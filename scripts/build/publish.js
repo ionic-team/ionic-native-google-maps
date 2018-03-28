@@ -20,12 +20,18 @@ const QUEUE = queue({
 });
 
 PACKAGES.forEach(packageName => {
+  if (packageName !== "google-maps") {
+    return;
+  }
 
   QUEUE.push(done => {
 
     console.log(`Publishing @ionic-native/${packageName}`);
     const packagePath = path.resolve(DIST, packageName);
-    exec(`npm publish ${packagePath} ${FLAGS}`)
+    exec(`cp ${ROOT}/README.md ${packagePath}/`)
+      .then(() => {
+        return exec(`npm publish ${packagePath} ${FLAGS}`)
+      })
       .then(() => done())
       .catch((e) => {
         if (e.stderr && e.stderr.indexOf('previously published version') === -1) {
@@ -55,4 +61,3 @@ QUEUE.start((err) => {
 
 
 });
-

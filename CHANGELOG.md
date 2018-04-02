@@ -1,3 +1,9 @@
+<a name="4.6.2"></a>
+## 4.6.2 (2018-04-02)
+
+### Bug Fix
+* TypeError: Right-hand side of 'instanceof' is not an object ([a188d5f](https://github.com/ionic-team/ionic-native-google-maps/commit/a188d5f))
+
 <a name="4.6.1"></a>
 ## 4.6.1 (2018-03-28)
 

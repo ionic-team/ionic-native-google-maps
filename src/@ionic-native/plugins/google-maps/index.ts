@@ -1239,7 +1239,7 @@ export class BaseClass {
    */
   @CordovaCheck({ sync: true })
   destroy(): void {
-    if (this instanceof GoogleMaps.getPlugin().GoogleMap) {
+    if (this._objectInstance.type === 'Map') {
       let map: GoogleMap = this._objectInstance.getMap();
       if (map) {
         delete this._objectInstance.getMap().get('_overlays')[this._objectInstance.getId()];

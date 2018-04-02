@@ -1,3 +1,9 @@
+<a name="4.6.3"></a>
+## 4.6.3 (2018-04-02)
+
+* `@ionic-native/google-maps@4.6.2` is not found even it is installed for some reason.
+  (Sorry about the trouble)
+
 <a name="4.6.2"></a>
 ## 4.6.2 (2018-04-02)
 

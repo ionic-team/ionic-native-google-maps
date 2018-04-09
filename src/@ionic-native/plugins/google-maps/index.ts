@@ -2159,7 +2159,7 @@ export class GoogleMap extends BaseClass {
 
   /**
    * Get the current camera target position
-   * @return {Promise<CameraPosition>}
+   * @return {ILatLng}
    */
   @CordovaInstance({ sync: true })
   getCameraTarget(): ILatLng { return; }

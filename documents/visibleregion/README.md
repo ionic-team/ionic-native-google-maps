@@ -8,36 +8,52 @@ let visibleRegion: VisibleRegion = this.map.getVisibleRegion();
 
 ## Instance properties
 
-### northeast: [ILatLng](../ilatlng/README.md)
 
-The northeast of the bounds that contains the farLeft, farRight, nearLeft and nearRight.
-Since the map view is able to rotate, the farRight is not the same as the northeast.
+<table>
+<tr>
+  <th>Params</th>
+  <th>Type</th>
+  <th>Details</th>
+</tr>
+<tr>
+  <td>northeast</td>
+  <td><a href="ilatlng/README.md">ILatLng</a></td>
+  <td>The northeast of the bounds that contains the farLeft, farRight, nearLeft and nearRight.
+  Since the map view is able to rotate, the farRight is not the same as the northeast.</td>
+</tr>
+<tr>
+  <td>southwest</td>
+  <td><a href="ilatlng/README.md">ILatLng</a></td>
+  <td>The southwest of the bounds that contains the farLeft, farRight, nearLeft and nearRight.
+  Since the map view is able to rotate, the nearLeft is not the same as the southwest.</td>
+</tr>
+<tr>
+  <td>farLeft</td>
+  <td><a href="ilatlng/README.md">ILatLng</a></td>
+  <td>The farLeft indicates the lat/lng of the top-left of the map view.</td>
+</tr>
+<tr>
+  <td>farRight</td>
+  <td><a href="ilatlng/README.md">ILatLng</a></td>
+  <td>The farRight indicates the lat/lng of the top-right of the map view.</td>
+</tr>
+<tr>
+  <td>nearLeft</td>
+  <td><a href="ilatlng/README.md">ILatLng</a></td>
+  <td>The nearLeft indicates the lat/lng of the bottom-left of the map view.</td>
+</tr>
+<tr>
+  <td>nearRight</td>
+  <td><a href="ilatlng/README.md">ILatLng</a></td>
+  <td>The nearRight indicates the lat/lng of the bottom-left of the map view.</td>
+</tr>
+<tr>
+  <td>type</td>
+  <td>string</td>
+  <td>`VisibleRegion`</td>
+</tr>
+</table>
 
-
-### southwest: [ILatLng](../ilatlng/README.md)
-
-The southwest of the bounds that contains the farLeft, farRight, nearLeft and nearRight.
-Since the map view is able to rotate, the nearLeft is not the same as the southwest.
-
-### farLeft: [ILatLng](../ilatlng/README.md)
-
-The nearRight indicates the lat/lng of the top-left of the map view.
-
-### farRight: [ILatLng](../ilatlng/README.md)
-
-The nearRight indicates the lat/lng of the top-right of the map view.
-
-### nearLeft: [ILatLng](../ilatlng/README.md)
-
-The nearRight indicates the lat/lng of the bottom-left of the map view.
-
-### nearRight: [ILatLng](../ilatlng/README.md)
-
-The nearRight indicates the lat/lng of the bottom-right of the map view.
-
-### type: string
-
-`VisibleRegion`
 
 ------
 

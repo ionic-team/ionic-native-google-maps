@@ -299,7 +299,7 @@ export interface CircleOptions {
    */
   strokeWidth?: number;
   /**
-   * Set the inside color of polygon
+   * Set the inside color of circle
    * (rgb, rgba, #RRGGBB, "colorname", ...etc)
    */
   fillColor?: string;
@@ -778,17 +778,17 @@ export class VisibleRegion implements ILatLngBounds {
   @InstanceProperty southwest: ILatLng;
 
   /**
-   * The nearRight indicates the lat/lng of the top-left of the map view.
+   * The farLeft indicates the lat/lng of the top-left of the map view.
    */
   @InstanceProperty farLeft: ILatLng;
 
   /**
-   * The nearRight indicates the lat/lng of the top-right of the map view.
+   * The farRight indicates the lat/lng of the top-right of the map view.
    */
   @InstanceProperty farRight: ILatLng;
 
   /**
-   * The nearRight indicates the lat/lng of the bottom-left of the map view.
+   * The nearLeft indicates the lat/lng of the bottom-left of the map view.
    */
   @InstanceProperty nearLeft: ILatLng;
 

@@ -2911,13 +2911,6 @@ export class Marker extends BaseClass {
   isInfoWindowShown(): boolean { return; }
 
   /**
-   * Returns the marker hash code.
-   * @Returns {string} Marker hash code
-   */
-  @CordovaInstance({ sync: true })
-  getHashCode(): string { return; }
-
-  /**
    * Higher zIndex value overlays will be drawn on top of lower zIndex value tile layers and overlays.
    * @param y {number} z-index
    */

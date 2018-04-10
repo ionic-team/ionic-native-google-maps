@@ -1,7 +1,7 @@
 # TileOverlay class
 
 ```typescript
-this.map.addTileOverlay(options: TileOverlayOptions).then((groundOverlay: TileOverlay) => {
+this.map.addTileOverlay(options: TileOverlayOptions).then((tileOverlay: TileOverlay) => {
 
 });
 ```

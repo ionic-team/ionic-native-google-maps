@@ -1,5 +1,5 @@
-**Update: 2018/Apr/10:
-Due to the ionic-native team updates the ionic-native document side, the Google Maps plugin page is not found (404).
+- **Update (2018/Apr/10)**
+  **Due to the ionic-native team updates the ionic-native document side, the Google Maps plugin page is not found (404).
 We are discussing this problem at [here](https://forum.ionicframework.com/t/what-about-google-maps/127437) and [here](https://github.com/ionic-team/ionic-native/issues/2410#issuecomment-380119542).
 Sorry for your inconvenience**.
 

@@ -2638,10 +2638,10 @@ export class GroundOverlay extends BaseClass {
 
   /**
    * Changes the image of the ground overlay
-   * @param image {string} URL of image
+   * @param imageUrl {string} URL of image
    */
   @CordovaInstance({ sync: true })
-  setImage(image: string): void {};
+  setImage(imageUrl: string): void {};
 
   /**
    * Changes the opacity of the ground overlay from 0.0 to 1.0
@@ -2658,7 +2658,7 @@ export class GroundOverlay extends BaseClass {
   getOpacity(): number { return; }
 
   /**
-   * Changes clickablity of the ground overlay
+   * Changes click-ability of the ground overlay
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3123,7 +3123,7 @@ export class Polygon extends BaseClass {
   getStrokeColor(): string { return; }
 
   /**
-   * Changes clickablity of the polygon
+   * Changes click-ability of the polygon
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3493,7 +3493,7 @@ export class KmlOverlay extends BaseClass {
   getVisible(): boolean { return; }
 
   /**
-   * Changes clickablity of the KmlOverlay
+   * Changes click-ability of the KmlOverlay
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })

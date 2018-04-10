@@ -74,7 +74,7 @@ export class LatLngBounds implements ILatLngBounds {
    * @param LatLng {ILatLng}
    */
   @CordovaInstance({ sync: true })
-  extend(LatLng: ILatLng): void {}
+  extend(latLng: ILatLng): void {}
 
   /**
    * Returns true if the given lat/lng is in this bounds.

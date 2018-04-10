@@ -129,6 +129,7 @@ https://docs.google.com/presentation/d/1zlkmoSY4AzDJc_P4IqWLnzct41IqHyzGkLeyhlAx
 - [GeocoderResult](./geocoderresult/README.md)
 - [GroundOverlayOptions](./groundoverlayoptions/README.md)
 - [ILatLng](./ilatlng/README.md)
+- [ILatLngBounds](./ilatlngbounds/README.md)
 - [MarkerIcon](./markericon/README.md)
 - [MarkerOptions](./markeroptions/README.md)
 - [MarkerClusterIcon](./markerclustericon/README.md)
@@ -143,5 +144,6 @@ https://docs.google.com/presentation/d/1zlkmoSY4AzDJc_P4IqWLnzct41IqHyzGkLeyhlAx
 - [ToDataUrlOptions](./todataurloptions/README.md)
 
 ### Constants
+- [GoogleMapsAnimation](./googlemapsanimation/README.md)
 - [MapType](./maptype/README.md)
 - [GoogleMapsEvent](./googlemapsevent/README.md)

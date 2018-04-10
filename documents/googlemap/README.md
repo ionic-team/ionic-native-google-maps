@@ -42,9 +42,7 @@ export class MapPage {
 ```
 
 
-## Class members
-
-
+## Class methods
 
 ### addMarker(options)
 

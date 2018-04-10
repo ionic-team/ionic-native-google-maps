@@ -34,7 +34,7 @@ export class MapPage {
 ```
 
 
-## Class method
+## Instance method
 
 ### create(element, options?)
 

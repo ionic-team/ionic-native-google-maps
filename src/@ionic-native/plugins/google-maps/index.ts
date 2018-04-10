@@ -3272,7 +3272,7 @@ export class Polyline extends BaseClass {
   getVisible(): boolean { return; }
 
   /**
-   * Changes clickablity of the polyline
+   * Changes click-ability of the polyline
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })

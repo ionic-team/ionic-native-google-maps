@@ -1,7 +1,7 @@
-# Circle class
+# Polyline class
 
 ```typescript
-this.map.addCircle(options: CircleOptions).then((circle: Circle) => {
+this.map.addPolyline(options: PolylineOptions).then((polyline: Polyline) => {
 
 });
 ```
@@ -21,9 +21,9 @@ Return the map instance.
 
 :arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
 
-### setCenter(latLng)
+### setPoints(points)
 
-Changes the center position.
+Changes the polyline points.
 
 <table>
 <tr>
@@ -32,47 +32,23 @@ Changes the center position.
   <th>Details</th>
 </tr>
 <tr>
-  <td>latLng</td>
-  <td><a href="../ilatlng/README.md">ILatLng</a></td>
+  <td>points</td>
+  <td>Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;</td>
   <td>new position</td>
 </tr>
 </table>
 
 
-### getCenter()
+### getPoints()
 
-Returns the current center position
+Returns an instance of the BaseArrayClass. You can modify the points.
 
-:arrow_right: Returns [ILatLng](../ilatlng/README.md).
-
-
-### setRadius(radius)
-
-Changes the circle radius.
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>radius</td>
-  <td>number</td>
-  <td>Radius in meter</td>
-</tr>
-</table>
+:arrow_right: Returns [BaseArrayClass](../basearrayclass/README.md).
 
 
-### getRadius()
+### setGeoDesic(geoDesic)
 
-Returns the current circle radius.
-
-:arrow_right: Returns `number`.
-
-### setFillColor(color)
-
-Changes the filling color (inner color).
+When true, edges of the polyline are interpreted as geodesic and will follow the curvature of the Earth.
 
 <table>
 <tr>
@@ -81,24 +57,18 @@ Changes the filling color (inner color).
   <th>Details</th>
 </tr>
 <tr>
-  <td>color</td>
-  <td>number</td>
-  <td>HTML color strings</td>
+  <td>geoDesic</td>
+  <td>boolean</td>
+  <td>true or false</td>
 </tr>
 </table>
 
 
-### getFillColor()
+### getGeodesic()
 
-Returns the current circle filling color (inner color).
+Returns true if the polyline is geodesic
 
-:arrow_right: Returns `string`.
-
-### getRadius()
-
-Returns the current circle radius.
-
-:arrow_right: Returns `number`.
+:arrow_right: Returns `boolean`.
 
 ### setStrokeWidth(strokeWidth)
 
@@ -120,13 +90,13 @@ Changes the stroke width.
 
 ### getStrokeWidth()
 
-Returns the current circle stroke width (unit: pixel).
+Returns the current stroke width (unit: pixel).
 
 :arrow_right: Returns `number`.
 
 ### setStrokeColor(color)
 
-Changes the stroke color (outter color).
+Changes the polyline color
 
 <table>
 <tr>
@@ -144,14 +114,14 @@ Changes the stroke color (outter color).
 
 ### getStrokeColor()
 
-Returns the current circle stroke color (outer color).
+Returns the current stroke color.
 
 :arrow_right: Returns `string`.
 
 
 ### setClickable(clickable)
 
-Changes click-ability of the circle.
+Changes click-ability of the polyline
 
 <table>
 <tr>
@@ -169,13 +139,13 @@ Changes click-ability of the circle.
 
 ### getClickable()
 
-Returns true if the circle is clickable.
+Returns true if the polyline is clickable.
 
 :arrow_right: Returns `boolean`.
 
 ### setVisible(clickable)
 
-Set circle visibility
+Set polyline visibility
 
 <table>
 <tr>
@@ -193,21 +163,14 @@ Set circle visibility
 
 ### getVisible()
 
-Returns true if the circle is visible.
+Returns true if the polyline is visible.
 
 :arrow_right: Returns `boolean`.
 
 
-### getBounds()
-
-Returns the latLngBounds (rectangle) that contains the circle.
-
-:arrow_right: Returns [LatLngBounds](../latlngbounds/README.md).
-
-
 ### setZIndex(index)
 
-Changes the circle zIndex order.
+Changes the polyline zIndex order.
 
 <table>
 <tr>
@@ -225,10 +188,10 @@ Changes the circle zIndex order.
 
 ### getZIndex()
 
-Returns the current circle zIndex.
+Returns the current polyline zIndex.
 
 :arrow_right: Returns `number`.
 
 ### remove()
 
-Remove the circle.
+Remove the polyline.

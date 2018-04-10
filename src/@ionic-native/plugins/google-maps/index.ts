@@ -2201,10 +2201,10 @@ export class GoogleMap extends BaseClass {
 
   /**
    * Set the camera view angle
-   * @param tiltLevel {number} Tilt level
+   * @param tiltAngle {number} Tilt angle
    */
   @CordovaInstance({ sync: true })
-  setCameraTilt(tiltLevel: number): void {}
+  setCameraTilt(tiltAngle: number): void {}
 
   /**
    * Set camera bearing
@@ -2215,11 +2215,11 @@ export class GoogleMap extends BaseClass {
 
   /**
    * Change the center of the map by the given distance in pixels
-   * @param x {any}
-   * @param y {any}
+   * @param x {number}
+   * @param y {number}
    */
   @CordovaInstance({ sync: true })
-  panBy(x: string | number, y: string | number): void { }
+  panBy(x: number, y: number): void { }
 
   /**
    * Get the current visible region (southWest and northEast)
@@ -2288,7 +2288,7 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<LatLng>}
    */
   @CordovaInstance()
-  fromPointToLatLng(point: any): Promise<LatLng> { return; }
+  fromPointToLatLng(point: number[]): Promise<LatLng> { return; }
 
   /**
    * Set true if you want to show the MyLocation control (blue dot)
@@ -2354,7 +2354,7 @@ export class GoogleMap extends BaseClass {
    * @param bottom {number}
    */
   @CordovaInstance({ sync: true })
-  setPadding(top?: number, right?: number, bottom?: number, left?: number): void { }
+  setPadding(top: number, right?: number, bottom?: number, left?: number): void { }
 
   /**
    * Set options
@@ -2366,10 +2366,10 @@ export class GoogleMap extends BaseClass {
   /**
    * Adds a marker
    * @param options {MarkerOptions} options
-   * @return {Promise<Marker | any>}
+   * @return {Promise<Marker>}
    */
   @InstanceCheck()
-  addMarker(options: MarkerOptions): Promise<Marker | any> {
+  addMarker(options: MarkerOptions): Promise<Marker> {
     return new Promise<Marker>((resolve, reject) => {
       this._objectInstance.addMarker(options, (marker: any) => {
         if (marker) {
@@ -2393,10 +2393,10 @@ export class GoogleMap extends BaseClass {
   /**
    * Adds a marker cluster
    * @param options {MarkerClusterOptions} options
-   * @return {Promise<MarkerCluster | any>}
+   * @return {Promise<MarkerCluster>}
    */
   @InstanceCheck()
-  addMarkerCluster(options: MarkerClusterOptions): Promise<MarkerCluster | any> {
+  addMarkerCluster(options: MarkerClusterOptions): Promise<MarkerCluster> {
     return new Promise<MarkerCluster>((resolve, reject) => {
       this._objectInstance.addMarkerCluster(options, (markerCluster: any) => {
         if (markerCluster) {
@@ -2421,10 +2421,10 @@ export class GoogleMap extends BaseClass {
   /**
    * Adds a circle
    * @param options {CircleOptions} options
-   * @return {Promise<Circle | any>}
+   * @return {Promise<Circle>}
    */
   @InstanceCheck()
-  addCircle(options: CircleOptions): Promise<Circle | any> {
+  addCircle(options: CircleOptions): Promise<Circle> {
     return new Promise<Circle>((resolve, reject) => {
       this._objectInstance.addCircle(options, (circle: any) => {
         if (circle) {
@@ -2448,10 +2448,10 @@ export class GoogleMap extends BaseClass {
   /**
    * Adds a polygon
    * @param options {PolygonOptions} options
-   * @return {Promise<Polygon | any>}
+   * @return {Promise<Polygon>}
    */
   @InstanceCheck()
-  addPolygon(options: PolygonOptions): Promise<Polygon | any> {
+  addPolygon(options: PolygonOptions): Promise<Polygon> {
     return new Promise<Polygon>((resolve, reject) => {
       this._objectInstance.addPolygon(options, (polygon: any) => {
         if (polygon) {
@@ -2475,10 +2475,10 @@ export class GoogleMap extends BaseClass {
   /**
    * Adds a polyline
    * @param options {PolylineOptions} options
-   * @return {Promise<Polyline | any>}
+   * @return {Promise<Polyline>}
    */
   @InstanceCheck()
-  addPolyline(options: PolylineOptions): Promise<Polyline | any> {
+  addPolyline(options: PolylineOptions): Promise<Polyline> {
     return new Promise<Polyline>((resolve, reject) => {
       this._objectInstance.addPolyline(options, (polyline: any) => {
         if (polyline) {
@@ -2502,10 +2502,10 @@ export class GoogleMap extends BaseClass {
   /**
    * Adds a tile overlay
    * @param options {TileOverlayOptions} options
-   * @return {Promise<TileOverlay | any>}
+   * @return {Promise<TileOverlay>}
    */
   @InstanceCheck()
-  addTileOverlay(options: TileOverlayOptions): Promise<TileOverlay | any> {
+  addTileOverlay(options: TileOverlayOptions): Promise<TileOverlay> {
     return new Promise<TileOverlay>((resolve, reject) => {
       this._objectInstance.addTileOverlay(options, (tileOverlay: any) => {
         if (tileOverlay) {
@@ -2529,10 +2529,10 @@ export class GoogleMap extends BaseClass {
   /**
    * Adds a ground overlay
    * @param options {GroundOverlayOptions} options
-   * @return {Promise<GroundOverlay | any>}
+   * @return {Promise<GroundOverlay>}
    */
   @InstanceCheck()
-  addGroundOverlay(options: GroundOverlayOptions): Promise<GroundOverlay | any> {
+  addGroundOverlay(options: GroundOverlayOptions): Promise<GroundOverlay> {
     return new Promise<GroundOverlay>((resolve, reject) => {
       this._objectInstance.addGroundOverlay(options, (groundOverlay: any) => {
         if (groundOverlay) {
@@ -2556,10 +2556,10 @@ export class GoogleMap extends BaseClass {
   /**
    * Adds a kml overlay
    * @param options {KmlOverlayOptions} options
-   * @return {Promise<KmlOverlay | any>}
+   * @return {Promise<KmlOverlay>}
    */
   @InstanceCheck()
-  addKmlOverlay(options: KmlOverlayOptions): Promise<KmlOverlay | any> {
+  addKmlOverlay(options: KmlOverlayOptions): Promise<KmlOverlay> {
     return new Promise<KmlOverlay>((resolve, reject) => {
       this._objectInstance.addKmlOverlay(options, (kmlOverlay: any) => {
         if (kmlOverlay) {
@@ -2586,7 +2586,7 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<string>}
    */
   @CordovaInstance()
-  toDataURL(params?: ToDataUrlOptions): Promise<string> { return; }
+  toDataURL(options?: ToDataUrlOptions): Promise<string> { return; }
 
 }
 

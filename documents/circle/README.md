@@ -2,35 +2,28 @@
 
 ```typescript
 this.map.addCircle(options: CircleOptions).then((circle: Circle) => {
-  
+
 });
 ```
 
 
 ## Class methods
 
-### addMarker(options)
+### getId()
 
-Adds a marker.
+Returns the ID of instance.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../markeroptions/README.md">MarkerOptions</a></td>
-  <td>options</td>
-</tr>
-</table>
+:arrow_right: Returns `string`
 
-:arrow_right: Returns `Promise<Marker>`
+### getMap()
 
-### addMarkerCluster(options)
+Return the map instance.
 
-Adds a marker cluster.
+:arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
+
+### setCenter(latLng)
+
+Changes the center position.
 
 <table>
 <tr>
@@ -39,196 +32,23 @@ Adds a marker cluster.
   <th>Details</th>
 </tr>
 <tr>
-  <td>options</td>
-  <td><a href="../markerclusteroptions/README.md">MarkerClusterOptions</a></td>
-  <td>options</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<MarkerCluster>`
-
-
-
-### addCircle(options)
-
-Adds a circle.
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../circleoptions/README.md">CircleOptions</a></td>
-  <td>options</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<Circle>`
-
-
-### addPolygon(options)
-
-Adds a polygon
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../polygonoptions/README.md">PolygonOptions</a></td>
-  <td>options</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<Polygon>`
-
-
-### addPolyline(options)
-
-Adds a polyline
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../polylineoptions/README.md">PollineOptions</a></td>
-  <td>options</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<Polyline>`
-
-
-### addPolyline(options)
-
-Adds a polyline
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../polylineoptions/README.md">PolylineOptions</a></td>
-  <td>options</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<Polyline>`
-
-
-### addTileOverlay(options)
-
-Adds a tile overlay
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../tileoverlayoptions/README.md">TileOverlayOptions</a></td>
-  <td>options</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<TileOverlay>`
-
-
-### addGroundOverlay(options)
-
-Adds a ground overlay
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../groundoverlayoptions/README.md">GroundOverlayOptions</a></td>
-  <td>options</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<GroundOverlay>`
-
-
-
-### addKmlOverlay(options)
-
-Adds a kml overlay
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../kmloverlayoptions/README.md">KmlOverlayOptions</a></td>
-  <td>options</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<KmlOverlay>`
-
-
-### setDiv(domNode?)
-
-If you want to display the map in an html element, you need to specify an element or id. If omit this argument, the map is detached from webview.
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>domNode</td>
-  <td>string | HTMLElement</td>
-  <td>(optional)Specifies the container of map div</td>
+  <td>latLng</td>
+  <td><a href="../ilatlng/README.md">ILatLng</a></td>
+  <td>new position</td>
 </tr>
 </table>
 
 
-### getDiv()
+### getCenter()
 
-Returns the map HTML element
+Returns the current center position
 
-:arrow_right: Returns `HTMLElement`
-
-### getFocusedBuilding()
-
-Get the currently focused building
-
-:arrow_right: Returns `Promise<any>`
+:arrow_right: Returns [ILatLng](../ilatlng/README.md).
 
 
+### setRadius(radius)
 
-### setMapTypeId(mapTypeId)
-
-Changes the map type id. Available constants are one of the [MapType](../maptype/README.md)
-
-### animateCamera(cameraPosition: CameraPosition<any>)
-
-Moves the camera with animation
+Changes the circle radius.
 
 <table>
 <tr>
@@ -237,132 +57,22 @@ Moves the camera with animation
   <th>Details</th>
 </tr>
 <tr>
-  <td>cameraPosition</td>
-  <td><a href="../cameraposition/README.md">CameraPosition&lt;any&gt;</a></td>
-  <td>Specify camera options</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<any>`
-
-
-### animateCameraZoomIn()
-
-Zooming in the camera with animation
-
-:arrow_right: Returns `Promise<any>`
-
-### animateCameraZoomOut()
-
-Zooming out the camera with animation
-
-:arrow_right: Returns `Promise<any>`
-
-### moveCamera(cameraPosition: CameraPosition<any>)
-
-Moves the camera with animation
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>cameraPosition</td>
-  <td><a href="../cameraposition/README.md">CameraPosition&lt;any&gt;</a></td>
-  <td>Specify camera options<br>Note that the `duration` property is ignored.</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<any>`
-
-
-### moveCameraZoomIn()
-
-Zooming in the camera without animation
-
-:arrow_right: Returns `Promise<any>`
-
-### moveCameraZoomOut()
-
-Zooming out the camera without animation
-
-:arrow_right: Returns `Promise<any>`
-
-### getCameraPosition()
-
-Get the position of the camera
-
-:arrow_right: Returns `CameraPosition<ILatLng>`
-
-
-### getCameraTarget()
-
-Get the current camera target position
-
-:arrow_right: Returns `ILatLng`
-
-### getCameraZoom()
-
-Get the current camera zoom level
-
-:arrow_right: Returns `number`
-
-### getCameraBearing()
-
-Get the current camera bearing
-
-:arrow_right: Returns `number`
-
-### getCameraTilt()
-
-Get the current camera tilt (view angle)
-
-:arrow_right: Returns `number`
-
-### setCameraTarget(target)
-
-Set the center position of the camera view.
-This is a wrapper of `moveCamera()` method.
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>target</td>
-  <td>
-    <a href="../ilatlng/README.md">ILatLng</a> | Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;</td>
-  <td>Specify camera target</td>
-</tr>
-</table>
-
-
-### setCameraZoom(zoomLevel)
-
-Set zoom level of the camera.
-This is a wrapper of `moveCamera()` method.
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>zoomLevel</td>
+  <td>radius</td>
   <td>number</td>
-  <td>Specify zoom level</td>
+  <td>Radius in meter</td>
 </tr>
 </table>
 
-### setCameraTilt(tiltAngle)
 
-Set the camera view angle.
-This is a wrapper of `moveCamera()` method.
+### getRadius()
+
+Returns the current circle radius.
+
+:arrow_right: Returns `number`.
+
+### setFillColor(color)
+
+Changes the filling color (inner color).
 
 <table>
 <tr>
@@ -371,16 +81,28 @@ This is a wrapper of `moveCamera()` method.
   <th>Details</th>
 </tr>
 <tr>
-  <td>tiltAngle</td>
+  <td>color</td>
   <td>number</td>
-  <td>Specify tilt angle</td>
+  <td>HTML color strings</td>
 </tr>
 </table>
 
-### setCameraBearing(bearing)
 
-Set camera bearing.
-This is a wrapper of `moveCamera()` method.
+### getFillColor()
+
+Returns the current circle filling color (inner color).
+
+:arrow_right: Returns `string`.
+
+### getRadius()
+
+Returns the current circle radius.
+
+:arrow_right: Returns `number`.
+
+### setStrokeWidth(strokeWidth)
+
+Changes the stroke width.
 
 <table>
 <tr>
@@ -389,15 +111,22 @@ This is a wrapper of `moveCamera()` method.
   <th>Details</th>
 </tr>
 <tr>
-  <td>bearing</td>
+  <td>strokeWidth</td>
   <td>number</td>
-  <td>Specify tilt angle</td>
+  <td>stroke width in pixel</td>
 </tr>
 </table>
 
-### panBy(x, y)
 
-Change the center of the map by the given distance in pixels.
+### getStrokeWidth()
+
+Returns the current circle stroke width (unit: pixel).
+
+:arrow_right: Returns `number`.
+
+### setStrokeColor(color)
+
+Changes the stroke color (outter color).
 
 <table>
 <tr>
@@ -406,28 +135,23 @@ Change the center of the map by the given distance in pixels.
   <th>Details</th>
 </tr>
 <tr>
-  <td>x</td>
-  <td>number</td>
-  <td>Distance in pixel for x</td>
-</tr>
-<tr>
-  <td>y</td>
-  <td>number</td>
-  <td>Distance in pixel for y</td>
+  <td>color</td>
+  <td>string</td>
+  <td>HTML color strings</td>
 </tr>
 </table>
 
 
-### getVisibleRegion()
+### getStrokeColor()
 
-Get the current visible region (southWest and northEast)
+Returns the current circle stroke color (outer color).
 
-:arrow_right: Returns [VisibleRegion](../visibleregion/README.md)
+:arrow_right: Returns `string`.
 
 
-### getMyLocation(options?)
+### setClickable(clickable)
 
-Get the current device location
+Changes click-ability of the circle.
 
 <table>
 <tr>
@@ -436,119 +160,22 @@ Get the current device location
   <th>Details</th>
 </tr>
 <tr>
-  <td>options</td>
-  <td>MyLocationOptions</td>
-  <td>(optional) options</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<MyLocation>`
-
-### setClickable(isClickable)
-
-Set false to ignore all clicks on the map
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>isClickable</td>
+  <td>clickable</td>
   <td>boolean</td>
-  <td>true / false</td>
+  <td>true or false</td>
 </tr>
 </table>
 
-### setMyLocationEnabled(enabled)
 
-Set true if you want to show the MyLocation control (blue dot)
+### getClickable()
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>enabled</td>
-  <td>boolean</td>
-  <td>true / false</td>
-</tr>
-</table>
+Returns true if the circle is clickable.
 
-### setMyLocationButtonEnabled(enabled)
+:arrow_right: Returns `boolean`.
 
-Set true if you want to show the MyLocation button
+### setVisible(clickable)
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>enabled</td>
-  <td>boolean</td>
-  <td>true / false</td>
-</tr>
-</table>
-
-### setTrafficEnabled(enabled)
-
-Set true if you want to show the traffic layer
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>enabled</td>
-  <td>boolean</td>
-  <td>true / false</td>
-</tr>
-</table>
-
-### setCompassEnabled(enabled)
-
-Set true if you want to show the compass button
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>enabled</td>
-  <td>boolean</td>
-  <td>true / false</td>
-</tr>
-</table>
-
-### setAllGesturesEnabled(enabled)
-
-Sets the preference for whether all gestures should be enabled or disabled
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>enabled</td>
-  <td>boolean</td>
-  <td>true / false</td>
-</tr>
-</table>
-
-### setVisible(visible)
-
-Set visibility of the map
+Set circle visibility
 
 <table>
 <tr>
@@ -559,13 +186,28 @@ Set visibility of the map
 <tr>
   <td>visible</td>
   <td>boolean</td>
-  <td>true / false</td>
+  <td>true or false</td>
 </tr>
 </table>
 
-### setIndoorEnabled(enabled)
 
-Set true if you want to show the indoor map
+### getVisible()
+
+Returns true if the circle is visible.
+
+:arrow_right: Returns `boolean`.
+
+
+### getBounds()
+
+Returns the latLngBounds (rectangle) that contains the circle.
+
+:arrow_right: Returns [LatLngBounds](../latlngbounds/README.md).
+
+
+### setZIndex(index)
+
+Changes the circle zIndex order.
 
 <table>
 <tr>
@@ -574,130 +216,19 @@ Set true if you want to show the indoor map
   <th>Details</th>
 </tr>
 <tr>
-  <td>enabled</td>
-  <td>boolean</td>
-  <td>true / false</td>
-</tr>
-</table>
-
-### setPadding(top, right?, bottom?, left?)
-
-Adjust the map padding (same as CSS padding rule)
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>top</td>
+  <td>index</td>
   <td>number</td>
-  <td>padding of top in pixels</td>
-</tr>
-<tr>
-  <td>right</td>
-  <td>number</td>
-  <td>(optional) padding of right in pixels</td>
-</tr>
-<tr>
-  <td>bottom</td>
-  <td>number</td>
-  <td>(optional) padding of bottom in pixels</td>
-</tr>
-<tr>
-  <td>left</td>
-  <td>number</td>
-  <td>(optional) padding of left in pixels</td>
+  <td>z-index</td>
 </tr>
 </table>
 
 
-### setOptions(options)
+### getZIndex()
 
-Set options
+Returns the current circle zIndex.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../googlemapoptions/README.md">GoogleMapOptions</a></td>
-  <td>map options</td>
-</tr>
-</table>
+:arrow_right: Returns `number`.
 
 ### remove()
 
-Destroy a map completely
-
-:arrow_right: Returns `Promise<any>`
-
-### clear()
-
-Remove all overlays, such as marker
-
-:arrow_right: Returns `Promise<any>`
-
-
-### fromLatLngToPoint(latLng)
-
-Convert the unit from LatLng to the pixels from the left/top of the map div.
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>latLng</td>
-  <td><a href="../latlng/README.md">ILatLng</a></td>
-  <td>a geographic point</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<any[]>`
-
-
-### fromPointToLatLng(point)
-
-Convert the unit from the pixels from the left/top to the LatLng.
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>point</td>
-  <td>point: number[]</td>
-  <td>a pixel point</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<LatLng>`
-
-
-### toDataURL(options?)
-
-Convert the unit from the pixels from the left/top to the LatLng.
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../todataurloptions/README.md">ToDataUrlOptions</a></td>
-  <td>(optional) options</td>
-</tr>
-</table>
-
-:arrow_right: Returns `Promise<string>`
+Remove the circle.

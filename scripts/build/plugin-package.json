@@ -3,7 +3,7 @@
   "version": "{{VERSION}}",
   "description": "Ionic Native - Native plugins for ionic apps",
   "module": "index.js",
-  "private": true, // prevent publishing
+  "private": true,
   "typings": "index.d.ts",
   "author": "ionic",
   "license": "MIT",

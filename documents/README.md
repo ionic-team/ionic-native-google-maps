@@ -137,3 +137,4 @@ https://docs.google.com/presentation/d/1zlkmoSY4AzDJc_P4IqWLnzct41IqHyzGkLeyhlAx
 - [TileOverlayOptions](./tileoverlayoptions/README.md)
 - [KmlOverlayOptions](./kmloverlayoption/README.md)
 - [VisibleRegion](./visibleregion/README.md)
+- [ToDataUrlOptions](./todataurloptions/README.md)

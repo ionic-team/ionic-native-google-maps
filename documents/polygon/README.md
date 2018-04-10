@@ -1,7 +1,7 @@
-# Polyline class
+# Polygon class
 
 ```typescript
-this.map.addPolyline(options: PolylineOptions).then((polyline: Polyline) => {
+this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
 
 });
 ```
@@ -23,7 +23,7 @@ Return the map instance.
 
 ### setPoints(points)
 
-Changes the polyline points.
+Changes the polygon points.
 
 <table>
 <tr>
@@ -43,11 +43,36 @@ Changes the polyline points.
 
 Returns an instance of the BaseArrayClass. You can modify the points.
 
-:arrow_right: Returns [BaseArrayClass](../basearrayclass/README.md)&lt;ILatLng&gt;.
+:arrow_right: Returns [BaseArrayClass](../basearrayclass/README.md)&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;.
+
+
+### setHoles(holes)
+
+Changes the polygon holes.
+
+<table>
+<tr>
+  <th>Params</th>
+  <th>Type</th>
+  <th>Details</th>
+</tr>
+<tr>
+  <td>holes</td>
+  <td>Array&lt;Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;&gt;</td>
+  <td>new holes</td>
+</tr>
+</table>
+
+
+### getHoles()
+
+Returns an instance of the BaseArrayClass. You can modify the points.
+
+:arrow_right: Returns [BaseArrayClass](../basearrayclass/README.md)&lt;ILatLng[]&gt;.
 
 ### setGeoDesic(geoDesic)
 
-When true, edges of the polyline are interpreted as geodesic and will follow the curvature of the Earth.
+When true, edges of the polygon are interpreted as geodesic and will follow the curvature of the Earth.
 
 <table>
 <tr>
@@ -65,7 +90,7 @@ When true, edges of the polyline are interpreted as geodesic and will follow the
 
 ### getGeodesic()
 
-Returns true if the polyline is geodesic
+Returns true if the polygon is geodesic
 
 :arrow_right: Returns `boolean`.
 
@@ -95,7 +120,7 @@ Returns the current stroke width (unit: pixel).
 
 ### setStrokeColor(color)
 
-Changes the polyline color
+Changes the polygon color
 
 <table>
 <tr>
@@ -118,9 +143,33 @@ Returns the current stroke color.
 :arrow_right: Returns `string`.
 
 
+### setFillColor(color)
+
+Changes the filling color (inner color).
+
+<table>
+<tr>
+  <th>Params</th>
+  <th>Type</th>
+  <th>Details</th>
+</tr>
+<tr>
+  <td>color</td>
+  <td>number</td>
+  <td>HTML color strings</td>
+</tr>
+</table>
+
+
+### getFillColor()
+
+Returns the current polygon filling color (inner color).
+
+:arrow_right: Returns `string`.
+
 ### setClickable(clickable)
 
-Changes click-ability of the polyline
+Changes click-ability of the polygon
 
 <table>
 <tr>
@@ -138,13 +187,13 @@ Changes click-ability of the polyline
 
 ### getClickable()
 
-Returns true if the polyline is clickable.
+Returns true if the polygon is clickable.
 
 :arrow_right: Returns `boolean`.
 
 ### setVisible(clickable)
 
-Set polyline visibility
+Set polygon visibility
 
 <table>
 <tr>
@@ -162,14 +211,14 @@ Set polyline visibility
 
 ### getVisible()
 
-Returns true if the polyline is visible.
+Returns true if the polygon is visible.
 
 :arrow_right: Returns `boolean`.
 
 
 ### setZIndex(index)
 
-Changes the polyline zIndex order.
+Changes the polygon zIndex order.
 
 <table>
 <tr>
@@ -187,10 +236,10 @@ Changes the polyline zIndex order.
 
 ### getZIndex()
 
-Returns the current polyline zIndex.
+Returns the current polygon zIndex.
 
 :arrow_right: Returns `number`.
 
 ### remove()
 
-Remove the polyline.
+Remove the polygon.

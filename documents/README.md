@@ -120,6 +120,9 @@ https://docs.google.com/presentation/d/1zlkmoSY4AzDJc_P4IqWLnzct41IqHyzGkLeyhlAx
 ### Interfaces
 
 - [GoogleMapOptions](./googlemapoptions/README.md)
+  - [GoogleMapControlOptions](./googlemapcontroloptions/README.md)
+  - [GoogleMapGestureOptions](./googlemapgestureoptions/README.md)
+  - [GoogleMapPreferenceOptions](./googlemappreferenceoptions/README.md)
 - [CameraPosition](./cameraposition/README.md)
 - [CircleOptions](./circleoptions/README.md)
 - [GeocoderRequest](./geocoderrequest/README.md)
@@ -138,3 +141,7 @@ https://docs.google.com/presentation/d/1zlkmoSY4AzDJc_P4IqWLnzct41IqHyzGkLeyhlAx
 - [KmlOverlayOptions](./kmloverlayoption/README.md)
 - [VisibleRegion](./visibleregion/README.md)
 - [ToDataUrlOptions](./todataurloptions/README.md)
+
+### Constants
+- [MapType](./maptype/README.md)
+- [GoogleMapsEvent](./googlemapsevent/README.md)

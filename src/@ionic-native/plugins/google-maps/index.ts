@@ -626,7 +626,7 @@ export interface MyLocation {
 export interface MyLocationOptions {
   /**
    * Set true if you want to try to use GPS mandatory.
-   * (In false, the plugin try to use GPS and network)
+   * In false, the plugin try to use GPS and network.
    * (default: false)
    */
   enableHighAccuracy?: boolean;

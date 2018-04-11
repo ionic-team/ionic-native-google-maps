@@ -1367,7 +1367,7 @@ export class BaseArrayClass<T> extends BaseClass {
   /**
    * Iterate over each element, calling the provided callback.
    * @param fn {Function}
-   * @Returns {Promise<any>}
+   * @Returns {Promise<void>}
    */
   @CordovaCheck()
   forEachAsync(fn: ((element: T, callback: () => void) => void)): Promise<void> {
@@ -1415,7 +1415,7 @@ export class BaseArrayClass<T> extends BaseClass {
   /**
    * The filter() method creates a new array with all elements that pass the test implemented by the provided function.
    * @param fn {Function}
-   * @Returns {Array<Object>} returns a new filtered array
+   * @Returns {T[]} returns a new filtered array
    */
   @CordovaInstance({ sync: true })
   filter(fn: (element: T, index: number) => boolean): T[] { return; }
@@ -1424,7 +1424,7 @@ export class BaseArrayClass<T> extends BaseClass {
    * The filterAsync() method creates a new array with all elements that pass the test implemented by the provided function.
    * @param fn {Function}
    * @param callback {Function}
-   * @Returns {Promise<any>} returns a new filtered array
+   * @Returns {Promise<T[]>} returns a new filtered array
    */
   @CordovaCheck()
   filterAsync(fn: (element: T, callback: (result: boolean) => void) => void): Promise<T[]> {
@@ -1479,7 +1479,7 @@ export class BaseArrayClass<T> extends BaseClass {
    * Inserts an element at the specified index.
    * @param index {number}
    * @param element {Object}
-   * @param noNotify? {boolean} [options] Set true to prevent insert_at events.
+   * @param noNotify? {boolean} [options] Set true to prevent insert_at event.
    * @Returns {Object}
    */
   @CordovaInstance({ sync: true })
@@ -1487,7 +1487,7 @@ export class BaseArrayClass<T> extends BaseClass {
 
   /**
    * Removes the last element of the array and returns that element.
-   * @param noNotify? {boolean} [options] Set true to prevent remove_at events.
+   * @param noNotify? {boolean} [options] Set true to prevent remove_at event.
    * @Returns {Object}
    */
   @CordovaInstance({ sync: true })
@@ -1504,16 +1504,16 @@ export class BaseArrayClass<T> extends BaseClass {
   /**
    * Removes an element from the specified index.
    * @param index {number}
-   * @param noNotify? {boolean} [options] Set true to prevent remove_at events.
+   * @param noNotify? {boolean} [options] Set true to prevent remove_at event.
    */
   @CordovaInstance({ sync: true })
-  removeAt(index: number, noNotify?: boolean): void {}
+  removeAt(index: number, noNotify?: boolean): T { return; }
 
   /**
    * Sets an element at the specified index.
    * @param index {number}
    * @param element {object}
-   * @param noNotify? {boolean} [options] Set true to prevent set_at events.
+   * @param noNotify? {boolean} [options] Set true to prevent set_at event.
    */
   @CordovaInstance({ sync: true })
   setAt(index: number, element: T, noNotify?: boolean): void {}

@@ -2998,7 +2998,7 @@ export class MarkerCluster extends BaseClass {
 
   /**
    * Add marker locations
-   * @param markers {MarkerOptions[]} multiple locations
+   * @param markers {MarkerOptions[]} multiple location
    */
   @CordovaInstance({ sync: true })
   addMarkers(markers: MarkerOptions[]): void {}

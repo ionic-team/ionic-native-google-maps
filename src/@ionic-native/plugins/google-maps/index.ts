@@ -522,6 +522,55 @@ export interface MarkerOptions {
   [key: string]: any;
 }
 
+export interface MarkerLabel {
+  /**
+   * Set true if use bold font
+   */
+  bold?: boolean;
+
+  /**
+   * Set font size in pixel
+   */
+  fontSize?: number;
+
+  /**
+   * color strings
+   */
+  color?: string;
+
+  /**
+   * Set true if use italic font
+   */
+  italic?: boolean;
+
+}
+export interface MarkerClusterIcon {
+  /**
+   * Minimum number of clustering
+   */
+  min?: number;
+
+  /**
+   * Maximum number of clustering
+   */
+  max?: number;
+
+  /**
+   * icon image for clustered marker
+   */
+  icon: MarkerIcon;
+
+  /**
+   * anchor position of the marker
+   */
+  anchor: any;
+
+  /**
+   * label option for clustered marker
+   */
+  label: MarkerLabel;
+}
+
 export interface MarkerClusterOptions {
   /**
    * Maximum zoom level of clustering
@@ -530,7 +579,7 @@ export interface MarkerClusterOptions {
   maxZoomLevel?: number;
 
   /**
-   * Draw a rectangle that contains all locations of clustered when you tap on a clister marker.
+   * Draw a rectangle that contains all locations of clustered when you tap on a cluster marker.
    * (default: true)
    */
   boundsDraw?: boolean;
@@ -550,10 +599,10 @@ export interface MarkerClusterOptions {
    * [
    *   {icon: "assets/small.png", min: 2, max: 10},
    *   {icon: "assets/middle.png", min: 11, max: 30},
-   *   {icon: "assets/large.png", min: 31},
+   *   {icon: "assets/large.png", min: 31}
    * ]
    */
-  icons: any[];
+  icons: MarkerClusterIcon[];
 
   /**
    * Accept own properties

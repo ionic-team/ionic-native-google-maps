@@ -357,7 +357,7 @@ export interface GeocoderRequest {
    *
    * [reverse-geocoding usage2]
    * let request: GeocoderRequest = {
-   *   address: [
+   *   position: [
    *    {"lat": 37.421655, "lng": -122.085637},
    *    {"lat": 37.332, "lng": -122.030781}
    *   ]

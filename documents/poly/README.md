@@ -1,6 +1,6 @@
 # Poly class
 
-## Instance method
+## Static method
 
 ### containsLocation(location, path)
 

@@ -34,8 +34,9 @@ export class MapPage {
 }
 ```
 
+------
 
-## Instance method
+## Static method
 
 ### getMyLocation(options?)
 

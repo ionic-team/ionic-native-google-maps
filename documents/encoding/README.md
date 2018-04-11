@@ -1,6 +1,6 @@
 # Encoding class
 
-## Instance method
+## Static method
 
 ### decodePath(encoded, precision?)
 

@@ -1,6 +1,6 @@
 # Geocoder class
 
-## Instance method
+## Static method
 
 ### geocode(options?)
 

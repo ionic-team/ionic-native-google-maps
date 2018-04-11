@@ -1,6 +1,6 @@
 # Spherical class
 
-## Instance method
+## Static method
 
 ### computeDistanceBetween(locationA, locationB)
 

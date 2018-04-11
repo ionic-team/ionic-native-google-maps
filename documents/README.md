@@ -7,7 +7,7 @@ This plugin used for [cordova-plugin-googlemaps](https://github.com/mapsplugin/c
 In order to use this plugin, you need to generate API keys at the Google Developers Console.
 Please follow the instruction.
 
-- [How to generate API keys?](./generate_api_key/README.md)
+- [How to generate API keys?](./api_key/generate_api_key.md)
 
 ```
 $> ionic cordova plugin add cordova-plugin-googlemaps \

@@ -676,7 +676,7 @@ export interface PolygonOptions {
   /**
    * Pass ILatLng[][] to create holes in polygon
    */
-  addHole?: Array<Array<ILatLng>>;
+  holes?: Array<Array<ILatLng>>;
 
   /**
    * Set true if you want to receive the POLYGON_CLICK event

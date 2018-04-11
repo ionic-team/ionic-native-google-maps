@@ -463,12 +463,17 @@ export interface MarkerOptions {
   /**
    * The position of the marker.
    */
-  position?: ILatLng;
+  position: ILatLng;
 
   /**
    * 	Specify the anchor of the InfoWindow
    */
   infoWindowAnchor?: number[];
+
+  /**
+   * 	Specify the anchor of icon image
+   */
+  anchor?: number[];
 
   /**
    * Set true if you want to enable to drag the marker. (Default: false) Important! Drag starts after long pressed on the marker.
@@ -3472,14 +3477,14 @@ export class KmlOverlay extends BaseClass {
   getMap(): GoogleMap { Returns this._map; }
 
   /**
-   * Changes visibility of the polyline
+   * Changes visibility of the kml overlay
    * @param visible {boolean}
    */
   @CordovaInstance({ sync: true })
   setVisible(visible: boolean): void {}
 
   /**
-   * Returns true if the polyline is visible
+   * Returns true if the kml overlay is visible
    * @Returns {boolean}
    */
   @CordovaInstance({ sync: true })

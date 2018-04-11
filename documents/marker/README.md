@@ -275,29 +275,6 @@ Changes the opacity of the marker from 0.0 to 1.0
 </table>
 
 
-### getOpacity()
-
-Returns the current opacity
-
-:arrow_right: Returns `number`.
-
-### setRotation(rotation)
-
-Set the marker rotation angle.
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>rotation</td>
-  <td>number</td>
-  <td>from 0.0 to 360.0</td>
-</tr>
-</table>
-
 
 ### getOpacity()
 
@@ -305,7 +282,7 @@ Returns the marker rotation angle.
 
 :arrow_right: Returns `number`.
 
-### setVisible(clickable)
+### setVisible(visible)
 
 Set marker visibility
 

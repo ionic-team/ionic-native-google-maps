@@ -1868,7 +1868,7 @@ export class Encoding {
 export class Poly {
 
   /**
-   * Returns true if the speicified location is in the polygon path
+   * Returns true if the specified location is in the polygon path
    * @param location {ILatLng}
    * @param path {ILatLng[]}
    * @Returns {boolean}
@@ -1878,7 +1878,7 @@ export class Poly {
   }
 
   /**
-   * Returns true if the speicified location is on the polyline path
+   * Returns true if the specified location is on the polyline path
    * @param location {ILatLng}
    * @param path {ILatLng[]}
    * @Returns {boolean}

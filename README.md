@@ -30,7 +30,10 @@ ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROI
 
 ## Documentation
 
-For the full Ionic Native documentation, please visit https://ionicframework.com/docs/native/google-maps/
+For the full Ionic Native documentation, please checkout this page.
+
+- [\@ionic-native/google-maps official documents](./documents/README.md)
+
 
 Also there are documents/demos for your help:
 

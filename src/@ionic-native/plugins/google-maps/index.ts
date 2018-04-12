@@ -569,6 +569,11 @@ export interface MarkerClusterIcon {
    * label option for clustered marker
    */
   label: MarkerLabel;
+
+  /**
+   * icon url
+   */
+  url: string;
 }
 
 export interface MarkerClusterOptions {

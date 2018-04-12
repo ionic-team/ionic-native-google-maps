@@ -2453,6 +2453,26 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
+   * Adds a marker in synchronous
+   * @param options {MarkerOptions} options
+   * @Returns {Marker}
+   */
+  @InstanceCheck()
+  addMarkerSync(options: MarkerOptions): Marker {
+    let marker: any = this._objectInstance.addMarker(options);
+    let overlayId: string = marker.getId();
+    const overlay: Marker = new Marker(this, marker);
+    this.get('_overlays')[overlayId] = overlay;
+    marker.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
+  }
+
+  /**
    * Adds a marker cluster
    * @param options {MarkerClusterOptions} options
    * @return {Promise<MarkerCluster>}
@@ -2478,6 +2498,27 @@ export class GoogleMap extends BaseClass {
         }
       });
     });
+  }
+
+  /**
+   * Adds a marker cluster in synchronous
+   * @param options {MarkerClusterOptions} options
+   * @Returns {MarkerCluster}
+   */
+  @InstanceCheck()
+  addMarkerClusterSync(options: MarkerClusterOptions): MarkerCluster {
+    let markerCluster: any = this._objectInstance.addMarkerCluster(options);
+    let overlayId: string = markerCluster.getId();
+    const overlay: MarkerCluster = new MarkerCluster(this, markerCluster);
+    this.get('_overlays')[overlayId] = overlay;
+    markerCluster.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    markerCluster.set('_overlays', new BaseArrayClass());
+    return overlay;
   }
 
   /**
@@ -2508,6 +2549,25 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
+   * Adds a circle in synchronous
+   * @param options {CircleOptions} options
+   * @return {Circle}
+   */
+  @InstanceCheck()
+  addCircleSync(options: CircleOptions): Circle {
+    let circle: any = this._objectInstance.addCircle(options);
+    let overlayId: string = circle.getId();
+    const overlay = new Circle(this, circle);
+    this.get('_overlays')[overlayId] = overlay;
+    circle.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
+  }
+  /**
    * Adds a polygon
    * @param options {PolygonOptions} options
    * @return {Promise<Polygon>}
@@ -2532,6 +2592,26 @@ export class GoogleMap extends BaseClass {
         }
       });
     });
+  }
+
+  /**
+   * Adds a polygon in synchronous
+   * @param options {PolygonOptions} options
+   * @return {Polygon}
+   */
+  @InstanceCheck()
+  addPolygonSync(options: PolygonOptions): Polygon {
+    let polygon: any = this._objectInstance.addPolygon(options);
+    let overlayId: string = polygon.getId();
+    const overlay = new Polygon(this, polygon);
+    this.get('_overlays')[overlayId] = overlay;
+    polygon.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
   }
 
   /**
@@ -2562,6 +2642,26 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
+   * Adds a polyline in synchronous
+   * @param options {PolylineOptions} options
+   * @return {Polyline}
+   */
+  @InstanceCheck()
+  addPolylineSync(options: PolylineOptions): Polyline {
+    let polyline: any = this._objectInstance.addPolyline(options);
+    let overlayId: string = polyline.getId();
+    const overlay = new Polyline(this, polyline);
+    this.get('_overlays')[overlayId] = overlay;
+    polyline.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
+  }
+
+  /**
    * Adds a tile overlay
    * @param options {TileOverlayOptions} options
    * @return {Promise<TileOverlay>}
@@ -2589,6 +2689,26 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
+   * Adds a tile overlay in synchronous
+   * @param options {TileOverlayOptions} options
+   * @return {TileOverlay}
+   */
+  @InstanceCheck()
+  addTileOverlaySync(options: TileOverlayOptions): TileOverlay {
+    let tileOverlay: any = this._objectInstance.addTileOverlay(options);
+    let overlayId: string = tileOverlay.getId();
+    const overlay = new TileOverlay(this, tileOverlay);
+    this.get('_overlays')[overlayId] = overlay;
+    tileOverlay.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
+  }
+
+  /**
    * Adds a ground overlay
    * @param options {GroundOverlayOptions} options
    * @return {Promise<GroundOverlay>}
@@ -2613,6 +2733,26 @@ export class GoogleMap extends BaseClass {
         }
       });
     });
+  }
+
+  /**
+   * Adds a ground overlay in synchronous
+   * @param options {GroundOverlayOptions} options
+   * @return {GroundOverlay}
+   */
+  @InstanceCheck()
+  addGroundOverlaySync(options: GroundOverlayOptions): GroundOverlay {
+    let groundOverlay: any = this._objectInstance.addGroundOverlay(options);
+    let overlayId: string = groundOverlay.getId();
+    const overlay = new GroundOverlay(this, groundOverlay);
+    this.get('_overlays')[overlayId] = overlay;
+    groundOverlay.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
   }
 
   /**

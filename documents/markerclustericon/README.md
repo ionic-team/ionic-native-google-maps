@@ -10,9 +10,17 @@
   <th>Details</th>
 </tr>
 <tr>
-  <td>icon</td>
-  <td><a href="../markericon/README.md">MarkerIcon</a></td>
-  <td>Maximum number of clustering</td>
+  <td>url</td>
+  <td>string</td>
+  <td>icon url or file path</td>
+</tr>
+<tr>
+  <td>anchor</td>
+  <td>{<br>
+&nbsp;&nbsp;width: number,<br>
+&nbsp;&nbsp;height: number<br>
+}</td>
+  <td>icon size(in pixels)</td>
 </tr>
 <tr>
   <td>anchor</td>

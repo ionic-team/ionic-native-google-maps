@@ -1,12 +1,6 @@
-- **Update (2018/Apr/10)**
-  **Due to the ionic-native team updates the ionic-native document side, the Google Maps plugin page is not found (404).
-We are discussing this problem at [here](https://forum.ionicframework.com/t/what-about-google-maps/127437) and [here](https://github.com/ionic-team/ionic-native/issues/2410#issuecomment-380119542).
-Sorry for your inconvenience**.
-
-
 # @ionic-native/google-maps
 
-@ionic-native/google-maps plugin is a wrapper plugin of [cordova-plugin-googlemaps](https://github.com/mapsplugin/cordova-plugin-googlemaps) for Ionic framework.
+@ionic-native/google-maps plugin is a wrapper plugin for [cordova-plugin-googlemaps](https://github.com/mapsplugin/cordova-plugin-googlemaps) for Ionic framework.
 
 Ionic Native wraps plugin callbacks in a Promise or Observable, providing a common interface for all plugins and making it easy to use plugins with Angular change detection.
 
@@ -14,15 +8,14 @@ Ionic Native wraps plugin callbacks in a Promise or Observable, providing a comm
 
 ## Installation
 
-Run following command to install `@ionic-native/core` and `@ionic-native/google-maps` plugins in your project.
+First of all, you need to generate API keys for Google Maps APIs.
+- [How to generate API keys?](./documents/api_key/generate_api_key.md)
+
+Second, run following command to install `@ionic-native/core` and `@ionic-native/google-maps` plugins in your project.
 
 ```
 npm install @ionic-native/core @ionic-native/google-maps
-```
 
-Then you also need to the `cordova-plugin-googlemaps` plugin.
-
-```
 ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="..." --variable API_KEY_FOR_IOS="..."
 ```
 

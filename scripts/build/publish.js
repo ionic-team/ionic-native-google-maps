@@ -29,9 +29,9 @@ PACKAGES.forEach(packageName => {
     console.log(`Publishing @ionic-native/${packageName}`);
     const packagePath = path.resolve(DIST, packageName);
     exec(`cp ${ROOT}/README.md ${packagePath}/`)
-      .then(() => {
-        return exec(`npm publish ${packagePath} ${FLAGS}`)
-      })
+      // .then(() => {
+      //   return exec(`npm publish ${packagePath} ${FLAGS}`)
+      // })
       .then(() => done())
       .catch((e) => {
         if (e.stderr && e.stderr.indexOf('previously published version') === -1) {

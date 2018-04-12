@@ -556,11 +556,6 @@ export interface MarkerClusterIcon {
   max?: number;
 
   /**
-   * icon image for clustered marker
-   */
-  icon: MarkerIcon;
-
-  /**
    * anchor position of the marker
    */
   anchor: any;
@@ -574,6 +569,14 @@ export interface MarkerClusterIcon {
    * icon url
    */
   url: string;
+
+  /**
+   * icon size
+   */
+  size?: {
+    width?: number;
+    height?: number;
+  };
 }
 
 export interface MarkerClusterOptions {

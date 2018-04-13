@@ -2080,36 +2080,14 @@ export class GoogleMap extends BaseClass {
       if (element instanceof HTMLElement) {
         this._objectInstance = GoogleMaps.getPlugin().Map.getMap(element, options);
       } else if (typeof element === 'string') {
-        let dummyObj: any = new (GoogleMaps.getPlugin().BaseClass)();
-        this._objectInstance = dummyObj;
-        let onListeners: any[] = [];
-        let oneListeners: any[] = [];
-        let _origAddEventListener: any = this._objectInstance.addEventListener;
-        let _origAddEventListenerOnce: any = this._objectInstance.addEventListenerOnce;
-        this._objectInstance.addEventListener = (eventName: string, fn: () => void) => {
-          if (eventName === GoogleMapsEvent.MAP_READY) {
-            _origAddEventListener.call(dummyObj, eventName, fn);
-          } else {
-            onListeners.push([dummyObj, fn]);
-          }
-        };
-        this._objectInstance.on = this._objectInstance.addEventListener;
 
-        this._objectInstance.addEventListenerOnce = (eventName: string, fn: () => void) => {
-          if (eventName === GoogleMapsEvent.MAP_READY) {
-            _origAddEventListenerOnce.call(dummyObj, eventName, fn);
-          } else {
-            oneListeners.push([dummyObj, fn]);
-          }
-        };
-        this._objectInstance.one = this._objectInstance.addEventListenerOnce;
-        (new Promise<any>((resolve, reject) => {
+        this._objectInstance = GoogleMaps.getPlugin().Map.getMap(new Promise<any[]>((resolve, reject) => {
           let count: number = 0;
           let timer: any = setInterval(() => {
             let target = document.querySelector('.show-page #' + element);
             if (target) {
               clearInterval(timer);
-              resolve(target);
+              resolve([target, options]);
             } else {
               if (count++ < 20) {
                 return;
@@ -2120,23 +2098,8 @@ export class GoogleMap extends BaseClass {
               reject();
             }
           }, 100);
-        }))
-        .then((target: any) => {
-          this._objectInstance = GoogleMaps.getPlugin().Map.getMap(target, options);
-          this._objectInstance.one(GoogleMapsEvent.MAP_READY, () => {
-            this.set('_overlays', {});
-            onListeners.forEach((args) => {
-              this.on.apply(this, args);
-            });
-            oneListeners.forEach((args) => {
-              this.one.apply(this, args);
-            });
-            dummyObj.trigger(GoogleMapsEvent.MAP_READY);
-          });
-        })
-        .catch(() => {
-          this._objectInstance = null;
-        });
+        }), options);
+
       } else if (element === null && options) {
         this._objectInstance = GoogleMaps.getPlugin().Map.getMap(null, options);
       }

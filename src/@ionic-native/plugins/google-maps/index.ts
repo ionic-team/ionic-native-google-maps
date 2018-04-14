@@ -558,12 +558,12 @@ export interface MarkerClusterIcon {
   /**
    * anchor position of the marker
    */
-  anchor: any;
+  anchor?: any;
 
   /**
    * label option for clustered marker
    */
-  label: MarkerLabel;
+  label?: MarkerLabel;
 
   /**
    * icon url

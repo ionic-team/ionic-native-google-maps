@@ -941,6 +941,29 @@ export interface StreetViewOptions {
   [key: string]: any;
 }
 
+
+export interface StreetViewNavigationLink {
+
+  /**
+   * panorama Id
+   */
+  panoId: string;
+
+  /**
+   * bearing (heading)
+   */
+  bearing: number;
+
+}
+
+export interface StreetViewLocation {
+
+  latLng: ILatLng;
+
+  links: StreetViewNavigationLink[];
+
+}
+
 /**
  * @hidden
  * You can listen to these events where appropriate
@@ -2170,6 +2193,123 @@ export class StreetView extends BaseClass {
       }
     }
   }
+
+
+  /**
+   * Moves the camera with animation
+   * @return {Promise<any>}
+   */
+  @CordovaInstance()
+  animateCamera(cameraPosition: StreetViewCameraPano | StreetViewCameraPosition): Promise<any> { return; }
+
+  /**
+   * Moves the camera without animation
+   * @return {Promise<any>}
+   */
+  @CordovaInstance()
+  moveCamera(cameraPosition: StreetViewCameraPano | StreetViewCameraPosition): Promise<any> { return; }
+
+  /**
+   * Toggles the ability for users to use pan around on the panorama using gestures.
+   * @param gestureEnable {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setPanningGesturesEnabled(gestureEnable: boolean): void {}
+
+  /**
+   * Retrun true if the panning gesture is enabled.
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getPanningGesturesEnabled(): boolean { return; }
+
+  /**
+   * Toggles the ability for users to zoom on the panorama using gestures.
+   * @param gestureEnable {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setZoomGesturesEnabled(gestureEnable: boolean): void {}
+
+  /**
+   * Retrun true if the zooming gesture is enabled.
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getZoomGesturesEnabled(): boolean { return; }
+
+  /**
+   * Toggles the ability for users to see street names on the panorama.
+   * @param gestureEnable {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setStreetNamesEnabled(gestureEnable: boolean): void {}
+
+  /**
+   * Retrun true if the street names control is enabled.
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getStreetNamesEnabled(): boolean { return; }
+
+  /**
+   * Toggles the ability for users to move between panoramas.
+   * @param gestureEnable {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setNavigationEnabled(gestureEnable: boolean): void {}
+
+  /**
+   * Retrun true if the navigation control is enabled.
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getNavigationEnabled(): boolean { return; }
+
+  /**
+   * Retrun the navigation links (StreetViewLocation.links)
+   * @return {StreetViewNavigationLink[]}
+   */
+  @CordovaInstance({ sync: true })
+  getLinks(): StreetViewNavigationLink[] { return; }
+
+  /**
+   * Retrun the current location
+   * @return {StreetViewLocation}
+   */
+  @CordovaInstance({ sync: true })
+  getLocation(): StreetViewLocation { return; }
+
+  /**
+   * Retrun the current panorama id
+   * @return {string}
+   */
+  @CordovaInstance({ sync: true })
+  getPano(): string { return; }
+
+  /**
+   * Retrun the current position (StreetViewLocation.latLng)
+   * @return {string}
+   */
+  @CordovaInstance({ sync: true })
+  getPosition(): ILatLng { return; }
+
+  /**
+   * Destroy a map completely
+   * @return {Promise<any>}
+   */
+  @CordovaInstance()
+  remove(): Promise<any> {
+    if (this.get('_overlays')) {
+      Object.keys(this.get('_overlays')).forEach((overlayId: string) => {
+        this.get('_overlays')[overlayId] = null;
+        delete this.get('_overlays')[overlayId];
+      });
+    }
+    return new Promise<any>((resolve) => {
+      this._objectInstance.remove(() => resolve());
+    });
+  }
+
 }
 
 /**

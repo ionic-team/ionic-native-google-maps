@@ -1184,16 +1184,16 @@ export class GoogleMaps extends IonicNativePlugin {
    * Creates a new StreetView instance
    * @param element {string | HTMLElement} Element ID or reference to attach the map to
    * @param options {StreetViewOptions} [options] Options
-   * @return {StreetView}
+   * @return {StreetViewPanorama}
    */
-  static createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetView {
+  static createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
     if (element instanceof HTMLElement) {
       if (element.getAttribute('__pluginMapId')) {
         console.error('GoogleMaps', element.tagName + '[__pluginMapId=\'' + element.getAttribute('__pluginMapId') +  '\'] has already map.');
         return;
       }
     }
-    return new StreetView(<HTMLElement>element, options);
+    return new StreetViewPanorama(<HTMLElement>element, options);
   }
 }
 
@@ -1220,7 +1220,7 @@ export class BaseClass {
     return new Observable((observer) => {
       this._objectInstance.on(eventName, (...args: any[]) => {
         if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map') {
+          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
             args[args.length - 1] = this;
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
@@ -1254,7 +1254,7 @@ export class BaseClass {
     return new Promise<any>((resolve) => {
       this._objectInstance.one(eventName, (...args: any[]) => {
         if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map') {
+          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
             args[args.length - 1] = this;
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
@@ -1314,7 +1314,7 @@ export class BaseClass {
     return new Observable((observer) => {
       this._objectInstance.on(eventName, (...args: any[]) => {
         if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map') {
+          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
             args[args.length - 1] = this;
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
@@ -1348,7 +1348,7 @@ export class BaseClass {
     return new Promise<any>((resolve) => {
       this._objectInstance.one(eventName, (...args: any[]) => {
         if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map') {
+          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
             args[args.length - 1] = this;
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
@@ -2161,10 +2161,10 @@ export class Spherical {
  * @hidden
  */
 @Plugin({
-  pluginName: 'StreetView',
+  pluginName: 'StreetViewPanorama',
   plugin: 'cordova-plugin-googlemaps'
 })
-export class StreetView extends BaseClass {
+export class StreetViewPanorama extends BaseClass {
   constructor(element: string | HTMLElement, options?: StreetViewOptions) {
     super();
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
@@ -2299,12 +2299,6 @@ export class StreetView extends BaseClass {
    */
   @CordovaInstance()
   remove(): Promise<any> {
-    if (this.get('_overlays')) {
-      Object.keys(this.get('_overlays')).forEach((overlayId: string) => {
-        this.get('_overlays')[overlayId] = null;
-        delete this.get('_overlays')[overlayId];
-      });
-    }
     return new Promise<any>((resolve) => {
       this._objectInstance.remove(() => resolve());
     });

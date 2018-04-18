@@ -895,6 +895,54 @@ export class VisibleRegion implements ILatLngBounds {
 
 /**
  * @hidden
+ */
+export const StreetViewSource = {
+  DEFAULT: 'DEFAULT',
+  OUTDOOR: 'OUTDOOR'
+};
+
+export interface StreetViewCameraPosition {
+  target: ILatLng;
+  source?: string;
+  radius?: number;
+  bearing?: number;
+  tilt?: number;
+  zoom?: number;
+}
+export interface StreetViewCameraPano {
+  target: string;
+  bearing?: number;
+  tilt?: number;
+  zoom?: number;
+}
+export interface StreetViewOptions {
+
+  camera?: StreetViewCameraPano | StreetViewCameraPosition;
+
+  /**
+   * controls [options]
+   */
+  controls?: {
+    streetNames?: boolean;
+    navigation?: boolean;
+  };
+
+  /**
+   * gestures [options]
+   */
+  gestures?: {
+    padding?: boolean;
+    zooming?: boolean;
+  };
+
+  /**
+   * Accept extra properties for future updates
+   */
+  [key: string]: any;
+}
+
+/**
+ * @hidden
  * You can listen to these events where appropriate
  */
 export const GoogleMapsEvent = {
@@ -925,13 +973,17 @@ export const GoogleMapsEvent = {
   MAP_DRAG: 'map_drag',
   MAP_DRAG_START: 'map_drag_start',
   MAP_DRAG_END: 'map_drag_end',
-  KML_CLICK: 'kml_click'
+  KML_CLICK: 'kml_click',
+  PANORAMA_READY: 'panorama_ready',
+  PANORAMA_CAMERA_CHANGE: 'panorama_camera_change',
+  PANORAMA_LOCATION_CHANGE: 'panorama_location_change',
+  PANORAMA_CLICK: 'panorama_click'
 };
 
 /**
  * @hidden
  */
-export const GoogleMapsAnimation: { [animationName: string]: string; } = {
+export const GoogleMapsAnimation = {
   BOUNCE: 'BOUNCE',
   DROP: 'DROP'
 };
@@ -939,7 +991,7 @@ export const GoogleMapsAnimation: { [animationName: string]: string; } = {
 /**
  * @hidden
  */
-export const GoogleMapsMapTypeId: { [mapType: string]: MapType; } = {
+export const GoogleMapsMapTypeId = {
   NORMAL: 'MAP_TYPE_NORMAL',
   ROADMAP: 'MAP_TYPE_ROADMAP',
   SATELLITE: 'MAP_TYPE_SATELLITE',
@@ -1104,6 +1156,22 @@ export class GoogleMaps extends IonicNativePlugin {
     return GoogleMaps.create(element, options);
   }
 
+
+  /**
+   * Creates a new StreetView instance
+   * @param element {string | HTMLElement} Element ID or reference to attach the map to
+   * @param options {StreetViewOptions} [options] Options
+   * @return {StreetView}
+   */
+  static createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetView {
+    if (element instanceof HTMLElement) {
+      if (element.getAttribute('__pluginMapId')) {
+        console.error('GoogleMaps', element.tagName + '[__pluginMapId=\'' + element.getAttribute('__pluginMapId') +  '\'] has already map.');
+        return;
+      }
+    }
+    return new StreetView(<HTMLElement>element, options);
+  }
 }
 
 /**
@@ -2063,6 +2131,44 @@ export class Spherical {
    */
   static interpolate(from: ILatLng, to: ILatLng, fraction: number): LatLng {
     return GoogleMaps.getPlugin().geometry.spherical.interpolate(from, to, fraction);
+  }
+}
+
+/**
+ * @hidden
+ */
+@Plugin({
+  pluginName: 'StreetView',
+  plugin: 'cordova-plugin-googlemaps'
+})
+export class StreetView extends BaseClass {
+  constructor(element: string | HTMLElement, options?: StreetViewOptions) {
+    super();
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      if (element instanceof HTMLElement) {
+        this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(element, options);
+      } else if (typeof element === 'string') {
+
+        this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(new Promise<any[]>((resolve, reject) => {
+          let count: number = 0;
+          let timer: any = setInterval(() => {
+            let target = document.querySelector('.show-page #' + element);
+            if (target) {
+              clearInterval(timer);
+              resolve([target, options]);
+            } else {
+              if (count++ < 20) {
+                return;
+              }
+              clearInterval(timer);
+              this._objectInstance.remove();
+              console.error('Can not find the element [#' + element + ']');
+              reject();
+            }
+          }, 100);
+        }), options);
+      }
+    }
   }
 }
 

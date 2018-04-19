@@ -5,9 +5,9 @@ _This class extends [BaseClass](../baseclass/README.md)_.
 ## Contents
 
   - <a href="#overview">Overview</a>
-    - <a href="#create-one-polygon">Create one polygon</a>
-    - <a href="#click-event">Click event</a>
-    - <a href="#create-polygon-with-holes">Create polygon with holes</a>
+    - <a href="#create-one-circle">Create one circle</a>
+    - <a href="#circle_click-event">Click event</a>
+    - <a href="#bindto-method">bindTo() method</a>
   - <a href="#api-reference">API Reference</a>
 
 ------------
@@ -45,7 +45,7 @@ loadMap() {
 
 ---------------------------------------------------------------
 
-### Listen CLICK event
+### Listen CIRCLE_CLICK event
 
 In order to listen the CIRCLE_CLICK event, you need to specify the `clickable` option.
 You can get the latitude/longitude pair of clicked position.
@@ -114,98 +114,266 @@ loadMap() {
 
 ---------------------------------------------------------------
 
-## API Reference
+## Create methods
 
-### Create
-<table>
-    <tr>
-        <th><a href="./addCircle/README.md">map.addCircle()</a></th>
-        <td>Add a circle asynchronously</td>
-    </tr>
-    <tr>
-        <th><a href="./addCircle/README.md">map.addCircleSync()</a></th>
-        <td>Add a circle synchronously</td>
-    </tr>
-</table>
+- ### map.addCircle()
 
-### Methods
+  Adds a circle onto the map **asynchronously**.
 
-<table>
-    <tr>
-        <th><a href="./setCenter/README.md">setCenter()</a></th>
-        <td>Change the center position.</td>
-    </tr>
-    <tr>
-        <th>getCenter()</th>
-        <td>Return the current center position.</td>
-    </tr>
-    <tr>
-        <th><a href="./setRadius/README.md">setRadius()</a></th>
-        <td>Change the circle radius.</td>
-    </tr>
-    <tr>
-        <th>getRadius()</th>
-        <td>Return the current circle radius.</td>
-    </tr>
-    <tr>
-        <th><a href="./setFillColor/README.md">setFillColor()</a></th>
-        <td>Change the filling color (inner color).</td>
-    </tr>
-    <tr>
-        <th>getFillColor()</th>
-        <td>Return the current circle filling color (inner color).</td>
-    </tr>
-    <tr>
-        <th><a href="./setStrokeWidth/README.md">setStrokeWidth()</a></th>
-        <td>Change the stroke width.</td>
-    </tr>
-    <tr>
-        <th>getStrokeWidth()</th>
-        <td>Return the current circle stroke width (unit: pixel).</td>
-    </tr>
-    <tr>
-        <th><a href="./setStrokeColor/README.md">setStrokeColor()</a></th>
-        <td>Change the stroke color (outter color).</td>
-    </tr>
-    <tr>
-        <th>getStrokeColor()</th>
-        <td>Return the current circle stroke color (outer color).</td>
-    </tr>
-    <tr>
-        <th><a href="./setClickable/README.md">setClickable()</a></th>
-        <td>Enables or disables click events for this circle.</td>
-    </tr>
-    <tr>
-        <th>getClickable()</th>
-        <td>Return true if the circle is clickable.</td>
-    </tr>
-    <tr>
-        <th><a href="./setZIndex/README.md">setZIndex()</a></th>
-        <td>Change the circle zIndex order.</td>
-    </tr>
-    <tr>
-        <th>getZIndex()</th>
-        <td>Return the current circle zIndex.</td>
-    </tr>
-    <tr>
-        <th><a href="./remove/README.md">remove()</a></th>
-        <td>Remove the circle.</td>
-    </tr>
-    <tr>
-        <th>getBounds()</th>
-        <td>Return the latLngBounds (rectangle) that contains the circle.</td>
-    </tr>
-    <tr>
-        <th>getMap()</th>
-        <td>Return the map reference.</td>
-    </tr>
-</table>
+  :arrow_right: Returns `Promise<Circle>`
 
-### Events
+- ### map.addCircleSync()
 
-<table>
-    <tr>
-        <th><a href="./CIRCLE_CLICK/README.md">CIRCLE_CLICK</a></th>
-        <td><b>Arguments: <a href="../LatLng/README.md">LatLng</a></b><br>This event is fired when you click on a circle.</td>
-    </tr>
-</table>
+  Adds a circle onto the map **synchronously**.
+
+  :arrow_right: Returns `Circle`
+
+
+------------------------------------------------------------------------
+
+## Instance methods
+
+- ### getId()
+
+  Returns the ID of instance.
+
+  :arrow_right: Returns `string`
+
+- ### getMap()
+
+  Return the map instance.
+
+  :arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
+
+- ### setCenter(latLng) [:orange_book:](./setCenter/README.md)
+
+  Changes the center position.
+
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>latLng</td>
+    <td><a href="../ilatlng/README.md">ILatLng</a></td>
+    <td>new position</td>
+  </tr>
+  </table>
+
+
+- ### getCenter()
+
+  Returns the current center position
+
+  :arrow_right: Returns [ILatLng](../ilatlng/README.md).
+
+
+- ### setRadius(radius) [:orange_book:](./setRadius/README.md)
+
+  Changes the circle radius.
+
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>radius</td>
+    <td>number</td>
+    <td>Radius in meter</td>
+  </tr>
+  </table>
+
+
+- ### getRadius()
+
+  Returns the current circle radius.
+
+  :arrow_right: Returns `number`.
+
+- ### setFillColor(color) [:orange_book:](./setFillColor/README.md)
+
+  Changes the filling color (inner color).
+
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>color</td>
+    <td>number</td>
+    <td>HTML color strings</td>
+  </tr>
+  </table>
+
+
+- ### getFillColor()
+
+  Returns the current circle filling color (inner color).
+
+  :arrow_right: Returns `string`.
+
+
+- ### setStrokeWidth(strokeWidth) [:orange_book:](./setStrokeWidth/README.md)
+
+  Changes the stroke width.
+
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>strokeWidth</td>
+    <td>number</td>
+    <td>stroke width in pixel</td>
+  </tr>
+  </table>
+
+
+- ### getStrokeWidth()
+
+  Returns the current circle stroke width (unit: pixel).
+
+  :arrow_right: Returns `number`.
+
+- ### setStrokeColor(color)
+
+  Changes the stroke color (outter color).
+
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>color</td>
+    <td>string</td>
+    <td>HTML color strings</td>
+  </tr>
+  </table>
+
+
+- ### getStrokeColor()
+
+  Returns the current circle stroke color (outer color).
+
+  :arrow_right: Returns `string`.
+
+
+- ### setClickable(clickable) [:orange_book:](./setClickable/README.md)
+
+  Changes click-ability of the circle.
+
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>clickable</td>
+    <td>boolean</td>
+    <td>true or false</td>
+  </tr>
+  </table>
+
+
+- ### getClickable()
+
+  Returns true if the circle is clickable.
+
+  :arrow_right: Returns `boolean`.
+
+- ### setVisible(clickable) [:orange_book:](./setVisible/README.md)
+
+  Set circle visibility
+
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>visible</td>
+    <td>boolean</td>
+    <td>true or false</td>
+  </tr>
+  </table>
+
+
+- ### getVisible()
+
+  Returns true if the circle is visible.
+
+  :arrow_right: Returns `boolean`.
+
+
+- ### getBounds()
+
+  Returns the latLngBounds (rectangle) that contains the circle.
+
+  :arrow_right: Returns [LatLngBounds](../latlngbounds/README.md).
+
+
+- ### setZIndex(index) [:orange_book:](./setZIndex/README.md)
+
+  Changes the circle zIndex order.
+
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>index</td>
+    <td>number</td>
+    <td>z-index</td>
+  </tr>
+  </table>
+
+
+- ### getZIndex()
+
+  Returns the current circle zIndex.
+
+  :arrow_right: Returns `number`.
+
+- ### remove() [:orange_book:](./setZIndex/README.md)
+
+  Remove the circle.
+
+------------------------------------------------------------------------
+
+## Event
+
+- ### CIRCLE_CLICK [:orange_book:](./CIRCLE_CLICK/README.md)
+
+  This event is fired when you click on a circle.
+
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>params[0]</td>
+    <td>LatLng</td>
+    <td>clicked position</td>
+  </tr>
+  <tr>
+    <td>params[1]</td>
+    <td>Circle</td>
+    <td>circle instance</td>
+  </tr>
+  </table>

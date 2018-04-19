@@ -1,11 +1,9 @@
-# map.addCircle()
+# map.addCircleSync()
 
-The map.addCircle() method adds a circle onto the map **asynchronously**.
+The map.addCircle() method adds a circle onto the map **synchronously**.
 
 ```typescript
-this.map.addCircle(options).then((circle: Circle) => {
-  ...
-});
+let circle: Circle = this.map.addCircleSync(options);
 ```
 
 ## Parameters
@@ -27,19 +25,17 @@ loadMap() {
   this.map = GoogleMaps.create('map_canvas');
 
   // Add circle
-  this.map.addCircle({
+  let circle: Circle = this.map.addCircle({
     'center': GOOGLE,
     'radius': 300,
     'strokeColor' : '#AA00FF',
     'strokeWidth': 5,
     'fillColor' : '#880000'
-  }).then((circle: Circle) => {
+  });
 
-    // Fit the map camera to circle
-    this.map.moveCamera({
-      target: circle.getBounds()
-    });
-
+  // Fit the map camera to circle
+  this.map.moveCamera({
+    target: circle.getBounds()
   });
 }
 ```

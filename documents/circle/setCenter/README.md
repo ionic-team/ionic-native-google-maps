@@ -11,7 +11,7 @@ circle.setCenter(latLng);
 
 name           | type          | description
 ---------------|---------------|---------------------------------------
-latLng         | LatLng        | new center position
+latLng         | ILatLng       | new center position
 -----------------------------------------------------------------------
 
 
@@ -21,35 +21,39 @@ latLng         | LatLng        | new center position
 <div id="map_canvas"></div>
 ```
 
-```js
-var GOOGLE = {"lat" : 37.422858, "lng" : -122.085065};
-var mapDiv = document.getElementById("map_canvas");
-var map = plugin.google.maps.Map.getMap(mapDiv);
+```typescript
+map: GoogleMap;
 
-// Add circle
-var circle = map.addCircle({
-  'center': GOOGLE,
-  'radius': 300,
-  'strokeColor' : '#AA00FF',
-  'strokeWidth': 5,
-  'fillColor' : '#880000'
-});
+loadMap() {
+  let GOOGLE: ILatLng = {"lat" : 37.422858, "lng" : -122.085065};
+  this.map = GoogleMaps.create('map_canvas');
 
-map.moveCamera({
-  target: circle.getBounds(),
-  padding: 50
-});
+  // Add a circle
+  let circle: Circle = this.map.addCircleSync({
+    'center': GOOGLE,
+    'radius': 300,
+    'strokeColor' : '#AA00FF',
+    'strokeWidth': 5,
+    'fillColor' : '#880000',
+    'clickable' : true   // default = false
+  });
 
-var marker = map.addMarker({
-  position: circle.getCenter(),
-  draggable: true,
-  title: "Drag me!"
-});
+  this.map.moveCamera({
+    target: circle.getBounds(),
+    padding: 50
+  });
 
-marker.showInfoWindow();
+  let marker: Marker = map.addMarkerSync({
+    position: circle.getCenter(),
+    draggable: true,
+    title: "Drag me!"
+  });
 
-// If the marker moves, the center property is also changed.
-marker.bindTo("position", circle, "center");
+  marker.showInfoWindow();
+
+  // circle.center = marker.position
+  marker.bindTo("position", circle, "center");
+}
 ```
 
 ![](image.gif)

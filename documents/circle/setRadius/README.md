@@ -19,56 +19,62 @@ radius         | number        | radius in meters.
 <div id="map_canvas"></div>
 ```
 
-```js
-var center = {"lat": 32, "lng": -97};
 
-// radius (meter)
-var radius = 300;
+```typescript
+map: GoogleMap;
 
-// Calculate the positions
-var deg0 = plugin.google.maps.geometry.spherical.computeOffset(center, radius, 0);
-var deg90 = plugin.google.maps.geometry.spherical.computeOffset(center, radius, 90);
-var deg180 = plugin.google.maps.geometry.spherical.computeOffset(center, radius, 180);
-var deg270 = plugin.google.maps.geometry.spherical.computeOffset(center, radius, 270);
+loadMap() {
+  let center: ILatLng = {"lat": 32, "lng": -97};
 
-var mapDiv = document.getElementById("map_canvas");
-var map = plugin.google.maps.Map.getMap(mapDiv, {
-  camera: {
-    target: [
-      center,
-      deg0,
-      deg90,
-      deg180,
-      deg270
-    ],
-    padding: 100
-  }
-});
+  // radius (meter)
+  let radius: number = 300;
 
-var marker = map.addMarker({
-  'position': deg0,
-  'draggable': true,
-  'title': 'Drag me!'
-});
+  // Calculate the positions
+  let deg0: ILatLng = Spherical.computeOffset(center, radius, 0);
+  let deg90: ILatLng = Spherical.computeOffset(center, radius, 90);
+  let deg180: ILatLng = Spherical.computeOffset(center, radius, 180);
+  let deg270: ILatLng = Spherical.computeOffset(center, radius, 270);
 
-marker.showInfoWindow();
+  this.map = GoogleMaps.create('map_canvas', {
+    camera: {
+      target: [
+        center,
+        deg0,
+        deg90,
+        deg180,
+        deg270
+      ],
+      padding: 100
+    }
+  });
 
-// Add circle
-var circle = map.addCircle({
-  'center': center,
-  'radius': radius,
-  'strokeColor' : '#AA00FF',
-  'strokeWidth': 5,
-  'fillColor' : '#00880055'
-});
+  let marker: Marker = map.addMarkerSync({
+    'position': deg0,
+    'draggable': true,
+    'title': 'Drag me!'
+  });
 
-marker.on("position_changed", function(oldValue, newValue) {
-  // Calculate distance between center and the marker position
-  var radius = plugin.google.maps.geometry.spherical.computeDistanceBetween(center, newValue);
+  marker.showInfoWindow();
 
-  // Update the radius
-  circle.setRadius(radius);
-});
+  // Add circle
+  let circle: Circle = map.addCircleSync({
+    'center': center,
+    'radius': radius,
+    'strokeColor' : '#AA00FF',
+    'strokeWidth': 5,
+    'fillColor' : '#00880055'
+  });
+
+  marker.on("position_changed").subscribe((params: any[]) => {
+    let latLng: ILatLng = params[0];
+
+    // Calculate distance between center and the marker position
+    let newRadius: number = Spherical.computeDistanceBetween(center, latLng);
+
+    // Update the radius
+    circle.setRadius(newRadius);
+  });
+}
 ```
 
 ![](image.gif)

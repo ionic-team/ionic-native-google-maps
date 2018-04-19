@@ -14,31 +14,38 @@ circle.remove()
 <div id="map_canvas"></div>
 ```
 
-```js
-var GOOGLE = {"lat" : 37.422858, "lng" : -122.085065};
-var mapDiv = document.getElementById("map_canvas");
-var map = plugin.google.maps.Map.getMap(mapDiv);
+```typescript
+map: GoogleMap;
 
-// Add a circle
-var circle = map.addCircle({
-  'center': GOOGLE,
-  'radius': 300,
-  'strokeColor' : '#AA00FF',
-  'strokeWidth': 5,
-  'fillColor' : '#880000',
-  'clickable' : true   // default = false
-);
+loadMap() {
+  let GOOGLE: ILatLng = {"lat" : 37.422858, "lng" : -122.085065};
+  this.map = GoogleMaps.create('map_canvas');
 
-map.moveCamera({
-  target: circle.getBounds()
-});
+  // Add a circle
+  let circle: Circle = this.map.addCircleSync({
+    'center': GOOGLE,
+    'radius': 300,
+    'strokeColor' : '#AA00FF',
+    'strokeWidth': 5,
+    'fillColor' : '#880000',
+    'clickable' : true   // default = false
+  });
 
-// Catch the circle_CLICK event
-circle.on(plugin.google.maps.event.CIRCLE_CLICK, function() {
+  this.map.moveCamera({
+    target: circle.getBounds()
+  });
+
+  // Listen the CIRCLE_CLICK event
+  circle.on(GoogleMapsEvent.CIRCLE_CLICK).subscribe(this.onCircleClick.bind(this));
+}
+
+
+onCircleClick((params: any[]) => {
+  //let latLng: LatLng = params[0];
+  let circle: Circle = params[1];
 
   // Remove the circle
   circle.remove();
-
 });
 ```
 

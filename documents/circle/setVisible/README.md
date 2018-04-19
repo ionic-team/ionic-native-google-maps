@@ -10,40 +10,47 @@ circle.setVisible(flag);
 
 name           | type          | description
 ---------------|---------------|---------------------------------------
-flag           | boolean       | `true`: visible, `false`M: invisible
+flag           | boolean       | `true`: visible, `false`: invisible
 -----------------------------------------------------------------------
 
 ## Demo code
 
 ```html
 <div id="map_canvas">
-  <span class="smallPanel"><button>Reverse the zIndex orders</button></span>
+  <button ion-button (click)="toggleVisibility()">
+  change the circle visibility
+  </button>
 </div>
 ```
 
-```js
-var GOOGLE = {"lat" : 37.422858, "lng" : -122.085065};
-var mapDiv = document.getElementById("map_canvas");
-var map = plugin.google.maps.Map.getMap(mapDiv);
+```typescript
+map: GoogleMap;
+circle: Circle;
 
-// Add a circle
-var circle = map.addCircle({
-  'center': GOOGLE,
-  'radius': 300,
-  'strokeColor' : '#AA00FF',
-  'strokeWidth': 5,
-  'fillColor' : '#880000',
-  'clickable' : true   // default = false
-});
+loadMap() {
+  let GOOGLE: ILatLng = {"lat" : 37.422858, "lng" : -122.085065};
+  this.map = GoogleMaps.create('map_canvas');
 
-map.moveCamera({
-  target: circle.getBounds()
-});
+  // Add a circle
+  this.circle = this.map.addCircleSync({
+    'center': GOOGLE,
+    'radius': 300,
+    'strokeColor' : '#AA00FF',
+    'strokeWidth': 5,
+    'fillColor' : '#880000',
+    'clickable' : true   // default = false
+  });
 
-var checkbox = document.getElementById("toggleCheckbox");
-checkbox.addEventListener("change", function() {
+  this.map.moveCamera({
+    target: circle.getBounds(),
+    padding: 50
+  });
+}
+
+toggleVisibility() {
 
   // Change the visible property
-  circle.setVisible(checkbox.checked);
-});
+  this.circle.setVisible(!this.marker.getVisible());
+
+}
 ```

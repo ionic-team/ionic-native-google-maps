@@ -19,32 +19,34 @@ width          | number        | The width of the circle's outline in screen pix
 <div id="map_canvas"></div>
 ```
 
-```js
-var mapDiv = document.getElementById("map_canvas");
-var map = plugin.google.maps.Map.getMap(mapDiv);
+```typescript
+map: GoogleMap;
 
-showVirtualDialog(mapDiv, "Click on the circle!");
+loadMap() {
+  let GOOGLE: ILatLng = {"lat" : 37.422858, "lng" : -122.085065};
+  this.map = GoogleMaps.create('map_canvas');
 
-// Add circle
-var circle = map.addCircle({
-  'center': GOOGLE,
-  'radius': 300,
-  'strokeColor' : '#AA00FF',
-  'strokeWidth': 5,
-  'fillColor' : '#880000',
-  'clickable' : true   // default = false
-});
+  // Add a circle
+  let circle: Circle = this.map.addCircleSync({
+    'center': GOOGLE,
+    'radius': 300,
+    'strokeColor' : '#AA00FF',
+    'strokeWidth': 5,
+    'fillColor' : '#880000',
+    'clickable' : true   // default = false
+  });
 
-map.moveCamera({
-  target: circle.getBounds()
-});
+  this.map.moveCamera({
+    target: circle.getBounds(),
+    padding: 50
+  });
 
-circle.on(plugin.google.maps.event.CIRCLE_CLICK, function(latLng) {
+  circle.on(plugin.google.maps.event.CIRCLE_CLICK).subscribe(() => {
 
-  // Change the stroke width
-  circle.setStrokeWidth(20);
-
-});
+    // Change the stroke width
+    circle.setStrokeWidth(20);
+  });
+}
 ```
 
 ![](image.gif)

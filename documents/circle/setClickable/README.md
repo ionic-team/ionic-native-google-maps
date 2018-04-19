@@ -11,7 +11,7 @@ circle.setClickable(flag);
 
 name           | type          | description
 ---------------|---------------|---------------------------------------
-flag           | LatLng        | new center position
+flag           | boolean       | `true`: clickable, `false`: non-clickable
 -----------------------------------------------------------------------
 
 ## Demo code
@@ -22,38 +22,40 @@ flag           | LatLng        | new center position
 </div>
 ```
 
-```js
-var mapDiv = document.getElementById("map_canvas");
+```typescript
+map: GoogleMap;
+circle: Circle;
+isClickable: boolean = true;
 
-// Create a map with specified camera bounds
-var map = plugin.google.maps.Map.getMap(mapDiv);
+loadMap() {
+  let GOOGLE: ILatLng = {"lat" : 37.422858, "lng" : -122.085065};
+  this.map = GoogleMaps.create('map_canvas');
 
-// Add a circle
-var circle = map.addCircle({
-  'center': GOOGLE,
-  'radius': 300,
-  'strokeColor' : '#AA00FF',
-  'strokeWidth': 5,
-  'fillColor' : '#880000',
-  'clickable' : true   // default = false
-});
+  // Add a circle
+  this.circle = this.map.addCircleSync({
+    'center': GOOGLE,
+    'radius': 300,
+    'strokeColor' : '#AA00FF',
+    'strokeWidth': 5,
+    'fillColor' : '#880000',
+    'clickable' : true   // default = false
+  });
 
-map.moveCamera({
-  target: circle.getBounds()
-});
+  this.map.moveCamera({
+    target: circle.getBounds(),
+    padding: 50
+  });
 
-var checkbox = document.getElementById("toggleCheckbox");
-checkbox.addEventListener("change", function() {
+  // Catch the CIRCLE_CLICK event
+  circle.on(plugin.google.maps.event.CIRCLE_CLICK).subscribe(() => {
+    alert("The circle is clicked!");
+  });
+}
 
-  // Change the clickable property
-  circle.setClickable(checkbox.checked);
-});
-
-// Catch the CIRCLE_CLICK event
-circle.on(plugin.google.maps.event.CIRCLE_CLICK, function(latLng) {
-  alert("The circle is clicked!");
-});
-
+toggleClickable() {
+  // Toggle clickable and non-clickable
+  this.circle.setClickable(checkbox.checked);
+}
 ```
 
 ![](image.gif)

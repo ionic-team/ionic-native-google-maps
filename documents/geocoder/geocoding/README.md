@@ -13,7 +13,7 @@ It means the geocoding results are different on Android and iOS.
 </div>
 ```
 
-```js
+```typescript
 map1: GoogleMap;
 search_address: any;
 
@@ -77,7 +77,7 @@ If any error occurs during the requests processing, the instance triggers `error
 </div>
 ```
 
-```type
+```typescript
 map2: GoogleMap;
 isRunning: boolean = false;
 

@@ -8,7 +8,7 @@ This plugin supports reverse geocoding. You can convert from latitude and longit
 <div id="map_canvas1"></div>
 ```
 
-```js
+```typescript
 map1: GoogleMap;
 
 loadMap1() {
@@ -71,7 +71,7 @@ If any error occurs during the requests processing, the instance triggers `error
 </div>
 ```
 
-```js
+```typescript
 map2: GoogleMap;
 isRunning: boolean = false;
 

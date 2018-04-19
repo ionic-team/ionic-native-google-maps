@@ -18,7 +18,7 @@ export class MapPage {
     });
   }
 
-  loadmap() {
+  loadMap() {
 
     let options: GoogleMapOptions = {
       controls: {

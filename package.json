@@ -1,6 +1,6 @@
 {
   "name": "@ionic-native/google-maps",
-  "version": "4.7.0",
+  "version": "4.8.0-rc1",
   "private": true,
   "description": "Native plugin wrappers for Cordova and Ionic with TypeScript, ES6+, Promise and Observable support",
   "homepage": "https://ionicframework.com/",

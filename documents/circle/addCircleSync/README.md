@@ -8,7 +8,10 @@ let circle: Circle = this.map.addCircleSync(options);
 
 ## Parameters
 
-- options : [CircleOptions](../../circleoptions/README.md)
+name           | type                                             | description
+---------------|--------------------------------------------------|---------------------------------------
+options        | [CircleOptions](../../circleoptions/README.md)   | circle options
+----------------------------------------------------------------------------------------------------------
 
 
 ## Demo code

@@ -10,7 +10,10 @@ this.map.addCircle(options).then((circle: Circle) => {
 
 ## Parameters
 
-- options : [CircleOptions](../../circleoptions/README.md)
+name           | type                                             | description
+---------------|--------------------------------------------------|---------------------------------------
+options        | [CircleOptions](../../circleoptions/README.md)   | circle options
+----------------------------------------------------------------------------------------------------------
 
 
 ## Demo code

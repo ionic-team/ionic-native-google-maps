@@ -116,13 +116,13 @@ loadMap() {
 
 ## Create methods
 
-- ### map.addCircle()
+- ### map.addCircle() [:orange_book:](./addCircle/README.md)
 
   Adds a circle onto the map **asynchronously**.
 
   :arrow_right: Returns `Promise<Circle>`
 
-- ### map.addCircleSync()
+- ### map.addCircleSync() [:orange_book:](./addCircleSync/README.md)
 
   Adds a circle onto the map **synchronously**.
 

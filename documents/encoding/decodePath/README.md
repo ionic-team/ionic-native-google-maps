@@ -24,27 +24,28 @@ precision?     | number   | (optional) default: 5
 ```
 
 ```js
-var encodedPath = 'c{|xHbo|OSnFrSjW~M{EnFwVz@wy@vQsq@cBoUzJ{EzObBrIcLfE~C~H{Y~C~CfOgY{EjM{EgTcLzTsSwQcGf@IoKgJSkMsb@RkR' +
-  'vVkRDon@SooBvBsXbGgE{@{EfE{EwLsXgEo{AcVgw@kRc|A_q@seAcLg@bBvQkCnKcGjCwQsSkM?cL{YjHrS{J~HgOwBgOjf@{Jj' +
-  'u@cLjRcGz^oUjW{Tni@f@jRsIj\wBjf@sNbo@wG~iArDnlArIj\bGfr@bQf^~WrSnPvVfOjHnURzc@cQbQzc@nUrtAbBfYkC~M~H' +
-  'nZ~Mz^f^_N~MrDbBwQkWsXR{E';
+map: GoogleMap;
 
-var points = plugin.google.maps.geometry.encoding.decodePath(encodedPath);
+loadMap() {
+  let encodedPath: string = 'c{|xHbo|OSnFrSjW~M{EnFwVz@wy@vQsq@cBoUzJ{EzObBrIcLfE~C~H{Y~C~CfOgY{EjM{EgTcLzTsSwQcGf@IoKgJSkMsb@RkR' +
+'vVkRDon@SooBvBsXbGgE{@{EfE{EwLsXgEo{AcVgw@kRc|A_q@seAcLg@bBvQkCnKcGjCwQsSkM?cL{YjHrS{J~HgOwBgOjf@{Jj' +
+'u@cLjRcGz^oUjW{Tni@f@jRsIj\wBjf@sNbo@wG~iArDnlArIj\bGfr@bQf^~WrSnPvVfOjHnURzc@cQbQzc@nUrtAbBfYkC~M~H' +
+'nZ~Mz^f^_N~MrDbBwQkWsXR{E';
 
-var mapDiv = document.getElementById("map_canvas");
-var map = plugin.google.maps.Map.getMap(mapDiv, {
-  camera: {
-    target: points
-  }
-});
+  let points: ILatLng[] = Encoding.decodePath(encodedPath);
+  console.log(points);
 
-map.addEventListener(plugin.google.maps.event.MAP_READY, function() {
-
-  map.addPolyline({
-    "points": points
+  this.map = GoogleMaps.create('map_canvas', {
+    camera: {
+      target: points
+    }
   });
 
-});
+  // Add a polygon
+  this.map.addPolylineSync({
+    'points': points
+  });
+}
 ```
 
 ![](image.png)

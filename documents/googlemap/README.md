@@ -232,811 +232,811 @@ Before using this plugin, please understand how this plugin work.
 
   - ### addMarker(options) [:orange_book:](../marker/addMarker/README.md)
 
-  Adds a marker.
+    Adds a marker.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../markeroptions/README.md">MarkerOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../markeroptions/README.md">MarkerOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<Marker>`
+    :arrow_right: Returns `Promise<Marker>`
 
   - ### addMarkerSync(options) [:orange_book:](../marker/addMarkerSync/README.md)
 
-  Adds a marker **synchronously**.
+    Adds a marker **synchronously**.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../markeroptions/README.md">MarkerOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../markeroptions/README.md">MarkerOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Marker`
+    :arrow_right: Returns `Marker`
 
   - ### addMarkerCluster(options) [:orange_book:](../markercluster/addMarkerCluster/README.md)
 
-  Adds a marker cluster.
+    Adds a marker cluster.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../markerclusteroptions/README.md">MarkerClusterOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../markerclusteroptions/README.md">MarkerClusterOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<MarkerCluster>`
+    :arrow_right: Returns `Promise<MarkerCluster>`
 
   - ### addMarkerClusterSync(options) [:orange_book:](../markercluster/addMarkerClusterSync/README.md)
 
-  Adds a marker cluster **synchronously**.
+    Adds a marker cluster **synchronously**.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../markerclusteroptions/README.md">MarkerClusterOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../markerclusteroptions/README.md">MarkerClusterOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<MarkerCluster>`
+    :arrow_right: Returns `Promise<MarkerCluster>`
 
 
   - ### addCircle(options) [:orange_book:](../circle/addCircle/README.md)
 
-  Adds a circle.
+    Adds a circle.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../circleoptions/README.md">CircleOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../circleoptions/README.md">CircleOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<Circle>`
+    :arrow_right: Returns `Promise<Circle>`
 
 
   - ### addCircleSync(options) [:orange_book:](../circle/addCircleSync/README.md)
 
-  Adds a circle **synchronously**.
+    Adds a circle **synchronously**.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../circleoptions/README.md">CircleOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../circleoptions/README.md">CircleOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Circle`
+    :arrow_right: Returns `Circle`
 
 
   - ### addPolygon(options) [:orange_book:](../polygon/addPolygon/README.md)
 
-  Adds a polygon.
+    Adds a polygon.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../polygonoptions/README.md">PolygonOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../polygonoptions/README.md">PolygonOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<Polygon>`
+    :arrow_right: Returns `Promise<Polygon>`
 
   - ### addPolygonSync(options) [:orange_book:](../polygon/addPolygonSync/README.md)
 
-  Adds a polygon **synchronously**.
+    Adds a polygon **synchronously**.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../polygonoptions/README.md">PolygonOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../polygonoptions/README.md">PolygonOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Polygon`
+    :arrow_right: Returns `Polygon`
 
 
 
   - ### addPolyline(options) [:orange_book:](../polyline/addPolyline/README.md)
 
-  Adds a polyline
+    Adds a polyline
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../polylineoptions/README.md">PollineOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../polylineoptions/README.md">PollineOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<Polyline>`
+    :arrow_right: Returns `Promise<Polyline>`
 
 
   - ### addPolylineSync(options) [:orange_book:](../polyline/addPolylineSync/README.md)
 
-  Adds a polyline **synchronously**.
+    Adds a polyline **synchronously**.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../polylineoptions/README.md">PolylineOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../polylineoptions/README.md">PolylineOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Polyline`
+    :arrow_right: Returns `Polyline`
 
 
   - ### addTileOverlay(options) [:orange_book:](../tileoverlay/addTileOverlay/README.md)
 
-  Adds a tile overlay
+    Adds a tile overlay
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../tileoverlayoptions/README.md">TileOverlayOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../tileoverlayoptions/README.md">TileOverlayOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<TileOverlay>`
+    :arrow_right: Returns `Promise<TileOverlay>`
 
   - ### addTileOverlaySyc(options) [:orange_book:](../tileoverlay/addTileOverlaySync/README.md)
 
-  Adds a tile overlay **synchronously**.
+    Adds a tile overlay **synchronously**.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../tileoverlayoptions/README.md">TileOverlayOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../tileoverlayoptions/README.md">TileOverlayOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `TileOverlay`
+    :arrow_right: Returns `TileOverlay`
 
 
   - ### addGroundOverlay(options) [:orange_book:](../groundoverlay/addGroundOverlay/README.md)
 
-  Adds a ground overlay **synchronously**.
+    Adds a ground overlay **synchronously**.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../groundoverlayoptions/README.md">GroundOverlayOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../groundoverlayoptions/README.md">GroundOverlayOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `GroundOverlay`
+    :arrow_right: Returns `GroundOverlay`
 
 
   - ### addGroundOverlaySync(options) [:orange_book:](../groundoverlay/addGroundOverlaySync/README.md)
 
-  Adds a ground overlay
+    Adds a ground overlay
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../groundoverlayoptions/README.md">GroundOverlayOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../groundoverlayoptions/README.md">GroundOverlayOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<GroundOverlay>`
+    :arrow_right: Returns `Promise<GroundOverlay>`
 
 
   - ### addKmlOverlay(options) [:orange_book:](../kmloverlay/addKmlOverlay/README.md)
 
-  Adds a kml overlay
+    Adds a kml overlay
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../kmloverlayoptions/README.md">KmlOverlayOptions</a></td>
-    <td>options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../kmloverlayoptions/README.md">KmlOverlayOptions</a></td>
+      <td>options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<KmlOverlay>`
+    :arrow_right: Returns `Promise<KmlOverlay>`
 
 
   - ### setDiv(domNode?) [:orange_book:](./setDiv/README.md)
 
-  If you want to display the map in an html element, you need to specify an element or id. If omit this argument, the map is detached from webview.
+    If you want to display the map in an html element, you need to specify an element or id. If omit this argument, the map is detached from webview.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>domNode</td>
-    <td>string | HTMLElement</td>
-    <td>(optional)Specifies the container of map div</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>domNode</td>
+      <td>string | HTMLElement</td>
+      <td>(optional)Specifies the container of map div</td>
+    </tr>
+    </table>
 
 
   - ### getDiv()
 
-  Returns the map HTML element
+    Returns the map HTML element
 
-  :arrow_right: Returns `HTMLElement`
+    :arrow_right: Returns `HTMLElement`
 
   - ### getFocusedBuilding()
 
-  Get the currently focused building
+    Get the currently focused building
 
-  :arrow_right: Returns `Promise<any>`
+    :arrow_right: Returns `Promise<any>`
 
 
 
   - ### setMapTypeId(mapTypeId) [:orange_book:](./setMapTypeId/README.md)
 
-  Changes the map type id. Available constants are one of the [MapType](../maptype/README.md)
+    Changes the map type id. Available constants are one of the [MapType](../maptype/README.md)
 
   - ### animateCamera(cameraPosition: CameraPosition<any>) [:orange_book:](./animateCamera/README.md)
 
-  Moves the camera with animation
+    Moves the camera with animation
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>cameraPosition</td>
-    <td><a href="../cameraposition/README.md">CameraPosition&lt;any&gt;</a></td>
-    <td>Specify camera options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>cameraPosition</td>
+      <td><a href="../cameraposition/README.md">CameraPosition&lt;any&gt;</a></td>
+      <td>Specify camera options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<any>`
+    :arrow_right: Returns `Promise<any>`
 
 
   - ### animateCameraZoomIn() [:orange_book:](./animateCameraZoomIn/README.md)
 
-  Zooming in the camera with animation
+    Zooming in the camera with animation
 
-  :arrow_right: Returns `Promise<any>`
+    :arrow_right: Returns `Promise<any>`
 
   - ### animateCameraZoomOut() [:orange_book:](./animateCameraZoomOut/README.md)
 
-  Zooming out the camera with animation
+    Zooming out the camera with animation
 
-  :arrow_right: Returns `Promise<any>`
+    :arrow_right: Returns `Promise<any>`
 
   - ### moveCamera(cameraPosition: CameraPosition<any>) [:orange_book:](./moveCamera/README.md)
 
-  Moves the camera with animation
+    Moves the camera with animation
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>cameraPosition</td>
-    <td><a href="../cameraposition/README.md">CameraPosition&lt;any&gt;</a></td>
-    <td>Specify camera options<br>Note that the `duration` property is ignored.</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>cameraPosition</td>
+      <td><a href="../cameraposition/README.md">CameraPosition&lt;any&gt;</a></td>
+      <td>Specify camera options<br>Note that the `duration` property is ignored.</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<any>`
+    :arrow_right: Returns `Promise<any>`
 
 
   - ### moveCameraZoomIn() [:orange_book:](./moveCameraZoomIn/README.md)
 
-  Zooming in the camera without animation
+    Zooming in the camera without animation
 
-  :arrow_right: Returns `Promise<any>`
+    :arrow_right: Returns `Promise<any>`
 
   - ### moveCameraZoomOut() [:orange_book:](./moveCameraZoomOut/README.md)
 
-  Zooming out the camera without animation
+    Zooming out the camera without animation
 
-  :arrow_right: Returns `Promise<any>`
+    :arrow_right: Returns `Promise<any>`
 
   - ### getCameraPosition() [:orange_book:](./getCameraPosition/README.md)
 
-  Get the position of the camera
+    Get the position of the camera
 
-  :arrow_right: Returns `CameraPosition<ILatLng>`
+    :arrow_right: Returns `CameraPosition<ILatLng>`
 
 
   - ### getCameraTarget() [:orange_book:](./getCameraTarget/README.md)
 
-  Get the current camera target position
+    Get the current camera target position
 
-  :arrow_right: Returns `ILatLng`
+    :arrow_right: Returns `ILatLng`
 
   - ### getCameraZoom() [:orange_book:](./getCameraZoom/README.md)
 
-  Get the current camera zoom level
+    Get the current camera zoom level
 
-  :arrow_right: Returns `number`
+    :arrow_right: Returns `number`
 
   - ### getCameraBearing() [:orange_book:](./getCameraBearing/README.md)
 
-  Get the current camera bearing
+    Get the current camera bearing
 
-  :arrow_right: Returns `number`
+    :arrow_right: Returns `number`
 
   - ### getCameraTilt() [:orange_book:](./getCameraTilt/README.md)
 
-  Get the current camera tilt (view angle)
+    Get the current camera tilt (view angle)
 
-  :arrow_right: Returns `number`
+    :arrow_right: Returns `number`
 
   - ### setCameraTarget(target) [:orange_book:](./setCameraTarget/README.md)
 
-  Set the center position of the camera view.
-  This is a wrapper of `moveCamera()` method.
+    Set the center position of the camera view.
+    This is a wrapper of `moveCamera()` method.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>target</td>
-    <td>
-      <a href="../ilatlng/README.md">ILatLng</a> | Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;</td>
-    <td>Specify camera target</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>target</td>
+      <td>
+        <a href="../ilatlng/README.md">ILatLng</a> | Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;</td>
+      <td>Specify camera target</td>
+    </tr>
+    </table>
 
 
   - ### setCameraZoom(zoomLevel) [:orange_book:](./setCameraZoom/README.md)
 
-  Set zoom level of the camera.
-  This is a wrapper of `moveCamera()` method.
+    Set zoom level of the camera.
+    This is a wrapper of `moveCamera()` method.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>zoomLevel</td>
-    <td>number</td>
-    <td>Specify zoom level</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>zoomLevel</td>
+      <td>number</td>
+      <td>Specify zoom level</td>
+    </tr>
+    </table>
 
   - ### setCameraTilt(tiltAngle) [:orange_book:](./setCameraTilt/README.md)
 
-  Set the camera view angle.
-  This is a wrapper of `moveCamera()` method.
+    Set the camera view angle.
+    This is a wrapper of `moveCamera()` method.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>tiltAngle</td>
-    <td>number</td>
-    <td>Specify tilt angle</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>tiltAngle</td>
+      <td>number</td>
+      <td>Specify tilt angle</td>
+    </tr>
+    </table>
 
   - ### setCameraBearing(bearing) [:orange_book:](./setCameraBearing/README.md)
 
-  Set camera bearing.
-  This is a wrapper of `moveCamera()` method.
+    Set camera bearing.
+    This is a wrapper of `moveCamera()` method.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>bearing</td>
-    <td>number</td>
-    <td>Specify tilt angle</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>bearing</td>
+      <td>number</td>
+      <td>Specify tilt angle</td>
+    </tr>
+    </table>
 
   - ### panBy(x, y) [:orange_book:](./panBy/README.md)
 
-  Change the center of the map by the given distance in pixels.
+    Change the center of the map by the given distance in pixels.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>x</td>
-    <td>number</td>
-    <td>Distance in pixel for x</td>
-  </tr>
-  <tr>
-    <td>y</td>
-    <td>number</td>
-    <td>Distance in pixel for y</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>x</td>
+      <td>number</td>
+      <td>Distance in pixel for x</td>
+    </tr>
+    <tr>
+      <td>y</td>
+      <td>number</td>
+      <td>Distance in pixel for y</td>
+    </tr>
+    </table>
 
 
   - ### getVisibleRegion() [:orange_book:](./getVisibleRegion/README.md)
 
-  Get the current visible region (southWest and northEast)
+    Get the current visible region (southWest and northEast)
 
-  :arrow_right: Returns [VisibleRegion](../visibleregion/README.md)
+    :arrow_right: Returns [VisibleRegion](../visibleregion/README.md)
 
 
   - ### getMyLocation(options?) [:orange_book:](./getMyLocation/README.md)
 
-  Get the current device location
+    Get the current device location
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td>MyLocationOptions</td>
-    <td>(optional) options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td>MyLocationOptions</td>
+      <td>(optional) options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<MyLocation>`
+    :arrow_right: Returns `Promise<MyLocation>`
 
   - ### setClickable(isClickable) [:orange_book:](./setClickable/README.md)
 
-  Set false to ignore all clicks on the map
+    Set false to ignore all clicks on the map
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>isClickable</td>
-    <td>boolean</td>
-    <td>true / false</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>isClickable</td>
+      <td>boolean</td>
+      <td>true / false</td>
+    </tr>
+    </table>
 
   - ### setMyLocationEnabled(enabled) [:orange_book:](./setMyLocationEnabled/README.md)
 
-  Set true if you want to show the MyLocation control (blue dot)
+    Set true if you want to show the MyLocation control (blue dot)
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>enabled</td>
-    <td>boolean</td>
-    <td>true / false</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>enabled</td>
+      <td>boolean</td>
+      <td>true / false</td>
+    </tr>
+    </table>
 
   - ### setMyLocationButtonEnabled(enabled) [:orange_book:](./setMyLocationButtonEnabled/README.md)
 
-  Set true if you want to show the MyLocation button
+    Set true if you want to show the MyLocation button
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>enabled</td>
-    <td>boolean</td>
-    <td>true / false</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>enabled</td>
+      <td>boolean</td>
+      <td>true / false</td>
+    </tr>
+    </table>
 
   - ### setTrafficEnabled(enabled) [:orange_book:](./setTrafficEnabled/README.md)
 
-  Set true if you want to show the traffic layer
+    Set true if you want to show the traffic layer
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>enabled</td>
-    <td>boolean</td>
-    <td>true / false</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>enabled</td>
+      <td>boolean</td>
+      <td>true / false</td>
+    </tr>
+    </table>
 
   - ### setCompassEnabled(enabled) [:orange_book:](./setCompassEnabled/README.md)
 
-  Set true if you want to show the compass button
+    Set true if you want to show the compass button
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>enabled</td>
-    <td>boolean</td>
-    <td>true / false</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>enabled</td>
+      <td>boolean</td>
+      <td>true / false</td>
+    </tr>
+    </table>
 
   - ### setAllGesturesEnabled(enabled) [:orange_book:](./setAllGesturesEnabled/README.md)
 
-  Sets the preference for whether all gestures should be enabled or disabled
+    Sets the preference for whether all gestures should be enabled or disabled
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>enabled</td>
-    <td>boolean</td>
-    <td>true / false</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>enabled</td>
+      <td>boolean</td>
+      <td>true / false</td>
+    </tr>
+    </table>
 
   - ### setVisible(visible) [:orange_book:](./setVisible/README.md)
 
-  Set visibility of the map
+    Set visibility of the map
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>visible</td>
-    <td>boolean</td>
-    <td>true / false</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>visible</td>
+      <td>boolean</td>
+      <td>true / false</td>
+    </tr>
+    </table>
 
   - ### setIndoorEnabled(enabled) [:orange_book:](./setIndoorEnabled/README.md)
 
-  Set true if you want to show the indoor map
+    Set true if you want to show the indoor map
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>enabled</td>
-    <td>boolean</td>
-    <td>true / false</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>enabled</td>
+      <td>boolean</td>
+      <td>true / false</td>
+    </tr>
+    </table>
 
   - ### setPadding(top, right?, bottom?, left?) [:orange_book:](./setPadding/README.md)
 
-  Adjust the map padding (same as CSS padding rule)
+    Adjust the map padding (same as CSS padding rule)
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>top</td>
-    <td>number</td>
-    <td>padding of top in pixels</td>
-  </tr>
-  <tr>
-    <td>right</td>
-    <td>number</td>
-    <td>(optional) padding of right in pixels</td>
-  </tr>
-  <tr>
-    <td>bottom</td>
-    <td>number</td>
-    <td>(optional) padding of bottom in pixels</td>
-  </tr>
-  <tr>
-    <td>left</td>
-    <td>number</td>
-    <td>(optional) padding of left in pixels</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>top</td>
+      <td>number</td>
+      <td>padding of top in pixels</td>
+    </tr>
+    <tr>
+      <td>right</td>
+      <td>number</td>
+      <td>(optional) padding of right in pixels</td>
+    </tr>
+    <tr>
+      <td>bottom</td>
+      <td>number</td>
+      <td>(optional) padding of bottom in pixels</td>
+    </tr>
+    <tr>
+      <td>left</td>
+      <td>number</td>
+      <td>(optional) padding of left in pixels</td>
+    </tr>
+    </table>
 
 
   - ### setOptions(options) [:orange_book:](./setOptions/README.md)
 
-  Set options
+    Set options
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../googlemapoptions/README.md">GoogleMapOptions</a></td>
-    <td>map options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../googlemapoptions/README.md">GoogleMapOptions</a></td>
+      <td>map options</td>
+    </tr>
+    </table>
 
   - ### remove() [:orange_book:](./remove/README.md)
 
-  Destroy a map completely
+    Destroy a map completely
 
-  :arrow_right: Returns `Promise<any>`
+    :arrow_right: Returns `Promise<any>`
 
   - ### clear() [:orange_book:](./clear/README.md)
 
-  Remove all overlays, such as marker
+    Remove all overlays, such as marker
 
-  :arrow_right: Returns `Promise<void>`
+    :arrow_right: Returns `Promise<void>`
 
 
   - ### fromLatLngToPoint(latLng) [:orange_book:](./fromLatLngToPoint/README.md)
 
-  Convert the unit from LatLng to the pixels from the left/top of the map div.
+    Convert the unit from LatLng to the pixels from the left/top of the map div.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>latLng</td>
-    <td><a href="../latlng/README.md">ILatLng</a></td>
-    <td>a geographic point</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>latLng</td>
+      <td><a href="../latlng/README.md">ILatLng</a></td>
+      <td>a geographic point</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<any[]>`
+    :arrow_right: Returns `Promise<any[]>`
 
 
   - ### fromPointToLatLng(point) [:orange_book:](./fromPointToLatLng/README.md)
 
-  Convert the unit from the pixels from the left/top to the LatLng.
+    Convert the unit from the pixels from the left/top to the LatLng.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>point</td>
-    <td>point: number[]</td>
-    <td>a pixel point</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>point</td>
+      <td>point: number[]</td>
+      <td>a pixel point</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<LatLng>`
+    :arrow_right: Returns `Promise<LatLng>`
 
 
   - ### toDataURL(options?) [:orange_book:](./toDataURL/README.md)
 
-  Convert the unit from the pixels from the left/top to the LatLng.
+    Convert the unit from the pixels from the left/top to the LatLng.
 
-  <table>
-  <tr>
-    <th>Params</th>
-    <th>Type</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>options</td>
-    <td><a href="../todataurloptions/README.md">ToDataUrlOptions</a></td>
-    <td>(optional) options</td>
-  </tr>
-  </table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td><a href="../todataurloptions/README.md">ToDataUrlOptions</a></td>
+      <td>(optional) options</td>
+    </tr>
+    </table>
 
-  :arrow_right: Returns `Promise<string>`
+    :arrow_right: Returns `Promise<string>`
 
 ------------------------------------------------------------------------
 

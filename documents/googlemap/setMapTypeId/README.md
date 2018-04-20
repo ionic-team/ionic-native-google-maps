@@ -29,7 +29,7 @@ mapTypeId   | string  | One of [MapType](../maptype/README.md) constants
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 mapTypeId: any;
 

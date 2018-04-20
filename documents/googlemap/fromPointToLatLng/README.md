@@ -26,7 +26,7 @@ point          | number[2] | x,y from the left-top of the map div.
 <div class="map" id="map_canvas"></div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 @ViewChild('map_canvas'):map_canvas;
 

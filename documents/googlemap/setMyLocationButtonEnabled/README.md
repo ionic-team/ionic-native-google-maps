@@ -22,7 +22,7 @@ flag   | boolean | `true`: show the myLocation button, `false`: hide it
 </div>
 ```
 
-```js
+```typescript
 var map = plugin.google.maps.Map.getMap(div, {
   controls: {
     myLocationButton: true,

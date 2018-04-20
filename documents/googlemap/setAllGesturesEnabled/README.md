@@ -22,7 +22,7 @@ flag   | boolean | `true`: enable, `false`: disable
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 isEnabled: boolean = true;
 

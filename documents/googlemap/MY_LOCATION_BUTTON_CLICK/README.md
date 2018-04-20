@@ -23,7 +23,7 @@ params[0]      | GoogleMap                               | map instance itself
 <div id="map_canvas"></div>
 ```
 
-```js
+```typescript
 LocationService.getMyLocation().then((result: MyLocation) => {
 
   // Display the current location map

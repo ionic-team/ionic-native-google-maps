@@ -23,7 +23,7 @@ y              | number   | distance y in pixels
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

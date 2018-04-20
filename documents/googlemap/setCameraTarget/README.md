@@ -22,7 +22,7 @@ latLng    | [ILatLng](../ilatlng/README.md)  | new camera position
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

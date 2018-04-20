@@ -27,7 +27,7 @@ div    | string, HTMLElement | (optional) new map container
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

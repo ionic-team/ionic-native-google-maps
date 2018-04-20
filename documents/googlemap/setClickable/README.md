@@ -22,7 +22,7 @@ flag   | boolean | `true`: clickable, `false`: non-clickable
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 clickable: boolean = true;
 

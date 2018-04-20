@@ -24,7 +24,7 @@ params[1]      | GoogleMap                               | map instance itself
 <div id="map_canvas"></div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

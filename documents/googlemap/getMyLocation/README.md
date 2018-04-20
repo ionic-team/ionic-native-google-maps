@@ -28,7 +28,7 @@ options        | [MyLocationOptions](../mylocationoptions/README.md) | location 
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

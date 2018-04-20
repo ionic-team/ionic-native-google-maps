@@ -27,7 +27,7 @@ You can specify options when you create a map.
 
 Check out the available options at the [GoogleMapOptions](../googlemapoptions/README.md) method.
 
-```js
+```typescript
 let map:GoogleMap = GoogleMaps.create('map_canvas2', {
   'mapType': GoogleMapsMapTypeId.HYBRID,
   'controls': {
@@ -88,7 +88,7 @@ The one of the benefits of the cordova-plugin-googlemaps is you are able to put 
 </div>
 ```
 
-```js
+```typescript
 let map: GoogleMap = GoogleMaps.create('map_canvas3');
 map.one(GoogleMapsEvent.MAP_READY).then(() => {
   console.log("--> map_canvas3 : ready.");

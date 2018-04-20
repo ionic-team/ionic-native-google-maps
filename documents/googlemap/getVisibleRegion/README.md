@@ -19,7 +19,7 @@ In the below example, the blue rectangle represents the visible region, the red 
 This polygon can be a trapezoid instead of a rectangle, because a camera can have tilt. If the camera is directly over the center of the camera, the shape is rectangular, but if the camera is tilted, the shape will appear to be a trapezoid whose smallest side is closest to the point of view.
 
 
-```js
+```typescript
 
 loadMap() {
   this.map = GoogleMaps.create("map_canvas", {

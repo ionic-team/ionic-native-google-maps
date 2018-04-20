@@ -28,7 +28,7 @@ left        | number  | (optional) padding of left in pixels
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 isEnabled: any;
 

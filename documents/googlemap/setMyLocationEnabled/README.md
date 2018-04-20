@@ -22,7 +22,7 @@ flag   | boolean | `true`: show the myLocation control, `false`: hide it
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 isEnabled: any;
 

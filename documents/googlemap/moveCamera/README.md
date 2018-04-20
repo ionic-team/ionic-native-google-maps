@@ -30,7 +30,7 @@ cameraPosition | [cameraPosition](../../cameraPosition/README.md) | new camera p
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

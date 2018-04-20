@@ -22,7 +22,7 @@ tilt      | number  | new camera view angle
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 tilt: number = 0;
 

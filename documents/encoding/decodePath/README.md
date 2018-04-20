@@ -21,11 +21,11 @@ precision?     | number   | (optional) default: 5
 
 ## Demo code
 
-```js
+```typescript
 <div id="map_canvas"></div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

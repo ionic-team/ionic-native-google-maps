@@ -20,7 +20,7 @@ this.map.getCameraTarget();
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 constructor(private alertCtrl: AlertController) {

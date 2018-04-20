@@ -22,7 +22,7 @@ zoom      | number  | new camera zoom level
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

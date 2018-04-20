@@ -26,7 +26,7 @@ latLng         | [ILatLng](../../ilatlng/README.md) | position
 <div class="map" id="map_canvas"></div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

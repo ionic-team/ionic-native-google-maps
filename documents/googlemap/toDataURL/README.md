@@ -28,7 +28,7 @@ options   | [ToDataUrlOptions](../todataurloptions/README.md) | quality options
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 isVisible: boolean = false;
 

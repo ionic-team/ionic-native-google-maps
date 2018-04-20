@@ -20,7 +20,7 @@ this.map.getCameraTilt();
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

@@ -22,7 +22,7 @@ this.map.getFocusedBuilding().then((building: any) => {
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 label: string;
 

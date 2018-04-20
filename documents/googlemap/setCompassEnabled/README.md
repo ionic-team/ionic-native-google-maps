@@ -22,7 +22,7 @@ flag   | boolean | `true`: show compass, `false`: hide compass
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 clickable: boolean = true;
 

@@ -22,7 +22,7 @@ flag   | boolean | `true`: visible, `false`: invisible
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 isVisible: boolean = false;
 

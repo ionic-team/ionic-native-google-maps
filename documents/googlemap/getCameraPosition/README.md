@@ -18,7 +18,7 @@ this.map.getCameraPosition();
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 constructor(private alertCtrl: AlertController) {

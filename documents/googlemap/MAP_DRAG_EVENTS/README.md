@@ -28,7 +28,7 @@ params[0]      | GoogleMap                               | map instance itself
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 label: any;
 

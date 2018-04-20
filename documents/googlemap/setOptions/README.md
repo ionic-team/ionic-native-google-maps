@@ -22,7 +22,7 @@ options   | [GoogleMapOptions](../googlemapoptions/README.md) | map options
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 isEnabled: any;
 

@@ -22,7 +22,7 @@ bearing   | number  | new camera bearing angle (orientation)
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 bearing: number = 0;
 

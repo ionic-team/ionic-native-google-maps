@@ -22,7 +22,7 @@ flag   | boolean | `true`: enable indoor levels, `false`: ground level only
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 clickable: boolean = true;
 

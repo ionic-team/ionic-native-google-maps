@@ -22,7 +22,7 @@ flag   | boolean | `true`: enable traffic layer, `false`: hide it
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 isEnabled: boolean = false;
 

@@ -20,7 +20,7 @@ this.map.clear().then(() => {
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

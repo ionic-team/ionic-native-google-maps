@@ -22,7 +22,7 @@ map.moveCameraZoomIn().then(() => {
 </div>
 ```
 
-```js
+```typescript
 map: GoogleMap;
 
 loadMap() {

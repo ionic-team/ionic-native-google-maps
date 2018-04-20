@@ -3,7 +3,7 @@
 The map.addCircle() method adds a circle onto the map **asynchronously**.
 
 ```typescript
-this.map.addCircle(options).then((circle: Circle) => {
+map.addCircle(options).then((circle: Circle) => {
   ...
 });
 ```
@@ -13,6 +13,13 @@ this.map.addCircle(options).then((circle: Circle) => {
 name           | type                                             | description
 ---------------|--------------------------------------------------|---------------------------------------
 options        | [CircleOptions](../../circleoptions/README.md)   | circle options
+
+
+## Return value
+
+:arrow_right: Returns `Promise<Circle>`
+
+
 ----------------------------------------------------------------------------------------------------------
 
 

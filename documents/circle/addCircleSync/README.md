@@ -3,7 +3,7 @@
 The map.addCircle() method adds a circle onto the map **synchronously**.
 
 ```typescript
-let circle: Circle = this.map.addCircleSync(options);
+let circle: Circle = map.addCircleSync(options);
 ```
 
 ## Parameters

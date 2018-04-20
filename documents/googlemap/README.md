@@ -970,7 +970,7 @@ Before using this plugin, please understand how this plugin work.
 
     Destroy a map completely
 
-    :arrow_right: Returns `Promise<any>`
+    :arrow_right: Returns `Promise<void>`
 
   - ### clear() [:orange_book:](./clear/README.md)
 

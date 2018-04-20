@@ -6,6 +6,10 @@ Destroy a map completely.
 map.remove()
 ```
 
+## Return value
+
+:arrow_right: Returns `Promise<void>`
+
 ----------------------------------------------------------------------------------------------------------
 
 ## Demo code

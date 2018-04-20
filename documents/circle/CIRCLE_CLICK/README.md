@@ -14,6 +14,8 @@ name           | type          | description
 ---------------|---------------|---------------------------------------
 params[0]      | LatLng        | clicked position
 params[1]      | Circle        | circle instance itself
+
+
 -----------------------------------------------------------------------
 
 ## Demo code

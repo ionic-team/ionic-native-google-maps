@@ -12,6 +12,8 @@ name           | type     | description
 ---------------|---------------------------------------------|---------------------------------------
 path           | ILatLng[], BaseArrayClass&lt;ILatLng&gt;    | Array of ILatLng
 
+## Return value
+
 :arrow_right: Returns `ILatLng[]`
 
 ------------------------------------------------------------------

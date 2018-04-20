@@ -11,6 +11,11 @@ let circle: Circle = this.map.addCircleSync(options);
 name           | type                                             | description
 ---------------|--------------------------------------------------|---------------------------------------
 options        | [CircleOptions](../../circleoptions/README.md)   | circle options
+
+## Return value
+
+:arrow_right: Returns `Circle`
+
 ----------------------------------------------------------------------------------------------------------
 
 

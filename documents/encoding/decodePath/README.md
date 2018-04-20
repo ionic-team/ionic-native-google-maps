@@ -13,6 +13,8 @@ name           | type     | description
 encoded        | string   | Encoded string
 precision?     | number   | (optional) default: 5
 
+## Return value
+
 :arrow_right: Returns `string`
 
 ------------------------------------------------------------------

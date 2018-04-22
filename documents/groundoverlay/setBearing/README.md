@@ -22,7 +22,7 @@ bearing        | number        | new center position
   <ion-list>
     <ion-item>
       <ion-label>bearing</ion-label>
-      <ion-range min="0" max="360" step="10" color="secondary"  snaps="true" ></ion-range>
+      <ion-range id="bearing" min="0" max="360" step="10" color="secondary"  snaps="true" ></ion-range>
     </ion-item>
   </ion-list>
 </div>

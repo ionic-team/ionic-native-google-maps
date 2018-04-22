@@ -18,7 +18,7 @@ flag           | boolean       | `true`: clickable, `false`: non-clickable
 
 ```html
 <div class="map" id="map_canvas">
-  <span class="smallPanel"><input type="checkbox" id="toggleCheckbox" checked="checked">circle.setClickable(true)</span>
+  <span class="smallPanel"><input type="checkbox"  (click)="toggleClickable()" checked="checked">circle.setClickable(true)</span>
 </div>
 ```
 
@@ -47,7 +47,7 @@ loadMap() {
   });
 
   // Catch the CIRCLE_CLICK event
-  circle.on(plugin.google.maps.event.CIRCLE_CLICK).subscribe(() => {
+  this.circle.on(GoogleMapsEvent.CIRCLE_CLICK).subscribe(() => {
     alert("The circle is clicked!");
   });
 }

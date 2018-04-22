@@ -22,35 +22,38 @@ url            | string        | image url or path
 ```
 
 ```typescript
-var bounds = [
-  {"lat": 40.712216, "lng": -74.22655},
-  {"lat": 40.773941, "lng": -74.12544}
-];
-var mapDiv = document.getElementById("map_canvas");
-var map = plugin.google.maps.Map.getMap(mapDiv, {
-  camera: {
-    target: bounds
-  }
-});
 
-// Add ground overlay
-var groundOverlay = map.addGroundOverlay({
-  'url': "../images/newark_nj_1922.jpg",
-  'bounds': bounds,
-  'opacity': 0.5,
-  'clickable': true  // default = false
-});
+map: GoogleMap;
+groundOverlay: GroundOverlay;
 
-// Catch the GROUND_OVERLAY_CLICK event
-groundOverlay.on(plugin.google.maps.event.GROUND_OVERLAY_CLICK, onClick);
+loadMap() {
 
+  let bounds: ILatLng[] = [
+    {"lat": 40.712216, "lng": -74.22655},
+    {"lat": 40.773941, "lng": -74.12544}
+  ];
+  this.map = GoogleMaps.create('map_canvas', {
+    camera: {
+      target: bounds
+    }
+  });
 
-function onClick(latLng) {
+  // All gestures (such as pinch-zooming) are disabled.
+  this.map.setAllGesturesEnabled(false);
 
-  // Change the image url.
-  var groundOverlay = this;
-  groundOverlay.setImage("../images/newark_nj_1922_2.jpg");
+  // Add ground overlay
+  this.groundOverlay = this.map.addGroundOverlaySync({
+    'url': "../images/newark_nj_1922.jpg",
+    'bounds': bounds,
+    'opacity': 0.5,
+    'clickable': true // default = false
+  });
 
+  // Catch the GROUND_OVERLAY_CLICK event
+  this.groundOverlay.on(GoogleMapsEvent.GROUND_OVERLAY_CLICK).subscribe(() => {
+    // Change the image url.
+    groundOverlay.setImage("../images/newark_nj_1922_2.jpg");
+  });
 }
 ```
 

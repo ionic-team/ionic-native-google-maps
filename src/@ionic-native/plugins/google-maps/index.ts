@@ -1810,7 +1810,7 @@ export class LocationService {
    */
   static getMyLocation(options?: MyLocationOptions): Promise<MyLocation> {
     return new Promise<MyLocation>((resolve, reject) => {
-      GoogleMaps.getPlugin().LocationService.getMyLocation(options, resolve);
+      GoogleMaps.getPlugin().LocationService.getMyLocation(options, resolve, reject);
     });
   }
 }

@@ -1,8 +1,6 @@
 # MarkerLabel interface
 
 
-## Interface members
-
 <table>
 <tr>
   <th>Params</th>

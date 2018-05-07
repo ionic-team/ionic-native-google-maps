@@ -80,7 +80,7 @@ this.map = GoogleMaps.create('map_canvas', options);
 </tr>
 <tr>
   <td>camera</td>
-  <td><a href="../cameraposition/README.md">CameraPosition&lt;aby&gt;</a></td>
+  <td><a href="../cameraposition/README.md">CameraPosition&lt;any&gt;</a></td>
   <td>(optional)Initial camera position</td>
 </tr>
 <tr>

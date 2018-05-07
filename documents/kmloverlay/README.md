@@ -1,7 +1,7 @@
 # KmlOverlay class
 
 ```typescript
-this.map.addKmlOverlay(options: KmlOverlayOptions).then((marker: Marker) => {
+this.map.addKmlOverlay(options: KmlOverlayOptions).then((kmlOverlay: KmlOverlay) => {
 
 });
 ```

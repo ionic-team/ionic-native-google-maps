@@ -901,16 +901,27 @@ export const StreetViewSource = {
   OUTDOOR: 'OUTDOOR'
 };
 
-export interface StreetViewCameraPosition {
+export interface SetPovOption {
+  bearing: number;
+  radius?: number;
+  zoom?: number;
+  duration: number;
+}
+export interface StreetViewSetPositionOption {
   target: ILatLng;
   source?: string;
   radius?: number;
+}
+export interface StreetViewCameraPano {
+  target: string;
   bearing?: number;
   tilt?: number;
   zoom?: number;
 }
-export interface StreetViewCameraPano {
-  target: string;
+export interface StreetViewCameraPosition {
+  target: ILatLng;
+  source?: string;
+  radius?: number;
   bearing?: number;
   tilt?: number;
   zoom?: number;
@@ -2196,18 +2207,16 @@ export class StreetViewPanorama extends BaseClass {
 
 
   /**
-   * Moves the camera with animation
-   * @return {Promise<any>}
+   * Sets the point of view for the Street View panorama.
    */
   @CordovaInstance()
-  animateCamera(cameraPosition: StreetViewCameraPano | StreetViewCameraPosition): Promise<any> { return; }
+  setPov(pov: StreetViewCameraPano): void {}
 
   /**
-   * Moves the camera without animation
-   * @return {Promise<any>}
+   * Sets the StreetViewPanorama to a given location.
    */
   @CordovaInstance()
-  moveCamera(cameraPosition: StreetViewCameraPano | StreetViewCameraPosition): Promise<any> { return; }
+  setPosition(cameraPosition: String | StreetViewSetPositionOption): void {}
 
   /**
    * Toggles the ability for users to use pan around on the panorama using gestures.

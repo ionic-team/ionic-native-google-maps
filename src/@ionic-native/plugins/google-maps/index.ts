@@ -2507,7 +2507,11 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<MyLocation>}
    */
   @CordovaInstance()
-  getMyLocation(options?: MyLocationOptions): Promise<MyLocation> { return; }
+  getMyLocation(options?: MyLocationOptions): Promise<MyLocation> {
+    return new Promise<MyLocation>((resolve, reject) => {
+      GoogleMaps.getPlugin().LocationService.getMyLocation(options, resolve, reject);
+    });
+  }
 
   /**
    * Set false to ignore all clicks on the map

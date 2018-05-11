@@ -1,3 +1,12 @@
+<a name="4.8.0"></a>
+## 4.8.0 (2018-05-11)
+
+* Adds `addMarkerSync()`, `addMarkerClusterSync()`, `addCircleSync()`, `addPolygonSync()`, `addPolylineSync()`, `addTileOverlaySync()`, and  `addGroundOverlaySync()` methods.
+
+* Adds `GoogleMaps.createPanorama()` method, and `StreetViewPanorama` class.
+
+* Merge pull request (#15) from TheDuc/master - pass reject to getMyLocation
+
 <a name="4.7.0"></a>
 ## 4.7.0 (2018-04-11)
 

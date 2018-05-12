@@ -13,7 +13,8 @@ const ROOT = path.resolve(path.join(__dirname, '../../')), // root ionic-native 
   PLUGIN_TS_CONFIG = require(path.resolve(__dirname, 'tsconfig-plugin.json')), // plugin tsconfig template
   BUILD_TMP = path.resolve(ROOT, '.tmp'), // tmp directory path
   BUILD_DIST_ROOT = path.resolve(ROOT, 'dist/@ionic-native'), // dist directory root path
-  BUILD_CORE_DIST = path.resolve(BUILD_DIST_ROOT, 'core'); // core dist directory path
+  BUILD_CORE_DIST = path.resolve(BUILD_DIST_ROOT, 'core'), // core dist directory path
+  BUILD_GOOGLEMAPS_DIST = path.resolve(BUILD_DIST_ROOT, 'google-maps'); // google-maps dist directory path
 
 
 // dependency versions
@@ -122,6 +123,8 @@ const addPluginToQueue = pluginName => {
               errors.push(err);
             }
 
+          } else {
+            exec(`cp ${ROOT}/README.md ${BUILD_GOOGLEMAPS_DIST}/`);
           }
 
           // we're done with this plugin!

@@ -1,3 +1,13 @@
+<a name="4.8.2"></a>
+## 4.8.2 (2018-05-11)
+
+*Fix: only README.md (sorry)
+
+<a name="4.8.1"></a>
+## 4.8.1 (2018-05-11)
+
+*Fix: only README.md (sorry)
+
 <a name="4.8.0"></a>
 ## 4.8.0 (2018-05-11)
 

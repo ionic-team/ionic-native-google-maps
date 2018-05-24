@@ -17,7 +17,7 @@ $> ionic cordova plugin add cordova-plugin-googlemaps \
 $> npm install --save @ionic-native/core@latest @ionic-native/google-maps@latest
 ```
 
-## Basic usage
+## Basic usage (Use \@ionic-native/google-maps@4.8.2)
 
 ```typescript
 import {
@@ -45,42 +45,31 @@ export class HomePage {
 
   loadMap() {
 
-   let mapOptions: GoogleMapOptions = {
-     camera: {
-        target: {
-          lat: 43.0741904,
-          lng: -89.3809802
-        },
-        zoom: 18,
-        tilt: 30
-      }
+    let mapOptions: GoogleMapOptions = {
+      camera: {
+         target: {
+           lat: 43.0741904,
+           lng: -89.3809802
+         },
+         zoom: 18,
+         tilt: 30
+       }
     };
 
-   this.map = GoogleMaps.create('map_canvas', mapOptions);
+    this.map = GoogleMaps.create('map_canvas', mapOptions);
 
-   // Wait the MAP_READY before using any methods.
-   this.map.one(GoogleMapsEvent.MAP_READY)
-     .then(() => {
-        console.log('Map is ready!');
-
-        // Now you can use all methods safely.
-        this.map.addMarker({
-          title: 'Ionic',
-          icon: 'blue',
-          animation: 'DROP',
-          position: {
-            lat: 43.0741904,
-            lng: -89.3809802
-          }
-        })
-        .then(marker => {
-          marker.on(GoogleMapsEvent.MARKER_CLICK)
-            .subscribe(() => {
-              alert('clicked');
-            });
-        });
-
-     });
+    let marker: Marker = this.map.addMarkerSync({
+      title: 'Ionic',
+      icon: 'blue',
+      animation: 'DROP',
+      position: {
+        lat: 43.0741904,
+        lng: -89.3809802
+      }
+    });
+    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+      alert('clicked');
+    });
   }
 }
 ```

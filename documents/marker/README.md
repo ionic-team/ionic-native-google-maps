@@ -44,12 +44,6 @@ Returns the marker position.
 
 :arrow_right: Returns <a href="../ilatlng/README.md">ILatLng</a>.
 
-### getPosition()
-
-Returns the marker position.
-
-:arrow_right: Returns <a href="../ilatlng/README.md">ILatLng</a>.
-
 ### showInfoWindow()
 
 Show the normal infoWindow of the marker.

@@ -1,48 +1,28 @@
 # How to generate API keys?
 
-In order to use \@ionic-native/google-maps plugin, you need to generate API Keys at the Google Developers Console.
+To use the cordova-plugin-googlemaps API, you must register your app project on the Google API Console and get a Google API key which you can add to your app.
 
-----
+## Quick guide to getting a key
 
-## Step 1: Create a project
+----------------------------------------------------------------
 
-Please go to this URL. Then create a project or choose existed project.
-https://console.developers.google.com/projectselector/apis/library
+### Create a project
 
-<img src="./step1.png" width="500">
+https://cloud.google.com/maps-platform/#get-started
 
-----
+Go to the above url, which guides you through the process of registering a project in the Google API console, activates the Maps APIs, and generates a generic, unrestricted API key.
 
-## Step 2: Enable Google maps APIs
 
-After creating a project, you will see the API Library list.
-Type "Google Maps native", then please enable both APIs.
+<img src="./tutorial1.png" width="500">
+<br>
+<br>
 
-<img src="./step2_a.png" width="500">
+<img src="./tutorial2.png" width="500">
+<br>
+<br>
 
-**[Important!]**
-You need to enable the APIS **BEFORE** generating the API keys.
+<img src="./tutorial3.png" width="500">
+<br>
+<br>
 
-Make sure you enabled the API.
-
-<img src="./step2_b.png" width="500">
-
-----
-
-## Step 3: Generate API Keys
-
-At the API page, click [Create credentials] button.
-
-<img src="./step3_a.png" width="500">
-
-You will see the API list, choose `Google Maps Android API` or `Google Maps SDK for iOS`, then generate a key.
-
-<img src="./step3_b.png" width="500">
-
-----
-
-## If you need to regenerate API key...
-
-click [Create credentials] button at the `Credentials` page, then choose `API key`. 
-
-<img src="./step3_c.png" width="500">
+<img src="./tutorial4.png" width="500">

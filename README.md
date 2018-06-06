@@ -43,4 +43,7 @@ Also there are documents/demos for your help:
 
 ## Troubles?
 
+Before asking your trouble, please check the trouble shooting guides.
+- [Trouble shootings](https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/tree/master/troubleshootings/README.md)
+
 If you face any troubles of `@ionic-native/google-maps` plugin, please report to [ionic-native-google-maps](https://github.com/ionic-team/ionic-native-google-maps/issues) repository.

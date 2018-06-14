@@ -442,6 +442,10 @@ export interface MarkerIcon {
     width?: number;
     height?: number;
   };
+  anchor?: {
+    x?: number;
+    y?: number;
+  };
 }
 
 export interface MarkerOptions {

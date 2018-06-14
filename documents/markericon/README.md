@@ -1,6 +1,8 @@
-# MarkerIcon interface
+# MarkerIcon Interface
 
-**[usage 1]SimpleIcon**
+## Usage Examples
+
+### Simple Icon
 
 ```typescript
 let icon: MarkerIcon = {
@@ -21,7 +23,7 @@ this.map.addMarker({
 
 ![](./simpleicon.png)
 
-**[usage 2]Color Icon**
+### Color Icon
 
 ```typescript
 this.map.addMarker({
@@ -34,7 +36,7 @@ this.map.addMarker({
 
 ![](./marker_icon-color.png)
 
-**[usage 3]Base64 Encoded Icon**
+### Base64 Encoded Icon
 
 ```typescript
 let icon: string = "data:image/png;base64,iVBORw0KGgo...CC";
@@ -65,7 +67,7 @@ img.onload = () => {
 
 ![](./base64-icon.gif)
 
-## Interface members
+## Interface Members
 
 <table>
 <tr>
@@ -84,6 +86,14 @@ img.onload = () => {
 &nbsp;&nbsp;width: number,<br>
 &nbsp;&nbsp;height: number,<br>
 }</td>
-  <td>(optional) size of the icon image</td>
+  <td>(optional) Size of the icon image.</td>
+</tr>
+<tr>
+  <td>anchor</td>
+  <td>{<br>
+&nbsp;&nbsp;x: number,<br>
+&nbsp;&nbsp;y: number,<br>
+}</td>
+  <td>(optional) Anchor of the icon image. This defaults to the center-bottom of the image.</td>
 </tr>
 </table>

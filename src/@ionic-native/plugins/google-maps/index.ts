@@ -199,7 +199,7 @@ export interface GoogleMapOptions {
   /**
    * mapType [options]
    */
-  mapType?: MapType;
+  mapType?: MapType | string;
 
   /**
    * controls [options]
@@ -1913,6 +1913,15 @@ export class LocationService {
   static getMyLocation(options?: MyLocationOptions): Promise<MyLocation> {
     return new Promise<MyLocation>((resolve, reject) => {
       GoogleMaps.getPlugin().LocationService.getMyLocation(options, resolve, reject);
+    });
+  }
+  /**
+   * Return true if the application has geolocation permission
+   * @return {Promise<MyLocation>}
+   */
+  static hasPermission(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      GoogleMaps.getPlugin().LocationService.hasPermission(resolve, reject);
     });
   }
 }

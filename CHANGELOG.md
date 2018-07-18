@@ -1,3 +1,13 @@
+<a name="4.9.1"></a>
+## 4.9.0 (2018-07-17)
+
+*Fix: only README.md (sorry)
+
+<a name="4.9.0"></a>
+## 4.9.0 (2018-07-17)
+
+*Add: LocationService.hasPermission()
+
 <a name="4.8.2"></a>
 ## 4.8.2 (2018-05-11)
 

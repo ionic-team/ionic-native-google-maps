@@ -31,7 +31,7 @@ let cameraPos: CameraPosition<ILatLng[]> = {
 </tr>
 <tr>
   <td>target</td>
-  <td><a href="../ilatlng/README.md">ILatLng</a> | Array&lt;ILatLng&gt; | any</td>
+  <td><a href="../ilatlng/README.md">ILatLng</a> | Array&lt;ILatLng&gt;</td>
   <td>(optional)camera target</td>
 </tr>
 <tr>

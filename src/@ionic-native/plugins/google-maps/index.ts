@@ -1027,7 +1027,7 @@ export const GoogleMapsAnimation = {
  */
 export const GoogleMapsMapTypeId = {
   NORMAL: 'MAP_TYPE_NORMAL',
-  ROADMAP: 'MAP_TYPE_ROADMAP',
+  ROADMAP: 'MAP_TYPE_NORMAL',
   SATELLITE: 'MAP_TYPE_SATELLITE',
   HYBRID: 'MAP_TYPE_HYBRID',
   TERRAIN: 'MAP_TYPE_TERRAIN',

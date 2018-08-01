@@ -44,7 +44,7 @@ function transformClass(cls: any, ngcBuild?: boolean) {
     [...transformMembers(cls), ...pluginStatics]
   );
 
-  Logger.profile('transformClass: ' + cls.name.text, { level: 'verbose' });
+  Logger.profile('transformClass: ' + cls.name.text);
   return cls;
 }
 
@@ -57,7 +57,8 @@ function transformClasses(
   return ts.visitEachChild(
     file,
     node => {
-      if (node.kind !== ts.SyntaxKind.ClassDeclaration) {
+      if (node.kind !== ts.SyntaxKind.ClassDeclaration
+          || (node.modifiers && node.modifiers.find(v => v.kind === ts.SyntaxKind.DeclareKeyword))) {
         return node;
       }
       return transformClass(node, ngcBuild);

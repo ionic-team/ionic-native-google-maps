@@ -222,7 +222,7 @@ export interface GoogleMapOptions {
   /**
    * mapType [options]
    */
-  mapType?: MapType;
+  mapType?: MapType | string;
 
   /**
    * controls [options]
@@ -322,7 +322,7 @@ export interface CircleOptions {
    */
   strokeWidth?: number;
   /**
-   * Set the inside color of polygon
+   * Set the inside color of circle
    * (rgb, rgba, #RRGGBB, "colorname", ...etc)
    */
   fillColor?: string;
@@ -380,7 +380,7 @@ export interface GeocoderRequest {
    *
    * [reverse-geocoding usage2]
    * let request: GeocoderRequest = {
-   *   address: [
+   *   position: [
    *    {"lat": 37.421655, "lng": -122.085637},
    *    {"lat": 37.332, "lng": -122.030781}
    *   ]
@@ -486,12 +486,17 @@ export interface MarkerOptions {
   /**
    * The position of the marker.
    */
-  position?: ILatLng;
+  position: ILatLng;
 
   /**
    *  Specify the anchor of the InfoWindow
    */
   infoWindowAnchor?: number[];
+
+  /**
+   * 	Specify the anchor of icon image
+   */
+  anchor?: number[];
 
   /**
    * Set true if you want to enable to drag the marker. (Default: false) Important! Drag starts after long pressed on the marker.
@@ -540,6 +545,63 @@ export interface MarkerOptions {
   [key: string]: any;
 }
 
+export interface MarkerLabel {
+  /**
+   * Set true if use bold font
+   */
+  bold?: boolean;
+
+  /**
+   * Set font size in pixel
+   */
+  fontSize?: number;
+
+  /**
+   * color strings
+   */
+  color?: string;
+
+  /**
+   * Set true if use italic font
+   */
+  italic?: boolean;
+
+}
+export interface MarkerClusterIcon {
+  /**
+   * Minimum number of clustering
+   */
+  min?: number;
+
+  /**
+   * Maximum number of clustering
+   */
+  max?: number;
+
+  /**
+   * anchor position of the marker
+   */
+  anchor?: any;
+
+  /**
+   * label option for clustered marker
+   */
+  label?: MarkerLabel;
+
+  /**
+   * icon url
+   */
+  url: string;
+
+  /**
+   * icon size
+   */
+  size?: {
+    width?: number;
+    height?: number;
+  };
+}
+
 export interface MarkerClusterOptions {
   /**
    * Maximum zoom level of clustering
@@ -548,7 +610,7 @@ export interface MarkerClusterOptions {
   maxZoomLevel?: number;
 
   /**
-   * Draw a rectangle that contains all locations of clustered when you tap on a clister marker.
+   * Draw a rectangle that contains all locations of clustered when you tap on a cluster marker.
    * (default: true)
    */
   boundsDraw?: boolean;
@@ -568,10 +630,10 @@ export interface MarkerClusterOptions {
    * [
    *   {icon: "assets/small.png", min: 2, max: 10},
    *   {icon: "assets/middle.png", min: 11, max: 30},
-   *   {icon: "assets/large.png", min: 31},
+   *   {icon: "assets/large.png", min: 31}
    * ]
    */
-  icons: any[];
+  icons: MarkerClusterIcon[];
 
   /**
    * Accept own properties
@@ -595,7 +657,7 @@ export interface MyLocation {
 export interface MyLocationOptions {
   /**
    * Set true if you want to try to use GPS mandatory.
-   * (In false, the plugin try to use GPS and network)
+   * In false, the plugin try to use GPS and network.
    * (default: false)
    */
   enableHighAccuracy?: boolean;
@@ -645,7 +707,7 @@ export interface PolygonOptions {
   /**
    * Pass ILatLng[][] to create holes in polygon
    */
-  addHole?: Array<Array<ILatLng>>;
+  holes?: Array<Array<ILatLng>>;
 
   /**
    * Set true if you want to receive the POLYGON_CLICK event
@@ -710,8 +772,8 @@ export interface PolylineOptions {
 
 export interface TileOverlayOptions {
   /**
-   * This callback must return string of image URL.
-   * If no tile, you need to return null.
+   * This callback must Returns string of image URL.
+   * If no tile, you need to Returns null.
    */
   getTile: (x: number, y: number, zoom: number) => string;
 
@@ -786,14 +848,44 @@ export interface KmlOverlayOptions {
  * @hidden
  */
 export class VisibleRegion implements ILatLngBounds {
-  @InstanceProperty() northeast: ILatLng;
-  @InstanceProperty() southwest: ILatLng;
-  @InstanceProperty() farLeft: ILatLng;
-  @InstanceProperty() farRight: ILatLng;
-  @InstanceProperty() nearLeft: ILatLng;
-  @InstanceProperty() nearRight: ILatLng;
-  @InstanceProperty() type: string;
   private _objectInstance: any;
+
+  /**
+   * The northeast of the bounds that contains the farLeft, farRight, nearLeft and nearRight.
+   * Since the map view is able to rotate, the farRight is not the same as the northeast.
+   */
+  @InstanceProperty northeast: ILatLng;
+
+  /**
+   * The southwest of the bounds that contains the farLeft, farRight, nearLeft and nearRight.
+   * Since the map view is able to rotate, the nearLeft is not the same as the southwest.
+   */
+  @InstanceProperty southwest: ILatLng;
+
+  /**
+   * The farLeft indicates the lat/lng of the top-left of the map view.
+   */
+  @InstanceProperty farLeft: ILatLng;
+
+  /**
+   * The farRight indicates the lat/lng of the top-right of the map view.
+   */
+  @InstanceProperty farRight: ILatLng;
+
+  /**
+   * The nearLeft indicates the lat/lng of the bottom-left of the map view.
+   */
+  @InstanceProperty nearLeft: ILatLng;
+
+  /**
+   * The nearRight indicates the lat/lng of the bottom-right of the map view.
+   */
+  @InstanceProperty nearRight: ILatLng;
+
+  /**
+   * constant value : `VisibleRegion`
+   */
+  @InstanceProperty type: string;
 
   constructor(southwest: LatLngBounds, northeast: LatLngBounds, farLeft: ILatLng, farRight: ILatLng, nearLeft: ILatLng, nearRight: ILatLng) {
     this._objectInstance = new (GoogleMaps.getPlugin()).VisibleRegion(southwest, northeast, farLeft, farRight, nearLeft, nearRight);
@@ -832,6 +924,88 @@ export class VisibleRegion implements ILatLngBounds {
 
 /**
  * @hidden
+ */
+export const StreetViewSource = {
+  DEFAULT: 'DEFAULT',
+  OUTDOOR: 'OUTDOOR'
+};
+
+export interface SetPovOption {
+  bearing: number;
+  radius?: number;
+  zoom?: number;
+  duration: number;
+}
+export interface StreetViewSetPositionOption {
+  target: ILatLng;
+  source?: string;
+  radius?: number;
+}
+export interface StreetViewCameraPano {
+  target: string;
+  bearing?: number;
+  tilt?: number;
+  zoom?: number;
+}
+export interface StreetViewCameraPosition {
+  target: ILatLng;
+  source?: string;
+  radius?: number;
+  bearing?: number;
+  tilt?: number;
+  zoom?: number;
+}
+export interface StreetViewOptions {
+
+  camera?: StreetViewCameraPano | StreetViewCameraPosition;
+
+  /**
+   * controls [options]
+   */
+  controls?: {
+    streetNames?: boolean;
+    navigation?: boolean;
+  };
+
+  /**
+   * gestures [options]
+   */
+  gestures?: {
+    padding?: boolean;
+    zooming?: boolean;
+  };
+
+  /**
+   * Accept extra properties for future updates
+   */
+  [key: string]: any;
+}
+
+
+export interface StreetViewNavigationLink {
+
+  /**
+   * panorama Id
+   */
+  panoId: string;
+
+  /**
+   * bearing (heading)
+   */
+  bearing: number;
+
+}
+
+export interface StreetViewLocation {
+
+  latLng: ILatLng;
+
+  links: StreetViewNavigationLink[];
+
+}
+
+/**
+ * @hidden
  * You can listen to these events where appropriate
  */
 export const GoogleMapsEvent = {
@@ -862,13 +1036,17 @@ export const GoogleMapsEvent = {
   MAP_DRAG: 'map_drag',
   MAP_DRAG_START: 'map_drag_start',
   MAP_DRAG_END: 'map_drag_end',
-  KML_CLICK: 'kml_click'
+  KML_CLICK: 'kml_click',
+  PANORAMA_READY: 'panorama_ready',
+  PANORAMA_CAMERA_CHANGE: 'panorama_camera_change',
+  PANORAMA_LOCATION_CHANGE: 'panorama_location_change',
+  PANORAMA_CLICK: 'panorama_click'
 };
 
 /**
  * @hidden
  */
-export const GoogleMapsAnimation: { [animationName: string]: string; } = {
+export const GoogleMapsAnimation = {
   BOUNCE: 'BOUNCE',
   DROP: 'DROP'
 };
@@ -876,9 +1054,9 @@ export const GoogleMapsAnimation: { [animationName: string]: string; } = {
 /**
  * @hidden
  */
-export const GoogleMapsMapTypeId: { [mapType: string]: MapType; } = {
+export const GoogleMapsMapTypeId = {
   NORMAL: 'MAP_TYPE_NORMAL',
-  ROADMAP: 'MAP_TYPE_ROADMAP',
+  ROADMAP: 'MAP_TYPE_NORMAL',
   SATELLITE: 'MAP_TYPE_SATELLITE',
   HYBRID: 'MAP_TYPE_HYBRID',
   TERRAIN: 'MAP_TYPE_TERRAIN',
@@ -930,35 +1108,29 @@ export const GoogleMapsMapTypeId: { [mapType: string]: MapType; } = {
  *
  *     this.map = GoogleMaps.create('map_canvas', mapOptions);
  *
- *     // Wait the MAP_READY before using any methods.
- *     this.map.one(GoogleMapsEvent.MAP_READY)
- *       .then(() => {
- *         console.log('Map is ready!');
+ *     let marker: Marker = this.map.addMarkerSync({
+ *       title: 'Ionic',
+ *       icon: 'blue',
+ *       animation: 'DROP',
+ *       position: {
+ *         lat: 43.0741904,
+ *         lng: -89.3809802
+ *       }
+ *     });
  *
- *         // Now you can use all methods safely.
- *         this.map.addMarker({
- *             title: 'Ionic',
- *             icon: 'blue',
- *             animation: 'DROP',
- *             position: {
- *               lat: 43.0741904,
- *               lng: -89.3809802
- *             }
- *           })
- *           .then(marker => {
- *             marker.on(GoogleMapsEvent.MARKER_CLICK)
- *               .subscribe(() => {
- *                 alert('clicked');
- *               });
- *           });
- *
+ *     marker.on(GoogleMapsEvent.MARKER_CLICK)
+ *       .subscribe(() => {
+ *         alert('clicked');
  *       });
+ *     });
  *   }
  * }
  *
  * ```
  * @classes
+ * GoogleMaps
  * GoogleMap
+ * StreetView
  * Circle
  * Encoding
  * Environment
@@ -1041,6 +1213,22 @@ export class GoogleMaps extends IonicNativePlugin {
     return GoogleMaps.create(element, options);
   }
 
+
+  /**
+   * Creates a new StreetView instance
+   * @param element {string | HTMLElement} Element ID or reference to attach the map to
+   * @param options {StreetViewOptions} [options] Options
+   * @return {StreetViewPanorama}
+   */
+  static createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
+    if (element instanceof HTMLElement) {
+      if (element.getAttribute('__pluginMapId')) {
+        console.error('GoogleMaps', element.tagName + '[__pluginMapId=\'' + element.getAttribute('__pluginMapId') +  '\'] has already map.');
+        return;
+      }
+    }
+    return new StreetViewPanorama(<HTMLElement>element, options);
+  }
 }
 
 /**
@@ -1066,7 +1254,7 @@ export class BaseClass {
     return new Observable((observer) => {
       this._objectInstance.on(eventName, (...args: any[]) => {
         if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map') {
+          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
             args[args.length - 1] = this;
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
@@ -1100,7 +1288,7 @@ export class BaseClass {
     return getPromise<any>((resolve) => {
       this._objectInstance.one(eventName, (...args: any[]) => {
         if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map') {
+          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
             args[args.length - 1] = this;
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
@@ -1164,7 +1352,7 @@ export class BaseClass {
     return new Observable((observer) => {
       this._objectInstance.on(eventName, (...args: any[]) => {
         if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map') {
+          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
             args[args.length - 1] = this;
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
@@ -1198,7 +1386,7 @@ export class BaseClass {
     return getPromise<any>((resolve) => {
       this._objectInstance.one(eventName, (...args: any[]) => {
         if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map') {
+          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
             args[args.length - 1] = this;
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
@@ -1244,9 +1432,11 @@ export class BaseClass {
    */
   @CordovaCheck({ sync: true })
   destroy(): void {
-    let map: GoogleMap = this._objectInstance.getMap();
-    if (map) {
-      delete this._objectInstance.getMap().get('_overlays')[this._objectInstance.getId()];
+    if (this._objectInstance.type === 'Map') {
+      let map: GoogleMap = this._objectInstance.getMap();
+      if (map) {
+        delete this._objectInstance.getMap().get('_overlays')[this._objectInstance.getId()];
+      }
     }
     this._objectInstance.remove();
   }
@@ -1318,7 +1508,7 @@ export class BaseArrayClass<T> extends BaseClass {
   /**
    * Iterate over each element, calling the provided callback.
    * @param fn {Function}
-   * @return {Promise<any>}
+   * @return {Promise<void>}
    */
   @CordovaCheck()
   forEachAsync(fn: ((element: T, callback: () => void) => void)): Promise<void> {
@@ -1328,7 +1518,7 @@ export class BaseArrayClass<T> extends BaseClass {
   }
 
   /**
-   * Iterate over each element, then return a new value.
+   * Iterate over each element, then Returns a new value.
    * Then you can get the results of each callback.
    * @param fn {Function}
    * @return {Array<Object>} returns a new array with the results
@@ -1368,7 +1558,7 @@ export class BaseArrayClass<T> extends BaseClass {
   /**
    * The filter() method creates a new array with all elements that pass the test implemented by the provided function.
    * @param fn {Function}
-   * @return {Array<Object>} returns a new filtered array
+   * @return {T[]} returns a new filtered array
    */
   @CordovaInstance({ sync: true })
   filter(fn: (element: T, index: number) => boolean): T[] {
@@ -1379,7 +1569,7 @@ export class BaseArrayClass<T> extends BaseClass {
    * The filterAsync() method creates a new array with all elements that pass the test implemented by the provided function.
    * @param fn {Function}
    * @param callback {Function}
-   * @return {Promise<any>} returns a new filtered array
+   * @return {Promise<T[]>} returns a new filtered array
    */
   @CordovaCheck()
   filterAsync(fn: (element: T, callback: (result: boolean) => void) => void): Promise<T[]> {
@@ -1443,7 +1633,7 @@ export class BaseArrayClass<T> extends BaseClass {
    * Inserts an element at the specified index.
    * @param index {number}
    * @param element {Object}
-   * @param noNotify? {boolean} [options] Set true to prevent insert_at events.
+   * @param noNotify? {boolean} [options] Set true to prevent insert_at event.
    * @return {Object}
    */
   @CordovaInstance({ sync: true })
@@ -1452,7 +1642,7 @@ export class BaseArrayClass<T> extends BaseClass {
 
   /**
    * Removes the last element of the array and returns that element.
-   * @param noNotify? {boolean} [options] Set true to prevent remove_at events.
+   * @param noNotify? {boolean} [options] Set true to prevent remove_at event.
    * @return {Object}
    */
   @CordovaInstance({ sync: true })
@@ -1472,17 +1662,16 @@ export class BaseArrayClass<T> extends BaseClass {
   /**
    * Removes an element from the specified index.
    * @param index {number}
-   * @param noNotify? {boolean} [options] Set true to prevent remove_at events.
+   * @param noNotify? {boolean} [options] Set true to prevent remove_at event.
    */
   @CordovaInstance({ sync: true })
-  removeAt(index: number, noNotify?: boolean): void {
-  }
+  removeAt(index: number, noNotify?: boolean): T { return; }
 
   /**
    * Sets an element at the specified index.
    * @param index {number}
    * @param element {object}
-   * @param noNotify? {boolean} [options] Set true to prevent set_at events.
+   * @param noNotify? {boolean} [options] Set true to prevent set_at event.
    */
   @CordovaInstance({ sync: true })
   setAt(index: number, element: T, noNotify?: boolean): void {
@@ -1504,7 +1693,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Return the ID of instance.
+   * Returns the ID of instance.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -1513,7 +1702,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Return the map instance.
+   * Returns the map instance.
    * @return {GoogleMap}
    */
   getMap(): any {
@@ -1521,7 +1710,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Change the center position.
+   * Changes the center position.
    * @param latLng {ILatLng}
    */
   @CordovaInstance({ sync: true })
@@ -1529,7 +1718,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Return the current center position
+   * Returns the current center position
    * @return {ILatLng}
    */
   @CordovaInstance({ sync: true })
@@ -1538,7 +1727,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Return the current circle radius.
+   * Returns the current circle radius.
    * @return {number}
    */
   @CordovaInstance({ sync: true })
@@ -1547,7 +1736,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Change the circle radius.
+   * Changes the circle radius.
    * @param radius {number}
    */
   @CordovaInstance({ sync: true })
@@ -1555,7 +1744,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Change the filling color (inner color).
+   * Changes the filling color (inner color).
    * @param color {string}
    */
   @CordovaInstance({ sync: true })
@@ -1563,7 +1752,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Return the current circle filling color (inner color).
+   * Returns the current circle filling color (inner color).
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -1572,7 +1761,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Change the stroke width.
+   * Changes the stroke width.
    * @param strokeWidth {number}
    */
   @CordovaInstance({ sync: true })
@@ -1580,7 +1769,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Return the current circle stroke width (unit: pixel).
+   * Returns the current circle stroke width (unit: pixel).
    * @return {number}
    */
   @CordovaInstance({ sync: true })
@@ -1589,7 +1778,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Change the stroke color (outter color).
+   * Changes the stroke color (outter color).
    * @param strokeColor {string}
    */
   @CordovaInstance({ sync: true })
@@ -1597,7 +1786,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Return the current circle stroke color (outer color).
+   * Returns the current circle stroke color (outer color).
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -1606,7 +1795,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Change clickablity of the circle.
+   * Changes click-ability of the circle.
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -1614,7 +1803,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Return true if the circle is clickable.
+   * Returns true if the circle is clickable.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -1623,7 +1812,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Change the circle zIndex order.
+   * Changes the circle zIndex order.
    * @param zIndex {number}
    */
   @CordovaInstance({ sync: true })
@@ -1631,7 +1820,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Return the current circle zIndex.
+   * Returns the current circle zIndex.
    * @return {number}
    */
   @CordovaInstance({ sync: true })
@@ -1647,7 +1836,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Return the latLngBounds (rectangle) that contains the circle.
+   * Returns the latLngBounds (rectangle) that contains the circle.
    * @return {LatLngBounds}
    */
   @CordovaInstance({ sync: true })
@@ -1664,7 +1853,7 @@ export class Circle extends BaseClass {
   }
 
   /**
-   * Returns a boolean that indicates whether the circle is visible
+   * Returns true if the circle is visible.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -1733,11 +1922,20 @@ export class Environment {
 export class Geocoder {
 
   /**
+   * @deprecation
+   * @hidden
+   */
+  geocode(request: GeocoderRequest): Promise<GeocoderResult[] | BaseArrayClass<GeocoderResult[]>> {
+    console.error('GoogleMaps', '[deprecated] This method is static. Please use Geocoder.geocode()');
+    return Geocoder.geocode(request);
+  }
+
+  /**
    * Converts position to address and vice versa
    * @param {GeocoderRequest} request Request object with either an address or a position
    * @return {Promise<GeocoderResult[] | BaseArrayClass<GeocoderResult>>}
    */
-  static geocode(request: GeocoderRequest): Promise<GeocoderResult[] | BaseArrayClass<GeocoderResult>> {
+  static geocode(request: GeocoderRequest): Promise<GeocoderResult[] | BaseArrayClass<GeocoderResult[]>> {
 
     if (request.address instanceof Array || Array.isArray(request.address) ||
       request.position instanceof Array || Array.isArray(request.position)) {
@@ -1803,7 +2001,16 @@ export class LocationService {
    */
   static getMyLocation(options?: MyLocationOptions): Promise<MyLocation> {
     return new Promise<MyLocation>((resolve, reject) => {
-      GoogleMaps.getPlugin().LocationService.getMyLocation(options, resolve);
+      GoogleMaps.getPlugin().LocationService.getMyLocation(options, resolve, reject);
+    });
+  }
+  /**
+   * Return true if the application has geolocation permission
+   * @return {Promise<MyLocation>}
+   */
+  static hasPermission(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      GoogleMaps.getPlugin().LocationService.hasPermission(resolve, reject);
     });
   }
 }
@@ -1869,7 +2076,7 @@ export class Encoding {
 export class Poly {
 
   /**
-   * Returns true if the speicified location is in the polygon path
+   * Returns true if the specified location is in the polygon path
    * @param location {ILatLng}
    * @param path {ILatLng[]}
    * @return {boolean}
@@ -1879,7 +2086,7 @@ export class Poly {
   }
 
   /**
-   * Returns true if the speicified location is on the polyline path
+   * Returns true if the specified location is on the polyline path
    * @param location {ILatLng}
    * @param path {ILatLng[]}
    * @return {boolean}
@@ -2057,46 +2264,24 @@ export class Spherical {
  * @hidden
  */
 @Plugin({
-  pluginName: 'GoogleMaps',
+  pluginName: 'StreetViewPanorama',
   plugin: 'cordova-plugin-googlemaps'
 })
-export class GoogleMap extends BaseClass {
-  constructor(element: any, options?: GoogleMapOptions) {
+export class StreetViewPanorama extends BaseClass {
+  constructor(element: string | HTMLElement, options?: StreetViewOptions) {
     super();
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       if (element instanceof HTMLElement) {
-        this._objectInstance = GoogleMaps.getPlugin().Map.getMap(element, options);
+        this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(element, options);
       } else if (typeof element === 'string') {
-        let dummyObj: any = new (GoogleMaps.getPlugin().BaseClass)();
-        this._objectInstance = dummyObj;
-        let onListeners: any[] = [];
-        let oneListeners: any[] = [];
-        let _origAddEventListener: any = this._objectInstance.addEventListener;
-        let _origAddEventListenerOnce: any = this._objectInstance.addEventListenerOnce;
-        this._objectInstance.addEventListener = (eventName: string, fn: () => void) => {
-          if (eventName === GoogleMapsEvent.MAP_READY) {
-            _origAddEventListener.call(dummyObj, eventName, fn);
-          } else {
-            onListeners.push([dummyObj, fn]);
-          }
-        };
-        this._objectInstance.on = this._objectInstance.addEventListener;
 
-        this._objectInstance.addEventListenerOnce = (eventName: string, fn: () => void) => {
-          if (eventName === GoogleMapsEvent.MAP_READY) {
-            _origAddEventListenerOnce.call(dummyObj, eventName, fn);
-          } else {
-            oneListeners.push([dummyObj, fn]);
-          }
-        };
-        this._objectInstance.one = this._objectInstance.addEventListenerOnce;
-        (getPromise<any>((resolve, reject) => {
+        this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(new Promise<any[]>((resolve, reject) => {
           let count: number = 0;
           let timer: any = setInterval(() => {
             let target = document.querySelector('.show-page #' + element);
             if (target) {
               clearInterval(timer);
-              resolve(target);
+              resolve([target, options]);
             } else {
               if (count++ < 20) {
                 return;
@@ -2107,23 +2292,155 @@ export class GoogleMap extends BaseClass {
               reject();
             }
           }, 100);
-        }))
-          .then((target: any) => {
-            this._objectInstance = GoogleMaps.getPlugin().Map.getMap(target, options);
-            this._objectInstance.one(GoogleMapsEvent.MAP_READY, () => {
-              this.set('_overlays', {});
-              onListeners.forEach((args) => {
-                this.on.apply(this, args);
-              });
-              oneListeners.forEach((args) => {
-                this.one.apply(this, args);
-              });
-              dummyObj.trigger(GoogleMapsEvent.MAP_READY);
-            });
-          })
-          .catch(() => {
-            this._objectInstance = null;
-          });
+        }), options);
+      }
+    }
+  }
+
+
+  /**
+   * Sets the point of view for the Street View panorama.
+   */
+  @CordovaInstance()
+  setPov(pov: StreetViewCameraPano): void {}
+
+  /**
+   * Sets the StreetViewPanorama to a given location.
+   */
+  @CordovaInstance()
+  setPosition(cameraPosition: String | StreetViewSetPositionOption): void {}
+
+  /**
+   * Toggles the ability for users to use pan around on the panorama using gestures.
+   * @param gestureEnable {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setPanningGesturesEnabled(gestureEnable: boolean): void {}
+
+  /**
+   * Retrun true if the panning gesture is enabled.
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getPanningGesturesEnabled(): boolean { return; }
+
+  /**
+   * Toggles the ability for users to zoom on the panorama using gestures.
+   * @param gestureEnable {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setZoomGesturesEnabled(gestureEnable: boolean): void {}
+
+  /**
+   * Retrun true if the zooming gesture is enabled.
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getZoomGesturesEnabled(): boolean { return; }
+
+  /**
+   * Toggles the ability for users to see street names on the panorama.
+   * @param gestureEnable {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setStreetNamesEnabled(gestureEnable: boolean): void {}
+
+  /**
+   * Retrun true if the street names control is enabled.
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getStreetNamesEnabled(): boolean { return; }
+
+  /**
+   * Toggles the ability for users to move between panoramas.
+   * @param gestureEnable {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setNavigationEnabled(gestureEnable: boolean): void {}
+
+  /**
+   * Retrun true if the navigation control is enabled.
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getNavigationEnabled(): boolean { return; }
+
+  /**
+   * Retrun the navigation links (StreetViewLocation.links)
+   * @return {StreetViewNavigationLink[]}
+   */
+  @CordovaInstance({ sync: true })
+  getLinks(): StreetViewNavigationLink[] { return; }
+
+  /**
+   * Retrun the current location
+   * @return {StreetViewLocation}
+   */
+  @CordovaInstance({ sync: true })
+  getLocation(): StreetViewLocation { return; }
+
+  /**
+   * Retrun the current panorama id
+   * @return {string}
+   */
+  @CordovaInstance({ sync: true })
+  getPano(): string { return; }
+
+  /**
+   * Retrun the current position (StreetViewLocation.latLng)
+   * @return {string}
+   */
+  @CordovaInstance({ sync: true })
+  getPosition(): ILatLng { return; }
+
+  /**
+   * Destroy a map completely
+   * @return {Promise<any>}
+   */
+  @CordovaInstance()
+  remove(): Promise<any> {
+    return new Promise<any>((resolve) => {
+      this._objectInstance.remove(() => resolve());
+    });
+  }
+
+}
+
+/**
+ * @hidden
+ */
+@Plugin({
+  pluginName: 'GoogleMaps',
+  plugin: 'cordova-plugin-googlemaps'
+})
+export class GoogleMap extends BaseClass {
+  constructor(element: any, options?: GoogleMapOptions) {
+    super();
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      if (element instanceof HTMLElement) {
+        this._objectInstance = GoogleMaps.getPlugin().Map.getMap(element, options);
+      } else if (typeof element === 'string') {
+
+        this._objectInstance = GoogleMaps.getPlugin().Map.getMap(getPromise<any[]>((resolve, reject) => {
+          let count: number = 0;
+          let timer: any = setInterval(() => {
+            let target = document.querySelector('.show-page #' + element);
+            if (target) {
+              clearInterval(timer);
+              resolve([target, options]);
+            } else {
+              if (count++ < 20) {
+                return;
+              }
+              clearInterval(timer);
+              this._objectInstance.remove();
+              console.error('Can not find the element [#' + element + ']');
+              reject();
+            }
+          }, 100);
+        }), options);
+
       } else if (element === null && options) {
         this._objectInstance = GoogleMaps.getPlugin().Map.getMap(null, options);
       }
@@ -2225,7 +2542,7 @@ export class GoogleMap extends BaseClass {
 
   /**
    * Get the current camera target position
-   * @return {Promise<CameraPosition>}
+   * @return {ILatLng}
    */
   @CordovaInstance({ sync: true })
   getCameraTarget(): ILatLng {
@@ -2277,11 +2594,10 @@ export class GoogleMap extends BaseClass {
 
   /**
    * Set the camera view angle
-   * @param tiltLevel {number} Tilt level
+   * @param tiltAngle {number} Tilt angle
    */
   @CordovaInstance({ sync: true })
-  setCameraTilt(tiltLevel: number): void {
-  }
+  setCameraTilt(tiltAngle: number): void {}
 
   /**
    * Set camera bearing
@@ -2292,13 +2608,12 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
-   * Change the center of the map by the given distance in pixels
-   * @param x {any}
-   * @param y {any}
+   * Changes the center of the map by the given distance in pixels
+   * @param x {number}
+   * @param y {number}
    */
   @CordovaInstance({ sync: true })
-  panBy(x: string | number, y: string | number): void {
-  }
+  panBy(x: number, y: number): void { }
 
   /**
    * Get the current visible region (southWest and northEast)
@@ -2315,7 +2630,9 @@ export class GoogleMap extends BaseClass {
    */
   @CordovaInstance()
   getMyLocation(options?: MyLocationOptions): Promise<MyLocation> {
-    return;
+    return getPromise<MyLocation>((resolve, reject) => {
+      GoogleMaps.getPlugin().LocationService.getMyLocation(options, resolve, reject);
+    });
   }
 
   /**
@@ -2374,9 +2691,7 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<LatLng>}
    */
   @CordovaInstance()
-  fromPointToLatLng(point: any): Promise<LatLng> {
-    return;
-  }
+  fromPointToLatLng(point: number[]): Promise<LatLng> { return; }
 
   /**
    * Set true if you want to show the MyLocation control (blue dot)
@@ -2450,8 +2765,7 @@ export class GoogleMap extends BaseClass {
    * @param bottom {number}
    */
   @CordovaInstance({ sync: true })
-  setPadding(top?: number, right?: number, bottom?: number, left?: number): void {
-  }
+  setPadding(top: number, right?: number, bottom?: number, left?: number): void { }
 
   /**
    * Set options
@@ -2464,7 +2778,7 @@ export class GoogleMap extends BaseClass {
   /**
    * Adds a marker
    * @param options {MarkerOptions} options
-   * @return {Promise<Marker | any>}
+   * @return {Promise<Marker>}
    */
   @InstanceCheck()
   addMarker(options: MarkerOptions): Promise<Marker | any> {
@@ -2489,9 +2803,29 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
+   * Adds a marker in synchronous
+   * @param options {MarkerOptions} options
+   * @Returns {Marker}
+   */
+  @InstanceCheck()
+  addMarkerSync(options: MarkerOptions): Marker {
+    let marker: any = this._objectInstance.addMarker(options);
+    let overlayId: string = marker.getId();
+    const overlay: Marker = new Marker(this, marker);
+    this.get('_overlays')[overlayId] = overlay;
+    marker.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
+  }
+
+  /**
    * Adds a marker cluster
    * @param options {MarkerClusterOptions} options
-   * @return {Promise<MarkerCluster | any>}
+   * @return {Promise<MarkerCluster>}
    */
   @InstanceCheck()
   addMarkerCluster(options: MarkerClusterOptions): Promise<MarkerCluster | any> {
@@ -2517,9 +2851,30 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
+   * Adds a marker cluster in synchronous
+   * @param options {MarkerClusterOptions} options
+   * @Returns {MarkerCluster}
+   */
+  @InstanceCheck()
+  addMarkerClusterSync(options: MarkerClusterOptions): MarkerCluster {
+    let markerCluster: any = this._objectInstance.addMarkerCluster(options);
+    let overlayId: string = markerCluster.getId();
+    const overlay: MarkerCluster = new MarkerCluster(this, markerCluster);
+    this.get('_overlays')[overlayId] = overlay;
+    markerCluster.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    markerCluster.set('_overlays', new BaseArrayClass());
+    return overlay;
+  }
+
+  /**
    * Adds a circle
    * @param options {CircleOptions} options
-   * @return {Promise<Circle | any>}
+   * @return {Promise<Circle>}
    */
   @InstanceCheck()
   addCircle(options: CircleOptions): Promise<Circle | any> {
@@ -2544,9 +2899,28 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
+   * Adds a circle in synchronous
+   * @param options {CircleOptions} options
+   * @return {Circle}
+   */
+  @InstanceCheck()
+  addCircleSync(options: CircleOptions): Circle {
+    let circle: any = this._objectInstance.addCircle(options);
+    let overlayId: string = circle.getId();
+    const overlay = new Circle(this, circle);
+    this.get('_overlays')[overlayId] = overlay;
+    circle.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
+  }
+  /**
    * Adds a polygon
    * @param options {PolygonOptions} options
-   * @return {Promise<Polygon | any>}
+   * @return {Promise<Polygon>}
    */
   @InstanceCheck()
   addPolygon(options: PolygonOptions): Promise<Polygon | any> {
@@ -2571,9 +2945,29 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
+   * Adds a polygon in synchronous
+   * @param options {PolygonOptions} options
+   * @return {Polygon}
+   */
+  @InstanceCheck()
+  addPolygonSync(options: PolygonOptions): Polygon {
+    let polygon: any = this._objectInstance.addPolygon(options);
+    let overlayId: string = polygon.getId();
+    const overlay = new Polygon(this, polygon);
+    this.get('_overlays')[overlayId] = overlay;
+    polygon.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
+  }
+
+  /**
    * Adds a polyline
    * @param options {PolylineOptions} options
-   * @return {Promise<Polyline | any>}
+   * @return {Promise<Polyline>}
    */
   @InstanceCheck()
   addPolyline(options: PolylineOptions): Promise<Polyline | any> {
@@ -2598,9 +2992,29 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
+   * Adds a polyline in synchronous
+   * @param options {PolylineOptions} options
+   * @return {Polyline}
+   */
+  @InstanceCheck()
+  addPolylineSync(options: PolylineOptions): Polyline {
+    let polyline: any = this._objectInstance.addPolyline(options);
+    let overlayId: string = polyline.getId();
+    const overlay = new Polyline(this, polyline);
+    this.get('_overlays')[overlayId] = overlay;
+    polyline.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
+  }
+
+  /**
    * Adds a tile overlay
    * @param options {TileOverlayOptions} options
-   * @return {Promise<TileOverlay | any>}
+   * @return {Promise<TileOverlay>}
    */
   @InstanceCheck()
   addTileOverlay(options: TileOverlayOptions): Promise<TileOverlay | any> {
@@ -2625,9 +3039,29 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
+   * Adds a tile overlay in synchronous
+   * @param options {TileOverlayOptions} options
+   * @return {TileOverlay}
+   */
+  @InstanceCheck()
+  addTileOverlaySync(options: TileOverlayOptions): TileOverlay {
+    let tileOverlay: any = this._objectInstance.addTileOverlay(options);
+    let overlayId: string = tileOverlay.getId();
+    const overlay = new TileOverlay(this, tileOverlay);
+    this.get('_overlays')[overlayId] = overlay;
+    tileOverlay.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
+  }
+
+  /**
    * Adds a ground overlay
    * @param options {GroundOverlayOptions} options
-   * @return {Promise<GroundOverlay | any>}
+   * @return {Promise<GroundOverlay>}
    */
   @InstanceCheck()
   addGroundOverlay(options: GroundOverlayOptions): Promise<GroundOverlay | any> {
@@ -2652,12 +3086,32 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
-   * Adds a kml overlay
-   * @param options {KmlOverlayOptions} options
-   * @return {Promise<KmlOverlay | any>}
+   * Adds a ground overlay in synchronous
+   * @param options {GroundOverlayOptions} options
+   * @return {GroundOverlay}
    */
   @InstanceCheck()
-  addKmlOverlay(options: KmlOverlayOptions): Promise<KmlOverlay | any> {
+  addGroundOverlaySync(options: GroundOverlayOptions): GroundOverlay {
+    let groundOverlay: any = this._objectInstance.addGroundOverlay(options);
+    let overlayId: string = groundOverlay.getId();
+    const overlay = new GroundOverlay(this, groundOverlay);
+    this.get('_overlays')[overlayId] = overlay;
+    groundOverlay.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
+    });
+    return overlay;
+  }
+
+  /**
+   * Adds a kml overlay
+   * @param options {KmlOverlayOptions} options
+   * @return {Promise<KmlOverlay>}
+   */
+  @InstanceCheck()
+  addKmlOverlay(options: KmlOverlayOptions): Promise<KmlOverlay> {
     return new Promise<KmlOverlay>((resolve, reject) => {
       this._objectInstance.addKmlOverlay(options, (kmlOverlay: any) => {
         if (kmlOverlay) {
@@ -2684,7 +3138,7 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<string>}
    */
   @CordovaInstance()
-  toDataURL(params?: ToDataUrlOptions): Promise<string> { return; }
+  toDataURL(options?: ToDataUrlOptions): Promise<string> { return; }
 
 }
 
@@ -2702,7 +3156,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Return the ID of instance.
+   * Returns the ID of instance.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -2711,7 +3165,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Return the map instance.
+   * Returns the map instance.
    * @return {GoogleMap}
    */
   getMap(): any {
@@ -2719,7 +3173,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Change the bounds of the GroundOverlay
+   * Changes the bounds of the GroundOverlay
    * @param bounds { ILatLng[]}
    */
   @CordovaInstance({ sync: true })
@@ -2727,7 +3181,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Change the bearing of the ground overlay
+   * Changes the bearing of the ground overlay
    * @param bearing {number}
    */
   @CordovaInstance({ sync: true })
@@ -2735,7 +3189,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Return the current bearing value
+   * Returns the current bearing value
    */
   @CordovaInstance({ sync: true })
   getBearing(): number {
@@ -2743,15 +3197,14 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Change the image of the ground overlay
-   * @param image {string} URL of image
+   * Changes the image of the ground overlay
+   * @param imageUrl {string} URL of image
    */
   @CordovaInstance({ sync: true })
-  setImage(image: string): void {
-  }
+  setImage(imageUrl: string): void {};
 
   /**
-   * Change the opacity of the ground overlay from 0.0 to 1.0
+   * Changes the opacity of the ground overlay from 0.0 to 1.0
    * @param opacity {number}
    */
   @CordovaInstance({ sync: true })
@@ -2759,7 +3212,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Return the current opacity
+   * Returns the current opacity
    * @return {number}
    */
   @CordovaInstance({ sync: true })
@@ -2768,7 +3221,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Change clickablity of the ground overlay
+   * Changes click-ability of the ground overlay
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -2776,7 +3229,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Return true if the ground overlay is clickable
+   * Returns true if the ground overlay is clickable
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -2785,7 +3238,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Change visibility of the ground overlay
+   * Changes visibility of the ground overlay
    * @param visible {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -2793,7 +3246,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Return true if the ground overlay is visible
+   * Returns true if the ground overlay is visible
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -2802,7 +3255,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Change the ground overlay zIndex order
+   * Changes the ground overlay zIndex order
    * @param index {number}
    */
   @CordovaInstance({ sync: true })
@@ -2810,7 +3263,7 @@ export class GroundOverlay extends BaseClass {
   }
 
   /**
-   * Return the current ground overlay zIndex
+   * Returns the current ground overlay zIndex
    * @return {number}
    */
   @CordovaInstance({ sync: true })
@@ -2846,7 +3299,7 @@ export class HtmlInfoWindow extends BaseClass {
   }
 
   /**
-   * Change the backgroundColor
+   * Changes the backgroundColor
    * @param color {string}
    */
   @CordovaInstance()
@@ -2893,7 +3346,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Return the ID of instance.
+   * Returns the ID of instance.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -2902,7 +3355,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Return the map instance.
+   * Returns the map instance.
    * @return {GoogleMap}
    */
   getMap(): any {
@@ -2919,7 +3372,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Return the marker position.
+   * Returns the marker position.
    * @return {ILatLng}
    */
   @CordovaInstance({ sync: true })
@@ -2966,7 +3419,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Return true if the marker is visible
+   * Returns true if the marker is visible
    */
   @CordovaInstance({ sync: true })
   isVisible(): boolean {
@@ -2974,7 +3427,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Change title of the normal infoWindow.
+   * Changes title of the normal infoWindow.
    * @param title {string}
    */
   @CordovaInstance({ sync: true })
@@ -2982,7 +3435,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Return the title strings.
+   * Returns the title strings.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -2991,7 +3444,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Change snippet of the normal infoWindow.
+   * Changes snippet of the normal infoWindow.
    * @param snippet {string}
    */
   @CordovaInstance({ sync: true })
@@ -2999,7 +3452,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Return the snippet strings.
+   * Returns the snippet strings.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -3008,7 +3461,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Change the marker opacity from 0.0 to 1.0.
+   * Changes the marker opacity from 0.0 to 1.0.
    * @param alpha {number} Opacity
    */
   @CordovaInstance({ sync: true })
@@ -3016,7 +3469,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Return the marker opacity.
+   * Returns the marker opacity.
    * @return {number} Opacity
    */
   @CordovaInstance({ sync: true })
@@ -3035,7 +3488,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Change the info window anchor. This defaults to 50% from the left of the image and at the bottom of the image.
+   * Changes the info window anchor. This defaults to 50% from the left of the image and at the bottom of the image.
    * @param x {number} Distance from left of the icon image in pixels.
    * @param y {number} Distance from top of the icon image in pixels.
    */
@@ -3044,7 +3497,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Change the info window anchor. This defaults to 50% from the left of the image and at the top of the image.
+   * Changes the info window anchor. This defaults to 50% from the left of the image and at the top of the image.
    * @param x {number} Distance from left of the icon image in pixels.
    * @param y {number} Distance from top of the icon image in pixels.
    */
@@ -3053,20 +3506,11 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Return true if the infoWindow is shown on the marker
+   * Returns true if the infoWindow is shown on the marker
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
   isInfoWindowShown(): boolean {
-    return;
-  }
-
-  /**
-   * Return the marker hash code.
-   * @return {string} Marker hash code
-   */
-  @CordovaInstance({ sync: true })
-  getHashCode(): string {
     return;
   }
 
@@ -3096,7 +3540,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Return true if the marker drag is enabled.
+   * Returns true if the marker drag is enabled.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3114,7 +3558,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Change icon url and/or size
+   * Changes icon url and/or size
    * @param icon
    */
   @CordovaInstance({ sync: true })
@@ -3131,7 +3575,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Return the marker rotation angle.
+   * Returns the marker rotation angle.
    * @return {number}
    */
   @CordovaInstance({ sync: true })
@@ -3155,7 +3599,7 @@ export class MarkerCluster extends BaseClass {
   }
 
   /**
-   * Return the ID of instance.
+   * Returns the ID of instance.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -3174,7 +3618,7 @@ export class MarkerCluster extends BaseClass {
 
   /**
    * Add marker locations
-   * @param markers {MarkerOptions[]} multiple locations
+   * @param markers {MarkerOptions[]} multiple location
    */
   @CordovaInstance({ sync: true })
   addMarkers(markers: MarkerOptions[]): void {
@@ -3192,7 +3636,7 @@ export class MarkerCluster extends BaseClass {
   }
 
   /**
-   * Return the map instance.
+   * Returns the map instance.
    * @return {GoogleMap}
    */
   getMap(): any {
@@ -3215,7 +3659,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Return the ID of instance.
+   * Returns the ID of instance.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -3224,7 +3668,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Return the map instance.
+   * Returns the map instance.
    * @return {GoogleMap}
    */
   getMap(): any {
@@ -3232,7 +3676,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Change the polygon points.
+   * Changes the polygon points.
    * @param points {ILatLng[]}
    */
   @CordovaInstance({ sync: true })
@@ -3240,7 +3684,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Return an instance of the BaseArrayClass.
+   * Returns an instance of the BaseArrayClass.
    * You can modify the points.
    * @return {BaseArrayClass<ILatLng>}
    */
@@ -3250,7 +3694,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Change the polygon holes.
+   * Changes the polygon holes.
    * @param holes {ILatLng[][]}
    */
   @CordovaInstance({ sync: true })
@@ -3258,7 +3702,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Return an instance of the BaseArrayClass.
+   * Returns an instance of the BaseArrayClass.
    * You can modify the holes.
    * @return {BaseArrayClass<ILatLng[]>}
    */
@@ -3273,7 +3717,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Change the filling color (inner color)
+   * Changes the filling color (inner color)
    * @param fillColor {string}
    */
   @CordovaInstance({ sync: true })
@@ -3281,7 +3725,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Return the current polygon filling color (inner color).
+   * Returns the current polygon filling color (inner color).
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -3290,7 +3734,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Change the stroke color (outer color)
+   * Changes the stroke color (outer color)
    * @param strokeColor {string}
    */
   @CordovaInstance({ sync: true })
@@ -3298,7 +3742,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Return the current polygon stroke color (outer color)
+   * Returns the current polygon stroke color (outer color)
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -3307,7 +3751,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Change clickablity of the polygon
+   * Changes click-ability of the polygon
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3315,7 +3759,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Return true if the polygon is clickable
+   * Returns true if the polygon is clickable
    */
   @CordovaInstance({ sync: true })
   getClickable(): boolean {
@@ -3323,7 +3767,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Change visibility of the polygon
+   * Changes visibility of the polygon
    * @param visible {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3331,7 +3775,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Return true if the polygon is visible
+   * Returns true if the polygon is visible
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3340,7 +3784,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Change the polygon zIndex order.
+   * Changes the polygon zIndex order.
    * @param zIndex {number}
    */
   @CordovaInstance({ sync: true })
@@ -3348,7 +3792,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Return the current polygon zIndex
+   * Returns the current polygon zIndex
    * @return {number}
    */
   @CordovaInstance({ sync: true })
@@ -3367,14 +3811,14 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Change the polygon stroke width
+   * Changes the polygon stroke width
    */
   @CordovaInstance({ sync: true })
   setStrokeWidth(strokeWidth: number): void {
   }
 
   /**
-   * Return the polygon stroke width
+   * Returns the polygon stroke width
    */
   @CordovaInstance({ sync: true })
   getStrokeWidth(): number {
@@ -3390,7 +3834,7 @@ export class Polygon extends BaseClass {
   }
 
   /**
-   * Return true if the polygon is geodesic.
+   * Returns true if the polygon is geodesic.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3414,7 +3858,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Return the ID of instance.
+   * Returns the ID of instance.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -3423,7 +3867,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Return the map instance.
+   * Returns the map instance.
    * @return {GoogleMap}
    */
   getMap(): any {
@@ -3431,7 +3875,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Change the polyline points.
+   * Changes the polyline points.
    * @param points {ILatLng[]}
    */
   @CordovaInstance({ sync: true })
@@ -3439,7 +3883,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Return an instance of the BaseArrayClass
+   * Returns an instance of the BaseArrayClass
    * You can modify the points.
    * @return {BaseArrayClass<ILatLng>}
    */
@@ -3457,7 +3901,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Return true if the polyline is geodesic
+   * Returns true if the polyline is geodesic
    */
   @CordovaInstance({ sync: true })
   getGeodesic(): boolean {
@@ -3465,7 +3909,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Change visibility of the polyline
+   * Changes visibility of the polyline
    * @param visible {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3473,7 +3917,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Return true if the polyline is visible
+   * Returns true if the polyline is visible
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3482,7 +3926,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Change clickablity of the polyline
+   * Changes click-ability of the polyline
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3490,7 +3934,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Return true if the polyline is clickable
+   * Returns true if the polyline is clickable
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3499,7 +3943,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Change the polyline color
+   * Changes the polyline color
    * @param strokeColor {string}
    */
   @CordovaInstance({ sync: true })
@@ -3507,7 +3951,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Return the current polyline color
+   * Returns the current polyline color
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -3516,7 +3960,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Change the polyline stroke width
+   * Changes the polyline stroke width
    * @param strokeWidth {number}
    */
   @CordovaInstance({ sync: true })
@@ -3524,7 +3968,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Return the current stroke width (unit: pixel).
+   * Returns the current stroke width (unit: pixel).
    * @return {number}
    */
   @CordovaInstance({ sync: true })
@@ -3533,7 +3977,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Change the polyline zIndex order.
+   * Changes the polyline zIndex order.
    * @param index {number}
    */
   @CordovaInstance({ sync: true })
@@ -3541,7 +3985,7 @@ export class Polyline extends BaseClass {
   }
 
   /**
-   * Return the current polyline zIndex
+   * Returns the current polyline zIndex
    * @return {number}
    */
   @CordovaInstance({ sync: true })
@@ -3574,7 +4018,7 @@ export class TileOverlay extends BaseClass {
   }
 
   /**
-   * Return the ID of instance.
+   * Returns the ID of instance.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
@@ -3583,7 +4027,7 @@ export class TileOverlay extends BaseClass {
   }
 
   /**
-   * Return the map instance.
+   * Returns the map instance.
    * @return {GoogleMap}
    */
   getMap(): any {
@@ -3616,7 +4060,7 @@ export class TileOverlay extends BaseClass {
   }
 
   /**
-   * Return the zIndex of the tile overlay
+   * Returns the zIndex of the tile overlay
    * @return {number}
    */
   @CordovaInstance({ sync: true })
@@ -3633,7 +4077,7 @@ export class TileOverlay extends BaseClass {
   }
 
   /**
-   * Return the opacity of the tile overlay
+   * Returns the opacity of the tile overlay
    * @return {number}
    */
   @CordovaInstance({ sync: true })
@@ -3650,7 +4094,7 @@ export class TileOverlay extends BaseClass {
   }
 
   /**
-   * Return true if the tile overlay is visible
+   * Returns true if the tile overlay is visible
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -3706,41 +4150,41 @@ export class KmlOverlay extends BaseClass {
   getDefaultViewport(): CameraPosition<ILatLng|ILatLng[]> { return; }
 
   /**
-   * Return the ID of instance.
+   * Returns the ID of instance.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
   getId(): string { return; }
 
   /**
-   * Return the map instance.
+   * Returns the map instance.
    * @return {GoogleMap}
    */
   getMap(): GoogleMap { return this._map; }
 
   /**
-   * Change visibility of the polyline
+   * Changes visibility of the kml overlay
    * @param visible {boolean}
    */
   @CordovaInstance({ sync: true })
   setVisible(visible: boolean): void {}
 
   /**
-   * Return true if the polyline is visible
+   * Returns true if the kml overlay is visible
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
   getVisible(): boolean { return; }
 
   /**
-   * Change clickablity of the KmlOverlay
+   * Changes click-ability of the KmlOverlay
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })
   setClickable(clickable: boolean): void {}
 
   /**
-   * Return true if the KmlOverlay is clickable
+   * Returns true if the KmlOverlay is clickable
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })

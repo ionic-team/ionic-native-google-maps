@@ -1,0 +1,19 @@
+{
+  "name": "@ionic-native/{{PLUGIN}}",
+  "version": "{{VERSION}}",
+  "description": "Ionic Native plugin for Google Maps",
+  "module": "index.js",
+  "private": true,
+  "typings": "index.d.ts",
+  "author": "ionic",
+  "license": "MIT",
+  "peerDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ionic-team/ionic-native-google-maps.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/ionic-native-google-maps/issues"
+  },
+  "homepage": "https://github.com/ionic-team/ionic-native-google-maps"
+}

@@ -21,7 +21,7 @@ const PACKAGE_JSON_BASE = {
   license: 'MIT',
   repository: {
     type: 'git',
-    url: 'https://github.com/ionic-team/ionic-native-google-maps'
+    url: 'https://github.com/ionic-team/ionic-native.git'
   }
 };
 
@@ -29,17 +29,17 @@ const DIST = path.resolve(ROOT, 'dist/@ionic-native');
 
 const PACKAGES = [];
 
-const RXJS_VEERSION = '^5.0.1';
-const CORE_VERSION = '^5.0.0';
+const RXJS_VERSION = '*';
 
 const PLUGIN_PEER_DEPENDENCIES = {
   '@ionic-native/core': VERSION, // TODO change this in production
-  rxjs: RXJS_VEERSION
+  rxjs: RXJS_VERSION
 };
 
-function getPackageJsonContent(name, peerDependencies = {}) {
+function getPackageJsonContent(name, peerDependencies = {}, dependencies = {}) {
   return merge(PACKAGE_JSON_BASE, {
     name: '@ionic-native/' + name,
+    dependencies,
     peerDependencies,
     version: VERSION
   });
@@ -54,7 +54,7 @@ function writePackageJson(data: any, dir: string) {
 function prepare() {
   // write @ionic-native/core package.json
   writePackageJson(
-    getPackageJsonContent('core', { rxjs: RXJS_VEERSION }),
+    getPackageJsonContent('core', { rxjs: RXJS_VERSION }, { '@types/cordova': 'latest' }),
     path.resolve(DIST, 'core')
   );
 
@@ -74,16 +74,11 @@ function prepare() {
 async function publish(ignoreErrors = false) {
   Logger.profile('Publishing');
   // upload 1 package per CPU thread at a time
-  const worker = Queue.async.asyncify((pkg: any) => {
+  const worker = Queue.async.asyncify((pkg: any) =>
     new Promise<any>((resolve, reject) => {
-      const pluginName = pkg.split(/[\/\\]+/).pop();
-      if (pluginName !== "google-maps") {
-        resolve(`-->[skip publishing] ${pluginName}`);
-        return;
-      }
       exec(`npm publish ${pkg} ${FLAGS}`, (err, stdout) => {
         if (stdout) {
-          Logger.log(stdout.trim());
+          Logger.verbose(stdout.trim());
           resolve(stdout);
         }
         if (err) {
@@ -100,8 +95,8 @@ async function publish(ignoreErrors = false) {
           }
         }
       });
-    });
-  });
+    })
+  );
 
   try {
     await Queue(worker, PACKAGES, cpus().length);
@@ -110,7 +105,7 @@ async function publish(ignoreErrors = false) {
     Logger.error('Error publishing!');
     Logger.error(e);
   }
-  Logger.profile('Publishing', { level: 'verbose' });
+  Logger.profile('Publishing');
 }
 
 prepare();

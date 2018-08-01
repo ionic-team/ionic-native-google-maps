@@ -1,28 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "declaration": true,
-    "stripInternal": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "noImplicitAny": true,
-    "module": "es2015",
-    "moduleResolution": "node",
-    "paths": {
-      "@ionic-native/core": ["./dist/@ionic-native/core"]
-    },
-    "outDir": "./dist",
-    "rootDir": "src",
+    "module": "commonjs",
     "target": "es5",
-    "skipLibCheck": true,
-    "lib": ["es2017", "dom"],
-    "inlineSources": true,
-    "inlineSourceMap": true
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "lib": ["es6"]
   },
-  "include": [
-    "src/@ionic-native/plugins/**/*.ts"
-  ],
-  "angularCompilerOptions": {
-    "genDir": "aot"
-  }
+  "exclude": [
+    "node_modules"
+  ]
 }

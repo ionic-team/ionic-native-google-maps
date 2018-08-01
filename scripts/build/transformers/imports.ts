@@ -19,7 +19,9 @@ function transformImports(file: ts.SourceFile, ctx: ts.TransformationContext, ng
 
   const decoratorRegex: RegExp = /@([a-zA-Z]+)\(/g;
 
-  const ignored: string [] = ['Plugin', 'Component'];
+  const ignored: string [] = ['Plugin', 'Component', 'Injectable'];
+
+  const keep: string [] = ['getPromise', 'checkAvailability'];
 
   let m;
 
@@ -37,8 +39,22 @@ function transformImports(file: ts.SourceFile, ctx: ts.TransformationContext, ng
 
     importStatement.importClause.namedBindings.elements = [
       ts.createIdentifier('IonicNativePlugin'),
-      ...methods.map(m => ts.createIdentifier(m))
+      ...methods.map(m => ts.createIdentifier(m)),
+      ...importStatement.importClause.namedBindings.elements.filter(el => keep.indexOf(el.name.text) !== -1)
     ];
+
+    if (ngcBuild) {
+      importStatement.importClause.namedBindings.elements = importStatement.importClause.namedBindings.elements.map(
+        binding => {
+          if (binding.escapedText) {
+            binding.name = {
+              text: binding.escapedText
+            };
+          }
+          return binding;
+        }
+      );
+    }
   }
 
   return file;

@@ -1,7 +1,4 @@
-import 'rxjs/add/observable/fromEvent';
-
-import * as _ from 'lodash';
-import { Observable } from 'rxjs/Observable';
+import { Observable, fromEvent } from 'rxjs';
 
 import { CordovaOptions } from './interfaces';
 
@@ -175,7 +172,7 @@ function wrapEventObservable(event: string, element: any): Observable<any> {
   } else {
     element = window;
   }
-  return Observable.fromEvent(element, event);
+  return fromEvent(element, event);
 }
 
 /**
@@ -288,7 +285,8 @@ export function setIndex(
     };
 
     const setErrorIndex = () => {
-      // We don't want that the reject cb gets spliced into the position of an optional argument that has not been defined and thus causing non expected behaviour.
+      // We don't want that the reject cb gets spliced into the position of an optional argument that has not been
+      // defined and thus causing non expected behavior.
       if (opts.errorIndex > args.length) {
         args[opts.errorIndex] = reject; // insert the reject fn at the correct specific index
       } else {
@@ -425,7 +423,7 @@ export const wrap = function(
   pluginObj: any,
   methodName: string,
   opts: CordovaOptions = {}
-) {
+): Function {
   return (...args: any[]) => {
     if (opts.sync) {
       // Sync doesn't wrap the plugin with a promise or observable, it returns the result as-is
@@ -449,7 +447,7 @@ export function wrapInstance(
   pluginObj: any,
   methodName: string,
   opts: any = {}
-) {
+): Function {
   return (...args: any[]) => {
     if (opts.sync) {
       return callInstance(pluginObj, methodName, args, opts);
@@ -526,7 +524,7 @@ export function wrapInstance(
             reject
           );
         }
-        if (result && !_.isUndefined(result.then)) {
+        if (result && result.then) {
           result.then(resolve, reject);
         } else {
           reject();

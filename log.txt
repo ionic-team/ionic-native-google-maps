@@ -1,0 +1,88 @@
+
+> @ionic-native/google-maps@5.0.0-beta.14 shipit /Users/masashi/Documents/workspace2/ionic-native-google-maps
+> npm run build && npm run readmes && npm run npmpub
+
+
+> @ionic-native/google-maps@5.0.0-beta.14 prebuild /Users/masashi/Documents/workspace2/ionic-native-google-maps
+> rimraf -rf dist
+
+
+> @ionic-native/google-maps@5.0.0-beta.14 build /Users/masashi/Documents/workspace2/ionic-native-google-maps
+> npm run build:core && npm run build:esm && npm run build:ngx && npm run build:es5
+
+
+> @ionic-native/google-maps@5.0.0-beta.14 build:core /Users/masashi/Documents/workspace2/ionic-native-google-maps
+> tsc -p tsconfig.core.json
+
+
+> @ionic-native/google-maps@5.0.0-beta.14 build:esm /Users/masashi/Documents/workspace2/ionic-native-google-maps
+> ts-node -P scripts/tsconfig.json scripts/tasks/build-esm
+
+[32minfo[39m: transformClass: LatLng {"durationMs":2}
+[32minfo[39m: transformClass: LatLngBounds {"durationMs":3}
+[32minfo[39m: transformClass: VisibleRegion {"durationMs":1}
+[32minfo[39m: transformClass: GoogleMaps {"durationMs":1}
+[32minfo[39m: transformClass: BaseClass {"durationMs":4}
+[32minfo[39m: transformClass: BaseArrayClass {"durationMs":2}
+[32minfo[39m: transformClass: Circle {"durationMs":2}
+[32minfo[39m: transformClass: Environment {"durationMs":0}
+[32minfo[39m: transformClass: Geocoder {"durationMs":0}
+[32minfo[39m: transformClass: LocationService {"durationMs":0}
+[32minfo[39m: transformClass: Encoding {"durationMs":1}
+[32minfo[39m: transformClass: Poly {"durationMs":0}
+[32minfo[39m: transformClass: Spherical {"durationMs":0}
+[32minfo[39m: transformClass: StreetViewPanorama {"durationMs":3}
+[32minfo[39m: transformClass: GoogleMap {"durationMs":16}
+[32minfo[39m: transformClass: GroundOverlay {"durationMs":5}
+[32minfo[39m: transformClass: HtmlInfoWindow {"durationMs":1}
+[32minfo[39m: transformClass: Marker {"durationMs":9}
+[32minfo[39m: transformClass: MarkerCluster {"durationMs":0}
+[32minfo[39m: transformClass: Polygon {"durationMs":0}
+[32minfo[39m: transformClass: Polyline {"durationMs":1}
+[32minfo[39m: transformClass: TileOverlay {"durationMs":1}
+[32minfo[39m: transformClass: KmlOverlay {"durationMs":1}
+
+> @ionic-native/google-maps@5.0.0-beta.14 build:ngx /Users/masashi/Documents/workspace2/ionic-native-google-maps
+> ts-node -P scripts/tsconfig.json scripts/tasks/build-ngx
+
+[32minfo[39m: transformClass: LatLng {"durationMs":1}
+[32minfo[39m: transformClass: LatLngBounds {"durationMs":3}
+[32minfo[39m: transformClass: VisibleRegion {"durationMs":0}
+[32minfo[39m: transformClass: GoogleMaps {"durationMs":1}
+[32minfo[39m: transformClass: BaseClass {"durationMs":1}
+[32minfo[39m: transformClass: BaseArrayClass {"durationMs":1}
+[32minfo[39m: transformClass: Circle {"durationMs":0}
+[32minfo[39m: transformClass: Environment {"durationMs":0}
+[32minfo[39m: transformClass: Geocoder {"durationMs":0}
+[32minfo[39m: transformClass: LocationService {"durationMs":0}
+[32minfo[39m: transformClass: Encoding {"durationMs":0}
+[32minfo[39m: transformClass: Poly {"durationMs":0}
+[32minfo[39m: transformClass: Spherical {"durationMs":0}
+[32minfo[39m: transformClass: StreetViewPanorama {"durationMs":1}
+[32minfo[39m: transformClass: GoogleMap {"durationMs":2}
+[32minfo[39m: transformClass: GroundOverlay {"durationMs":2}
+[32minfo[39m: transformClass: HtmlInfoWindow {"durationMs":0}
+[32minfo[39m: transformClass: Marker {"durationMs":2}
+[32minfo[39m: transformClass: MarkerCluster {"durationMs":0}
+[32minfo[39m: transformClass: Polygon {"durationMs":0}
+[32minfo[39m: transformClass: Polyline {"durationMs":0}
+[32minfo[39m: transformClass: TileOverlay {"durationMs":0}
+[32minfo[39m: transformClass: KmlOverlay {"durationMs":1}
+
+> @ionic-native/google-maps@5.0.0-beta.14 build:es5 /Users/masashi/Documents/workspace2/ionic-native-google-maps
+> ts-node -P scripts/tsconfig.json scripts/tasks/build-es5
+
+[32minfo[39m: build-es5 {"durationMs":629}
+[32minfo[39m: Compiled ES5 file with Webpack successfully.
+
+> @ionic-native/google-maps@5.0.0-beta.14 readmes /Users/masashi/Documents/workspace2/ionic-native-google-maps
+> gulp readmes
+
+[19:12:04] Using gulpfile ~/Documents/workspace2/ionic-native-google-maps/gulpfile.js
+[19:12:04] Starting 'readmes'...
+1 README files generated
+[19:12:06] Finished 'readmes' after 1.57 s
+
+> @ionic-native/google-maps@5.0.0-beta.14 npmpub /Users/masashi/Documents/workspace2/ionic-native-google-maps
+> ts-node -P scripts/tsconfig.json scripts/tasks/publish
+

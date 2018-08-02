@@ -1072,8 +1072,7 @@ export const GoogleMapsMapTypeId = {
  * Prerequisites:
  *  - [Generate API keys](https://github.com/ionic-team/ionic-native-google-maps/blob/master/documents/api_key/generate_api_key.md)
  *
- * @note
- * This plugin is for ionic/v4 beta. You need to use this plugin with https://www.npmjs.com/package/@ionic-native/core/v/5.0.0-beta.14
+ * Note that this plugin is for ionic/v4 beta. You need to use this plugin with https://www.npmjs.com/package/@ionic-native/core/v/5.0.0-beta.14
  * @usage
  * ```typescript
  * import {

@@ -1,5 +1,5 @@
-<a name="5.0.0-beta"></a>
-# [5.0.0-beta](https://github.com/ionic-team/ionic-native/compare/v4.7.0...v5.0.0-beta) (2018-08-02)
+<a name="5.0.0-beta.14"></a>
+# [5.0.0-beta.14](https://github.com/ionic-team/ionic-native/compare/v4.7.0...v5.0.0-beta.14) (2018-08-02)
 
 
 

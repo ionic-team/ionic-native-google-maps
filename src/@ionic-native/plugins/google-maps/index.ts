@@ -1068,8 +1068,12 @@ export const GoogleMapsMapTypeId = {
 /**
  * @name Google Maps
  * @description
- * This plugin uses the native Google Maps SDK
- * Note: As of Ionic native 4.0, this using the 2.0 version of the google maps plugin. Please make sure your plugin is updated
+ * This plugin embeds into your app.
+ * Prerequisites:
+ *  - [Generate API keys](https://github.com/ionic-team/ionic-native-google-maps/blob/master/documents/api_key/generate_api_key.md)
+ *
+ * @note
+ * This plugin is for ionic/v4 beta. You need to use this plugin with https://www.npmjs.com/package/@ionic-native/core/v/5.0.0-beta.14
  * @usage
  * ```typescript
  * import {

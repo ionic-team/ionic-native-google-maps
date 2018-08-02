@@ -1,5 +1,5 @@
 {
-  "extends": "tslint-ionic-rules",
+  "extends": ["tslint-ionic-rules", "rxjs-tslint-rules"],
   "rules": {
     "ordered-imports": false,
     "no-empty": false,

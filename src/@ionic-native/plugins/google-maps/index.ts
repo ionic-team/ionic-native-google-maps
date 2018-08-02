@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import {
   checkAvailability,
   CordovaCheck,
@@ -9,8 +8,11 @@ import {
   Plugin,
   getPromise
 } from '@ionic-native/core';
+
+
+
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
+// import 'rxjs/add/observable/fromEvent';
 
 
 export type MapType =
@@ -854,38 +856,38 @@ export class VisibleRegion implements ILatLngBounds {
    * The northeast of the bounds that contains the farLeft, farRight, nearLeft and nearRight.
    * Since the map view is able to rotate, the farRight is not the same as the northeast.
    */
-  @InstanceProperty northeast: ILatLng;
+  @InstanceProperty() northeast: ILatLng;
 
   /**
    * The southwest of the bounds that contains the farLeft, farRight, nearLeft and nearRight.
    * Since the map view is able to rotate, the nearLeft is not the same as the southwest.
    */
-  @InstanceProperty southwest: ILatLng;
+  @InstanceProperty() southwest: ILatLng;
 
   /**
    * The farLeft indicates the lat/lng of the top-left of the map view.
    */
-  @InstanceProperty farLeft: ILatLng;
+  @InstanceProperty() farLeft: ILatLng;
 
   /**
    * The farRight indicates the lat/lng of the top-right of the map view.
    */
-  @InstanceProperty farRight: ILatLng;
+  @InstanceProperty() farRight: ILatLng;
 
   /**
    * The nearLeft indicates the lat/lng of the bottom-left of the map view.
    */
-  @InstanceProperty nearLeft: ILatLng;
+  @InstanceProperty() nearLeft: ILatLng;
 
   /**
    * The nearRight indicates the lat/lng of the bottom-right of the map view.
    */
-  @InstanceProperty nearRight: ILatLng;
+  @InstanceProperty() nearRight: ILatLng;
 
   /**
    * constant value : `VisibleRegion`
    */
-  @InstanceProperty type: string;
+  @InstanceProperty() type: string;
 
   constructor(southwest: LatLngBounds, northeast: LatLngBounds, farLeft: ILatLng, farRight: ILatLng, nearLeft: ILatLng, nearRight: ILatLng) {
     this._objectInstance = new (GoogleMaps.getPlugin()).VisibleRegion(southwest, northeast, farLeft, farRight, nearLeft, nearRight);
@@ -1180,7 +1182,6 @@ export const GoogleMapsMapTypeId = {
   installVariables: ['API_KEY_FOR_ANDROID', 'API_KEY_FOR_IOS'],
   platforms: ['Android', 'iOS']
 })
-@Injectable()
 export class GoogleMaps extends IonicNativePlugin {
 
   /**
@@ -1199,7 +1200,7 @@ export class GoogleMaps extends IonicNativePlugin {
       options = <GoogleMapOptions>element;
       element = null;
     }
-    let googleMap: GoogleMap = new GoogleMap(<HTMLElement>element, options);
+    const googleMap: GoogleMap = new GoogleMap(<HTMLElement>element, options);
     googleMap.set('_overlays', {});
     return googleMap;
   }
@@ -1259,9 +1260,9 @@ export class BaseClass {
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
             if (!overlay) {
-              let markerJS: any = args[args.length - 1];
-              let markerId: string = markerJS.getId();
-              let markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerJS: any = args[args.length - 1];
+              const markerId: string = markerJS.getId();
+              const markerCluster: MarkerCluster = <MarkerCluster>this;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1293,9 +1294,9 @@ export class BaseClass {
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
             if (!overlay) {
-              let markerJS: any = args[args.length - 1];
-              let markerId: string = markerJS.getId();
-              let markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerJS: any = args[args.length - 1];
+              const markerId: string = markerJS.getId();
+              const markerCluster: MarkerCluster = <MarkerCluster>this;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1357,9 +1358,9 @@ export class BaseClass {
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
             if (!overlay) {
-              let markerJS: any = args[args.length - 1];
-              let markerId: string = markerJS.getId();
-              let markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerJS: any = args[args.length - 1];
+              const markerId: string = markerJS.getId();
+              const markerCluster: MarkerCluster = <MarkerCluster>this;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1391,9 +1392,9 @@ export class BaseClass {
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
             if (!overlay) {
-              let markerJS: any = args[args.length - 1];
-              let markerId: string = markerJS.getId();
-              let markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerJS: any = args[args.length - 1];
+              const markerId: string = markerJS.getId();
+              const markerCluster: MarkerCluster = <MarkerCluster>this;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1433,7 +1434,7 @@ export class BaseClass {
   @CordovaCheck({ sync: true })
   destroy(): void {
     if (this._objectInstance.type === 'Map') {
-      let map: GoogleMap = this._objectInstance.getMap();
+      const map: GoogleMap = this._objectInstance.getMap();
       if (map) {
         delete this._objectInstance.getMap().get('_overlays')[this._objectInstance.getId()];
       }
@@ -1484,7 +1485,7 @@ export class BaseArrayClass<T> extends BaseClass {
     super();
     if (initialData instanceof GoogleMaps.getPlugin().BaseArrayClass) {
       this._objectInstance = initialData;
-    } else {
+    } else if (Array.isArray(initialData)) {
       this._objectInstance = new (GoogleMaps.getPlugin().BaseArrayClass)(initialData);
     }
   }
@@ -2276,9 +2277,10 @@ export class StreetViewPanorama extends BaseClass {
       } else if (typeof element === 'string') {
 
         this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(new Promise<any[]>((resolve, reject) => {
-          let count: number = 0;
-          let timer: any = setInterval(() => {
-            let target = document.querySelector('.show-page #' + element);
+          let count: number;
+          count = 0;
+          const timer: any = setInterval(() => {
+            const target = document.querySelector('.show-page #' + element);
             if (target) {
               clearInterval(timer);
               resolve([target, options]);
@@ -2423,9 +2425,10 @@ export class GoogleMap extends BaseClass {
       } else if (typeof element === 'string') {
 
         this._objectInstance = GoogleMaps.getPlugin().Map.getMap(getPromise<any[]>((resolve, reject) => {
-          let count: number = 0;
-          let timer: any = setInterval(() => {
-            let target = document.querySelector('.show-page #' + element);
+          let count: number;
+          count = 0;
+          const timer: any = setInterval(() => {
+            const target = document.querySelector('.show-page #' + element);
             if (target) {
               clearInterval(timer);
               resolve([target, options]);
@@ -2785,7 +2788,7 @@ export class GoogleMap extends BaseClass {
     return getPromise<Marker>((resolve, reject) => {
       this._objectInstance.addMarker(options, (marker: any) => {
         if (marker) {
-          let overlayId: string = marker.getId();
+          const overlayId: string = marker.getId();
           const overlay: Marker = new Marker(this, marker);
           this.get('_overlays')[overlayId] = overlay;
           marker.one(overlayId + '_remove', () => {
@@ -2809,8 +2812,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addMarkerSync(options: MarkerOptions): Marker {
-    let marker: any = this._objectInstance.addMarker(options);
-    let overlayId: string = marker.getId();
+    const marker: any = this._objectInstance.addMarker(options);
+    const overlayId: string = marker.getId();
     const overlay: Marker = new Marker(this, marker);
     this.get('_overlays')[overlayId] = overlay;
     marker.one(overlayId + '_remove', () => {
@@ -2832,7 +2835,7 @@ export class GoogleMap extends BaseClass {
     return getPromise<MarkerCluster>((resolve, reject) => {
       this._objectInstance.addMarkerCluster(options, (markerCluster: any) => {
         if (markerCluster) {
-          let overlayId = markerCluster.getId();
+          const overlayId = markerCluster.getId();
           const overlay = new MarkerCluster(this, markerCluster);
           this.get('_overlays')[overlayId] = overlay;
           markerCluster.one('remove', () => {
@@ -2857,8 +2860,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addMarkerClusterSync(options: MarkerClusterOptions): MarkerCluster {
-    let markerCluster: any = this._objectInstance.addMarkerCluster(options);
-    let overlayId: string = markerCluster.getId();
+    const markerCluster: any = this._objectInstance.addMarkerCluster(options);
+    const overlayId: string = markerCluster.getId();
     const overlay: MarkerCluster = new MarkerCluster(this, markerCluster);
     this.get('_overlays')[overlayId] = overlay;
     markerCluster.one(overlayId + '_remove', () => {
@@ -2881,7 +2884,7 @@ export class GoogleMap extends BaseClass {
     return getPromise<Circle>((resolve, reject) => {
       this._objectInstance.addCircle(options, (circle: any) => {
         if (circle) {
-          let overlayId: string = circle.getId();
+          const overlayId: string = circle.getId();
           const overlay = new Circle(this, circle);
           this.get('_overlays')[overlayId] = overlay;
           circle.one(overlayId + '_remove', () => {
@@ -2905,8 +2908,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addCircleSync(options: CircleOptions): Circle {
-    let circle: any = this._objectInstance.addCircle(options);
-    let overlayId: string = circle.getId();
+    const circle: any = this._objectInstance.addCircle(options);
+    const overlayId: string = circle.getId();
     const overlay = new Circle(this, circle);
     this.get('_overlays')[overlayId] = overlay;
     circle.one(overlayId + '_remove', () => {
@@ -2927,7 +2930,7 @@ export class GoogleMap extends BaseClass {
     return getPromise<Polygon>((resolve, reject) => {
       this._objectInstance.addPolygon(options, (polygon: any) => {
         if (polygon) {
-          let overlayId: string = polygon.getId();
+          const overlayId: string = polygon.getId();
           const overlay = new Polygon(this, polygon);
           this.get('_overlays')[overlayId] = overlay;
           polygon.one(overlayId + '_remove', () => {
@@ -2951,8 +2954,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addPolygonSync(options: PolygonOptions): Polygon {
-    let polygon: any = this._objectInstance.addPolygon(options);
-    let overlayId: string = polygon.getId();
+    const polygon: any = this._objectInstance.addPolygon(options);
+    const overlayId: string = polygon.getId();
     const overlay = new Polygon(this, polygon);
     this.get('_overlays')[overlayId] = overlay;
     polygon.one(overlayId + '_remove', () => {
@@ -2974,7 +2977,7 @@ export class GoogleMap extends BaseClass {
     return getPromise<Polyline>((resolve, reject) => {
       this._objectInstance.addPolyline(options, (polyline: any) => {
         if (polyline) {
-          let overlayId: string = polyline.getId();
+          const overlayId: string = polyline.getId();
           const overlay = new Polyline(this, polyline);
           this.get('_overlays')[overlayId] = overlay;
           polyline.one(overlayId + '_remove', () => {
@@ -2998,8 +3001,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addPolylineSync(options: PolylineOptions): Polyline {
-    let polyline: any = this._objectInstance.addPolyline(options);
-    let overlayId: string = polyline.getId();
+    const polyline: any = this._objectInstance.addPolyline(options);
+    const overlayId: string = polyline.getId();
     const overlay = new Polyline(this, polyline);
     this.get('_overlays')[overlayId] = overlay;
     polyline.one(overlayId + '_remove', () => {
@@ -3021,7 +3024,7 @@ export class GoogleMap extends BaseClass {
     return getPromise<TileOverlay>((resolve, reject) => {
       this._objectInstance.addTileOverlay(options, (tileOverlay: any) => {
         if (tileOverlay) {
-          let overlayId: string = tileOverlay.getId();
+          const overlayId: string = tileOverlay.getId();
           const overlay = new TileOverlay(this, tileOverlay);
           this.get('_overlays')[overlayId] = overlay;
           tileOverlay.one(overlayId + '_remove', () => {
@@ -3045,8 +3048,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addTileOverlaySync(options: TileOverlayOptions): TileOverlay {
-    let tileOverlay: any = this._objectInstance.addTileOverlay(options);
-    let overlayId: string = tileOverlay.getId();
+    const tileOverlay: any = this._objectInstance.addTileOverlay(options);
+    const overlayId: string = tileOverlay.getId();
     const overlay = new TileOverlay(this, tileOverlay);
     this.get('_overlays')[overlayId] = overlay;
     tileOverlay.one(overlayId + '_remove', () => {
@@ -3068,7 +3071,7 @@ export class GoogleMap extends BaseClass {
     return getPromise<GroundOverlay>((resolve, reject) => {
       this._objectInstance.addGroundOverlay(options, (groundOverlay: any) => {
         if (groundOverlay) {
-          let overlayId: string = groundOverlay.getId();
+          const overlayId: string = groundOverlay.getId();
           const overlay = new GroundOverlay(this, groundOverlay);
           this.get('_overlays')[overlayId] = overlay;
           groundOverlay.one(overlayId + '_remove', () => {
@@ -3092,8 +3095,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addGroundOverlaySync(options: GroundOverlayOptions): GroundOverlay {
-    let groundOverlay: any = this._objectInstance.addGroundOverlay(options);
-    let overlayId: string = groundOverlay.getId();
+    const groundOverlay: any = this._objectInstance.addGroundOverlay(options);
+    const overlayId: string = groundOverlay.getId();
     const overlay = new GroundOverlay(this, groundOverlay);
     this.get('_overlays')[overlayId] = overlay;
     groundOverlay.one(overlayId + '_remove', () => {
@@ -3115,7 +3118,7 @@ export class GoogleMap extends BaseClass {
     return new Promise<KmlOverlay>((resolve, reject) => {
       this._objectInstance.addKmlOverlay(options, (kmlOverlay: any) => {
         if (kmlOverlay) {
-          let overlayId: string = kmlOverlay.getId();
+          const overlayId: string = kmlOverlay.getId();
           const overlay = new KmlOverlay(this, kmlOverlay);
           this.get('_overlays')[overlayId] = overlay;
           kmlOverlay.one(overlayId + '_remove', () => {
@@ -3201,7 +3204,7 @@ export class GroundOverlay extends BaseClass {
    * @param imageUrl {string} URL of image
    */
   @CordovaInstance({ sync: true })
-  setImage(imageUrl: string): void {};
+  setImage(imageUrl: string): void {}
 
   /**
    * Changes the opacity of the ground overlay from 0.0 to 1.0
@@ -3708,8 +3711,8 @@ export class Polygon extends BaseClass {
    */
   @CordovaCheck()
   getHoles(): BaseArrayClass<ILatLng[]> {
-    let holes: ILatLng[][] = this._objectInstance.getPoints();
-    let results: BaseArrayClass<ILatLng[]> = new BaseArrayClass<ILatLng[]>();
+    const holes: ILatLng[][] = this._objectInstance.getPoints();
+    const results: BaseArrayClass<ILatLng[]> = new BaseArrayClass<ILatLng[]>();
     holes.forEach((hole: ILatLng[]) => {
       results.push(hole);
     });

@@ -75,27 +75,45 @@ async function publish(ignoreErrors = false) {
   Logger.profile('Publishing');
   // upload 1 package per CPU thread at a time
   const worker = Queue.async.asyncify((pkg: any) =>
-    new Promise<any>((resolve, reject) => {
-      exec(`npm publish ${pkg} ${FLAGS}`, (err, stdout) => {
-        if (stdout) {
-          Logger.verbose(stdout.trim());
-          resolve(stdout);
-        }
-        if (err) {
-          if (!ignoreErrors) {
-            if (
-              err.message.includes(
-                'You cannot publish over the previously published version'
-              )
-            ) {
-              Logger.verbose('Ignoring duplicate version error.');
-              return resolve();
-            }
-            reject(err);
-          }
-        }
+    if (pkg !== "google-maps") {
+      new Promise<any>((resolve, reject) => {
+        Logger.verbose(`skip ${pkg}`);
+        resolve(`skip ${pkg}`);
       });
-    })
+    } else {
+      new Promise<any>((resolve, reject) => {
+        exec('echo "Are you ready[N/y]?"; read input_variable; echo "${input_variable}"', (err, stdout) => {
+console.log(stdout);
+          if (stdout.indexOf("y") > -1 || stdout.indexOf("Y") > -1) {
+            resolve();
+          } else {
+            reject('canceled');
+          }
+        });
+      }).then(() => {
+        new Promise<any>((resolve, reject) => {
+          exec(`npm publish ${pkg} ${FLAGS}`, (err, stdout) => {
+            if (stdout) {
+              Logger.verbose(stdout.trim());
+              resolve(stdout);
+            }
+            if (err) {
+              if (!ignoreErrors) {
+                if (
+                  err.message.includes(
+                    'You cannot publish over the previously published version'
+                  )
+                ) {
+                  Logger.verbose('Ignoring duplicate version error.');
+                  return resolve();
+                }
+                reject(err);
+              }
+            }
+          });
+        })
+      });
+    }
   );
 
   try {

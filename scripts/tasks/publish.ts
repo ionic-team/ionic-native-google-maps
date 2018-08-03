@@ -17,11 +17,11 @@ const PACKAGE_JSON_BASE = {
   description: 'Ionic Native - Native plugins for ionic apps',
   module: 'index.js',
   typings: 'index.d.ts',
-  author: 'ionic',
+  author: 'ionic,Masashi Katsumata',
   license: 'MIT',
   repository: {
     type: 'git',
-    url: 'https://github.com/ionic-team/ionic-native.git'
+    url: 'https://github.com/ionic-team/ionic-native-google-maps'
   }
 };
 
@@ -74,47 +74,36 @@ function prepare() {
 async function publish(ignoreErrors = false) {
   Logger.profile('Publishing');
   // upload 1 package per CPU thread at a time
-  const worker = Queue.async.asyncify((pkg: any) =>
-    if (pkg !== "google-maps") {
+  const worker = Queue.async.asyncify((pkg: any) => {
+    if (pkg.indexOf("google-maps") === -1) {
       new Promise<any>((resolve, reject) => {
         Logger.verbose(`skip ${pkg}`);
         resolve(`skip ${pkg}`);
       });
     } else {
       new Promise<any>((resolve, reject) => {
-        exec('echo "Are you ready[N/y]?"; read input_variable; echo "${input_variable}"', (err, stdout) => {
-console.log(stdout);
-          if (stdout.indexOf("y") > -1 || stdout.indexOf("Y") > -1) {
-            resolve();
-          } else {
-            reject('canceled');
+        exec(`npm publish ${pkg} ${FLAGS}`, (err, stdout) => {
+          if (stdout) {
+            Logger.verbose(stdout.trim());
+            resolve(stdout);
+          }
+          if (err) {
+            if (!ignoreErrors) {
+              if (
+                err.message.includes(
+                  'You cannot publish over the previously published version'
+                )
+              ) {
+                Logger.verbose('Ignoring duplicate version error.');
+                return resolve();
+              }
+              reject(err);
+            }
           }
         });
-      }).then(() => {
-        new Promise<any>((resolve, reject) => {
-          exec(`npm publish ${pkg} ${FLAGS}`, (err, stdout) => {
-            if (stdout) {
-              Logger.verbose(stdout.trim());
-              resolve(stdout);
-            }
-            if (err) {
-              if (!ignoreErrors) {
-                if (
-                  err.message.includes(
-                    'You cannot publish over the previously published version'
-                  )
-                ) {
-                  Logger.verbose('Ignoring duplicate version error.');
-                  return resolve();
-                }
-                reject(err);
-              }
-            }
-          });
-        })
       });
     }
-  );
+  });
 
   try {
     await Queue(worker, PACKAGES, cpus().length);

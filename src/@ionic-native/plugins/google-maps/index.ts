@@ -1,5 +1,4 @@
 import {
-  checkAvailability,
   CordovaCheck,
   CordovaInstance,
   InstanceCheck,
@@ -8,6 +7,7 @@ import {
   Plugin,
   getPromise
 } from '@ionic-native/core';
+import { Injectable } from '@angular/core';
 
 
 
@@ -1185,6 +1185,7 @@ export const GoogleMapsMapTypeId = {
   installVariables: ['API_KEY_FOR_ANDROID', 'API_KEY_FOR_IOS'],
   platforms: ['Android', 'iOS']
 })
+@Injectable()
 export class GoogleMaps extends IonicNativePlugin {
 
   /**
@@ -1193,7 +1194,7 @@ export class GoogleMaps extends IonicNativePlugin {
    * @param options {GoogleMapOptions} [options] Options
    * @return {GoogleMap}
    */
-  static create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
+  create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
     if (element instanceof HTMLElement) {
       if (element.getAttribute('__pluginMapId')) {
         console.error('GoogleMaps', element.tagName + '[__pluginMapId=\'' + element.getAttribute('__pluginMapId') + '\'] has already map.');
@@ -1207,16 +1208,16 @@ export class GoogleMaps extends IonicNativePlugin {
     googleMap.set('_overlays', {});
     return googleMap;
   }
-
-  /**
-   * @deprecation
-   * @hidden
-   */
-  create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
-    console.error('GoogleMaps', '[deprecated] Please use GoogleMaps.create()');
-    return GoogleMaps.create(element, options);
-  }
-
+  //
+  // /**
+  //  * @deprecation
+  //  * @hidden
+  //  */
+  // create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
+  //   console.error('GoogleMaps', '[deprecated] Please use GoogleMaps.create()');
+  //   return GoogleMaps.create(element, options);
+  // }
+  //
 
   /**
    * Creates a new StreetView instance
@@ -1224,7 +1225,7 @@ export class GoogleMaps extends IonicNativePlugin {
    * @param options {StreetViewOptions} [options] Options
    * @return {StreetViewPanorama}
    */
-  static createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
+  createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
     if (element instanceof HTMLElement) {
       if (element.getAttribute('__pluginMapId')) {
         console.error('GoogleMaps', element.tagName + '[__pluginMapId=\'' + element.getAttribute('__pluginMapId') +  '\'] has already map.');
@@ -2283,7 +2284,7 @@ export class StreetViewPanorama extends BaseClass {
           let count: number;
           count = 0;
           const timer: any = setInterval(() => {
-            const target = document.querySelector('.show-page #' + element);
+            const target = document.querySelector('ion-router-outlet[main] #' + element);
             if (target) {
               clearInterval(timer);
               resolve([target, options]);
@@ -2431,7 +2432,7 @@ export class GoogleMap extends BaseClass {
           let count: number;
           count = 0;
           const timer: any = setInterval(() => {
-            const target = document.querySelector('.show-page #' + element);
+            const target = document.querySelector('ion-router-outlet[main] #' + element);
             if (target) {
               clearInterval(timer);
               resolve([target, options]);

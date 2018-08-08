@@ -1478,10 +1478,9 @@ export class BaseClass {
  * https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/BaseArrayClass/README.md
  */
 @Plugin({
+  pluginName: 'BaseArrayClass',
   plugin: 'cordova-plugin-googlemaps',
-  pluginName: 'GoogleMaps',
-  pluginRef: 'plugin.google.maps.BaseArrayClass',
-  repo: ''
+  pluginRef: 'plugin.google.maps.BaseArrayClass'
 })
 export class BaseArrayClass<T> extends BaseClass {
 
@@ -2423,7 +2422,11 @@ export class StreetViewPanorama extends BaseClass {
 export class GoogleMap extends BaseClass {
   constructor(element: any, options?: GoogleMapOptions) {
     super();
-    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+
+    const _init: any = () => {
+      //---------------
+      // Create a map
+      //---------------
       if (element instanceof HTMLElement) {
         this._objectInstance = GoogleMaps.getPlugin().Map.getMap(element, options);
       } else if (typeof element === 'string') {
@@ -2451,6 +2454,36 @@ export class GoogleMap extends BaseClass {
       } else if (element === null && options) {
         this._objectInstance = GoogleMaps.getPlugin().Map.getMap(null, options);
       }
+    };
+
+    // Since Promise does not work well for some reason,
+    // so create a map using if-statement.
+
+    if (!(window.plugin && window.plugin.google && window.plugin.google.maps)) {
+      // The `deviceready` event is not fired yet. Wait for it.
+      document.addEventListener("deviceready", _init, {
+        'once': true
+      });
+    } else {
+      if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+        _init();
+      } else {
+        console.error("not available!!");
+
+        if (element instanceof HTMLElement) {
+          element.style.backgroundColor = "#ccc";
+          element.style.color = "red";
+          element.innerHTML = 'cordova-plugin-googlemaps is not available.';
+        } else if (typeof element === 'string') {
+          const target = document.querySelector('ion-router-outlet[main] #' + element);
+          if (target) {
+            target.style.backgroundColor = "#ccc";
+            target.style.color = "red";
+            target.innerHTML = 'cordova-plugin-googlemaps is not available.';
+          }
+        }
+
+      }
     }
   }
 
@@ -2461,7 +2494,7 @@ export class GoogleMap extends BaseClass {
   @InstanceCheck()
   setDiv(domNode?: HTMLElement | string): void {
     if (typeof domNode === 'string') {
-      this._objectInstance.setDiv(document.querySelector('.show-page #' + domNode));
+      this._objectInstance.setDiv(document.querySelector('ion-router-outlet[main] #' + domNode));
     } else {
       this._objectInstance.setDiv(domNode);
     }

@@ -19,7 +19,8 @@
     "readmes": "gulp readmes",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "postchangelog": "git commit -am \"chore(): update changelog\"",
-    "shipit": "npm run build && npm run readmes && npm run npmpub"
+    "shipit": "npm run build && npm run readmes && npm run npmpub",
+    "dev": "npm run build && cp -R dist/@ionic-native/plugins/google-maps /Users/masashi/Documents/workspace2/ionic-googlemaps-quickdemo-v4/node_modules/@ionic-native/"
   },
   "devDependencies": {
     "@angular/common": "^6.0.9",
@@ -30,7 +31,6 @@
     "@types/fs-extra": "^5.0.4",
     "@types/jest": "^23.3.0",
     "@types/lodash": "^4.14.112",
-    "@types/node": "^9.6.25",
     "@types/rimraf": "^2.0.2",
     "@types/webpack": "^4.4.7",
     "async-promise-queue": "^1.0.4",
@@ -95,6 +95,7 @@
     }
   },
   "dependencies": {
+    "@types/node": "^9.6.23",
     "gulp": "^3.9.1",
     "gulp-tslint": "^8.1.3",
     "request": "^2.87.0",

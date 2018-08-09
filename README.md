@@ -1,4 +1,4 @@
-# @ionic-native/google-maps (v4.9.1)
+# @ionic-native/google-maps (v5.0.0-beta.15)
 
 @ionic-native/google-maps plugin is a wrapper plugin for [cordova-plugin-googlemaps](https://github.com/mapsplugin/cordova-plugin-googlemaps) for Ionic framework.
 
@@ -14,9 +14,9 @@ First of all, you need to generate API keys for Google Maps APIs.
 Second, run following command to install `@ionic-native/core` and `@ionic-native/google-maps` plugins in your project.
 
 ```
-npm install @ionic-native/core @ionic-native/google-maps
+npm install @ionic-native/core@5.0.0-beta.14 @ionic-native/google-maps@5.0.0-beta.15
 
-ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="..." --variable API_KEY_FOR_IOS="..."
+ionic cordova plugin add https://github.com/mapsplugin/cordova-plugin-googlemaps#multiple_maps --variable API_KEY_FOR_ANDROID="..." --variable API_KEY_FOR_IOS="..."
 ```
 
 ------------------------
@@ -34,9 +34,12 @@ Also there are documents/demos for your help:
 
 - [@ionic-native/google-maps get started](https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/ionic-native/README.md)
 
-- [@ionic-native/google-maps quick example](https://github.com/mapsplugin/ionic-googlemaps-quickdemo)
-
 - [\@ionic-native/google-maps slide](https://docs.google.com/presentation/d/e/2PACX-1vScoho1ensbR4qCI9AIuQN55BZVvK73pAjI7sumDvW3CrxxHnrmpXWUjx2-8CpFibqU1EjLKCRhuthJ/pub?start=false&loop=false&delayms=3000)
+
+## Demo
+- [(ionic v4)@ionic-native/google-maps quick example](https://github.com/mapsplugin/ionic-googlemaps-quickdemo-v4)
+
+- [(ionic v3)@ionic-native/google-maps quick example](https://github.com/mapsplugin/ionic-googlemaps-quickdemo)
 
 
 ------------------------

@@ -2270,30 +2270,72 @@ export class Spherical {
 export class StreetViewPanorama extends BaseClass {
   constructor(element: string | HTMLElement, options?: StreetViewOptions) {
     super();
-    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+
+
+    const _init: any = () => {
+      // -------------------
+      // Create a panorama
+      // -------------------
       if (element instanceof HTMLElement) {
         this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(element, options);
       } else if (typeof element === 'string') {
 
-        this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(new Promise<any[]>((resolve, reject) => {
+        this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(getPromise<any[]>((resolve, reject) => {
           let count: number;
           count = 0;
           const timer: any = setInterval(() => {
             const target = document.querySelector('ion-router-outlet[main] #' + element);
-            if (target) {
+            if (target && target.offsetWidth >= 100 && target.offsetHeight >= 100) {
               clearInterval(timer);
               resolve([target, options]);
             } else {
               if (count++ < 20) {
                 return;
               }
+              if (target.offsetWidth < 100 || target.offsetHeight < 100) {
+                console.error(target.tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
+              } else {
+                console.error('Can not find the element [#' + element + ']');
+              }
               clearInterval(timer);
               this._objectInstance.remove();
-              console.error('Can not find the element [#' + element + ']');
               reject();
             }
           }, 100);
         }), options);
+
+      } else if (element === null && options) {
+        this._objectInstance = GoogleMaps.getPlugin().Map.getMap(null, options);
+      }
+    };
+
+    // Since Promise does not work well for some reason,
+    // so create a panorama using if-statement.
+
+    if (!(window.plugin && window.plugin.google && window.plugin.google.maps)) {
+      // The `deviceready` event is not fired yet. Wait for it.
+      document.addEventListener('deviceready', _init, {
+        'once': true
+      });
+    } else {
+      if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+        _init();
+      } else {
+        console.error('cordova-plugin-googlemaps is not available!!');
+
+        if (element instanceof HTMLElement) {
+          element.style.backgroundColor = '#ccc';
+          element.style.color = 'red';
+          element.innerHTML = 'cordova-plugin-googlemaps is not available.';
+        } else if (typeof element === 'string') {
+          const target = document.querySelector('ion-router-outlet[main] #' + element);
+          if (target) {
+            target.style.backgroundColor = '#ccc';
+            target.style.color = 'red';
+            target.innerHTML = 'cordova-plugin-googlemaps is not available.';
+          }
+        }
+
       }
     }
   }
@@ -2432,16 +2474,20 @@ export class GoogleMap extends BaseClass {
           count = 0;
           const timer: any = setInterval(() => {
             const target = document.querySelector('ion-router-outlet[main] #' + element);
-            if (target) {
+            if (target && target.offsetWidth >= 100 && target.offsetHeight >= 100) {
               clearInterval(timer);
               resolve([target, options]);
             } else {
               if (count++ < 20) {
                 return;
               }
+              if (target.offsetWidth < 100 || target.offsetHeight < 100) {
+                console.error(target.tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
+              } else {
+                console.error('Can not find the element [#' + element + ']');
+              }
               clearInterval(timer);
               this._objectInstance.remove();
-              console.error('Can not find the element [#' + element + ']');
               reject();
             }
           }, 100);

@@ -1514,7 +1514,6 @@ export class BaseArrayClass<T> extends BaseClass {
    * @param fn {Function}
    * @return {Promise<void>}
    */
-  @CordovaCheck()
   forEachAsync(fn: ((element: T, callback: () => void) => void)): Promise<void> {
     return getPromise<void>((resolve) => {
       this._objectInstance.forEach(fn, resolve);
@@ -1539,7 +1538,6 @@ export class BaseArrayClass<T> extends BaseClass {
    * @param callback {Function}
    * @return {Promise<any>} returns a new array with the results
    */
-  @CordovaCheck()
   mapAsync(fn: ((element: T, callback: (newElement: any) => void) => void)): Promise<any[]> {
     return getPromise<any[]>((resolve) => {
       this._objectInstance.map(fn, resolve);
@@ -1552,7 +1550,6 @@ export class BaseArrayClass<T> extends BaseClass {
    * @param callback {Function}
    * @return {Promise<any>} returns a new array with the results
    */
-  @CordovaCheck()
   mapSeries(fn: ((element: T, callback: (newElement: any) => void) => void)): Promise<any[]> {
     return new Promise<any[]>((resolve) => {
       this._objectInstance.mapSeries(fn, resolve);
@@ -1575,7 +1572,6 @@ export class BaseArrayClass<T> extends BaseClass {
    * @param callback {Function}
    * @return {Promise<T[]>} returns a new filtered array
    */
-  @CordovaCheck()
   filterAsync(fn: (element: T, callback: (result: boolean) => void) => void): Promise<T[]> {
     return getPromise<any[]>((resolve) => {
       this._objectInstance.filter(fn, resolve);
@@ -2424,9 +2420,9 @@ export class GoogleMap extends BaseClass {
     super();
 
     const _init: any = () => {
-      //---------------
+      // ---------------
       // Create a map
-      //---------------
+      // ---------------
       if (element instanceof HTMLElement) {
         this._objectInstance = GoogleMaps.getPlugin().Map.getMap(element, options);
       } else if (typeof element === 'string') {
@@ -2461,24 +2457,24 @@ export class GoogleMap extends BaseClass {
 
     if (!(window.plugin && window.plugin.google && window.plugin.google.maps)) {
       // The `deviceready` event is not fired yet. Wait for it.
-      document.addEventListener("deviceready", _init, {
+      document.addEventListener('deviceready', _init, {
         'once': true
       });
     } else {
       if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
         _init();
       } else {
-        console.error("not available!!");
+        console.error('cordova-plugin-googlemaps is not available!!');
 
         if (element instanceof HTMLElement) {
-          element.style.backgroundColor = "#ccc";
-          element.style.color = "red";
+          element.style.backgroundColor = '#ccc';
+          element.style.color = 'red';
           element.innerHTML = 'cordova-plugin-googlemaps is not available.';
         } else if (typeof element === 'string') {
           const target = document.querySelector('ion-router-outlet[main] #' + element);
           if (target) {
-            target.style.backgroundColor = "#ccc";
-            target.style.color = "red";
+            target.style.backgroundColor = '#ccc';
+            target.style.color = 'red';
             target.innerHTML = 'cordova-plugin-googlemaps is not available.';
           }
         }
@@ -3728,7 +3724,6 @@ export class Polygon extends BaseClass {
    * You can modify the points.
    * @return {BaseArrayClass<ILatLng>}
    */
-  @CordovaCheck()
   getPoints(): BaseArrayClass<ILatLng> {
     return new BaseArrayClass<ILatLng>(this._objectInstance.getPoints());
   }
@@ -3746,7 +3741,6 @@ export class Polygon extends BaseClass {
    * You can modify the holes.
    * @return {BaseArrayClass<ILatLng[]>}
    */
-  @CordovaCheck()
   getHoles(): BaseArrayClass<ILatLng[]> {
     const holes: ILatLng[][] = this._objectInstance.getPoints();
     const results: BaseArrayClass<ILatLng[]> = new BaseArrayClass<ILatLng[]>();
@@ -3927,7 +3921,6 @@ export class Polyline extends BaseClass {
    * You can modify the points.
    * @return {BaseArrayClass<ILatLng>}
    */
-  @CordovaCheck()
   getPoints(): BaseArrayClass<ILatLng> {
     return new BaseArrayClass<ILatLng>(this._objectInstance.getPoints());
   }

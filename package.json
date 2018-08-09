@@ -20,7 +20,7 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "postchangelog": "git commit -am \"chore(): update changelog\"",
     "shipit": "npm run build && npm run readmes && npm run npmpub",
-    "dev": "npm run build && cp -R dist/@ionic-native/plugins/google-maps /Users/masashi/Documents/workspace2/ionic-googlemaps-quickdemo-v4/node_modules/@ionic-native/"
+    "dev": "npm run lint && npm run build && cp -R dist/@ionic-native/core /Users/masashi/Documents/workspace2/ionic-googlemaps-quickdemo-v4/node_modules/@ionic-native/ && cp -R dist/@ionic-native/plugins/google-maps /Users/masashi/Documents/workspace2/ionic-googlemaps-quickdemo-v4/node_modules/@ionic-native/"
   },
   "devDependencies": {
     "@angular/common": "^6.0.9",

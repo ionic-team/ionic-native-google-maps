@@ -1068,11 +1068,14 @@ export const GoogleMapsMapTypeId = {
 /**
  * @name Google Maps
  * @description
- * This plugin embeds into your app.
+ * Embed native Google Maps views into your app.
+ * This version is aimed for ionic v4/beta.
+ * You need to use [cordova-plugin-googlemaps@2.3.11](https://www.npmjs.com/package/cordova-plugin-googlemaps) with this plugin.
+ *
+ *
  * Prerequisites:
  *  - [Generate API keys](https://github.com/ionic-team/ionic-native-google-maps/blob/master/documents/api_key/generate_api_key.md)
  *
- * Note that this plugin is for ionic/v4 beta. You need to use this plugin with https://www.npmjs.com/package/@ionic-native/core/v/5.0.0-beta.14
  * @usage
  * ```typescript
  * import {

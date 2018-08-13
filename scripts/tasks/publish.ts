@@ -75,12 +75,7 @@ async function publish(ignoreErrors = false) {
   Logger.profile('Publishing');
   // upload 1 package per CPU thread at a time
   const worker = Queue.async.asyncify((pkg: any) => {
-    if (pkg.indexOf("google-maps") === -1) {
-      new Promise<any>((resolve, reject) => {
-        Logger.verbose(`skip ${pkg}`);
-        resolve(`skip ${pkg}`);
-      });
-    } else {
+    if (/google\-maps$/.test(pkg)) {
       new Promise<any>((resolve, reject) => {
         exec(`npm publish ${pkg} ${FLAGS}`, (err, stdout) => {
           if (stdout) {
@@ -101,6 +96,11 @@ async function publish(ignoreErrors = false) {
             }
           }
         });
+      });
+    } else {
+      new Promise<any>((resolve, reject) => {
+        Logger.verbose(`skip ${pkg}`);
+        resolve(`skip ${pkg}`);
       });
     }
   });

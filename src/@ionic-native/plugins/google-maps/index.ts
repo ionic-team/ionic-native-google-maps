@@ -1252,6 +1252,10 @@ export class GoogleMaps extends IonicNativePlugin {
 export class BaseClass {
   protected _objectInstance: any;
 
+  constructor() {
+    this._objectInstance = new (GoogleMaps.getPlugin().BaseClass)();
+  }
+
   /**
    * Adds an event listener.
    * @param eventName {string} event name you want to observe.
@@ -1493,6 +1497,8 @@ export class BaseArrayClass<T> extends BaseClass {
       this._objectInstance = initialData;
     } else if (Array.isArray(initialData)) {
       this._objectInstance = new (GoogleMaps.getPlugin().BaseArrayClass)(initialData);
+    } else {
+      this._objectInstance = new (GoogleMaps.getPlugin().BaseArrayClass)([]);
     }
   }
 

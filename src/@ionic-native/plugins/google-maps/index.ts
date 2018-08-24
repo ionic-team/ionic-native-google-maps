@@ -1091,17 +1091,24 @@ export const GoogleMapsMapTypeId = {
 };
 
 /**
- * @name Google Maps
+ * @name @ionic-native/google-maps
  * @description
  * Embed native Google Maps views into your app.
  * This version is aimed for ionic v4/beta.
- * You need to use [cordova-plugin-googlemaps@2.3.11](https://www.npmjs.com/package/cordova-plugin-googlemaps) with this plugin.
+ * You need to use [cordova-plugin-googlemaps@2.4.0](https://www.npmjs.com/package/cordova-plugin-googlemaps) with this plugin.
  *
  *
  * Prerequisites:
  *  - [Generate API keys](https://github.com/ionic-team/ionic-native-google-maps/blob/master/documents/api_key/generate_api_key.md)
  *
- * @usage
+ * Demo:
+ *  - [Browser platform](https://mapsplugin.github.io/ionic-googlemaps-quickdemo-v4/)
+ *
+ * Documentaion:
+ *  - [API Reference](https://github.com/ionic-team/ionic-native-google-maps#documentation)
+ *  - [Overview slide](https://docs.google.com/presentation/d/e/2PACX-1vScoho1ensbR4qCI9AIuQN55BZVvK73pAjI7sumDvW3CrxxHnrmpXWUjx2-8CpFibqU1EjLKCRhuthJ/pub?start=false&loop=false&delayms=3000)
+ *
+ * Usage
  * ```typescript
  * import {
  *  GoogleMaps,
@@ -1211,7 +1218,7 @@ export const GoogleMapsMapTypeId = {
   document: 'https://ionicframework.com/docs/native/google-maps/',
   install: 'ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="YOUR_ANDROID_API_KEY_IS_HERE" --variable API_KEY_FOR_IOS="YOUR_IOS_API_KEY_IS_HERE"',
   installVariables: ['API_KEY_FOR_ANDROID', 'API_KEY_FOR_IOS'],
-  platforms: ['Android', 'iOS']
+  platforms: ['Android', 'iOS', 'Browser']
 })
 @Injectable()
 export class GoogleMaps extends IonicNativePlugin {

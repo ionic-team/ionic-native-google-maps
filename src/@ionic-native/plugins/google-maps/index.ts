@@ -852,6 +852,26 @@ export interface KmlOverlayOptions {
 
 
 /**
+ * Options for Environment.setEnv()
+ */
+export interface EnvOptions {
+  /*
+   * API key for Google Maps JavaScript API v3 for `https:` (on server)
+   */
+  API_KEY_FOR_BROWSER_RELEASE?: string;
+
+  /*
+   * API key for Google Maps JavaScript API v3 for `http:` (local development)
+   */
+  API_KEY_FOR_BROWSER_DEBUG?: string;
+
+  /**
+   * Accept own properties for future update
+   */
+  [key: string]: any;
+}
+
+/**
  * @hidden
  */
 export class VisibleRegion implements ILatLngBounds {
@@ -1886,6 +1906,13 @@ export class Circle extends BaseClass {
   repo: ''
 })
 export class Environment {
+
+  /**
+   * Set environment variables.
+   */
+  static setEnv(envOptions: EnvOptions): void {
+    GoogleMaps.getPlugin().environment.setEnv(envOptions);
+  }
 
   /**
    * Get the open source software license information for Google Maps SDK for iOS.

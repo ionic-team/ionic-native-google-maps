@@ -839,6 +839,11 @@ export interface KmlOverlayOptions {
    */
   suppressInfoWindows?: boolean;
 
+  /*
+   * icon option
+   */
+  icon?: string | MarkerIcon;
+
   /**
    * Accept own properties for future update
    */

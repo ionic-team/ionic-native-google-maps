@@ -814,12 +814,37 @@ export interface KmlOverlayOptions {
    */
   suppressInfoWindows?: boolean;
 
+  /*
+   * icon option
+   */
+  icon?: string | MarkerIcon;
+
   /**
    * Accept own properties for future update
    */
   [key: string]: any;
 }
 
+
+/**
+ * Options for Environment.setEnv()
+ */
+export interface EnvOptions {
+  /*
+   * API key for Google Maps JavaScript API v3 for `https:` (on server)
+   */
+  API_KEY_FOR_BROWSER_RELEASE?: string;
+
+  /*
+   * API key for Google Maps JavaScript API v3 for `http:` (local development)
+   */
+  API_KEY_FOR_BROWSER_DEBUG?: string;
+
+  /**
+   * Accept own properties for future update
+   */
+  [key: string]: any;
+}
 
 /**
  * @hidden
@@ -1152,10 +1177,10 @@ export const GoogleMapsMapTypeId = {
   pluginRef: 'plugin.google.maps',
   plugin: 'cordova-plugin-googlemaps',
   repo: 'https://github.com/mapsplugin/cordova-plugin-googlemaps',
-  document: 'https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/README.md',
+  document: 'https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/README.md',
   install: 'ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="YOUR_ANDROID_API_KEY_IS_HERE" --variable API_KEY_FOR_IOS="YOUR_IOS_API_KEY_IS_HERE"',
   installVariables: ['API_KEY_FOR_ANDROID', 'API_KEY_FOR_IOS'],
-  platforms: ['Android', 'iOS']
+  platforms: ['Android', 'iOS', 'Brwoser']
 })
 @Injectable()
 export class GoogleMaps extends IonicNativePlugin {
@@ -1220,6 +1245,7 @@ export class GoogleMaps extends IonicNativePlugin {
 })
 export class BaseClass {
   protected _objectInstance: any;
+
 
   /**
    * Adds an event listener.
@@ -1792,6 +1818,13 @@ export class Circle extends BaseClass {
   repo: ''
 })
 export class Environment {
+
+  /**
+   * Set environment variables.
+   */
+  static setEnv(envOptions: EnvOptions): void {
+    GoogleMaps.getPlugin().environment.setEnv(envOptions);
+  }
 
   /**
    * Get the open source software license information for Google Maps SDK for iOS.

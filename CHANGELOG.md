@@ -1,3 +1,10 @@
+<a name="5.0.0-beta.18"></a>
+Fix: GoogleMaps.create() targets incorrect node when page changing.
+
+<a name="5.0.0-beta.17"></a>
+Update: Add `icon` option to `KmlOverlayOptions`.
+Update: Adapt browser platform.
+
 <a name="5.0.0-beta.16"></a>
 The same as v5.0.0-beta.15, but republished to fix a mistake.
 

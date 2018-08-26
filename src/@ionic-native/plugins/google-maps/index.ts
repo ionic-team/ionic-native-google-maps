@@ -2332,16 +2332,22 @@ export class StreetViewPanorama extends BaseClass {
           let count: number;
           count = 0;
           const timer: any = setInterval(() => {
-            const target = document.querySelector('ion-router-outlet[main] #' + element);
-            if (target && target.offsetWidth >= 100 && target.offsetHeight >= 100) {
+            let targets: any[] = document.querySelectorAll('ion-router-outlet[main] #' + element);
+            targets = Array.prototype.slice.call(targets, 0);
+            if (targets.length > 0) {
+              targets = targets.filter(function(target) {
+                return !target.hasAttribute('__pluginmapid');
+              });
+            }
+            if (targets.length === 1 && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
               clearInterval(timer);
-              resolve([target, options]);
+              resolve([targets[0], options]);
             } else {
               if (count++ < 20) {
                 return;
               }
-              if (target.offsetWidth < 100 || target.offsetHeight < 100) {
-                console.error(target.tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
+              if (targets.length > 0 && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
+                console.error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
               } else {
                 console.error('Can not find the element [#' + element + ']');
               }
@@ -2521,16 +2527,22 @@ export class GoogleMap extends BaseClass {
           let count: number;
           count = 0;
           const timer: any = setInterval(() => {
-            const target = document.querySelector('ion-router-outlet[main] #' + element);
-            if (target && target.offsetWidth >= 100 && target.offsetHeight >= 100) {
+            let targets: any[] = document.querySelectorAll('ion-router-outlet[main] #' + element);
+            targets = Array.prototype.slice.call(targets, 0);
+            if (targets.length > 0) {
+              targets = targets.filter(function(target) {
+                return !target.hasAttribute('__pluginmapid');
+              });
+            }
+            if (targets.length === 1 && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
               clearInterval(timer);
-              resolve([target, options]);
+              resolve([targets[0], options]);
             } else {
               if (count++ < 20) {
                 return;
               }
-              if (target.offsetWidth < 100 || target.offsetHeight < 100) {
-                console.error(target.tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
+              if (targets.length > 0 && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
+                console.error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
               } else {
                 console.error('Can not find the element [#' + element + ']');
               }

@@ -1,3 +1,6 @@
+<a name="5.0.0-beta.20"></a>
+Fix: `GoogleMaps.create()` does not create a map if tab template uses.
+
 <a name="5.0.0-beta.19"></a>
 Fix: Error: Can't resolve 'rxjs/Observable' in '/node_modules/@ionic-native/google-maps/ngx'
 

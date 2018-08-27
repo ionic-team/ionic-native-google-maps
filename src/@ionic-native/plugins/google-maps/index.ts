@@ -1095,7 +1095,7 @@ export const GoogleMapsMapTypeId = {
  * @description
  * Embed native Google Maps views into your app.
  * This version is aimed for ionic v4/beta.
- * You need to use [cordova-plugin-googlemaps@2.4.0](https://www.npmjs.com/package/cordova-plugin-googlemaps) with this plugin.
+ * You need to use [cordova-plugin-googlemaps@2.4.1](https://www.npmjs.com/package/cordova-plugin-googlemaps) with this plugin.
  *
  *
  * Prerequisites:
@@ -2319,8 +2319,7 @@ export class StreetViewPanorama extends BaseClass {
   constructor(element: string | HTMLElement, options?: StreetViewOptions) {
     super();
 
-
-    const _init: any = () => {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       // -------------------
       // Create a panorama
       // -------------------
@@ -2332,21 +2331,21 @@ export class StreetViewPanorama extends BaseClass {
           let count: number;
           count = 0;
           const timer: any = setInterval(() => {
-            let targets: any[] = document.querySelectorAll('ion-router-outlet[main] #' + element);
+            let targets: any[] = document.querySelectorAll('#' + element);
             targets = Array.prototype.slice.call(targets, 0);
             if (targets.length > 0) {
               targets = targets.filter(function(target) {
                 return !target.hasAttribute('__pluginmapid');
               });
             }
-            if (targets.length === 1 && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
+            if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
               clearInterval(timer);
               resolve([targets[0], options]);
             } else {
               if (count++ < 20) {
                 return;
               }
-              if (targets.length > 0 && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
+              if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
                 console.error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
               } else {
                 console.error('Can not find the element [#' + element + ']');
@@ -2361,36 +2360,28 @@ export class StreetViewPanorama extends BaseClass {
       } else if (element === null && options) {
         this._objectInstance = GoogleMaps.getPlugin().Map.getMap(null, options);
       }
-    };
-
-    // Since Promise does not work well for some reason,
-    // so create a panorama using if-statement.
-
-    if (!(window.plugin && window.plugin.google && window.plugin.google.maps)) {
-      // The `deviceready` event is not fired yet. Wait for it.
-      document.addEventListener('deviceready', _init, {
-        'once': true
-      });
     } else {
-      if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
-        _init();
-      } else {
-        console.error('cordova-plugin-googlemaps is not available!!');
+      console.error('cordova-plugin-googlemaps is not available!!');
 
-        if (element instanceof HTMLElement) {
-          element.style.backgroundColor = '#ccc';
-          element.style.color = 'red';
-          element.innerHTML = 'cordova-plugin-googlemaps is not available.';
-        } else if (typeof element === 'string') {
-          const target = document.querySelector('ion-router-outlet[main] #' + element);
-          if (target) {
-            target.style.backgroundColor = '#ccc';
-            target.style.color = 'red';
-            target.innerHTML = 'cordova-plugin-googlemaps is not available.';
-          }
+      if (element instanceof HTMLElement) {
+        element.style.backgroundColor = '#ccc';
+        element.style.color = 'red';
+        element.innerHTML = 'cordova-plugin-googlemaps is not available.';
+      } else if (typeof element === 'string') {
+        let targets: any[] = document.querySelectorAll('#' + element);
+        targets = Array.prototype.slice.call(targets, 0);
+        if (targets.length > 0) {
+          targets = targets.filter(function(target) {
+            return !target.hasAttribute('__pluginmapid');
+          });
         }
-
+        if (targets.length > 0 && targets[0]) {
+          targets[0].style.backgroundColor = '#ccc';
+          targets[0].style.color = 'red';
+          targets[0].innerHTML = 'cordova-plugin-googlemaps is not available.';
+        }
       }
+
     }
   }
 
@@ -2527,21 +2518,21 @@ export class GoogleMap extends BaseClass {
           let count: number;
           count = 0;
           const timer: any = setInterval(() => {
-            let targets: any[] = document.querySelectorAll('ion-router-outlet[main] #' + element);
+            let targets: any[] = document.querySelectorAll('ion-router-outlet #' + element);
             targets = Array.prototype.slice.call(targets, 0);
             if (targets.length > 0) {
               targets = targets.filter(function(target) {
                 return !target.hasAttribute('__pluginmapid');
               });
             }
-            if (targets.length === 1 && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
+            if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
               clearInterval(timer);
               resolve([targets[0], options]);
             } else {
               if (count++ < 20) {
                 return;
               }
-              if (targets.length > 0 && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
+              if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
                 console.error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
               } else {
                 console.error('Can not find the element [#' + element + ']');
@@ -2577,11 +2568,17 @@ export class GoogleMap extends BaseClass {
           element.style.color = 'red';
           element.innerHTML = 'cordova-plugin-googlemaps is not available.';
         } else if (typeof element === 'string') {
-          const target = document.querySelector('ion-router-outlet[main] #' + element);
-          if (target) {
-            target.style.backgroundColor = '#ccc';
-            target.style.color = 'red';
-            target.innerHTML = 'cordova-plugin-googlemaps is not available.';
+          let targets: any[] = document.querySelectorAll('ion-router-outlet #' + element);
+          targets = Array.prototype.slice.call(targets, 0);
+          if (targets.length > 0) {
+            targets = targets.filter(function(target) {
+              return !target.hasAttribute('__pluginmapid');
+            });
+          }
+          if (targets.length === 1 && targets[0]) {
+            targets[0].style.backgroundColor = '#ccc';
+            targets[0].style.color = 'red';
+            targets[0].innerHTML = 'cordova-plugin-googlemaps is not available.';
           }
         }
 
@@ -2596,7 +2593,16 @@ export class GoogleMap extends BaseClass {
   @InstanceCheck()
   setDiv(domNode?: HTMLElement | string): void {
     if (typeof domNode === 'string') {
-      this._objectInstance.setDiv(document.querySelector('ion-router-outlet[main] #' + domNode));
+      let targets: any[] = document.querySelectorAll('#' + domNode);
+      targets = Array.prototype.slice.call(targets, 0);
+      if (targets.length > 0) {
+        targets = targets.filter(function(target) {
+          return !target.hasAttribute('__pluginmapid');
+        });
+      }
+      if (targets.length === 1 && targets[0]) {
+        this._objectInstance.setDiv(targets[0]);
+      }
     } else {
       this._objectInstance.setDiv(domNode);
     }

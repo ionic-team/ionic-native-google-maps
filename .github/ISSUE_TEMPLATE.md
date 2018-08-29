@@ -13,6 +13,7 @@ If you desire the support by e-mail in private, please contact to wf9a5m75@gmail
 **If you choose 'problem or bug report', please select OS:**  (check one with "x")
 - [ ] **Android**
 - [ ] **iOS**
+- [ ] **Browser**
 
 **cordova information:**  (run `$> cordova plugin list`) 
 

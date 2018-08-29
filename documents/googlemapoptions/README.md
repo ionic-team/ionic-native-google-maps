@@ -2,7 +2,7 @@
 
 ```typescript
 let options: GoogleMapOptions = {
-  mapType: MapType.HYBRID,
+  mapType: GoogleMapsMapTypeId.HYBRID,
 
   controls: {
     'compass': true,

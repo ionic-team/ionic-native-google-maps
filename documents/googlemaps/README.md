@@ -53,7 +53,7 @@ Generate an instance of [GoogleMap](../googlemap/README.md) class.
 </tr>
 <tr>
   <td>options</td>
-  <td>GoogleMapOptions</td>
+  <td><a href="../googlemapoptions/README.md">GoogleMapOptions</a></td>
   <td>(optional)Initial option</td>
 </tr>
 </table>

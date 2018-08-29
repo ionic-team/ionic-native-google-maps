@@ -74,7 +74,7 @@ onButtonClick() {
 
   // Change the map options
   this.map.setOptions({
-    'mapType': MapType.HYBRID,
+    'mapType': GoogleMapsMapTypeId.HYBRID,
     'controls': {
       'compass': true,
       'myLocationButton': true,

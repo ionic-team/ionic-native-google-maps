@@ -560,7 +560,7 @@ Before using this plugin, please understand how this plugin work.
 
   - ### setMapTypeId(mapTypeId) [:orange_book:](./setMapTypeId/README.md)
 
-    Changes the map type id. Available constants are one of the [MapType](../maptype/README.md)
+    Changes the map type id. Available constants are one of the [GoogleMapsMapTypeId](../maptype/README.md)
 
   - ### animateCamera(cameraPosition: CameraPosition<any>) [:orange_book:](./animateCamera/README.md)
 

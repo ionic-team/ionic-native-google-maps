@@ -11,7 +11,7 @@ map.setMapTypeId(mapTypeId)
 
 name        | type    | description
 ------------|---------|---------------------------------------
-mapTypeId   | string  | One of [MapType](../maptype/README.md) constants
+mapTypeId   | string  | One of [GoogleMapsMapTypeId](../maptype/README.md) constants
 
 ----------------------------------------------------------------------------------------------------------
 

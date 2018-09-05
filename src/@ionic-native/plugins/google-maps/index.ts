@@ -2422,7 +2422,7 @@ export class GoogleMap extends BaseClass {
    * @param mapTypeId {string}
    */
   @CordovaInstance({ sync: true })
-  setMapTypeId(mapTypeId: MapType): void { }
+  setMapTypeId(mapTypeId: MapType | string): void { }
 
   /**
    * Moves the camera with animation

@@ -1,6 +1,6 @@
 {
   "name": "@ionic-native/google-maps",
-  "version": "5.0.0-beta.20",
+  "version": "5.0.0-beta.21",
   "description": "Native plugin wrappers for Cordova and Ionic with TypeScript, ES6+, Promise and Observable support",
   "homepage": "https://github.com/ionic-team/ionic-native-google-maps/",
   "author": "Ionic Team <hi@ionic.io> (https://ionic.io)",
@@ -20,10 +20,10 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "postchangelog": "git commit -am \"chore(): update changelog\"",
     "shipit": "npm run build && npm run readmes && npm login && npm run npmpub && npm logout",
-    "dev": "npm run lint && npm run build && cp -R dist/@ionic-native/core /Users/masashi/Documents/workspace/ionic-googlemaps-quickdemo-v4/node_modules/@ionic-native/ && cp -R dist/@ionic-native/plugins/google-maps /Users/masashi/Documents/workspace/ionic-googlemaps-quickdemo-v4/node_modules/@ionic-native/"
+    "dev": "npm run lint && npm run build && cp -R dist/@ionic-native/core /Users/wf9a5m75/Documents/workspace/test/ionic-native-google-maps-issue/node_modules/@ionic-native/ && cp -R dist/@ionic-native/plugins/google-maps /Users/wf9a5m75/Documents/workspace/test/ionic-native-google-maps-issue/node_modules/@ionic-native/"
   },
   "dependencies": {
-    "@ionic-native/core": "^5.0.0-beta.15"
+    "@ionic-native/core": "^5.0.0-beta.17"
   },
   "devDependencies": {
     "@angular/common": "^6.1.3",

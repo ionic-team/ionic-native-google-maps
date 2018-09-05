@@ -5,7 +5,8 @@ import {
   InstanceProperty,
   IonicNativePlugin,
   Plugin,
-  getPromise
+  getPromise,
+  checkAvailability
 } from '@ionic-native/core';
 import { Injectable } from '@angular/core';
 
@@ -1104,7 +1105,7 @@ export const GoogleMapsMapTypeId = {
  * Demo:
  *  - [Browser platform](https://mapsplugin.github.io/ionic-googlemaps-quickdemo-v4/)
  *
- * Documentaion:
+ * Documentation:
  *  - [API Reference](https://github.com/ionic-team/ionic-native-google-maps#documentation)
  *  - [Overview slide](https://docs.google.com/presentation/d/e/2PACX-1vScoho1ensbR4qCI9AIuQN55BZVvK73pAjI7sumDvW3CrxxHnrmpXWUjx2-8CpFibqU1EjLKCRhuthJ/pub?start=false&loop=false&delayms=3000)
  *
@@ -1474,7 +1475,7 @@ export class BaseClass {
   /**
    * Executes off() and empty()
    */
-  @CordovaCheck({ sync: true })
+  @CordovaInstance({ sync: true })
   destroy(): void {
     if (this._objectInstance.type === 'Map') {
       const map: GoogleMap = this._objectInstance.getMap();
@@ -1872,8 +1873,11 @@ export class Circle extends BaseClass {
   /**
    * Remove the circle.
    */
-  @CordovaInstance({ sync: true })
+  @CordovaInstance()
   remove(): void {
+    delete this._objectInstance.getMap().get('_overlays')[this.getId()];
+    this._objectInstance.remove();
+    this.destroy();
   }
 
   /**
@@ -2812,7 +2816,7 @@ export class GoogleMap extends BaseClass {
    * Remove all overlays, such as marker
    * @return {Promise<any>}
    */
-  @InstanceCheck()
+  @CordovaInstance()
   clear(): Promise<any> {
     if (this.get('_overlays')) {
       Object.keys(this.get('_overlays')).forEach((overlayId: string) => {
@@ -3422,7 +3426,7 @@ export class GroundOverlay extends BaseClass {
   /**
    * Remove the ground overlay
    */
-  @CordovaCheck()
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();
@@ -3628,7 +3632,7 @@ export class Marker extends BaseClass {
   /**
    * Remove the marker.
    */
-  @CordovaCheck()
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();
@@ -3775,7 +3779,7 @@ export class MarkerCluster extends BaseClass {
   /**
    * Remove the marker cluster
    */
-  @InstanceCheck()
+  @CordovaInstance()
   remove(): void {
     this._objectInstance.set('_overlays', undefined);
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
@@ -3949,7 +3953,7 @@ export class Polygon extends BaseClass {
   /**
    * Remove the polygon.
    */
-  @InstanceCheck()
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();
@@ -4141,7 +4145,7 @@ export class Polyline extends BaseClass {
   /**
    * Remove the polyline
    */
-  @InstanceCheck()
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();
@@ -4258,7 +4262,7 @@ export class TileOverlay extends BaseClass {
   /**
    * Remove the tile overlay
    */
-  @CordovaCheck()
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();
@@ -4338,7 +4342,7 @@ export class KmlOverlay extends BaseClass {
   /**
    * Remove the KmlOverlay
    */
-  @InstanceCheck()
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();

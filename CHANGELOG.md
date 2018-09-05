@@ -1,3 +1,6 @@
+<a name="5.0.0-beta.21"></a>
+Fix: `remove()`, `destroy()`, `clear()` cause `plugin.constructor.getPluginRef is not a function` error.
+
 <a name="5.0.0-beta.20"></a>
 Fix: `GoogleMaps.create()` does not create a map if tab template uses.
 

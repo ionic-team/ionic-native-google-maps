@@ -77,7 +77,7 @@ export class HomePage {
 ### Understanding the \@ionic-native/google-maps plugin
 
 Before using the \@ionic-native/google-maps plugin, reading this slides helps you to understand this plugin.
-https://docs.google.com/presentation/d/1zlkmoSY4AzDJc_P4IqWLnzct41IqHyzGkLeyhlAxMDE/edit#slide=id.p
+[Overview of @ionic-native/google-maps](https://docs.google.com/presentation/d/e/2PACX-1vScoho1ensbR4qCI9AIuQN55BZVvK73pAjI7sumDvW3CrxxHnrmpXWUjx2-8CpFibqU1EjLKCRhuthJ/pub?start=false&loop=false&delayms=3000)
 
 ### Static Class
 

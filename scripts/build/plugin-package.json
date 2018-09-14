@@ -3,7 +3,6 @@
   "version": "{{VERSION}}",
   "description": "Ionic Native plugin for Google Maps",
   "module": "index.js",
-  "private": true,
   "typings": "index.d.ts",
   "author": "ionic",
   "license": "MIT",

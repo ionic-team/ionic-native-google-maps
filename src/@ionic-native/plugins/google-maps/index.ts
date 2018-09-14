@@ -189,6 +189,11 @@ export interface GoogleMapPreferenceOptions {
   building?: boolean;
 
   /**
+   * Sets the bounds limit for user panning gesture.
+   */
+  gestureBounds?: Array<ILatLng>;
+
+  /**
    * Accept extra properties for future updates
    */
   [key: string]: any;
@@ -1950,7 +1955,7 @@ export class LocationService {
   }
   /**
    * Return true if the application has geolocation permission
-   * @return {Promise<MyLocation>}
+   * @return {Promise<boolean>}
    */
   static hasPermission(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {

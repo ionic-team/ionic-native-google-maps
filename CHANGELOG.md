@@ -1,3 +1,11 @@
+<a name="4.13.0"></a>
+## 4.13.0 (2018-09-14)
+*Add: `GoogleMapOptions.preferences.gestureBounds` property
+
+<a name="4.12.0"></a>
+## 4.12.0 (2018-08-24)
+*Add: `Environment` class
+
 <a name="4.9.1"></a>
 ## 4.9.1 (2018-07-17)
 

@@ -2058,7 +2058,7 @@ export class LocationService {
   }
   /**
    * Return true if the application has geolocation permission
-   * @return {Promise<MyLocation>}
+   * @return {Promise<boolean>}
    */
   static hasPermission(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {

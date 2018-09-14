@@ -1,3 +1,9 @@
+<a name="5.0.0-beta.22"></a>
+Fix: Can not display map/streetviewPanorama if application uses `NavController` instead of `Ionic Router outlet`.
+Fix: `Encoding.encodePath()` and `Encoding.decodePath()` do not work.
+Fix: Small problems.
+Add: `GoogleMapOptions.preferences.gestureBounds` property
+
 <a name="5.0.0-beta.21"></a>
 Fix: `remove()`, `destroy()`, `clear()` cause `plugin.constructor.getPluginRef is not a function` error.
 

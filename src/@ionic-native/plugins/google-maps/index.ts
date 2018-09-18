@@ -5,8 +5,8 @@ import {
   InstanceProperty,
   IonicNativePlugin,
   Plugin,
-  getPromise,
-  checkAvailability
+  checkAvailability,
+  getPromise
 } from '@ionic-native/core';
 import { Injectable } from '@angular/core';
 
@@ -222,7 +222,7 @@ export interface GoogleMapPreferenceOptions {
   /**
    * Sets the bounds limit for user panning gesture.
    */
-  gestureBounds?: Array<ILatLng>;
+  gestureBounds?: ILatLng[];
 
   /**
    * Accept extra properties for future updates
@@ -408,7 +408,7 @@ export interface GeocoderResult {
   countryCode?: string;
   extra?: {
     featureName?: string;
-    lines?: Array<string>;
+    lines?: string[];
     permises?: string;
     phone?: string;
     url?: string
@@ -432,7 +432,7 @@ export interface GroundOverlayOptions {
   /**
    * Bounds, array of ILatLng
    */
-  bounds: Array<ILatLng>;
+  bounds: ILatLng[];
 
   /**
    * Set to true to receive the GROUND_OVERLAY_CLICK event
@@ -681,7 +681,7 @@ export interface PolygonOptions {
    * Pass ILatLng[] to specify the vertixes.
    * You need to contain two points at least.
    */
-  points: Array<ILatLng>;
+  points: ILatLng[];
 
   /**
    * Set true if you want to draw the curve polygon based on the earth
@@ -720,7 +720,7 @@ export interface PolygonOptions {
   /**
    * Pass ILatLng[][] to create holes in polygon
    */
-  holes?: Array<Array<ILatLng>>;
+  holes?: ILatLng[][];
 
   /**
    * Set true if you want to receive the POLYGON_CLICK event
@@ -740,7 +740,7 @@ export interface PolylineOptions {
    * Pass ILatLng[] to specify the vertixes.
    * You need to contain two points at least.
    */
-  points: Array<ILatLng>;
+  points: ILatLng[];
 
   /**
    * Set false if you want to create invisible polyline
@@ -1243,27 +1243,17 @@ export class GoogleMaps extends IonicNativePlugin {
   create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
     if (element instanceof HTMLElement) {
       if (element.getAttribute('__pluginMapId')) {
-        console.error('GoogleMaps', element.tagName + '[__pluginMapId=\'' + element.getAttribute('__pluginMapId') + '\'] has already map.');
+        console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
         return;
       }
     } else if (typeof element === 'object') {
-      options = <GoogleMapOptions>element;
+      options = element as GoogleMapOptions;
       element = null;
     }
-    const googleMap: GoogleMap = new GoogleMap(<HTMLElement>element, options);
+    const googleMap: GoogleMap = new GoogleMap(element, options);
     googleMap.set('_overlays', {});
     return googleMap;
   }
-  //
-  // /**
-  //  * @deprecation
-  //  * @hidden
-  //  */
-  // create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
-  //   console.error('GoogleMaps', '[deprecated] Please use GoogleMaps.create()');
-  //   return GoogleMaps.create(element, options);
-  // }
-  //
 
   /**
    * Creates a new StreetView instance
@@ -1274,11 +1264,11 @@ export class GoogleMaps extends IonicNativePlugin {
   createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
     if (element instanceof HTMLElement) {
       if (element.getAttribute('__pluginMapId')) {
-        console.error('GoogleMaps', element.tagName + '[__pluginMapId=\'' + element.getAttribute('__pluginMapId') +  '\'] has already map.');
+        console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
         return;
       }
     }
-    return new StreetViewPanorama(<HTMLElement>element, options);
+    return new StreetViewPanorama(element, options);
   }
 }
 
@@ -1316,7 +1306,7 @@ export class BaseClass {
             if (!overlay) {
               const markerJS: any = args[args.length - 1];
               const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerCluster: MarkerCluster = this as MarkerCluster;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1350,7 +1340,7 @@ export class BaseClass {
             if (!overlay) {
               const markerJS: any = args[args.length - 1];
               const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerCluster: MarkerCluster = this as MarkerCluster;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1414,7 +1404,7 @@ export class BaseClass {
             if (!overlay) {
               const markerJS: any = args[args.length - 1];
               const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerCluster: MarkerCluster = this as MarkerCluster;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1448,7 +1438,7 @@ export class BaseClass {
             if (!overlay) {
               const markerJS: any = args[args.length - 1];
               const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerCluster: MarkerCluster = this as MarkerCluster;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1576,7 +1566,7 @@ export class BaseArrayClass<T> extends BaseClass {
    * Iterate over each element, then Returns a new value.
    * Then you can get the results of each callback.
    * @param fn {Function}
-   * @return {Array<Object>} returns a new array with the results
+   * @return {Object[]} returns a new array with the results
    */
   @CordovaInstance({ sync: true })
   map(fn: (element: T, index: number) => any): any[] {
@@ -1632,7 +1622,7 @@ export class BaseArrayClass<T> extends BaseClass {
 
   /**
    * Returns a reference to the underlying Array.
-   * @return {Array<Object>}
+   * @return {Object[]}
    */
   @CordovaInstance({ sync: true })
   getArray(): T[] {
@@ -1966,7 +1956,7 @@ export class Environment {
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Environment.getLicenseInfo()
    * @hidden
    */
   getLicenseInfo(): Promise<any> {
@@ -1975,7 +1965,7 @@ export class Environment {
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Environment.setBackgroundColor()
    * @hidden
    */
   setBackgroundColor(color: string): void {
@@ -1996,7 +1986,7 @@ export class Environment {
 export class Geocoder {
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Geocoder.geocode()
    * @hidden
    */
   geocode(request: GeocoderRequest): Promise<GeocoderResult[] | BaseArrayClass<GeocoderResult[]>> {
@@ -2053,7 +2043,7 @@ export class Geocoder {
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Geocoder.geocode()
    * @hidden
    */
   geocode(request: GeocoderRequest): Promise<GeocoderResult[] | BaseArrayClass<GeocoderResult>> {
@@ -2129,10 +2119,10 @@ export class Encoding {
 
   /**
    * Encodes a sequence of LatLngs into an encoded path string.
-   * @param path {Array<ILatLng> | BaseArrayClass<ILatLng>} a sequence of LatLngs
+   * @param path {ILatLng[] | BaseArrayClass<ILatLng>} a sequence of LatLngs
    * @return {string}
    */
-  static encodePath(path: Array<ILatLng> | BaseArrayClass<ILatLng>): string {
+  static encodePath(path: ILatLng[] | BaseArrayClass<ILatLng>): string {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
@@ -2142,19 +2132,19 @@ export class Encoding {
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Encoding.decodePath()
    * @hidden
    */
-  decodePath(encoded: string, precision?: number): Array<ILatLng> {
+  decodePath(encoded: string, precision?: number): ILatLng[] {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Encoding.decodePath()');
     return Encoding.decodePath(encoded, precision);
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Encoding.encodePath()
    * @hidden
    */
-  encodePath(path: Array<ILatLng> | BaseArrayClass<ILatLng>): string {
+  encodePath(path: ILatLng[] | BaseArrayClass<ILatLng>): string {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Encoding.encodePath()');
     return Encoding.encodePath(path);
   }
@@ -2262,10 +2252,10 @@ export class Spherical {
 
   /**
    * Returns the length of the given path.
-   * @param path {Array<ILatLng> | BaseArrayClass<ILatLng>}
+   * @param path {ILatLng[] | BaseArrayClass<ILatLng>}
    * @return {number}
    */
-  static computeLength(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  static computeLength(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
@@ -2276,10 +2266,10 @@ export class Spherical {
 
   /**
    * Returns the area of a closed path. The computed area uses the same units as the radius.
-   * @param path {Array<ILatLng> | BaseArrayClass<ILatLng>}.
+   * @param path {ILatLng[] | BaseArrayClass<ILatLng>}.
    * @return {number}
    */
-  static computeArea(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  static computeArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
@@ -2289,10 +2279,10 @@ export class Spherical {
 
   /**
    * Returns the signed area of a closed path. The signed area may be used to determine the orientation of the path.
-   * @param path {Array<ILatLng> | BaseArrayClass<ILatLng>}.
+   * @param path {ILatLng[] | BaseArrayClass<ILatLng>}.
    * @return {number}
    */
-  static computeSignedArea(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  static computeSignedArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
@@ -2330,7 +2320,7 @@ export class Spherical {
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Spherical.computeDistanceBetween()
    * @hidden
    */
   computeDistanceBetween(from: ILatLng, to: ILatLng): number {
@@ -2339,7 +2329,7 @@ export class Spherical {
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Spherical.computeOffset()
    * @hidden
    */
   computeOffset(from: ILatLng, distance: number, heading: number): LatLng {
@@ -2348,7 +2338,7 @@ export class Spherical {
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Spherical.computeOffsetOrigin()
    * @hidden
    */
   computeOffsetOrigin(to: ILatLng, distance: number, heading: number): LatLng {
@@ -2357,34 +2347,34 @@ export class Spherical {
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Spherical.computeLength()
    * @hidden
    */
-  computeLength(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  computeLength(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeLength()');
     return Spherical.computeLength(path);
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Spherical.computeArea()
    * @hidden
    */
-  computeArea(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  computeArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeArea()');
     return Spherical.computeArea(path);
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Spherical.computeSignedArea()
    * @hidden
    */
-  computeSignedArea(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  computeSignedArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeSignedArea()');
     return Spherical.computeSignedArea(path);
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Spherical.computeHeading()
    * @hidden
    */
   computeHeading(from: ILatLng, to: ILatLng): number {
@@ -2393,7 +2383,7 @@ export class Spherical {
   }
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Spherical.interpolate()
    * @hidden
    */
   interpolate(from: ILatLng, to: ILatLng, fraction: number): LatLng {
@@ -2435,7 +2425,7 @@ export class StreetViewPanorama extends BaseClass {
               targets = document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element);
               targets = Array.prototype.slice.call(targets, 0);
               if (targets.length > 0) {
-                targets = targets.filter(function(target) {
+                targets = targets.filter((target) => {
                   return !target.hasAttribute('__pluginmapid');
                 });
               }
@@ -2472,7 +2462,7 @@ export class StreetViewPanorama extends BaseClass {
         let targets: any[] = document.querySelectorAll('#' + element);
         targets = Array.prototype.slice.call(targets, 0);
         if (targets.length > 0) {
-          targets = targets.filter(function(target) {
+          targets = targets.filter((target) => {
             return !target.hasAttribute('__pluginmapid');
           });
         }
@@ -2629,7 +2619,7 @@ export class GoogleMap extends BaseClass {
               targets = document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element);
               targets = Array.prototype.slice.call(targets, 0);
               if (targets.length > 0) {
-                targets = targets.filter(function(target) {
+                targets = targets.filter((target) => {
                   return !target.hasAttribute('__pluginmapid');
                 });
               }
@@ -2668,7 +2658,7 @@ export class GoogleMap extends BaseClass {
         let targets: any[] = document.querySelectorAll('#' + element);
         targets = Array.prototype.slice.call(targets, 0);
         if (targets.length > 0) {
-          targets = targets.filter(function(target) {
+          targets = targets.filter((target) => {
             return !target.hasAttribute('__pluginmapid');
           });
         }
@@ -2695,7 +2685,7 @@ export class GoogleMap extends BaseClass {
         targets = document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element);
         targets = Array.prototype.slice.call(targets, 0);
         if (targets.length > 0) {
-          targets = targets.filter(function(target) {
+          targets = targets.filter((target) => {
             return !target.hasAttribute('__pluginmapid');
           });
         }
@@ -2842,10 +2832,10 @@ export class GoogleMap extends BaseClass {
 
   /**
    * Set the center position of the camera view
-   * @param latLng {ILatLng | Array<ILatLng>}
+   * @param latLng {ILatLng | ILatLng[]}
    */
   @CordovaInstance({ sync: true })
-  setCameraTarget(latLng: ILatLng | Array<ILatLng>): void {
+  setCameraTarget(latLng: ILatLng | ILatLng[]): void {
   }
 
   /**
@@ -4408,7 +4398,7 @@ export class KmlOverlay extends BaseClass {
    * Returns the viewport to contains all overlays
    */
   @CordovaInstance({ sync: true })
-  getDefaultViewport(): CameraPosition<ILatLng|ILatLng[]> { return; }
+  getDefaultViewport(): CameraPosition<ILatLng | ILatLng[]> { return; }
 
   /**
    * Returns the ID of instance.

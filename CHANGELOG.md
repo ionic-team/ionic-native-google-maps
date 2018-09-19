@@ -1,3 +1,7 @@
+<a name="4.14.0"></a>
+## 4.14.0 (2018-09-18)
+*Build to compatible with `@ionic-native/core@4.14.0`
+
 <a name="4.13.0"></a>
 ## 4.13.0 (2018-09-14)
 *Add: `GoogleMapOptions.preferences.gestureBounds` property

@@ -14,7 +14,7 @@ First of all, you need to generate API keys for Google Maps APIs.
 Second, run following command to install `@ionic-native/core` and `@ionic-native/google-maps` plugins in your project.
 
 ```
-npm install @ionic-native/core @ionic-native/google-maps@4.9.1
+npm install @ionic-native/core @ionic-native/google-maps
 
 ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="..." --variable API_KEY_FOR_IOS="..."
 ```

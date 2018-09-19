@@ -1,10 +1,9 @@
-"use strict";
+'use strict';
 // Node module dependencies
-const fs = require('fs-extra-promise').useFs(require('fs-extra')),
+const fs = require('fs-extra'),
   queue = require('queue'),
   path = require('path'),
   exec = require('child-process-promise').exec;
-
 
 const ROOT = path.resolve(path.join(__dirname, '../../')),
   DIST = path.resolve(ROOT, 'dist', '@ionic-native');
@@ -42,13 +41,10 @@ PACKAGES.forEach(packageName => {
         }
         done();
       });
-
   });
-
 });
 
-QUEUE.start((err) => {
-
+QUEUE.start(err => {
   if (err) {
     console.log('Error publishing ionic-native. ', err);
   } else if (failedPackages.length > 0) {
@@ -57,7 +53,4 @@ QUEUE.start((err) => {
   } else {
     console.log('Done publishing ionic-native!');
   }
-
-
-
 });

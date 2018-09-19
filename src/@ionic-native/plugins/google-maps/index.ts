@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CordovaCheck, CordovaInstance, Plugin, InstanceProperty, InstanceCheck, checkAvailability, IonicNativePlugin } from '@ionic-native/core';
+import { CordovaCheck, CordovaInstance, InstanceCheck, InstanceProperty, IonicNativePlugin, Plugin, checkAvailability } from '@ionic-native/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 
@@ -191,7 +191,7 @@ export interface GoogleMapPreferenceOptions {
   /**
    * Sets the bounds limit for user panning gesture.
    */
-  gestureBounds?: Array<ILatLng>;
+  gestureBounds?: ILatLng[];
 
   /**
    * Accept extra properties for future updates
@@ -377,7 +377,7 @@ export interface GeocoderResult {
   countryCode?: string;
   extra?: {
     featureName?: string;
-    lines?: Array<string>;
+    lines?: string[];
     permises?: string;
     phone?: string;
     url?: string
@@ -401,7 +401,7 @@ export interface GroundOverlayOptions {
   /**
    * Bounds, array of ILatLng
    */
-  bounds: Array<ILatLng>;
+  bounds: ILatLng[];
 
   /**
    * Set to true to receive the GROUND_OVERLAY_CLICK event
@@ -650,7 +650,7 @@ export interface PolygonOptions {
    * Pass ILatLng[] to specify the vertixes.
    * You need to contain two points at least.
    */
-  points: Array<ILatLng>;
+  points: ILatLng[];
 
   /**
    * Set true if you want to draw the curve polygon based on the earth
@@ -689,7 +689,7 @@ export interface PolygonOptions {
   /**
    * Pass ILatLng[][] to create holes in polygon
    */
-  holes?: Array<Array<ILatLng>>;
+  holes?: ILatLng[][];
 
   /**
    * Set true if you want to receive the POLYGON_CLICK event
@@ -709,7 +709,7 @@ export interface PolylineOptions {
    * Pass ILatLng[] to specify the vertixes.
    * You need to contain two points at least.
    */
-  points: Array<ILatLng>;
+  points: ILatLng[];
 
   /**
    * Set false if you want to create invisible polyline
@@ -1199,14 +1199,14 @@ export class GoogleMaps extends IonicNativePlugin {
   static create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
     if (element instanceof HTMLElement) {
       if (element.getAttribute('__pluginMapId')) {
-        console.error('GoogleMaps', element.tagName + '[__pluginMapId=\'' + element.getAttribute('__pluginMapId') +  '\'] has already map.');
+        console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
         return;
       }
     } else if (typeof element === 'object') {
-      options = <GoogleMapOptions>element;
+      options = element as GoogleMapOptions;
       element = null;
     }
-    let googleMap: GoogleMap = new GoogleMap(<HTMLElement>element, options);
+    const googleMap: GoogleMap = new GoogleMap(element, options);
     googleMap.set('_overlays', {});
     return googleMap;
   }
@@ -1230,11 +1230,11 @@ export class GoogleMaps extends IonicNativePlugin {
   static createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
     if (element instanceof HTMLElement) {
       if (element.getAttribute('__pluginMapId')) {
-        console.error('GoogleMaps', element.tagName + '[__pluginMapId=\'' + element.getAttribute('__pluginMapId') +  '\'] has already map.');
+        console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
         return;
       }
     }
-    return new StreetViewPanorama(<HTMLElement>element, options);
+    return new StreetViewPanorama(element, options);
   }
 }
 
@@ -1267,9 +1267,9 @@ export class BaseClass {
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
             if (!overlay) {
-              let markerJS: any = args[args.length - 1];
-              let markerId: string = markerJS.getId();
-              let markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerJS: any = args[args.length - 1];
+              const markerId: string = markerJS.getId();
+              const markerCluster: MarkerCluster = this as MarkerCluster;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1301,9 +1301,9 @@ export class BaseClass {
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
             if (!overlay) {
-              let markerJS: any = args[args.length - 1];
-              let markerId: string = markerJS.getId();
-              let markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerJS: any = args[args.length - 1];
+              const markerId: string = markerJS.getId();
+              const markerCluster: MarkerCluster = this as MarkerCluster;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1361,9 +1361,9 @@ export class BaseClass {
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
             if (!overlay) {
-              let markerJS: any = args[args.length - 1];
-              let markerId: string = markerJS.getId();
-              let markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerJS: any = args[args.length - 1];
+              const markerId: string = markerJS.getId();
+              const markerCluster: MarkerCluster = this as MarkerCluster;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1395,9 +1395,9 @@ export class BaseClass {
           } else if (this instanceof MarkerCluster) {
             let overlay: Marker = this.get(args[args.length - 1].getId());
             if (!overlay) {
-              let markerJS: any = args[args.length - 1];
-              let markerId: string = markerJS.getId();
-              let markerCluster: MarkerCluster = <MarkerCluster>this;
+              const markerJS: any = args[args.length - 1];
+              const markerId: string = markerJS.getId();
+              const markerCluster: MarkerCluster = this as MarkerCluster;
               overlay = new Marker(markerCluster.getMap(), markerJS);
               this.get('_overlays')[markerId] = overlay;
               markerJS.one(markerJS.getId() + '_remove', () => {
@@ -1435,7 +1435,7 @@ export class BaseClass {
   @CordovaCheck({ sync: true })
   destroy(): void {
     if (this._objectInstance.type === 'Map') {
-      let map: GoogleMap = this._objectInstance.getMap();
+      const map: GoogleMap = this._objectInstance.getMap();
       if (map) {
         delete this._objectInstance.getMap().get('_overlays')[this._objectInstance.getId()];
       }
@@ -1484,11 +1484,8 @@ export class BaseArrayClass<T> extends BaseClass {
 
   constructor(initialData?: T[] | any) {
     super();
-    if (initialData instanceof GoogleMaps.getPlugin().BaseArrayClass) {
-      this._objectInstance = initialData;
-    } else {
-      this._objectInstance = new (GoogleMaps.getPlugin().BaseArrayClass)(initialData);
-    }
+    this._objectInstance = (initialData instanceof GoogleMaps.getPlugin().BaseArrayClass) ?
+      initialData : this._objectInstance = new (GoogleMaps.getPlugin().BaseArrayClass)(initialData);
   }
 
   /**
@@ -1521,7 +1518,7 @@ export class BaseArrayClass<T> extends BaseClass {
    * Iterate over each element, then Returns a new value.
    * Then you can get the results of each callback.
    * @param fn {Function}
-   * @return {Array<Object>} returns a new array with the results
+   * @return {Object[]} returns a new array with the results
    */
   @CordovaInstance({ sync: true })
   map(fn: (element: T, index: number) => any): any[] { return; }
@@ -1576,7 +1573,7 @@ export class BaseArrayClass<T> extends BaseClass {
 
   /**
    * Returns a reference to the underlying Array.
-   * @return {Array<Object>}
+   * @return {Object[]}
    */
   @CordovaInstance({ sync: true })
   getArray(): T[] { return; }
@@ -1979,7 +1976,7 @@ export class Encoding {
    * @deprecation
    * @hidden
    */
-  decodePath(encoded: string, precision?: number): Array<ILatLng> {
+  decodePath(encoded: string, precision?: number): ILatLng[] {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Encoding.decodePath()');
     return Encoding.decodePath(encoded, precision);
   }
@@ -1988,7 +1985,7 @@ export class Encoding {
    * @deprecation
    * @hidden
    */
-  encodePath(path: Array<ILatLng> | BaseArrayClass<ILatLng>): string {
+  encodePath(path: ILatLng[] | BaseArrayClass<ILatLng>): string {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Encoding.encodePath()');
     return Encoding.encodePath(path);
   }
@@ -1999,16 +1996,16 @@ export class Encoding {
    * @param precision? {number} default: 5
    * @return {ILatLng[]}
    */
-  static decodePath(encoded: string, precision?: number): Array<ILatLng> {
+  static decodePath(encoded: string, precision?: number): ILatLng[] {
     return GoogleMaps.getPlugin().geometry.encoding.decodePath(encoded, precision);
   }
 
   /**
    * Encodes a sequence of LatLngs into an encoded path string.
-   * @param path {Array<ILatLng> | BaseArrayClass<ILatLng>} a sequence of LatLngs
+   * @param path {ILatLng[] | BaseArrayClass<ILatLng>} a sequence of LatLngs
    * @return {string}
    */
-  static encodePath(path: Array<ILatLng> | BaseArrayClass<ILatLng>): string {
+  static encodePath(path: ILatLng[] | BaseArrayClass<ILatLng>): string {
     return GoogleMaps.getPlugin().geometry.encoding.encodePath(path);
   }
 }
@@ -2087,7 +2084,7 @@ export class Spherical {
    * @deprecation
    * @hidden
    */
-  computeLength(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  computeLength(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeLength()');
     return Spherical.computeLength(path);
   }
@@ -2096,7 +2093,7 @@ export class Spherical {
    * @deprecation
    * @hidden
    */
-  computeArea(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  computeArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeArea()');
     return Spherical.computeArea(path);
   }
@@ -2105,7 +2102,7 @@ export class Spherical {
    * @deprecation
    * @hidden
    */
-  computeSignedArea(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  computeSignedArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeSignedArea()');
     return Spherical.computeSignedArea(path);
   }
@@ -2168,28 +2165,28 @@ export class Spherical {
 
   /**
    * Returns the length of the given path.
-   * @param path {Array<ILatLng> | BaseArrayClass<ILatLng>}
+   * @param path {ILatLng[] | BaseArrayClass<ILatLng>}
    * @return {number}
    */
-  static computeLength(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  static computeLength(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     return GoogleMaps.getPlugin().geometry.spherical.computeLength(path);
   }
 
   /**
    * Returns the area of a closed path. The computed area uses the same units as the radius.
-   * @param path {Array<ILatLng> | BaseArrayClass<ILatLng>}.
+   * @param path {ILatLng[] | BaseArrayClass<ILatLng>}.
    * @return {number}
    */
-  static computeArea(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  static computeArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     return GoogleMaps.getPlugin().geometry.spherical.computeArea(path);
   }
 
   /**
    * Returns the signed area of a closed path. The signed area may be used to determine the orientation of the path.
-   * @param path {Array<ILatLng> | BaseArrayClass<ILatLng>}.
+   * @param path {ILatLng[] | BaseArrayClass<ILatLng>}.
    * @return {number}
    */
-  static computeSignedArea(path: Array<ILatLng> | BaseArrayClass<ILatLng>): number {
+  static computeSignedArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     return GoogleMaps.getPlugin().geometry.spherical.computeSignedArea(path);
   }
 
@@ -2231,9 +2228,9 @@ export class StreetViewPanorama extends BaseClass {
       } else if (typeof element === 'string') {
 
         this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(new Promise<any[]>((resolve, reject) => {
-          let count: number = 0;
-          let timer: any = setInterval(() => {
-            let target = document.querySelector('.show-page #' + element);
+          let count = 0;
+          const timer: any = setInterval(() => {
+            const target = document.querySelector('.show-page #' + element);
             if (target) {
               clearInterval(timer);
               resolve([target, options]);
@@ -2370,7 +2367,7 @@ export class StreetViewPanorama extends BaseClass {
   plugin: 'cordova-plugin-googlemaps'
 })
 export class GoogleMap extends BaseClass {
-  constructor(element: string | HTMLElement, options?: GoogleMapOptions) {
+  constructor(element: any, options?: GoogleMapOptions) {
     super();
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       if (element instanceof HTMLElement) {
@@ -2378,9 +2375,9 @@ export class GoogleMap extends BaseClass {
       } else if (typeof element === 'string') {
 
         this._objectInstance = GoogleMaps.getPlugin().Map.getMap(new Promise<any[]>((resolve, reject) => {
-          let count: number = 0;
-          let timer: any = setInterval(() => {
-            let target = document.querySelector('.show-page #' + element);
+          let count = 0;
+          const timer: any = setInterval(() => {
+            const target = document.querySelector('.show-page #' + element);
             if (target) {
               clearInterval(timer);
               resolve([target, options]);
@@ -2508,10 +2505,10 @@ export class GoogleMap extends BaseClass {
 
   /**
    * Set the center position of the camera view
-   * @param latLng {ILatLng | Array<ILatLng>}
+   * @param latLng {ILatLng | ILatLng[]}
    */
   @CordovaInstance({ sync: true })
-  setCameraTarget(latLng: ILatLng | Array<ILatLng>): void { }
+  setCameraTarget(latLng: ILatLng | ILatLng[]): void { }
 
   /**
    * Set zoom level of the camera
@@ -2698,7 +2695,7 @@ export class GoogleMap extends BaseClass {
     return new Promise<Marker>((resolve, reject) => {
       this._objectInstance.addMarker(options, (marker: any) => {
         if (marker) {
-          let overlayId: string = marker.getId();
+          const overlayId: string = marker.getId();
           const overlay: Marker = new Marker(this, marker);
           this.get('_overlays')[overlayId] = overlay;
           marker.one(overlayId + '_remove', () => {
@@ -2722,8 +2719,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addMarkerSync(options: MarkerOptions): Marker {
-    let marker: any = this._objectInstance.addMarker(options);
-    let overlayId: string = marker.getId();
+    const marker: any = this._objectInstance.addMarker(options);
+    const overlayId: string = marker.getId();
     const overlay: Marker = new Marker(this, marker);
     this.get('_overlays')[overlayId] = overlay;
     marker.one(overlayId + '_remove', () => {
@@ -2745,7 +2742,7 @@ export class GoogleMap extends BaseClass {
     return new Promise<MarkerCluster>((resolve, reject) => {
       this._objectInstance.addMarkerCluster(options, (markerCluster: any) => {
         if (markerCluster) {
-          let overlayId = markerCluster.getId();
+          const overlayId = markerCluster.getId();
           const overlay = new MarkerCluster(this, markerCluster);
           this.get('_overlays')[overlayId] = overlay;
           markerCluster.one('remove', () => {
@@ -2770,8 +2767,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addMarkerClusterSync(options: MarkerClusterOptions): MarkerCluster {
-    let markerCluster: any = this._objectInstance.addMarkerCluster(options);
-    let overlayId: string = markerCluster.getId();
+    const markerCluster: any = this._objectInstance.addMarkerCluster(options);
+    const overlayId: string = markerCluster.getId();
     const overlay: MarkerCluster = new MarkerCluster(this, markerCluster);
     this.get('_overlays')[overlayId] = overlay;
     markerCluster.one(overlayId + '_remove', () => {
@@ -2794,7 +2791,7 @@ export class GoogleMap extends BaseClass {
     return new Promise<Circle>((resolve, reject) => {
       this._objectInstance.addCircle(options, (circle: any) => {
         if (circle) {
-          let overlayId: string = circle.getId();
+          const overlayId: string = circle.getId();
           const overlay = new Circle(this, circle);
           this.get('_overlays')[overlayId] = overlay;
           circle.one(overlayId + '_remove', () => {
@@ -2818,8 +2815,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addCircleSync(options: CircleOptions): Circle {
-    let circle: any = this._objectInstance.addCircle(options);
-    let overlayId: string = circle.getId();
+    const circle: any = this._objectInstance.addCircle(options);
+    const overlayId: string = circle.getId();
     const overlay = new Circle(this, circle);
     this.get('_overlays')[overlayId] = overlay;
     circle.one(overlayId + '_remove', () => {
@@ -2840,7 +2837,7 @@ export class GoogleMap extends BaseClass {
     return new Promise<Polygon>((resolve, reject) => {
       this._objectInstance.addPolygon(options, (polygon: any) => {
         if (polygon) {
-          let overlayId: string = polygon.getId();
+          const overlayId: string = polygon.getId();
           const overlay = new Polygon(this, polygon);
           this.get('_overlays')[overlayId] = overlay;
           polygon.one(overlayId + '_remove', () => {
@@ -2864,8 +2861,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addPolygonSync(options: PolygonOptions): Polygon {
-    let polygon: any = this._objectInstance.addPolygon(options);
-    let overlayId: string = polygon.getId();
+    const polygon: any = this._objectInstance.addPolygon(options);
+    const overlayId: string = polygon.getId();
     const overlay = new Polygon(this, polygon);
     this.get('_overlays')[overlayId] = overlay;
     polygon.one(overlayId + '_remove', () => {
@@ -2887,7 +2884,7 @@ export class GoogleMap extends BaseClass {
     return new Promise<Polyline>((resolve, reject) => {
       this._objectInstance.addPolyline(options, (polyline: any) => {
         if (polyline) {
-          let overlayId: string = polyline.getId();
+          const overlayId: string = polyline.getId();
           const overlay = new Polyline(this, polyline);
           this.get('_overlays')[overlayId] = overlay;
           polyline.one(overlayId + '_remove', () => {
@@ -2911,8 +2908,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addPolylineSync(options: PolylineOptions): Polyline {
-    let polyline: any = this._objectInstance.addPolyline(options);
-    let overlayId: string = polyline.getId();
+    const polyline: any = this._objectInstance.addPolyline(options);
+    const overlayId: string = polyline.getId();
     const overlay = new Polyline(this, polyline);
     this.get('_overlays')[overlayId] = overlay;
     polyline.one(overlayId + '_remove', () => {
@@ -2934,7 +2931,7 @@ export class GoogleMap extends BaseClass {
     return new Promise<TileOverlay>((resolve, reject) => {
       this._objectInstance.addTileOverlay(options, (tileOverlay: any) => {
         if (tileOverlay) {
-          let overlayId: string = tileOverlay.getId();
+          const overlayId: string = tileOverlay.getId();
           const overlay = new TileOverlay(this, tileOverlay);
           this.get('_overlays')[overlayId] = overlay;
           tileOverlay.one(overlayId + '_remove', () => {
@@ -2958,8 +2955,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addTileOverlaySync(options: TileOverlayOptions): TileOverlay {
-    let tileOverlay: any = this._objectInstance.addTileOverlay(options);
-    let overlayId: string = tileOverlay.getId();
+    const tileOverlay: any = this._objectInstance.addTileOverlay(options);
+    const overlayId: string = tileOverlay.getId();
     const overlay = new TileOverlay(this, tileOverlay);
     this.get('_overlays')[overlayId] = overlay;
     tileOverlay.one(overlayId + '_remove', () => {
@@ -2981,7 +2978,7 @@ export class GoogleMap extends BaseClass {
     return new Promise<GroundOverlay>((resolve, reject) => {
       this._objectInstance.addGroundOverlay(options, (groundOverlay: any) => {
         if (groundOverlay) {
-          let overlayId: string = groundOverlay.getId();
+          const overlayId: string = groundOverlay.getId();
           const overlay = new GroundOverlay(this, groundOverlay);
           this.get('_overlays')[overlayId] = overlay;
           groundOverlay.one(overlayId + '_remove', () => {
@@ -3005,8 +3002,8 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addGroundOverlaySync(options: GroundOverlayOptions): GroundOverlay {
-    let groundOverlay: any = this._objectInstance.addGroundOverlay(options);
-    let overlayId: string = groundOverlay.getId();
+    const groundOverlay: any = this._objectInstance.addGroundOverlay(options);
+    const overlayId: string = groundOverlay.getId();
     const overlay = new GroundOverlay(this, groundOverlay);
     this.get('_overlays')[overlayId] = overlay;
     groundOverlay.one(overlayId + '_remove', () => {
@@ -3028,7 +3025,7 @@ export class GoogleMap extends BaseClass {
     return new Promise<KmlOverlay>((resolve, reject) => {
       this._objectInstance.addKmlOverlay(options, (kmlOverlay: any) => {
         if (kmlOverlay) {
-          let overlayId: string = kmlOverlay.getId();
+          const overlayId: string = kmlOverlay.getId();
           const overlay = new KmlOverlay(this, kmlOverlay);
           this.get('_overlays')[overlayId] = overlay;
           kmlOverlay.one(overlayId + '_remove', () => {
@@ -3106,7 +3103,7 @@ export class GroundOverlay extends BaseClass {
    * @param imageUrl {string} URL of image
    */
   @CordovaInstance({ sync: true })
-  setImage(imageUrl: string): void {};
+  setImage(imageUrl: string): void {}
 
   /**
    * Changes the opacity of the ground overlay from 0.0 to 1.0
@@ -3544,8 +3541,8 @@ export class Polygon extends BaseClass {
    */
   @CordovaCheck()
   getHoles(): BaseArrayClass<ILatLng[]> {
-    let holes: ILatLng[][] = this._objectInstance.getPoints();
-    let results: BaseArrayClass<ILatLng[]> = new BaseArrayClass<ILatLng[]>();
+    const holes: ILatLng[][] = this._objectInstance.getPoints();
+    const results: BaseArrayClass<ILatLng[]> = new BaseArrayClass<ILatLng[]>();
     holes.forEach((hole: ILatLng[]) => {
       results.push(hole);
     });
@@ -3921,7 +3918,7 @@ export class KmlOverlay extends BaseClass {
    * Returns the viewport to contains all overlays
    */
   @CordovaInstance({ sync: true })
-  getDefaultViewport(): CameraPosition<ILatLng|ILatLng[]> { return; }
+  getDefaultViewport(): CameraPosition<ILatLng | ILatLng[]> { return; }
 
   /**
    * Returns the ID of instance.

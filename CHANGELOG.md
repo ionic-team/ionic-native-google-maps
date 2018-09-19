@@ -1,3 +1,6 @@
+<a name="5.0.0-beta.23"></a>
+Update: Rebuild to compatible with `@ionic-native/core@5.0.0-beta.20`.
+
 <a name="5.0.0-beta.22"></a>
 Fix: Can not display map/streetviewPanorama if application uses `NavController` instead of `Ionic Router outlet`.
 Fix: `Encoding.encodePath()` and `Encoding.decodePath()` do not work.

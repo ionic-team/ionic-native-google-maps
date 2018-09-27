@@ -1,3 +1,9 @@
+<a name="5.0.0-beta.24"></a>
+Update: Rebuild to compatible with `@ionic-native/core@5.0.0-beta.21`.
+Update: The code for displaying error message.
+Add: `map.addFusionTableOverlay()`
+Add: `TileOverlayOptions.getTile` is able to return `Promise<string>`.
+
 <a name="5.0.0-beta.23"></a>
 Update: Rebuild to compatible with `@ionic-native/core@5.0.0-beta.20`.
 

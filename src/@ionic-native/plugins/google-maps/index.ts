@@ -785,10 +785,10 @@ export interface PolylineOptions {
 
 export interface TileOverlayOptions {
   /**
-   * This callback must Returns string of image URL.
+   * This callback must Returns string of image URL, or Promise.
    * If no tile, you need to Returns null.
    */
-  getTile: (x: number, y: number, zoom: number) => string;
+  getTile: (x: number, y: number, zoom: number) => string | Promise<string>;
 
   /**
    * Set false if you want to create invisible tilelayer
@@ -842,6 +842,79 @@ export interface KmlOverlayOptions {
 
   /*
    * Do not fire the KML_CLICK event if false. Default is true.
+   */
+  clickable?: boolean;
+
+  /*
+   * Do not display the default infoWindow if true. Default is false.
+   */
+  suppressInfoWindows?: boolean;
+
+  /*
+   * icon option
+   */
+  icon?: string | MarkerIcon;
+
+  /**
+   * Accept own properties for future update
+   */
+  [key: string]: any;
+}
+
+
+/**
+ * Options for FusionTableOverlayOptions.query
+ */
+export interface FusionTableQueryOptions {
+
+  /*
+   * The ID of the Fusion Tables table to display. This ID can be found in the table's URL, as the value of the **dsrcid** parameter. Required.
+   */
+  from: boolean;
+
+  /*
+   * Limit on the number of results returned by the query.
+   */
+  limit?: number;
+
+  /*
+   * Offset into the sorted results.
+   */
+  offset?: number;
+
+  /*
+   * The method by which to sort the results. Accepts either of:
+   *  - A column name.
+   *    The column name may be suffixed with ASC or DESC (e.g. col2 DESC) to specify ascending or descending sort.
+   *
+   *  - An ST_DISTANCE spatial relationship (sort by distance).
+   *    A column and the coordinate from which to calculate distance must be passed, for example, orderBy: 'ST_DISTANCE(col1, LATLNG(1.2, 3.4))'.
+   */
+  orderBy?: string;
+
+  /*
+   * A column, containing geographic features to be displayed on the map. See [Fusion Tables Setup](https://developers.google.com/maps/documentation/javascript/fusiontableslayer#fusion_table_setup) in the Maps API documentation for information about valid columns.
+   */
+  select: string;
+
+  /*
+   * The SQL predicate to be applied to the layer.
+   */
+  where?: string;
+
+}
+
+/**
+ * Options for map.addFusionTableOverlay() method
+ */
+export interface FusionTableOverlayOptions {
+  /*
+   * Query for Fusion Table
+   */
+  query: FusionTableQueryOptions;
+
+  /*
+   * Do not fire the FUSION_TABLE_CLICK event if false. Default is true.
    */
   clickable?: boolean;
 
@@ -1241,18 +1314,49 @@ export class GoogleMaps extends IonicNativePlugin {
    * @return {GoogleMap}
    */
   create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
-    if (element instanceof HTMLElement) {
-      if (element.getAttribute('__pluginMapId')) {
-        console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
-        return;
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      if (element instanceof HTMLElement) {
+        if (element.getAttribute('__pluginMapId')) {
+          console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
+          return;
+        }
+      } else if (typeof element === 'object') {
+        options = element as GoogleMapOptions;
+        element = null;
       }
-    } else if (typeof element === 'object') {
-      options = element as GoogleMapOptions;
-      element = null;
+      const googleMap: GoogleMap = new GoogleMap(element, options);
+      googleMap.set('_overlays', {});
+      return googleMap;
+    } else {
+      const errorMessage: string[] = [
+        '[GoogleMaps]'
+      ];
+      if (!window.cordova) {
+        errorMessage.push('You need to execute "$> ionic cordova run browser".');
+        errorMessage.push('"$> ionic serve" is not supported.');
+      } else {
+        errorMessage.push('cordova-plugin-googlemaps is not installed or not ready yet.');
+      }
+      console.error(errorMessage.join(''));
+
+      if (element instanceof HTMLElement) {
+        displayErrorMessage(element, errorMessage.join('<br />'));
+      } else if (typeof element === 'string') {
+        let targets: any[] = document.querySelectorAll('#' + element);
+        targets = Array.prototype.slice.call(targets, 0);
+        if (targets.length > 0) {
+          targets = targets.filter((target) => {
+            return !target.hasAttribute('__pluginmapid');
+          });
+        }
+        if (targets.length === 1 && targets[0]) {
+          displayErrorMessage(targets[0], errorMessage.join('<br />'));
+        }
+      }
+
+
+      return null;
     }
-    const googleMap: GoogleMap = new GoogleMap(element, options);
-    googleMap.set('_overlays', {});
-    return googleMap;
   }
 
   /**
@@ -1262,15 +1366,64 @@ export class GoogleMaps extends IonicNativePlugin {
    * @return {StreetViewPanorama}
    */
   createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
-    if (element instanceof HTMLElement) {
-      if (element.getAttribute('__pluginMapId')) {
-        console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
-        return;
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      if (element instanceof HTMLElement) {
+        if (element.getAttribute('__pluginMapId')) {
+          console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
+          return;
+        }
       }
+      return new StreetViewPanorama(element, options);
+    } else {
+      const errorMessage: string[] = [
+        '[GoogleMaps]'
+      ];
+      if (!window.cordova) {
+        errorMessage.push('You need to execute "$> ionic cordova run browser".');
+        errorMessage.push('"$> ionic serve" is not supported.');
+      } else {
+        errorMessage.push('cordova-plugin-googlemaps is not installed or not ready yet.');
+      }
+      console.error(errorMessage.join(''));
+
+      if (element instanceof HTMLElement) {
+        displayErrorMessage(element, errorMessage.join('<br />'));
+      } else if (typeof element === 'string') {
+        let targets: any[] = document.querySelectorAll('#' + element);
+        targets = Array.prototype.slice.call(targets, 0);
+        if (targets.length > 0) {
+          targets = targets.filter((target) => {
+            return !target.hasAttribute('__pluginmapid');
+          });
+        }
+        if (targets.length === 1 && targets[0]) {
+          displayErrorMessage(targets[0], errorMessage.join('<br />'));
+        }
+      }
+
+      return null;
     }
-    return new StreetViewPanorama(element, options);
   }
 }
+
+const displayErrorMessage = (element: HTMLElement, message: string) => {
+  const errorDiv: HTMLElement = document.createElement('div');
+  errorDiv.innerHTML = message;
+  errorDiv.style.color = 'red';
+  errorDiv.style.position = 'absolute';
+  errorDiv.style.width = '80%';
+  errorDiv.style.height = '50%';
+  errorDiv.style.top = 0;
+  errorDiv.style.bottom = 0;
+  errorDiv.style.right = 0;
+  errorDiv.style.left = 0;
+  errorDiv.style.padding = 0;
+  errorDiv.style.margin = 'auto';
+
+  element.style.position = 'relative';
+  element.style.backgroundColor = '#ccc7';
+  element.appendChild(errorDiv);
+};
 
 /**
  * @hidden
@@ -2452,12 +2605,20 @@ export class StreetViewPanorama extends BaseClass {
 
       }
     } else {
-      console.error('cordova-plugin-googlemaps is not available!!');
+
+      const errorMessage: string[] = [
+        '[GoogleMaps]'
+      ];
+      if (!window.cordova) {
+        errorMessage.push('You need to execute "$> ionic cordova run browser".');
+        errorMessage.push('"$> ionic serve" is not supported.');
+      } else {
+        errorMessage.push('cordova-plugin-googlemaps is not installed or not ready yet.');
+      }
+      console.error(errorMessage.join(''));
 
       if (element instanceof HTMLElement) {
-        element.style.backgroundColor = '#ccc';
-        element.style.color = 'red';
-        element.innerHTML = 'cordova-plugin-googlemaps is not available.';
+        displayErrorMessage(element, errorMessage.join('<br />'));
       } else if (typeof element === 'string') {
         let targets: any[] = document.querySelectorAll('#' + element);
         targets = Array.prototype.slice.call(targets, 0);
@@ -2467,11 +2628,10 @@ export class StreetViewPanorama extends BaseClass {
           });
         }
         if (targets.length === 1 && targets[0]) {
-          targets[0].style.backgroundColor = '#ccc';
-          targets[0].style.color = 'red';
-          targets[0].innerHTML = 'cordova-plugin-googlemaps is not available.';
+          displayErrorMessage(targets[0], errorMessage.join('<br />'));
         }
       }
+
     }
 
   }
@@ -2648,12 +2808,20 @@ export class GoogleMap extends BaseClass {
         this._objectInstance = GoogleMaps.getPlugin().Map.getMap(null, options);
       }
     } else {
-      console.error('cordova-plugin-googlemaps is not available!!');
+
+      const errorMessage: string[] = [
+        '[GoogleMaps]'
+      ];
+      if (!window.cordova) {
+        errorMessage.push('You need to execute "$> ionic cordova run browser".');
+        errorMessage.push('"$> ionic serve" is not supported.');
+      } else {
+        errorMessage.push('cordova-plugin-googlemaps is not installed or not ready yet.');
+      }
+      console.error(errorMessage.join(''));
 
       if (element instanceof HTMLElement) {
-        element.style.backgroundColor = '#ccc';
-        element.style.color = 'red';
-        element.innerHTML = 'cordova-plugin-googlemaps is not available.';
+        displayErrorMessage(element, errorMessage.join('<br />'));
       } else if (typeof element === 'string') {
         let targets: any[] = document.querySelectorAll('#' + element);
         targets = Array.prototype.slice.call(targets, 0);
@@ -2663,9 +2831,7 @@ export class GoogleMap extends BaseClass {
           });
         }
         if (targets.length === 1 && targets[0]) {
-          targets[0].style.backgroundColor = '#ccc';
-          targets[0].style.color = 'red';
-          targets[0].innerHTML = 'cordova-plugin-googlemaps is not available.';
+          displayErrorMessage(targets[0], errorMessage.join('<br />'));
         }
       }
 
@@ -3373,6 +3539,33 @@ export class GoogleMap extends BaseClass {
           const overlay = new KmlOverlay(this, kmlOverlay);
           this.get('_overlays')[overlayId] = overlay;
           kmlOverlay.one(overlayId + '_remove', () => {
+            if (this.get('_overlays')) {
+              this.get('_overlays')[overlayId] = null;
+              overlay.destroy();
+            }
+          });
+          resolve(overlay);
+        } else {
+          reject();
+        }
+      });
+    });
+  }
+
+  /**
+   * Adds a fusionTable overlay
+   * @param options {FusionTableOverlayOptions} options
+   * @return {Promise<FusionTableOverlay>}
+   */
+  @InstanceCheck()
+  addFusionTableOverlay(options: FusionTableOverlayOptions): Promise<FusionTableOverlay> {
+    return new Promise<FusionTableOverlay>((resolve, reject) => {
+      this._objectInstance.addFusionTableOverlay(options, (fusionTableOverlay: any) => {
+        if (fusionTableOverlay) {
+          const overlayId: string = fusionTableOverlay.getId();
+          const overlay = new FusionTableOverlay(this, fusionTableOverlay);
+          this.get('_overlays')[overlayId] = overlay;
+          fusionTableOverlay.one(overlayId + '_remove', () => {
             if (this.get('_overlays')) {
               this.get('_overlays')[overlayId] = null;
               overlay.destroy();
@@ -4399,6 +4592,79 @@ export class KmlOverlay extends BaseClass {
    */
   @CordovaInstance({ sync: true })
   getDefaultViewport(): CameraPosition<ILatLng | ILatLng[]> { return; }
+
+  /**
+   * Returns the ID of instance.
+   * @return {string}
+   */
+  @CordovaInstance({ sync: true })
+  getId(): string { return; }
+
+  /**
+   * Returns the map instance.
+   * @return {GoogleMap}
+   */
+  getMap(): GoogleMap { return this._map; }
+
+  /**
+   * Changes visibility of the kml overlay
+   * @param visible {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setVisible(visible: boolean): void {}
+
+  /**
+   * Returns true if the kml overlay is visible
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getVisible(): boolean { return; }
+
+  /**
+   * Changes click-ability of the KmlOverlay
+   * @param clickable {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setClickable(clickable: boolean): void {}
+
+  /**
+   * Returns true if the KmlOverlay is clickable
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getClickable(): boolean { return; }
+
+  /**
+   * Remove the KmlOverlay
+   */
+  @CordovaInstance()
+  remove(): void {
+    delete this._objectInstance.getMap().get('_overlays')[this.getId()];
+    this._objectInstance.remove();
+    this.destroy();
+  }
+}
+
+/**
+ * @hidden
+ */
+export class FusionTableOverlay extends BaseClass {
+
+  private _map: GoogleMap;
+
+  constructor(_map: GoogleMap, _objectInstance: any) {
+    super();
+    this._map = _map;
+    this._objectInstance = _objectInstance;
+
+  }
+
+  /**
+   *
+   * @param queryOpts {FusionTableQueryOptions}
+   */
+  @CordovaInstance({ sync: true })
+  query(queryOpts: FusionTableQueryOptions): void {}
 
   /**
    * Returns the ID of instance.

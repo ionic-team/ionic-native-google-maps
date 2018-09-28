@@ -23,4 +23,9 @@
   <td>boolean</td>
   <td>(optional)Turns the 3D buildings layer on or off.</td>
 </tr>
+<tr>
+  <td>gestureBounds</td>
+  <td>ILatLng[]</td>
+  <td>(optional) Panning limitation bounds</td>
+</tr>
 </table>

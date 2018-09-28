@@ -56,3 +56,11 @@ Get the current device location without map.
 </table>
 
 :arrow_right: `Promise<MyLocation>`
+
+### hasPermission()
+
+Return true if application has `geolocation` permission.
+This method works on `Android`, `iOS`, `Browser on Chrome/FireFox` correctly.
+Other browsers (`Safari`, `Opera`, `Microsoft Edge`,...etc) do not work.
+
+:arrow_right: `Promise<boolean>`

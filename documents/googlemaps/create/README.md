@@ -2,7 +2,7 @@
 
 ## Create a map
 
-You can create a google maps using `GoogleMaps.create(divId)`.
+You can create a map view using `GoogleMaps.create(divId)`.
 
 The cordova-plugin-googlemaps has two sides: `JavaScript` and `native`.
 

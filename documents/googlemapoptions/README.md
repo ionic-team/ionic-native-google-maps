@@ -2,7 +2,7 @@
 
 ```typescript
 let options: GoogleMapOptions = {
-  mapType: MapType.HYBRID,
+  mapType: GoogleMapsMapTypeId.HYBRID,
 
   controls: {
     'compass': true,
@@ -60,8 +60,8 @@ this.map = GoogleMaps.create('map_canvas', options);
 </tr>
 <tr>
   <td>mapType</td>
-  <td><a href="../maptype/README.md">MapType</a></td>
-  <td>(optional)maptype</td>
+  <td><a href="../maptype/README.md">GoogleMapsMapTypeId</a></td>
+  <td>(optional)GoogleMapsMapTypeId</td>
 </tr>
 <tr>
   <td>controls</td>

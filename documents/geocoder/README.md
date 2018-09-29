@@ -3,6 +3,10 @@
 - [:orange_book: geocoding](./geocoding/README.md)
 - [:orange_book: reverse geocoding](./reverse_geocoding/README.md)
 
+---------------------------------------------------------------
+## API Reference
+---------------------------------------------------------------
+
 ## Static method
 
 - ### geocode(options?)

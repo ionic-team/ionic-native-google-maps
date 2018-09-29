@@ -80,12 +80,12 @@ this.map.addMarker(options).then((marker: Marker) => {
 </tr>
 <tr>
   <td>infoWindowAnchor</td>
-  <td>Array&lt;x, y&gt;</td>
+  <td>[x: number, y: number]</td>
   <td>(optional)Specify the anchor of the InfoWindow in pixels</td>
 </tr>
 <tr>
   <td>anchor</td>
-  <td>Array&lt;x, y&gt;</td>
+  <td>[x: number, y: number]</td>
   <td>(optional)Specify the anchor of icon image in pixels</td>
 </tr>
 <tr>

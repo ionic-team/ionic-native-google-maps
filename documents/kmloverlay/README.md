@@ -7,7 +7,9 @@ this.map.addKmlOverlay(options: KmlOverlayOptions).then((kmlOverlay: KmlOverlay)
 ```
 
 
-------
+---------------------------------------------------------------
+## API Reference
+---------------------------------------------------------------
 
 ## Instance properties
 
@@ -20,7 +22,7 @@ this.map.addKmlOverlay(options: KmlOverlayOptions).then((kmlOverlay: KmlOverlay)
 </tr>
 <tr>
   <td>camera</td>
-  <td>Array&lt;<a href="ilatlng/README.md">ILatLng</a>&gt;</td>
+  <td><a href="ilatlng/README.md">ILatLng</a>[]</td>
   <td>Camera target bounds that contains all overlays</td>
 </tr>
 <tr>
@@ -30,80 +32,80 @@ this.map.addKmlOverlay(options: KmlOverlayOptions).then((kmlOverlay: KmlOverlay)
 </tr>
 </table>
 
-------
+---------------------------------------------------------------
 
 ## Instance methods
 
-### getId()
+  -### getId()
 
-Returns the ID of instance.
+    Returns the ID of instance.
 
-:arrow_right: Returns `string`
+    :arrow_right: Returns `string`
 
-### getMap()
+  -### getMap()
 
-Returns the map instance.
+    Returns the map instance.
 
-:arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
+    :arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
 
-### getDefaultViewport()
+  -### getDefaultViewport()
 
-Returns the viewport to contains all overlays
+    Returns the viewport to contains all overlays
 
-:arrow_right: Returns [CameraPosition](../cameraposition/README.md)&lt;[ILatLng](../ilatlng/README.md) | [ILatLng[]](../ilatlng/README.md)&gt;.
-
-
-### setVisible(visible)
-
-Set marker visibility
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>visible</td>
-  <td>boolean</td>
-  <td>true or false</td>
-</tr>
-</table>
+    :arrow_right: Returns [CameraPosition](../cameraposition/README.md)&lt;[ILatLng](../ilatlng/README.md) | [ILatLng[]](../ilatlng/README.md)&gt;.
 
 
-### getVisible()
+  -### setVisible(visible)
 
-Returns true if the marker is visible.
+    Set marker visibility
 
-:arrow_right: Returns `boolean`.
-
-
-### setClickable(clickable)
-
-Changes click-ability of the KmlOverlay
-
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>clickable</td>
-  <td>boolean</td>
-  <td>true or false</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>visible</td>
+      <td>boolean</td>
+      <td>true or false</td>
+    </tr>
+    </table>
 
 
-### getClickable()
+  -### getVisible()
 
-Returns true if the KmlOverlay is clickable.
+    Returns true if the marker is visible.
 
-:arrow_right: Returns `boolean`.
+    :arrow_right: Returns `boolean`.
+
+
+  -### setClickable(clickable)
+
+    Changes click-ability of the KmlOverlay
+
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>clickable</td>
+      <td>boolean</td>
+      <td>true or false</td>
+    </tr>
+    </table>
+
+
+  -### getClickable()
+
+    Returns true if the KmlOverlay is clickable.
+
+    :arrow_right: Returns `boolean`.
 
 
 
-### remove()
+  -### remove()
 
-Remove the KmlOverlay
+    Remove the KmlOverlay

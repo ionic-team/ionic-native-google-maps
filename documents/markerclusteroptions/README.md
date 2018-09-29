@@ -40,7 +40,7 @@ this.map.addMarkerCluster(options).then((markerCluster: MarkerCluster) => {
 </tr>
 <tr>
   <td>markers</td>
-  <td>Array&lt;<a href="../markeroptions/README.md">MarkerOptions</a>&gt;</td>
+  <td><a href="../markeroptions/README.md">MarkerOptions</a>[]</td>
   <td>Position list<br>
 [<br>
 &nbsp;&nbsp;{title: "store A", position: {lat: ..., lng: ...}},<br>
@@ -51,7 +51,7 @@ this.map.addMarkerCluster(options).then((markerCluster: MarkerCluster) => {
 </tr>
 <tr>
   <td>icons</td>
-  <td>Array&lt;<a href="../markerclustericon/README.md">MarkerClusterIcon</a>&gt;</td>
+  <td><a href="../markerclustericon/README.md">MarkerClusterIcon</a>[]</td>
   <td>Conditions of clustering<br>
 [<br>
 &nbsp;&nbsp;{icon: "assets/small.png", min: 2, max: 10},<br>

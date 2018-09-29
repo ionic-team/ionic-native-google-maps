@@ -24,4 +24,9 @@
   <td>boolean</td>
   <td>(optional)Do not display the default infoWindow if true.(Default is false)</td>
 </tr>
+<tr>
+  <td>icon</td>
+  <td><a href="../markeroptions/README.md">MarkerOptions</a></td>
+  <td>(optional)Marker option for KML pointer</td>
+</tr>
 </table>

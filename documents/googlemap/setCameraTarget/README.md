@@ -3,7 +3,7 @@
 Set the camera target(latitude/longitude) position.
 
 ```typescript
-map.setCameraTarget(latLng)
+map.setCameraTarget(latLng | <a href="../ilatlng/README.md">ILatLng</a>[])
 ```
 
 ## Parameters

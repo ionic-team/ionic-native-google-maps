@@ -6,240 +6,244 @@ this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
 });
 ```
 
+---------------------------------------------------------------
+## API Reference
+---------------------------------------------------------------
+
 
 ## Instance methods
 
-### getId()
+  -### getId()
 
-Returns the ID of instance.
+    Returns the ID of instance.
 
-:arrow_right: Returns `string`
+    :arrow_right: Returns `string`
 
-### getMap()
+  -### getMap()
 
-Return the map instance.
+    Return the map instance.
 
-:arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
+    :arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
 
-### setPoints(points)
+  -### setPoints(points)
 
-Changes the polygon points.
+    Changes the polygon points.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>points</td>
-  <td>Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;</td>
-  <td>new position</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>points</td>
+      <td>Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;</td>
+      <td>new position</td>
+    </tr>
+    </table>
 
 
-### getPoints()
+  -### getPoints()
 
-Returns an instance of the BaseArrayClass. You can modify the points.
+    Returns an instance of the BaseArrayClass. You can modify the points.
 
-:arrow_right: Returns [BaseArrayClass](../basearrayclass/README.md)&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;.
+    :arrow_right: Returns [BaseArrayClass](../basearrayclass/README.md)&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;.
 
 
-### setHoles(holes)
+  -### setHoles(holes)
 
-Changes the polygon holes.
+    Changes the polygon holes.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>holes</td>
-  <td>Array&lt;Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;&gt;</td>
-  <td>new holes</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>holes</td>
+      <td><a href="../ilatlng/README.md">ILatLng</a>[][]</td>
+      <td>new holes</td>
+    </tr>
+    </table>
 
 
-### getHoles()
+  -### getHoles()
 
-Returns an instance of the BaseArrayClass. You can modify the points.
+    Returns an instance of the BaseArrayClass. You can modify the points.
 
-:arrow_right: Returns [BaseArrayClass](../basearrayclass/README.md)&lt;ILatLng[]&gt;.
+    :arrow_right: Returns [BaseArrayClass](../basearrayclass/README.md)&lt;ILatLng[]&gt;.
 
-### setGeoDesic(geoDesic)
+  -### setGeoDesic(geoDesic)
 
-When true, edges of the polygon are interpreted as geodesic and will follow the curvature of the Earth.
+    When true, edges of the polygon are interpreted as geodesic and will follow the curvature of the Earth.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>geoDesic</td>
-  <td>boolean</td>
-  <td>true or false</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>geoDesic</td>
+      <td>boolean</td>
+      <td>true or false</td>
+    </tr>
+    </table>
 
 
-### getGeodesic()
+  -### getGeodesic()
 
-Returns true if the polygon is geodesic
+    Returns true if the polygon is geodesic
 
-:arrow_right: Returns `boolean`.
+    :arrow_right: Returns `boolean`.
 
-### setStrokeWidth(strokeWidth)
+  -### setStrokeWidth(strokeWidth)
 
-Changes the stroke width.
+    Changes the stroke width.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>strokeWidth</td>
-  <td>number</td>
-  <td>stroke width in pixel</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>strokeWidth</td>
+      <td>number</td>
+      <td>stroke width in pixel</td>
+    </tr>
+    </table>
 
 
-### getStrokeWidth()
+  -### getStrokeWidth()
 
-Returns the current stroke width (unit: pixel).
+    Returns the current stroke width (unit: pixel).
 
-:arrow_right: Returns `number`.
+    :arrow_right: Returns `number`.
 
-### setStrokeColor(color)
+  -### setStrokeColor(color)
 
-Changes the polygon color
+    Changes the polygon color
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>color</td>
-  <td>string</td>
-  <td>HTML color strings</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>color</td>
+      <td>string</td>
+      <td>HTML color strings</td>
+    </tr>
+    </table>
 
 
-### getStrokeColor()
+  -### getStrokeColor()
 
-Returns the current stroke color.
+    Returns the current stroke color.
 
-:arrow_right: Returns `string`.
+    :arrow_right: Returns `string`.
 
 
-### setFillColor(color)
+  -### setFillColor(color)
 
-Changes the filling color (inner color).
+    Changes the filling color (inner color).
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>color</td>
-  <td>number</td>
-  <td>HTML color strings</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>color</td>
+      <td>number</td>
+      <td>HTML color strings</td>
+    </tr>
+    </table>
 
 
-### getFillColor()
+  -### getFillColor()
 
-Returns the current polygon filling color (inner color).
+    Returns the current polygon filling color (inner color).
 
-:arrow_right: Returns `string`.
+    :arrow_right: Returns `string`.
 
-### setClickable(clickable)
+  -### setClickable(clickable)
 
-Changes click-ability of the polygon
+    Changes click-ability of the polygon
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>clickable</td>
-  <td>boolean</td>
-  <td>true or false</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>clickable</td>
+      <td>boolean</td>
+      <td>true or false</td>
+    </tr>
+    </table>
 
 
-### getClickable()
+  -### getClickable()
 
-Returns true if the polygon is clickable.
+    Returns true if the polygon is clickable.
 
-:arrow_right: Returns `boolean`.
+    :arrow_right: Returns `boolean`.
 
-### setVisible(clickable)
+  -### setVisible(clickable)
 
-Set polygon visibility
+    Set polygon visibility
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>visible</td>
-  <td>boolean</td>
-  <td>true or false</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>visible</td>
+      <td>boolean</td>
+      <td>true or false</td>
+    </tr>
+    </table>
 
 
-### getVisible()
+  -### getVisible()
 
-Returns true if the polygon is visible.
+    Returns true if the polygon is visible.
 
-:arrow_right: Returns `boolean`.
+    :arrow_right: Returns `boolean`.
 
 
-### setZIndex(index)
+  -### setZIndex(index)
 
-Changes the polygon zIndex order.
+    Changes the polygon zIndex order.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>index</td>
-  <td>number</td>
-  <td>z-index</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td>number</td>
+      <td>z-index</td>
+    </tr>
+    </table>
 
 
-### getZIndex()
+  -### getZIndex()
 
-Returns the current polygon zIndex.
+    Returns the current polygon zIndex.
 
-:arrow_right: Returns `number`.
+    :arrow_right: Returns `number`.
 
-### remove()
+  -### remove()
 
-Remove the polygon.
+    Remove the polygon.

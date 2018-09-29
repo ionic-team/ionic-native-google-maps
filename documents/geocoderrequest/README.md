@@ -83,10 +83,10 @@ Geocoder.geocode(options)
 </tr>
 <tr>
   <td>address</td>
-  <td>string | Array&lt;string&gt;</td>
+  <td>string | string[]</td>
 </tr>
 <tr>
   <td>position</td>
-  <td>ILatLng | Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;</td>
+  <td>ILatLng | <a href="../ilatlng/README.md">ILatLng</a>[]</td>
 </tr>
 </table>

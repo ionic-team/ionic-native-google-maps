@@ -1,5 +1,9 @@
 # Environment class
 
+---------------------------------------------------------------
+## API Reference
+---------------------------------------------------------------
+
 ## Static method
 
 - ### getLicenseInfo() [:orange_book:](./getLicenseInfo/README.md)
@@ -22,5 +26,22 @@
     <td>color</td>
     <td>string</td>
     <td>HTML color string</td>
+  </tr>
+  </table>
+
+- ### setEnv(options) [:orange_book:](./setEnv/README.md)
+
+  Specifies environment variables.
+
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>options</td>
+    <td><a href="../envoptions/README.md">EnvOptions</a></td>
+    <td>environment variables</td>
   </tr>
   </table>

@@ -19,8 +19,8 @@ let bounds: LatLngBounds = new LatLngBounds([
 </tr>
 <tr>
   <td>points</td>
-  <td>Array&lt;<a href="../ilatlngbounds/README.md">LatLngBounds</a>&gt;</td>
-  <td>(optional)array of ILatLng</td>
+  <td><a href="../ilatlngbounds/README.md">LatLngBounds</a>[]</td>
+  <td>(optional)ILatLng[]</td>
 </tr>
 </table>
 

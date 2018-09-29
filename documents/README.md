@@ -11,8 +11,8 @@ Please follow the instruction.
 
 ```
 $> ionic cordova plugin add cordova-plugin-googlemaps \
- Â --variable API_KEY_FOR_ANDROID="(API_KEY_FOR_ANDROID)" \
- Â --variable API_KEY_FOR_IOS="(API_KEY_FOR_IOS)"
+  --variable API_KEY_FOR_ANDROID="(API_KEY_FOR_ANDROID)" \
+  --variable API_KEY_FOR_IOS="(API_KEY_FOR_IOS)"
 
 $> npm install --save @ionic-native/core@latest @ionic-native/google-maps@latest
 ```
@@ -27,7 +27,8 @@ import {
   GoogleMapOptions,
   CameraPosition,
   MarkerOptions,
-  Marker
+  Marker,
+  Environment
 } from '@ionic-native/google-maps';
 import { Component } from "@angular/core/";
 
@@ -44,6 +45,12 @@ export class HomePage {
   }
 
   loadMap() {
+
+    // This code is necessary for browser
+    Environment.setEnv({
+      'API_KEY_FOR_BROWSER_RELEASE': '(your api key for `https://`)',
+      'API_KEY_FOR_BROWSER_DEBUG': '(your api key for `http://`)'
+    });
 
     let mapOptions: GoogleMapOptions = {
       camera: {
@@ -77,7 +84,7 @@ export class HomePage {
 ### Understanding the \@ionic-native/google-maps plugin
 
 Before using the \@ionic-native/google-maps plugin, reading this slides helps you to understand this plugin.
-https://docs.google.com/presentation/d/1zlkmoSY4AzDJc_P4IqWLnzct41IqHyzGkLeyhlAxMDE/edit#slide=id.p
+[Overview of @ionic-native/google-maps](https://docs.google.com/presentation/d/e/2PACX-1vScoho1ensbR4qCI9AIuQN55BZVvK73pAjI7sumDvW3CrxxHnrmpXWUjx2-8CpFibqU1EjLKCRhuthJ/pub?start=false&loop=false&delayms=3000)
 
 ### Static Class
 
@@ -105,6 +112,7 @@ https://docs.google.com/presentation/d/1zlkmoSY4AzDJc_P4IqWLnzct41IqHyzGkLeyhlAx
 - [Polygon](./polygon/README.md)
 - [KmlOverlay](./kmloverlay/README.md)
 - [TileOverlay](./tileoverlay/README.md)
+- [StreetViewPanorama](./streetviewpanorama/README.md)
 
 ### Interfaces
 
@@ -132,6 +140,15 @@ https://docs.google.com/presentation/d/1zlkmoSY4AzDJc_P4IqWLnzct41IqHyzGkLeyhlAx
 - [KmlOverlayOptions](./kmloverlayoption/README.md)
 - [VisibleRegion](./visibleregion/README.md)
 - [ToDataUrlOptions](./todataurloptions/README.md)
+- [EnvOptions](./envoptions/README.md)
+- [StreetViewOptions](./streetviewoptions/README.md)
+- [StreetViewCameraPano](./streetviewcamerapano/README.md)
+- [StreetViewCameraPositionOption](./streetviewcameraposition/README.md)
+- [StreetViewControlOptions](./streetviewcontroloptions/README.md)
+- [StreetViewGestureOptions](./streetviewgestureoptions/README.md)
+- [StreetViewSetPositionOption](./streetviewsetpositionoption/README.md)
+- [StreetViewLocation](./streetviewlocation/README.md)
+- [StreetViewNavigationLink](./streetviewnavigationlink/README.md)
 
 ### Constants
 - [GoogleMapsAnimation](./googlemapsanimation/README.md)

@@ -23,7 +23,7 @@ Not all fields are filled. Depends on the response of Google and Apple.
   <td>extra</td>
   <td>{<br>
 &nbsp;&nbsp;featureName: string,<br>
-&nbsp;&nbsp;lines: Array&lt;string&gt;,<br>
+&nbsp;&nbsp;lines: string[],<br>
 &nbsp;&nbsp;permises: string,<br>
 &nbsp;&nbsp;phone: string,<br>
 &nbsp;&nbsp;url: string<br>

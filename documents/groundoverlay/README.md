@@ -121,7 +121,7 @@ groundOverlay.on(GoogleMapsEvent.GROUND_OVERLAY_CLICK).subscribe((params: any[])
   </tr>
   <tr>
     <td>bounds</td>
-    <td>Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;</td>
+    <td><a href="../ilatlng/README.md">ILatLng</a>[]</td>
     <td>new bounds</td>
   </tr>
   </table>

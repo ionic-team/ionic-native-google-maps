@@ -11,7 +11,7 @@ _This class extends [BaseClass](../BaseClass/README.md)_.
     - <a href="#camera">Camera</a>
   - <a href="#api-reference">API Reference</a>
 
-------------
+---------------------------------------------------------------
 
 ## Overview
 
@@ -54,7 +54,7 @@ export class MapPage {
 
 <img src="./embed_map.gif" width="150">
 
-------------
+---------------------------------------------------------------
 
 ### How does the plugin work?
 
@@ -82,7 +82,7 @@ Before using this plugin, please understand how this plugin work.
 
   <img src="./camera.gif" width="150">
 
-------------
+---------------------------------------------------------------
 
 ### Events
 
@@ -152,7 +152,7 @@ Before using this plugin, please understand how this plugin work.
   });
   ```
 
-------------
+---------------------------------------------------------------
 
 ### Camera
 
@@ -560,7 +560,7 @@ Before using this plugin, please understand how this plugin work.
 
   - ### setMapTypeId(mapTypeId) [:orange_book:](./setMapTypeId/README.md)
 
-    Changes the map type id. Available constants are one of the [MapType](../maptype/README.md)
+    Changes the map type id. Available constants are one of the [GoogleMapsMapTypeId](../maptype/README.md)
 
   - ### animateCamera(cameraPosition: CameraPosition<any>) [:orange_book:](./animateCamera/README.md)
 
@@ -671,7 +671,7 @@ Before using this plugin, please understand how this plugin work.
     <tr>
       <td>target</td>
       <td>
-        <a href="../ilatlng/README.md">ILatLng</a> | Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;</td>
+        <a href="../ilatlng/README.md">ILatLng</a> | <a href="../ilatlng/README.md">ILatLng</a>[]</td>
       <td>Specify camera target</td>
     </tr>
     </table>
@@ -1054,7 +1054,7 @@ Before using this plugin, please understand how this plugin work.
   </tr>
   <tr>
     <td>params[0]</td>
-    <td>Map</td>
+    <td>GoogleMap</td>
     <td>map instance</td>
   </tr>
   </table>
@@ -1076,7 +1076,7 @@ Before using this plugin, please understand how this plugin work.
   </tr>
   <tr>
     <td>params[1]</td>
-    <td>Map</td>
+    <td>GoogleMap</td>
     <td>map instance</td>
   </tr>
   </table>
@@ -1098,7 +1098,7 @@ Before using this plugin, please understand how this plugin work.
   </tr>
   <tr>
     <td>params[1]</td>
-    <td>Map</td>
+    <td>GoogleMap</td>
     <td>map instance</td>
   </tr>
   </table>
@@ -1115,7 +1115,7 @@ Before using this plugin, please understand how this plugin work.
   </tr>
   <tr>
     <td>params[0]</td>
-    <td>Map</td>
+    <td>GoogleMap</td>
     <td>map instance</td>
   </tr>
   </table>
@@ -1137,7 +1137,7 @@ Before using this plugin, please understand how this plugin work.
   </tr>
   <tr>
     <td>params[1]</td>
-    <td>Map</td>
+    <td>GoogleMap</td>
     <td>map instance</td>
   </tr>
   </table>
@@ -1164,7 +1164,7 @@ Before using this plugin, please understand how this plugin work.
   </tr>
   <tr>
     <td>params[2]</td>
-    <td>Map</td>
+    <td>GoogleMap</td>
     <td>map instance</td>
   </tr>
   </table>
@@ -1186,7 +1186,7 @@ Before using this plugin, please understand how this plugin work.
   </tr>
   <tr>
     <td>params[1]</td>
-    <td>Map</td>
+    <td>GoogleMap</td>
     <td>map instance</td>
   </tr>
   </table>
@@ -1204,7 +1204,7 @@ Before using this plugin, please understand how this plugin work.
   <tr>
   <tr>
     <td>params[0]</td>
-    <td>Map</td>
+    <td>GoogleMap</td>
     <td>map instance</td>
   </tr>
   </table>

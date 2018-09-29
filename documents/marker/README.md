@@ -7,324 +7,328 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 ```
 
 
+---------------------------------------------------------------
+## API Reference
+---------------------------------------------------------------
+
 ## Instance methods
 
-### getId()
+  -### getId()
 
-Returns the ID of instance.
+    Returns the ID of instance.
 
-:arrow_right: Returns `string`
+    :arrow_right: Returns `string`
 
-### getMap()
+  -### getMap()
 
-Return the map instance.
+    Return the map instance.
 
-:arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
+    :arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
 
-### setPosition(position)
+  -### setPosition(position)
 
-Set the marker position.
+    Set the marker position.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>position</td>
-  <td><a href="../ilatlng/README.md">ILatLng</a></td>
-  <td>new position</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>position</td>
+      <td><a href="../ilatlng/README.md">ILatLng</a></td>
+      <td>new position</td>
+    </tr>
+    </table>
 
-### getPosition()
+  -### getPosition()
 
-Returns the marker position.
+    Returns the marker position.
 
-:arrow_right: Returns <a href="../ilatlng/README.md">ILatLng</a>.
+    :arrow_right: Returns <a href="../ilatlng/README.md">ILatLng</a>.
 
-### showInfoWindow()
+  -### showInfoWindow()
 
-Show the normal infoWindow of the marker.
+    Show the normal infoWindow of the marker.
 
-### hideInfoWindow()
+  -### hideInfoWindow()
 
-Hide the normal infoWindow of the marker.
+    Hide the normal infoWindow of the marker.
 
-### setAnimation(animation)
+  -### setAnimation(animation)
 
-Specify the animation either `DROP` or `BOUNCE`.
+    Specify the animation either `DROP` or `BOUNCE`.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>animation</td>
-  <td>string</td>
-  <td>`DROP` or `BOUNCE`</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>animation</td>
+      <td>string</td>
+      <td>`DROP` or `BOUNCE`</td>
+    </tr>
+    </table>
 
-### setDisableAutoPan(disableAutoPan)
+  -### setDisableAutoPan(disableAutoPan)
 
-Set true if you **do not want** to move the map when you click on the marker.
+    Set true if you **do not want** to move the map when you click on the marker.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>disableAutoPan</td>
-  <td>boolean</td>
-  <td>true or false</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>disableAutoPan</td>
+      <td>boolean</td>
+      <td>true or false</td>
+    </tr>
+    </table>
 
 
 
-### setTitle(title)
+  -### setTitle(title)
 
-Changes title of the normal infoWindow.
+    Changes title of the normal infoWindow.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>title</td>
-  <td>string</td>
-  <td>new title</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>string</td>
+      <td>new title</td>
+    </tr>
+    </table>
 
 
-### getTile()
+  -### getTile()
 
-Returns the current title strings.
+    Returns the current title strings.
 
-:arrow_right: Returns `string`.
+    :arrow_right: Returns `string`.
 
 
 
-### setSnippet(snippet)
+  -### setSnippet(snippet)
 
-Changes snippet of the normal infoWindow.
+    Changes snippet of the normal infoWindow.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>snippet</td>
-  <td>string</td>
-  <td>new snippet</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>snippet</td>
+      <td>string</td>
+      <td>new snippet</td>
+    </tr>
+    </table>
 
 
-### getSnippet()
+  -### getSnippet()
 
-Returns the current snippet strings.
+    Returns the current snippet strings.
 
-:arrow_right: Returns `string`.
+    :arrow_right: Returns `string`.
 
 
 
-### setIconAnchor(x, y)
+  -### setIconAnchor(x, y)
 
-Changes the info window anchor. This defaults to 50% from the left of the image and at the bottom of the image.
+    Changes the info window anchor. This defaults to 50% from the left of the image and at the bottom of the image.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>x</td>
-  <td>number</td>
-  <td>Distance from left of the icon image in pixels.</td>
-</tr>
-<tr>
-  <td>y</td>
-  <td>number</td>
-  <td>Distance from top of the icon image in pixels.</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>x</td>
+      <td>number</td>
+      <td>Distance from left of the icon image in pixels.</td>
+    </tr>
+    <tr>
+      <td>y</td>
+      <td>number</td>
+      <td>Distance from top of the icon image in pixels.</td>
+    </tr>
+    </table>
 
 
-### setInfoWindowAnchor(x, y)
+  -### setInfoWindowAnchor(x, y)
 
-Changes the info window anchor. This defaults to 50% from the left of the image and at the top of the image.
+    Changes the info window anchor. This defaults to 50% from the left of the image and at the top of the image.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>x</td>
-  <td>number</td>
-  <td>Distance from left of the icon image in pixels.</td>
-</tr>
-<tr>
-  <td>y</td>
-  <td>number</td>
-  <td>Distance from top of the icon image in pixels.</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>x</td>
+      <td>number</td>
+      <td>Distance from left of the icon image in pixels.</td>
+    </tr>
+    <tr>
+      <td>y</td>
+      <td>number</td>
+      <td>Distance from top of the icon image in pixels.</td>
+    </tr>
+    </table>
 
 
-### isInfoWindowShown()
+  -### isInfoWindowShown()
 
-Returns true if the infoWindow is shown on the marker
+    Returns true if the infoWindow is shown on the marker
 
-:arrow_right: Returns `boolean`.
+    :arrow_right: Returns `boolean`.
 
 
-### setDraggable(draggable)
+  -### setDraggable(draggable)
 
-Set true if you allow all users to drag the marker.
+    Set true if you allow all users to drag the marker.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>draggable</td>
-  <td>boolean</td>
-  <td>true or false</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>draggable</td>
+      <td>boolean</td>
+      <td>true or false</td>
+    </tr>
+    </table>
 
-### isDraggable(draggable)
+  -### isDraggable(draggable)
 
-Returns true if the marker drag is enabled.
+    Returns true if the marker drag is enabled.
 
-:arrow_right: Returns `boolean`.
+    :arrow_right: Returns `boolean`.
 
 
-### setFlat(flat)
+  -### setFlat(flat)
 
-Set true if you want to be flat marker.
+    Set true if you want to be flat marker.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>flat</td>
-  <td>boolean</td>
-  <td>true or false</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>flat</td>
+      <td>boolean</td>
+      <td>true or false</td>
+    </tr>
+    </table>
 
-### setIcon(icon)
+  -### setIcon(icon)
 
-Set true if you want to be flat marker.
+    Set true if you want to be flat marker.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>icon</td>
-  <td><a href="../markericon/README.md">MarkerIcon</a></td>
-  <td>new image</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>icon</td>
+      <td><a href="../markericon/README.md">MarkerIcon</a></td>
+      <td>new image</td>
+    </tr>
+    </table>
 
-### setOpacity(opacity)
+  -### setOpacity(opacity)
 
-Changes the opacity of the marker from 0.0 to 1.0
+    Changes the opacity of the marker from 0.0 to 1.0
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>opacity</td>
-  <td>number</td>
-  <td>from 0.0 to 1.0</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>opacity</td>
+      <td>number</td>
+      <td>from 0.0 to 1.0</td>
+    </tr>
+    </table>
 
 
 
-### getOpacity()
+  -### getOpacity()
 
-Returns the marker rotation angle.
+    Returns the marker rotation angle.
 
-:arrow_right: Returns `number`.
+    :arrow_right: Returns `number`.
 
-### setVisible(visible)
+  -### setVisible(visible)
 
-Set marker visibility
+    Set marker visibility
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>visible</td>
-  <td>boolean</td>
-  <td>true or false</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>visible</td>
+      <td>boolean</td>
+      <td>true or false</td>
+    </tr>
+    </table>
 
 
-### isVisible()
+  -### isVisible()
 
-Returns true if the marker is visible.
+    Returns true if the marker is visible.
 
-:arrow_right: Returns `boolean`.
+    :arrow_right: Returns `boolean`.
 
 
-### setZIndex(index)
+  -### setZIndex(index)
 
-Changes the marker zIndex order.
+    Changes the marker zIndex order.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>index</td>
-  <td>number</td>
-  <td>z-index</td>
-</tr>
-</table>
+    <table>
+    <tr>
+      <th>Params</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td>number</td>
+      <td>z-index</td>
+    </tr>
+    </table>
 
 
-### getZIndex()
+  -### getZIndex()
 
-Returns the current marker zIndex.
+    Returns the current marker zIndex.
 
-:arrow_right: Returns `number`.
+    :arrow_right: Returns `number`.
 
-### remove()
+  -### remove()
 
-Remove the marker.
+    Remove the marker.

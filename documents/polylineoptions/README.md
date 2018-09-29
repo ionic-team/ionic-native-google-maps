@@ -32,7 +32,7 @@ this.map.addPolyline(options).then((polyline: Polyline) => {
 </tr>
 <tr>
   <td>points</td>
-  <td>Array&lt;<a href="../ilatlng/README.md">ILatLng&gt;</td>
+  <td><a href="../ilatlng/README.md">ILatLng</a>[]</td>
   <td>Pass ILatLng[] to specify the vertixes.<br>You need to contain two points at least.</td>
 </tr>
 <tr>

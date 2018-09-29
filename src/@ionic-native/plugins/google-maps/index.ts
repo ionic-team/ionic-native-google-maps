@@ -1066,25 +1066,32 @@ export interface StreetViewCameraPosition {
   tilt?: number;
   zoom?: number;
 }
+
+export interface StreetViewControlOptions {
+  streetNames?: boolean;
+  navigation?: boolean;
+}
+export interface StreetViewGestureOptions {
+  panning?: boolean;
+  zooming?: boolean;
+}
+
 export interface StreetViewOptions {
 
+  /*
+   * camera: [options] Initial camera position
+   */
   camera?: StreetViewCameraPano | StreetViewCameraPosition;
 
   /**
    * controls [options]
    */
-  controls?: {
-    streetNames?: boolean;
-    navigation?: boolean;
-  };
+  controls?: StreetViewControlOptions;
 
   /**
    * gestures [options]
    */
-  gestures?: {
-    padding?: boolean;
-    zooming?: boolean;
-  };
+  gestures?: StreetViewGestureOptions;
 
   /**
    * Accept extra properties for future updates
@@ -1425,6 +1432,30 @@ const displayErrorMessage = (element: HTMLElement, message: string) => {
   element.appendChild(errorDiv);
 };
 
+const normalizeArgumentsOfEventListener = (_objectInstance: any, ...args: any[]): any[] => {
+  if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
+    if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
+      args[args.length - 1] = this;
+    } else if (this instanceof MarkerCluster) {
+      let overlay: Marker = this.get(args[args.length - 1].getId());
+      if (!overlay) {
+        const markerJS: any = args[args.length - 1];
+        const markerId: string = markerJS.getId();
+        const markerCluster: MarkerCluster = this as MarkerCluster;
+        overlay = new Marker(markerCluster.getMap(), markerJS);
+        this.get('_overlays')[markerId] = overlay;
+        markerJS.one(markerJS.getId() + '_remove', () => {
+          this.get('_overlays')[markerId] = null;
+        });
+      }
+      args[args.length - 1] = overlay;
+    } else {
+      args[args.length - 1] = this._objectInstance.getMap().get('_overlays')[args[args.length - 1].getId()];
+    }
+  }
+  return args;
+};
+
 /**
  * @hidden
  * https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/BaseClass/README.md
@@ -1450,28 +1481,41 @@ export class BaseClass {
   @InstanceCheck({ observable: true })
   addEventListener(eventName: string): Observable<any> {
     return new Observable((observer) => {
-      this._objectInstance.on(eventName, (...args: any[]) => {
-        if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
-            args[args.length - 1] = this;
-          } else if (this instanceof MarkerCluster) {
-            let overlay: Marker = this.get(args[args.length - 1].getId());
-            if (!overlay) {
-              const markerJS: any = args[args.length - 1];
-              const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = this as MarkerCluster;
-              overlay = new Marker(markerCluster.getMap(), markerJS);
-              this.get('_overlays')[markerId] = overlay;
-              markerJS.one(markerJS.getId() + '_remove', () => {
-                this.get('_overlays')[markerId] = null;
-              });
-            }
-            args[args.length - 1] = overlay;
-          } else {
-            args[args.length - 1] = this._objectInstance.getMap().get('_overlays')[args[args.length - 1].getId()];
-          }
-        }
-        observer.next(args);
+      this._objectInstance.addEventListener(eventName, (...args: any[]) => {
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+        observer.next(newArgs);
+      });
+    });
+  }
+
+
+  /**
+   * Attaches the handler for the event that is thrown by the target, where the minimum interval between events (in milliseconds) is specified as a parameter.
+   * @param eventName {string} event name you want to observe.
+   * @param throttleInterval {number} throttle interval in milliseconds
+   * @return {Observable<any>}
+   */
+  addThrottledEventListener(eventName: string, throttleInterval: number): Observable<any> {
+    return new Observable((observer) => {
+      this._objectInstance.addThrottledEventListener(eventName, (...args: any[]) => {
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+        observer.next(newArgs);
+      });
+    });
+  }
+
+
+  /**
+   * Adds an event listener that works once.
+   * @param eventName {string} event name you want to observe.
+   * @return {Promise<any>}
+   */
+  @InstanceCheck()
+  addEventListenerOnce(eventName: string): Promise<any> {
+    return getPromise<any>((resolve) => {
+      this._objectInstance.one(eventName, (...args: any[]) => {
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+        resolve(newArgs);
       });
     });
   }
@@ -1483,31 +1527,8 @@ export class BaseClass {
    */
   @InstanceCheck()
   addListenerOnce(eventName: string): Promise<any> {
-    return getPromise<any>((resolve) => {
-      this._objectInstance.one(eventName, (...args: any[]) => {
-        if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
-            args[args.length - 1] = this;
-          } else if (this instanceof MarkerCluster) {
-            let overlay: Marker = this.get(args[args.length - 1].getId());
-            if (!overlay) {
-              const markerJS: any = args[args.length - 1];
-              const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = this as MarkerCluster;
-              overlay = new Marker(markerCluster.getMap(), markerJS);
-              this.get('_overlays')[markerId] = overlay;
-              markerJS.one(markerJS.getId() + '_remove', () => {
-                this.get('_overlays')[markerId] = null;
-              });
-            }
-            args[args.length - 1] = overlay;
-          } else {
-            args[args.length - 1] = this._objectInstance.getMap().get('_overlays')[args[args.length - 1].getId()];
-          }
-        }
-        resolve(args);
-      });
-    });
+    console.warn('[GoogleMaps] "addListenerOnce" is deprecated. Please use "addEventListenerOnce".');
+    return this.addEventListenerOnce(eventName);
   }
 
   /**
@@ -1549,27 +1570,23 @@ export class BaseClass {
   on(eventName: string): Observable<any> {
     return new Observable((observer) => {
       this._objectInstance.on(eventName, (...args: any[]) => {
-        if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
-            args[args.length - 1] = this;
-          } else if (this instanceof MarkerCluster) {
-            let overlay: Marker = this.get(args[args.length - 1].getId());
-            if (!overlay) {
-              const markerJS: any = args[args.length - 1];
-              const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = this as MarkerCluster;
-              overlay = new Marker(markerCluster.getMap(), markerJS);
-              this.get('_overlays')[markerId] = overlay;
-              markerJS.one(markerJS.getId() + '_remove', () => {
-                this.get('_overlays')[markerId] = null;
-              });
-            }
-            args[args.length - 1] = overlay;
-          } else {
-            args[args.length - 1] = this._objectInstance.getMap().get('_overlays')[args[args.length - 1].getId()];
-          }
-        }
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
         observer.next(args);
+      });
+    });
+  }
+
+  /**
+   * Alias of `addThrottledEventListener`
+   * @param key {string} The property name you want to observe.
+   * @return {Observable<any>}
+   */
+  @InstanceCheck({ observable: true })
+  onThrottled(eventName: string): Observable<any> {
+    return new Observable((observer) => {
+      this._objectInstance.onThrottled(eventName, (...args: any[]) => {
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+        observer.next(newArgs);
       });
     });
   }
@@ -1583,29 +1600,19 @@ export class BaseClass {
   one(eventName: string): Promise<any> {
     return getPromise<any>((resolve) => {
       this._objectInstance.one(eventName, (...args: any[]) => {
-        if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
-            args[args.length - 1] = this;
-          } else if (this instanceof MarkerCluster) {
-            let overlay: Marker = this.get(args[args.length - 1].getId());
-            if (!overlay) {
-              const markerJS: any = args[args.length - 1];
-              const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = this as MarkerCluster;
-              overlay = new Marker(markerCluster.getMap(), markerJS);
-              this.get('_overlays')[markerId] = overlay;
-              markerJS.one(markerJS.getId() + '_remove', () => {
-                this.get('_overlays')[markerId] = null;
-              });
-            }
-            args[args.length - 1] = overlay;
-          } else {
-            args[args.length - 1] = this._objectInstance.getMap().get('_overlays')[args[args.length - 1].getId()];
-          }
-        }
-        resolve(args);
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+        resolve(newArgs);
       });
     });
+  }
+
+  /**
+   * Return true if this object has event listener for event name
+   * @param eventName {string} Event name
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  hasEventListener(): boolean {
   }
 
   /**
@@ -2657,7 +2664,7 @@ export class StreetViewPanorama extends BaseClass {
   setPanningGesturesEnabled(gestureEnable: boolean): void {}
 
   /**
-   * Retrun true if the panning gesture is enabled.
+   * Return true if the panning gesture is enabled.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -2671,7 +2678,7 @@ export class StreetViewPanorama extends BaseClass {
   setZoomGesturesEnabled(gestureEnable: boolean): void {}
 
   /**
-   * Retrun true if the zooming gesture is enabled.
+   * Return true if the zooming gesture is enabled.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -2685,7 +2692,7 @@ export class StreetViewPanorama extends BaseClass {
   setStreetNamesEnabled(gestureEnable: boolean): void {}
 
   /**
-   * Retrun true if the street names control is enabled.
+   * Return true if the street names control is enabled.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -2699,42 +2706,42 @@ export class StreetViewPanorama extends BaseClass {
   setNavigationEnabled(gestureEnable: boolean): void {}
 
   /**
-   * Retrun true if the navigation control is enabled.
+   * Return true if the navigation control is enabled.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
   getNavigationEnabled(): boolean { return; }
 
   /**
-   * Retrun the navigation links (StreetViewLocation.links)
+   * Return the navigation links (StreetViewLocation.links)
    * @return {StreetViewNavigationLink[]}
    */
   @CordovaInstance({ sync: true })
   getLinks(): StreetViewNavigationLink[] { return; }
 
   /**
-   * Retrun the current location
+   * Return the current location
    * @return {StreetViewLocation}
    */
   @CordovaInstance({ sync: true })
   getLocation(): StreetViewLocation { return; }
 
   /**
-   * Retrun the current panorama id
+   * Return the current panorama id
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getPano(): string { return; }
+  getPanoId(): string { return; }
 
   /**
-   * Retrun the current position (StreetViewLocation.latLng)
+   * Return the current position (StreetViewLocation.latLng)
    * @return {string}
    */
   @CordovaInstance({ sync: true })
   getPosition(): ILatLng { return; }
 
   /**
-   * Destroy a map completely
+   * Destroy a panorama completely
    * @return {Promise<any>}
    */
   @CordovaInstance()

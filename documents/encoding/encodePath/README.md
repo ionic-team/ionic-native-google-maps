@@ -10,7 +10,7 @@ Encoding.encodePath(path)
 
 name           | type     | description
 ---------------|---------------------------------------------|---------------------------------------
-path           | ILatLng[], BaseArrayClass&lt;ILatLng&gt;    | Array of ILatLng
+path           | ILatLng[], BaseArrayClass[ILatLng]          | Array of ILatLng
 
 ## Return value
 

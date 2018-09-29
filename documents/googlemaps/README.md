@@ -33,54 +33,57 @@ export class MapPage {
 }
 ```
 
+---------------------------------------------------------------
+## API Reference
+---------------------------------------------------------------
 
 ## Static method
 
-### create(element, options?)
+- ### create(element, options?)
 
-Generate an instance of [GoogleMap](../googlemap/README.md) class.
+  Generate an instance of [GoogleMap](../googlemap/README.md) class.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>element</td>
-  <td>string | HTMLElement</td>
-  <td>Specifies the container of map div</td>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../googlemapoptions/README.md">GoogleMapOptions</a></td>
-  <td>(optional)Initial option</td>
-</tr>
-</table>
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>element</td>
+    <td>string | HTMLElement</td>
+    <td>Specifies the container of map div</td>
+  </tr>
+  <tr>
+    <td>options</td>
+    <td><a href="../googlemapoptions/README.md">GoogleMapOptions</a></td>
+    <td>(optional)Initial option</td>
+  </tr>
+  </table>
 
-:arrow_right: returns instance of [GoogleMap](../googlemap/README.md) class
+  :arrow_right: returns instance of [GoogleMap](../googlemap/README.md) class
 
-### createPanorama(element, options?)
+- ### createPanorama(element, options?)
 
-Generate an instance of [StreetViewPanorama](../streetviewpanorama/README.md) class.
+  Generate an instance of [StreetViewPanorama](../streetviewpanorama/README.md) class.
 
-<table>
-<tr>
-  <th>Params</th>
-  <th>Type</th>
-  <th>Details</th>
-</tr>
-<tr>
-  <td>element</td>
-  <td>string | HTMLElement</td>
-  <td>Specifies the container of panorama div</td>
-</tr>
-<tr>
-  <td>options</td>
-  <td><a href="../streetviewoptions/README.md">StreetViewOptions</a></td>
-  <td></td>
-  <td>(optional)Initial option</td>
-</tr>
-</table>
+  <table>
+  <tr>
+    <th>Params</th>
+    <th>Type</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>element</td>
+    <td>string | HTMLElement</td>
+    <td>Specifies the container of panorama div</td>
+  </tr>
+  <tr>
+    <td>options</td>
+    <td><a href="../streetviewoptions/README.md">StreetViewOptions</a></td>
+    <td></td>
+    <td>(optional)Initial option</td>
+  </tr>
+  </table>
 
-:arrow_right: returns instance of [StreetViewPanorama](../streetviewpanorama/README.md) class
+  :arrow_right: returns instance of [StreetViewPanorama](../streetviewpanorama/README.md) class

@@ -2264,13 +2264,13 @@ export class StreetViewPanorama extends BaseClass {
 
   /**
    * Toggles the ability for users to use pan around on the panorama using gestures.
-   * @param gestureEnable {boolean}
+   * @param enable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setPanningGesturesEnabled(gestureEnable: boolean): void {}
+  setPanningGesturesEnabled(enable: boolean): void {}
 
   /**
-   * Retrun true if the panning gesture is enabled.
+   * Return true if the panning gesture is enabled.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -2278,13 +2278,13 @@ export class StreetViewPanorama extends BaseClass {
 
   /**
    * Toggles the ability for users to zoom on the panorama using gestures.
-   * @param gestureEnable {boolean}
+   * @param enable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setZoomGesturesEnabled(gestureEnable: boolean): void {}
+  setZoomGesturesEnabled(enable: boolean): void {}
 
   /**
-   * Retrun true if the zooming gesture is enabled.
+   * Return true if the zooming gesture is enabled.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -2292,13 +2292,13 @@ export class StreetViewPanorama extends BaseClass {
 
   /**
    * Toggles the ability for users to see street names on the panorama.
-   * @param gestureEnable {boolean}
+   * @param enable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setStreetNamesEnabled(gestureEnable: boolean): void {}
+  setStreetNamesEnabled(enable: boolean): void {}
 
   /**
-   * Retrun true if the street names control is enabled.
+   * Return true if the street names control is enabled.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
@@ -2309,45 +2309,45 @@ export class StreetViewPanorama extends BaseClass {
    * @param gestureEnable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setNavigationEnabled(gestureEnable: boolean): void {}
+  setNavigationEnabled(enable: boolean): void {}
 
   /**
-   * Retrun true if the navigation control is enabled.
+   * Return true if the navigation control is enabled.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
   getNavigationEnabled(): boolean { return; }
 
   /**
-   * Retrun the navigation links (StreetViewLocation.links)
+   * Return the navigation links (StreetViewLocation.links)
    * @return {StreetViewNavigationLink[]}
    */
   @CordovaInstance({ sync: true })
   getLinks(): StreetViewNavigationLink[] { return; }
 
   /**
-   * Retrun the current location
+   * Return the current location
    * @return {StreetViewLocation}
    */
   @CordovaInstance({ sync: true })
   getLocation(): StreetViewLocation { return; }
 
   /**
-   * Retrun the current panorama id
+   * Return the current panorama id
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getPano(): string { return; }
+  getPanoId(): string { return; }
 
   /**
-   * Retrun the current position (StreetViewLocation.latLng)
+   * Return the current position (StreetViewLocation.latLng)
    * @return {string}
    */
   @CordovaInstance({ sync: true })
   getPosition(): ILatLng { return; }
 
   /**
-   * Destroy a map completely
+   * Destroy a panorama view completely
    * @return {Promise<any>}
    */
   @CordovaInstance()

@@ -9,7 +9,7 @@
   <th>Details</th>
 </tr>
 <tr>
-  <td>target</td>
+  <td>panoId</td>
   <td>string</td>
   <td>Panorama ID</td>
 </tr>

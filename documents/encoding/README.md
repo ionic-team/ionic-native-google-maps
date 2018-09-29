@@ -1,5 +1,10 @@
 # Encoding class
 
+
+---------------------------------------------------------------
+## API Reference
+---------------------------------------------------------------
+
 ## Static method
 
 - ### decodePath(encoded, precision?) [:orange_book:](./decodePath/README.md)
@@ -39,7 +44,7 @@
   </tr>
   <tr>
     <td>path</td>
-    <td><a href="../ilatlng/README.md">ILatLng</a>[] | <a href="../basearrayclass/README.md">BaseArrayClass</a>&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;</td>
+    <td><a href="../ilatlng/README.md">ILatLng</a>[] | <a href="../basearrayclass/README.md">BaseArrayClass</a>[<a href="../ilatlng/README.md">ILatLng</a>]</td>
     <td>a sequence of LatLngs</td>
   </tr>
   </table>

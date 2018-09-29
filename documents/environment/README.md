@@ -1,5 +1,9 @@
 # Environment class
 
+---------------------------------------------------------------
+## API Reference
+---------------------------------------------------------------
+
 ## Static method
 
 - ### getLicenseInfo() [:orange_book:](./getLicenseInfo/README.md)

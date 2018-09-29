@@ -37,12 +37,12 @@ this.map.addPolygon(options).then((polygon: Polygon) => {
 </tr>
 <tr>
   <td>points</td>
-  <td>Array&lt;<a href="../ilatlng/README.md">ILatLng&gt;</td>
+  <td><a href="../ilatlng/README.md">ILatLng[]</td>
   <td>Pass ILatLng[] to specify the vertixes.<br>You need to contain two points at least.</td>
 </tr>
 <tr>
   <td>holes</td>
-  <td>Array&lt;Array&lt;<a href="../ilatlng/README.md">ILatLng&gt;&gt;</td>
+  <td><a href="../ilatlng/README.md">ILatLng[][]</td>
   <td>Pass ILatLng[][] to create holes in polygon.</td>
 </tr>
 <tr>

@@ -31,7 +31,7 @@ this.map.addGroundOverlay(options).then((groundOverlay: GroundOverlay) => {
 </tr>
 <tr>
   <td>bounds</td>
-  <td>Array&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;</td>
+  <td><a href="../ilatlng/README.md">ILatLng</a>[]</td>
   <td>You need to specify south-west, and north-east points</td>
 </tr>
 <tr>

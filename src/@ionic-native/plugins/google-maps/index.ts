@@ -1323,7 +1323,7 @@ export class GoogleMaps extends IonicNativePlugin {
         options = element as GoogleMapOptions;
         element = null;
       }
-      const googleMap: GoogleMap = new GoogleMap(element, options);
+      const googleMap: GoogleMap = new GoogleMap(element as HTMLElement | string, options);
       googleMap.set('_overlays', {});
       return googleMap;
     } else {
@@ -2710,7 +2710,8 @@ export class StreetViewPanorama extends BaseClass {
   plugin: 'cordova-plugin-googlemaps'
 })
 export class GoogleMap extends BaseClass {
-  constructor(element: any, options?: GoogleMapOptions) {
+  constructor(element: HTMLElement | string, options?: GoogleMapOptions) {
+    super();
 
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       // ---------------

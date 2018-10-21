@@ -2594,9 +2594,6 @@ export class StreetViewPanorama extends BaseClass {
             } else {
               throw new Error('Can not find the element [#' + element + ']');
             }
-            clearInterval(timer);
-            this._objectInstance.remove();
-            reject();
           }, 100);
         }), options);
 

@@ -3,7 +3,7 @@
   "version": "5.0.0-beta.24",
   "description": "Native plugin wrappers for Cordova and Ionic with TypeScript, ES6+, Promise and Observable support",
   "homepage": "https://github.com/ionic-team/ionic-native-google-maps/",
-  "author": "Ionic Team <hi@ionic.io> (https://ionic.io)",
+  "author": "Masashi Katsumata, Ionic Team <hi@ionic.io> (https://ionic.io)",
   "license": "MIT",
   "scripts": {
     "test": "jest",

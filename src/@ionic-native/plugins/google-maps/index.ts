@@ -1323,9 +1323,11 @@ export class GoogleMaps extends IonicNativePlugin {
   create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       if (element instanceof HTMLElement) {
+        if (!element.offsetParent) {
+          throw new Error('Element must be under <body>');
+        }
         if (element.getAttribute('__pluginMapId')) {
-          console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
-          return;
+          throw new Error(`${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
         }
       } else if (typeof element === 'object') {
         options = element as GoogleMapOptions;
@@ -1344,13 +1346,11 @@ export class GoogleMaps extends IonicNativePlugin {
       } else {
         errorMessage.push('cordova-plugin-googlemaps is not installed or not ready yet.');
       }
-      console.error(errorMessage.join(''));
 
       if (element instanceof HTMLElement) {
         displayErrorMessage(element, errorMessage.join('<br />'));
       } else if (typeof element === 'string') {
-        let targets: any[] = document.querySelectorAll('#' + element);
-        targets = Array.prototype.slice.call(targets, 0);
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         if (targets.length > 0) {
           targets = targets.filter((target) => {
             return !target.hasAttribute('__pluginmapid');
@@ -1361,8 +1361,7 @@ export class GoogleMaps extends IonicNativePlugin {
         }
       }
 
-
-      return null;
+      throw new Error(errorMessage.join(''));
     }
   }
 
@@ -1374,10 +1373,12 @@ export class GoogleMaps extends IonicNativePlugin {
    */
   createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      if (!element.offsetParent) {
+        throw new Error('Element must be under <body>');
+      }
       if (element instanceof HTMLElement) {
         if (element.getAttribute('__pluginMapId')) {
-          console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
-          return;
+          throw new Error(`${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
         }
       }
       return new StreetViewPanorama(element, options);
@@ -1391,13 +1392,11 @@ export class GoogleMaps extends IonicNativePlugin {
       } else {
         errorMessage.push('cordova-plugin-googlemaps is not installed or not ready yet.');
       }
-      console.error(errorMessage.join(''));
 
       if (element instanceof HTMLElement) {
         displayErrorMessage(element, errorMessage.join('<br />'));
       } else if (typeof element === 'string') {
-        let targets: any[] = document.querySelectorAll('#' + element);
-        targets = Array.prototype.slice.call(targets, 0);
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         if (targets.length > 0) {
           targets = targets.filter((target) => {
             return !target.hasAttribute('__pluginmapid');
@@ -1407,8 +1406,7 @@ export class GoogleMaps extends IonicNativePlugin {
           displayErrorMessage(targets[0], errorMessage.join('<br />'));
         }
       }
-
-      return null;
+      throw new Error(errorMessage.join(''));
     }
   }
 }
@@ -1420,11 +1418,11 @@ const displayErrorMessage = (element: HTMLElement, message: string) => {
   errorDiv.style.position = 'absolute';
   errorDiv.style.width = '80%';
   errorDiv.style.height = '50%';
-  errorDiv.style.top = 0;
-  errorDiv.style.bottom = 0;
-  errorDiv.style.right = 0;
-  errorDiv.style.left = 0;
-  errorDiv.style.padding = 0;
+  errorDiv.style.top = '0px';
+  errorDiv.style.bottom = '0px';
+  errorDiv.style.right = '0px';
+  errorDiv.style.left = '0px';
+  errorDiv.style.padding = '0px';
   errorDiv.style.margin = 'auto';
 
   element.style.position = 'relative';
@@ -2268,7 +2266,7 @@ export class Encoding {
    * @param precision? {number} default: 5
    * @return {LatLng}
    */
-  static decodePath(encoded: string, precision?: number): LatLng {
+  static decodePath(encoded: string, precision?: number): ILatLng[] {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
@@ -2568,10 +2566,10 @@ export class StreetViewPanorama extends BaseClass {
       // Create a panorama
       // -------------------
       if (element instanceof HTMLElement) {
-        if (domNode.offsetWidth >= 100 && domNode.offsetHeight >= 100) {
+        if (element.offsetWidth >= 100 && element.offsetHeight >= 100) {
           this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(element, options);
         } else {
-          console.error(domNode.tagName + ' is too small. Must be bigger than 100x100.');
+          throw new Error(element.tagName + ' is too small. Must be bigger than 100x100.');
         }
       } else if (typeof element === 'string') {
 
@@ -2582,8 +2580,7 @@ export class StreetViewPanorama extends BaseClass {
           const timer: any = setInterval(() => {
             let targets: any[];
             for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
-              targets = document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element);
-              targets = Array.prototype.slice.call(targets, 0);
+              targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element));
               if (targets.length > 0) {
                 targets = targets.filter((target) => {
                   return !target.hasAttribute('__pluginmapid');
@@ -2600,9 +2597,9 @@ export class StreetViewPanorama extends BaseClass {
               return;
             }
             if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
-              console.error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
+              throw new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
             } else {
-              console.error('Can not find the element [#' + element + ']');
+              throw new Error('Can not find the element [#' + element + ']');
             }
             clearInterval(timer);
             this._objectInstance.remove();
@@ -2622,13 +2619,11 @@ export class StreetViewPanorama extends BaseClass {
       } else {
         errorMessage.push('cordova-plugin-googlemaps is not installed or not ready yet.');
       }
-      console.error(errorMessage.join(''));
 
       if (element instanceof HTMLElement) {
         displayErrorMessage(element, errorMessage.join('<br />'));
       } else if (typeof element === 'string') {
-        let targets: any[] = document.querySelectorAll('#' + element);
-        targets = Array.prototype.slice.call(targets, 0);
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         if (targets.length > 0) {
           targets = targets.filter((target) => {
             return !target.hasAttribute('__pluginmapid');
@@ -2638,7 +2633,7 @@ export class StreetViewPanorama extends BaseClass {
           displayErrorMessage(targets[0], errorMessage.join('<br />'));
         }
       }
-
+      throw new Error(errorMessage.join(''));
     }
 
   }
@@ -2769,10 +2764,13 @@ export class GoogleMap extends BaseClass {
       // Create a map
       // ---------------
       if (element instanceof HTMLElement) {
-        if (domNode.offsetWidth >= 100 && domNode.offsetHeight >= 100) {
+        if (!element.offsetParent) {
+          throw new Error('Element must be under <body>');
+        }
+        if (element.offsetWidth >= 100 && element.offsetHeight >= 100) {
           this._objectInstance = GoogleMaps.getPlugin().Map.getMap(element, options);
         } else {
-          console.error(domNode.tagName + ' is too small. Must be bigger than 100x100.');
+          throw new Error(element.tagName + ' is too small. Must be bigger than 100x100.');
         }
       } else if (typeof element === 'string') {
 
@@ -2783,8 +2781,7 @@ export class GoogleMap extends BaseClass {
           const timer: any = setInterval(() => {
             let targets: any[];
             for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
-              targets = document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element);
-              targets = Array.prototype.slice.call(targets, 0);
+              targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element));
               if (targets.length > 0) {
                 targets = targets.filter((target) => {
                   return !target.hasAttribute('__pluginmapid');
@@ -2800,14 +2797,13 @@ export class GoogleMap extends BaseClass {
             if (count++ < 20) {
               return;
             }
-            if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
-              console.error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
-            } else {
-              console.error('Can not find the element [#' + element + ']');
-            }
             clearInterval(timer);
             this._objectInstance.remove();
-            reject();
+            if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
+              reject(throw new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.'));
+            } else {
+              reject(throw new Error('Can not find the element [#' + element + ']'));
+            }
           }, 100);
         }), options);
 
@@ -2830,8 +2826,7 @@ export class GoogleMap extends BaseClass {
       if (element instanceof HTMLElement) {
         displayErrorMessage(element, errorMessage.join('<br />'));
       } else if (typeof element === 'string') {
-        let targets: any[] = document.querySelectorAll('#' + element);
-        targets = Array.prototype.slice.call(targets, 0);
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         if (targets.length > 0) {
           targets = targets.filter((target) => {
             return !target.hasAttribute('__pluginmapid');
@@ -2855,15 +2850,13 @@ export class GoogleMap extends BaseClass {
 
       let targets: any[];
       for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
-        targets = document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element);
-        targets = Array.prototype.slice.call(targets, 0);
+        targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + domNode));
         if (targets.length > 0) {
           targets = targets.filter((target) => {
             return !target.hasAttribute('__pluginmapid');
           });
         }
         if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
-          clearInterval(timer);
           resolve([targets[0], options]);
           return;
         }

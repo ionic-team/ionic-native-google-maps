@@ -1,10 +1,27 @@
+import {
+  CordovaCheck,
+  CordovaInstance,
+  InstanceCheck,
+  InstanceProperty,
+  IonicNativePlugin,
+  Plugin,
+  checkAvailability
+} from '@ionic-native/core';
 import { Injectable } from '@angular/core';
-import { CordovaCheck, CordovaInstance, InstanceCheck, InstanceProperty, IonicNativePlugin, Plugin, checkAvailability } from '@ionic-native/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 
+const TARGET_ELEMENT_FINDING_QUERYS: string[] = [
+  '.show-page #',
+];
 
-export type MapType = 'MAP_TYPE_NORMAL' | 'MAP_TYPE_ROADMAP' | 'MAP_TYPE_SATELLITE' | 'MAP_TYPE_HYBRID' | 'MAP_TYPE_TERRAIN' | 'MAP_TYPE_NONE';
+export type MapType =
+  'MAP_TYPE_NORMAL'
+  | 'MAP_TYPE_ROADMAP'
+  | 'MAP_TYPE_SATELLITE'
+  | 'MAP_TYPE_HYBRID'
+  | 'MAP_TYPE_TERRAIN'
+  | 'MAP_TYPE_NONE';
 
 /**
  * @hidden
@@ -44,11 +61,10 @@ export interface ILatLngBounds {
  */
 export class LatLngBounds implements ILatLngBounds {
 
-  private _objectInstance: any;
-
   @InstanceProperty northeast: ILatLng;
   @InstanceProperty southwest: ILatLng;
   @InstanceProperty type: string;
+  private _objectInstance: any;
 
   constructor(points?: ILatLng[]) {
     this._objectInstance = new (GoogleMaps.getPlugin()).LatLngBounds(points);
@@ -59,7 +75,9 @@ export class LatLngBounds implements ILatLngBounds {
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  toString(): string { return; }
+  toString(): string {
+    return;
+  }
 
   /**
    * Returns a string of the form "lat_sw,lng_sw,lat_ne,lng_ne" for this bounds, where "sw" corresponds to the southwest corner of the bounding box, while "ne" corresponds to the northeast corner of that box.
@@ -67,28 +85,35 @@ export class LatLngBounds implements ILatLngBounds {
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  toUrlValue(precision?: number): string { return; }
+  toUrlValue(precision?: number): string {
+    return;
+  }
 
   /**
    * Extends this bounds to contain the given point.
    * @param LatLng {ILatLng}
    */
   @CordovaInstance({ sync: true })
-  extend(latLng: ILatLng): void {}
+  extend(LatLng: ILatLng): void {
+  }
 
   /**
    * Returns true if the given lat/lng is in this bounds.
    * @param LatLng {ILatLng}
    */
   @CordovaInstance({ sync: true })
-  contains(LatLng: ILatLng): boolean { return; }
+  contains(LatLng: ILatLng): boolean {
+    return;
+  }
 
   /**
    * Computes the center of this LatLngBounds
    * @return {LatLng}
    */
   @CordovaInstance({ sync: true })
-  getCenter(): LatLng { return; }
+  getCenter(): LatLng {
+    return;
+  }
 }
 
 export interface GoogleMapControlOptions {
@@ -341,7 +366,7 @@ export interface GeocoderRequest {
    * [geocoding usage1]
    * let request: GeocoderRequest = {
    *   address: "Los Angeles, California, USA"
-   * };
+   * }
    *
    * [geocoding usage2]
    * let request: GeocoderRequest = {
@@ -349,7 +374,7 @@ export interface GeocoderRequest {
    *    "Los Angeles, California, USA",
    *    "San Francisco, California, USA",
    *   ]
-   * };
+   * }
    */
   address?: string | string[];
 
@@ -358,7 +383,7 @@ export interface GeocoderRequest {
    * [reverse-geocoding usage1]
    * let request: GeocoderRequest = {
    *   position: {"lat": 37.421655, "lng": -122.085637}
-   * };
+   * }
    *
    * [reverse-geocoding usage2]
    * let request: GeocoderRequest = {
@@ -366,7 +391,7 @@ export interface GeocoderRequest {
    *    {"lat": 37.421655, "lng": -122.085637},
    *    {"lat": 37.332, "lng": -122.030781}
    *   ]
-   * };
+   * }
    */
   position?: ILatLng | ILatLng[];
 }
@@ -471,7 +496,7 @@ export interface MarkerOptions {
   position: ILatLng;
 
   /**
-   * 	Specify the anchor of the InfoWindow
+   *  Specify the anchor of the InfoWindow
    */
   infoWindowAnchor?: number[];
 
@@ -486,12 +511,12 @@ export interface MarkerOptions {
   draggable?: boolean;
 
   /**
-   * 	Set true if you want to use a flat marker. (Default: false)
+   *  Set true if you want to use a flat marker. (Default: false)
    */
   flat?: boolean;
 
   /**
-   * 	Set rotation angle. (Default: 0)
+   *  Set rotation angle. (Default: 0)
    */
   rotation?: number;
 
@@ -754,10 +779,10 @@ export interface PolylineOptions {
 
 export interface TileOverlayOptions {
   /**
-   * This callback must Returns string of image URL.
+   * This callback must Returns string of image URL, or Promise.
    * If no tile, you need to Returns null.
    */
-  getTile: (x: number, y: number, zoom: number) => string;
+  getTile: (x: number, y: number, zoom: number) => string | Promise<string>;
 
   /**
    * Set false if you want to create invisible tilelayer
@@ -823,6 +848,74 @@ export interface KmlOverlayOptions {
    * icon option
    */
   icon?: string | MarkerIcon;
+
+  /**
+   * Accept own properties for future update
+   */
+  [key: string]: any;
+}
+
+
+/**
+ * Options for FusionTableOverlayOptions.query
+ */
+export interface FusionTableQueryOptions {
+
+  /*
+   * The ID of the Fusion Tables table to display. This ID can be found in the table's URL, as the value of the **dsrcid** parameter. Required.
+   */
+  from: boolean;
+
+  /*
+   * Limit on the number of results returned by the query.
+   */
+  limit?: number;
+
+  /*
+   * Offset into the sorted results.
+   */
+  offset?: number;
+
+  /*
+   * The method by which to sort the results. Accepts either of:
+   *  - A column name.
+   *    The column name may be suffixed with ASC or DESC (e.g. col2 DESC) to specify ascending or descending sort.
+   *
+   *  - An ST_DISTANCE spatial relationship (sort by distance).
+   *    A column and the coordinate from which to calculate distance must be passed, for example, orderBy: 'ST_DISTANCE(col1, LATLNG(1.2, 3.4))'.
+   */
+  orderBy?: string;
+
+  /*
+   * A column, containing geographic features to be displayed on the map. See [Fusion Tables Setup](https://developers.google.com/maps/documentation/javascript/fusiontableslayer#fusion_table_setup) in the Maps API documentation for information about valid columns.
+   */
+  select: string;
+
+  /*
+   * The SQL predicate to be applied to the layer.
+   */
+  where?: string;
+
+}
+
+/**
+ * Options for map.addFusionTableOverlay() method
+ */
+export interface FusionTableOverlayOptions {
+  /*
+   * Query for Fusion Table
+   */
+  query: FusionTableQueryOptions;
+
+  /*
+   * Do not fire the FUSION_TABLE_CLICK event if false. Default is true.
+   */
+  clickable?: boolean;
+
+  /*
+   * Do not display the default infoWindow if true. Default is false.
+   */
+  suppressInfoWindows?: boolean;
 
   /**
    * Accept own properties for future update
@@ -903,7 +996,9 @@ export class VisibleRegion implements ILatLngBounds {
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  toString(): string { return; }
+  toString(): string {
+    return;
+  }
 
   /**
    * Returns a string of the form "lat_sw,lng_sw,lat_ne,lng_ne" for this bounds, where "sw" corresponds to the southwest corner of the bounding box, while "ne" corresponds to the northeast corner of that box.
@@ -911,7 +1006,9 @@ export class VisibleRegion implements ILatLngBounds {
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  toUrlValue(precision?: number): string { return; }
+  toUrlValue(precision?: number): string {
+    return;
+  }
 
 
   /**
@@ -919,7 +1016,9 @@ export class VisibleRegion implements ILatLngBounds {
    * @param LatLng {ILatLng}
    */
   @CordovaInstance({ sync: true })
-  contains(LatLng: ILatLng): boolean { return; }
+  contains(LatLng: ILatLng): boolean {
+    return;
+  }
 
 }
 
@@ -956,25 +1055,32 @@ export interface StreetViewCameraPosition {
   tilt?: number;
   zoom?: number;
 }
+
+export interface StreetViewControlOptions {
+  streetNames?: boolean;
+  navigation?: boolean;
+}
+export interface StreetViewGestureOptions {
+  panning?: boolean;
+  zooming?: boolean;
+}
+
 export interface StreetViewOptions {
 
+  /*
+   * camera: [options] Initial camera position
+   */
   camera?: StreetViewCameraPano | StreetViewCameraPosition;
 
   /**
    * controls [options]
    */
-  controls?: {
-    streetNames?: boolean;
-    navigation?: boolean;
-  };
+  controls?: StreetViewControlOptions;
 
   /**
    * gestures [options]
    */
-  gestures?: {
-    padding?: boolean;
-    zooming?: boolean;
-  };
+  gestures?: StreetViewGestureOptions;
 
   /**
    * Accept extra properties for future updates
@@ -1105,39 +1211,33 @@ export const GoogleMapsMapTypeId = {
  *         zoom: 18,
  *         tilt: 30
  *       }
- *     };
+ *     }
  *
  *     this.map = GoogleMaps.create('map_canvas', mapOptions);
  *
- *     // Wait the MAP_READY before using any methods.
- *     this.map.one(GoogleMapsEvent.MAP_READY)
- *       .then(() => {
- *         console.log('Map is ready!');
+ *     let marker: Marker = this.map.addMarkerSync({
+ *       title: 'Ionic',
+ *       icon: 'blue',
+ *       animation: 'DROP',
+ *       position: {
+ *         lat: 43.0741904,
+ *         lng: -89.3809802
+ *       }
+ *     });
  *
- *         // Now you can use all methods safely.
- *         this.map.addMarker({
- *             title: 'Ionic',
- *             icon: 'blue',
- *             animation: 'DROP',
- *             position: {
- *               lat: 43.0741904,
- *               lng: -89.3809802
- *             }
- *           })
- *           .then(marker => {
- *             marker.on(GoogleMapsEvent.MARKER_CLICK)
- *               .subscribe(() => {
- *                 alert('clicked');
- *               });
- *           });
- *
+ *     marker.on(GoogleMapsEvent.MARKER_CLICK)
+ *       .subscribe(() => {
+ *         alert('clicked');
  *       });
+ *     });
  *   }
  * }
  *
  * ```
  * @classes
+ * GoogleMaps
  * GoogleMap
+ * StreetView
  * Circle
  * Encoding
  * Environment
@@ -1182,10 +1282,10 @@ export const GoogleMapsMapTypeId = {
   pluginRef: 'plugin.google.maps',
   plugin: 'cordova-plugin-googlemaps',
   repo: 'https://github.com/mapsplugin/cordova-plugin-googlemaps',
-  document: 'https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/README.md',
+  document: 'https://ionicframework.com/docs/native/google-maps/',
   install: 'ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="YOUR_ANDROID_API_KEY_IS_HERE" --variable API_KEY_FOR_IOS="YOUR_IOS_API_KEY_IS_HERE"',
   installVariables: ['API_KEY_FOR_ANDROID', 'API_KEY_FOR_IOS'],
-  platforms: ['Android', 'iOS', 'Brwoser']
+  platforms: ['Android', 'iOS', 'Browser']
 })
 @Injectable()
 export class GoogleMaps extends IonicNativePlugin {
@@ -1196,30 +1296,50 @@ export class GoogleMaps extends IonicNativePlugin {
    * @param options {GoogleMapOptions} [options] Options
    * @return {GoogleMap}
    */
-  static create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
-    if (element instanceof HTMLElement) {
-      if (element.getAttribute('__pluginMapId')) {
-        console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
-        return;
-      }
-    } else if (typeof element === 'object') {
-      options = element as GoogleMapOptions;
-      element = null;
-    }
-    const googleMap: GoogleMap = new GoogleMap(element, options);
-    googleMap.set('_overlays', {});
-    return googleMap;
-  }
-
-  /**
-   * @deprecation
-   * @hidden
-   */
   create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
-    console.error('GoogleMaps', '[deprecated] Please use GoogleMaps.create()');
-    return GoogleMaps.create(element, options);
-  }
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      if (element instanceof HTMLElement) {
+        if (!element.offsetParent) {
+          throw new Error('Element must be under <body>');
+        }
+        if (element.getAttribute('__pluginMapId')) {
+          throw new Error(`${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
+        }
+      } else if (typeof element === 'object') {
+        options = element as GoogleMapOptions;
+        element = null;
+      }
+      const googleMap: GoogleMap = new GoogleMap(element, options);
+      googleMap.set('_overlays', {});
+      return googleMap;
+    } else {
+      const errorMessage: string[] = [
+        '[GoogleMaps]'
+      ];
+      if (!window.cordova) {
+        errorMessage.push('You need to execute "$> ionic cordova run browser".');
+        errorMessage.push('"$> ionic serve" is not supported.');
+      } else {
+        errorMessage.push('cordova-plugin-googlemaps is not installed or not ready yet.');
+      }
 
+      if (element instanceof HTMLElement) {
+        displayErrorMessage(element, errorMessage.join('<br />'));
+      } else if (typeof element === 'string') {
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
+        if (targets.length > 0) {
+          targets = targets.filter((target) => {
+            return !target.hasAttribute('__pluginmapid');
+          });
+        }
+        if (targets.length === 1 && targets[0]) {
+          displayErrorMessage(targets[0], errorMessage.join('<br />'));
+        }
+      }
+
+      throw new Error(errorMessage.join(''));
+    }
+  }
 
   /**
    * Creates a new StreetView instance
@@ -1227,16 +1347,88 @@ export class GoogleMaps extends IonicNativePlugin {
    * @param options {StreetViewOptions} [options] Options
    * @return {StreetViewPanorama}
    */
-  static createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
-    if (element instanceof HTMLElement) {
-      if (element.getAttribute('__pluginMapId')) {
-        console.error('GoogleMaps', `${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
-        return;
+  createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      if (element instanceof HTMLElement) {
+        if (!element.offsetParent) {
+          throw new Error('Element must be under <body>');
+        }
+        if (element.getAttribute('__pluginMapId')) {
+          throw new Error(`${element.tagName}[__pluginMapId='${element.getAttribute('__pluginMapId')}'] has already map.`);
+        }
       }
+      return new StreetViewPanorama(element, options);
+    } else {
+      const errorMessage: string[] = [
+        '[GoogleMaps]'
+      ];
+      if (!window.cordova) {
+        errorMessage.push('You need to execute "$> ionic cordova run browser".');
+        errorMessage.push('"$> ionic serve" is not supported.');
+      } else {
+        errorMessage.push('cordova-plugin-googlemaps is not installed or not ready yet.');
+      }
+
+      if (element instanceof HTMLElement) {
+        displayErrorMessage(element, errorMessage.join('<br />'));
+      } else if (typeof element === 'string') {
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
+        if (targets.length > 0) {
+          targets = targets.filter((target) => {
+            return !target.hasAttribute('__pluginmapid');
+          });
+        }
+        if (targets.length === 1 && targets[0]) {
+          displayErrorMessage(targets[0], errorMessage.join('<br />'));
+        }
+      }
+      throw new Error(errorMessage.join(''));
     }
-    return new StreetViewPanorama(element, options);
   }
 }
+
+const displayErrorMessage = (element: HTMLElement, message: string) => {
+  const errorDiv: HTMLElement = document.createElement('div');
+  errorDiv.innerHTML = message;
+  errorDiv.style.color = 'red';
+  errorDiv.style.position = 'absolute';
+  errorDiv.style.width = '80%';
+  errorDiv.style.height = '50%';
+  errorDiv.style.top = '0px';
+  errorDiv.style.bottom = '0px';
+  errorDiv.style.right = '0px';
+  errorDiv.style.left = '0px';
+  errorDiv.style.padding = '0px';
+  errorDiv.style.margin = 'auto';
+
+  element.style.position = 'relative';
+  element.style.backgroundColor = '#ccc7';
+  element.appendChild(errorDiv);
+};
+
+const normalizeArgumentsOfEventListener = (_objectInstance: any, ...args: any[]): any[] => {
+  if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
+    if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
+      args[args.length - 1] = this;
+    } else if (this instanceof MarkerCluster) {
+      let overlay: Marker = this.get(args[args.length - 1].getId());
+      if (!overlay) {
+        const markerJS: any = args[args.length - 1];
+        const markerId: string = markerJS.getId();
+        const markerCluster: MarkerCluster = this as MarkerCluster;
+        overlay = new Marker(markerCluster.getMap(), markerJS);
+        this.get('_overlays')[markerId] = overlay;
+        markerJS.one(markerJS.getId() + '_remove', () => {
+          this.get('_overlays')[markerId] = null;
+        });
+      }
+      args[args.length - 1] = overlay;
+    } else {
+      args[args.length - 1] = this._objectInstance.getMap().get('_overlays')[args[args.length - 1].getId()];
+    }
+  }
+  return args;
+};
 
 /**
  * @hidden
@@ -1251,6 +1443,9 @@ export class GoogleMaps extends IonicNativePlugin {
 export class BaseClass {
   protected _objectInstance: any;
 
+  constructor(_objectInstance?: any) {
+    this._objectInstance = _objectInstance;
+  }
 
   /**
    * Adds an event listener.
@@ -1260,31 +1455,29 @@ export class BaseClass {
   @InstanceCheck({ observable: true })
   addEventListener(eventName: string): Observable<any> {
     return new Observable((observer) => {
-      this._objectInstance.on(eventName, (...args: any[]) => {
-        if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
-            args[args.length - 1] = this;
-          } else if (this instanceof MarkerCluster) {
-            let overlay: Marker = this.get(args[args.length - 1].getId());
-            if (!overlay) {
-              const markerJS: any = args[args.length - 1];
-              const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = this as MarkerCluster;
-              overlay = new Marker(markerCluster.getMap(), markerJS);
-              this.get('_overlays')[markerId] = overlay;
-              markerJS.one(markerJS.getId() + '_remove', () => {
-                this.get('_overlays')[markerId] = null;
-              });
-            }
-            args[args.length - 1] = overlay;
-          } else {
-            args[args.length - 1] = this._objectInstance.getMap().get('_overlays')[args[args.length - 1].getId()];
-          }
-        }
-        observer.next(args);
+      this._objectInstance.addEventListener(eventName, (...args: any[]) => {
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+        observer.next(newArgs);
       });
     });
   }
+
+
+  /**
+   * Attaches the handler for the event that is thrown by the target, where the minimum interval between events (in milliseconds) is specified as a parameter.
+   * @param eventName {string} event name you want to observe.
+   * @param throttleInterval {number} throttle interval in milliseconds
+   * @return {Observable<any>}
+   */
+  addThrottledEventListener(eventName: string, throttleInterval: number): Observable<any> {
+    return new Observable((observer) => {
+      this._objectInstance.addThrottledEventListener(eventName, (...args: any[]) => {
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+        observer.next(newArgs);
+      });
+    });
+  }
+
 
   /**
    * Adds an event listener that works once.
@@ -1292,32 +1485,25 @@ export class BaseClass {
    * @return {Promise<any>}
    */
   @InstanceCheck()
-  addListenerOnce(eventName: string): Promise<any> {
+  addEventListenerOnce(eventName: string): Promise<any> {
     return new Promise<any>((resolve) => {
       this._objectInstance.one(eventName, (...args: any[]) => {
-        if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
-            args[args.length - 1] = this;
-          } else if (this instanceof MarkerCluster) {
-            let overlay: Marker = this.get(args[args.length - 1].getId());
-            if (!overlay) {
-              const markerJS: any = args[args.length - 1];
-              const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = this as MarkerCluster;
-              overlay = new Marker(markerCluster.getMap(), markerJS);
-              this.get('_overlays')[markerId] = overlay;
-              markerJS.one(markerJS.getId() + '_remove', () => {
-                this.get('_overlays')[markerId] = null;
-              });
-            }
-            args[args.length - 1] = overlay;
-          } else {
-            args[args.length - 1] = this._objectInstance.getMap().get('_overlays')[args[args.length - 1].getId()];
-          }
-        }
-        resolve(args);
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+        resolve(newArgs);
       });
     });
+  }
+
+  /**
+   * @deprecated
+   * Adds an event listener that works once.
+   * @param eventName {string} event name you want to observe.
+   * @return {Promise<any>}
+   */
+  @InstanceCheck()
+  addListenerOnce(eventName: string): Promise<any> {
+    console.warn('[GoogleMaps] "addListenerOnce" is deprecated. Please use "addEventListenerOnce".');
+    return this.addEventListenerOnce(eventName);
   }
 
   /**
@@ -1325,7 +1511,9 @@ export class BaseClass {
    * @param key {any}
    */
   @CordovaInstance({ sync: true })
-  get(key: string): any { return; }
+  get(key: string): any {
+    return;
+  }
 
   /**
    * Sets a value
@@ -1334,7 +1522,8 @@ export class BaseClass {
    * @param noNotify {boolean} [options] True if you want to prevent firing the `(key)_changed` event.
    */
   @CordovaInstance({ sync: true })
-  set(key: string, value: any, noNotify?: boolean): void { }
+  set(key: string, value: any, noNotify?: boolean): void {
+  }
 
   /**
    * Bind a key to another object
@@ -1344,7 +1533,8 @@ export class BaseClass {
    * @param noNotify? {boolean} [options] True if you want to prevent `(key)_changed` event when you bind first time, because the internal status is changed from `undefined` to something.
    */
   @CordovaInstance({ sync: true })
-  bindTo(key: string, target: any, targetKey?: string, noNotify?: boolean): void { }
+  bindTo(key: string, target: any, targetKey?: string, noNotify?: boolean): void {
+  }
 
   /**
    * Alias of `addEventListener`
@@ -1355,27 +1545,23 @@ export class BaseClass {
   on(eventName: string): Observable<any> {
     return new Observable((observer) => {
       this._objectInstance.on(eventName, (...args: any[]) => {
-        if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
-            args[args.length - 1] = this;
-          } else if (this instanceof MarkerCluster) {
-            let overlay: Marker = this.get(args[args.length - 1].getId());
-            if (!overlay) {
-              const markerJS: any = args[args.length - 1];
-              const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = this as MarkerCluster;
-              overlay = new Marker(markerCluster.getMap(), markerJS);
-              this.get('_overlays')[markerId] = overlay;
-              markerJS.one(markerJS.getId() + '_remove', () => {
-                this.get('_overlays')[markerId] = null;
-              });
-            }
-            args[args.length - 1] = overlay;
-          } else {
-            args[args.length - 1] = this._objectInstance.getMap().get('_overlays')[args[args.length - 1].getId()];
-          }
-        }
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
         observer.next(args);
+      });
+    });
+  }
+
+  /**
+   * Alias of `addThrottledEventListener`
+   * @param key {string} The property name you want to observe.
+   * @return {Observable<any>}
+   */
+  @InstanceCheck({ observable: true })
+  onThrottled(eventName: string): Observable<any> {
+    return new Observable((observer) => {
+      this._objectInstance.onThrottled(eventName, (...args: any[]) => {
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+        observer.next(newArgs);
       });
     });
   }
@@ -1389,36 +1575,28 @@ export class BaseClass {
   one(eventName: string): Promise<any> {
     return new Promise<any>((resolve) => {
       this._objectInstance.one(eventName, (...args: any[]) => {
-        if (args[args.length - 1] instanceof GoogleMaps.getPlugin().BaseClass) {
-          if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
-            args[args.length - 1] = this;
-          } else if (this instanceof MarkerCluster) {
-            let overlay: Marker = this.get(args[args.length - 1].getId());
-            if (!overlay) {
-              const markerJS: any = args[args.length - 1];
-              const markerId: string = markerJS.getId();
-              const markerCluster: MarkerCluster = this as MarkerCluster;
-              overlay = new Marker(markerCluster.getMap(), markerJS);
-              this.get('_overlays')[markerId] = overlay;
-              markerJS.one(markerJS.getId() + '_remove', () => {
-                this.get('_overlays')[markerId] = null;
-              });
-            }
-            args[args.length - 1] = overlay;
-          } else {
-            args[args.length - 1] = this._objectInstance.getMap().get('_overlays')[args[args.length - 1].getId()];
-          }
-        }
-        resolve(args);
+        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+        resolve(newArgs);
       });
     });
+  }
+
+  /**
+   * Return true if this object has event listener for event name
+   * @param eventName {string} Event name
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  hasEventListener(): boolean {
+    return;
   }
 
   /**
    * Clears all stored values
    */
   @CordovaInstance({ sync: true })
-  empty(): void { }
+  empty(): void {
+  }
 
   /**
    * Dispatch event.
@@ -1426,13 +1604,14 @@ export class BaseClass {
    * @param parameters {any} [options] The data you want to pass to event listerners.
    */
   @CordovaInstance({ sync: true })
-  trigger(eventName: string, ...parameters: any[]): void {}
+  trigger(eventName: string, ...parameters: any[]): void {
+  }
 
 
   /**
    * Executes off() and empty()
    */
-  @CordovaCheck({ sync: true })
+  @CordovaInstance({ sync: true })
   destroy(): void {
     if (this._objectInstance.type === 'Map') {
       const map: GoogleMap = this._objectInstance.getMap();
@@ -1475,17 +1654,20 @@ export class BaseClass {
  * https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/BaseArrayClass/README.md
  */
 @Plugin({
+  pluginName: 'BaseArrayClass',
   plugin: 'cordova-plugin-googlemaps',
-  pluginName: 'GoogleMaps',
-  pluginRef: 'plugin.google.maps.BaseArrayClass',
-  repo: ''
+  pluginRef: 'plugin.google.maps.BaseArrayClass'
 })
 export class BaseArrayClass<T> extends BaseClass {
 
   constructor(initialData?: T[] | any) {
-    super();
-    this._objectInstance = (initialData instanceof GoogleMaps.getPlugin().BaseArrayClass) ?
-      initialData : this._objectInstance = new (GoogleMaps.getPlugin().BaseArrayClass)(initialData);
+    if (initialData instanceof GoogleMaps.getPlugin().BaseArrayClass) {
+      super(initialData);
+    } else if (Array.isArray(initialData)) {
+      super(new (GoogleMaps.getPlugin().BaseArrayClass)(initialData));
+    } else {
+      super(new (GoogleMaps.getPlugin().BaseArrayClass)([]));
+    }
   }
 
   /**
@@ -1493,24 +1675,25 @@ export class BaseArrayClass<T> extends BaseClass {
    * @param noNotify? {boolean} [options] Set true to prevent remove_at events.
    */
   @CordovaInstance({ sync: true })
-  empty(noNotify?: boolean): void {}
+  empty(noNotify?: boolean): void {
+  }
 
   /**
    * Iterate over each element, calling the provided callback.
    * @param fn {Function}
    */
   @CordovaInstance({ sync: true })
-  forEach(fn: (element: T, index?: number) => void): void {}
+  forEach(fn: (element: T, index?: number) => void): void {
+  }
 
   /**
    * Iterate over each element, calling the provided callback.
    * @param fn {Function}
    * @return {Promise<void>}
    */
-  @CordovaCheck()
   forEachAsync(fn: ((element: T, callback: () => void) => void)): Promise<void> {
     return new Promise<void>((resolve) => {
-      this._objectInstance.forEachAsync(fn, resolve);
+      this._objectInstance.forEach(fn, resolve);
     });
   }
 
@@ -1521,7 +1704,9 @@ export class BaseArrayClass<T> extends BaseClass {
    * @return {Object[]} returns a new array with the results
    */
   @CordovaInstance({ sync: true })
-  map(fn: (element: T, index: number) => any): any[] { return; }
+  map(fn: (element: T, index: number) => any): any[] {
+    return;
+  }
 
   /**
    * Iterate over each element, calling the provided callback.
@@ -1530,10 +1715,9 @@ export class BaseArrayClass<T> extends BaseClass {
    * @param callback {Function}
    * @return {Promise<any>} returns a new array with the results
    */
-  @CordovaCheck()
   mapAsync(fn: ((element: T, callback: (newElement: any) => void) => void)): Promise<any[]> {
     return new Promise<any[]>((resolve) => {
-      this._objectInstance.mapAsync(fn, resolve);
+      this._objectInstance.map(fn, resolve);
     });
   }
 
@@ -1543,7 +1727,6 @@ export class BaseArrayClass<T> extends BaseClass {
    * @param callback {Function}
    * @return {Promise<any>} returns a new array with the results
    */
-  @CordovaCheck()
   mapSeries(fn: ((element: T, callback: (newElement: any) => void) => void)): Promise<any[]> {
     return new Promise<any[]>((resolve) => {
       this._objectInstance.mapSeries(fn, resolve);
@@ -1556,7 +1739,9 @@ export class BaseArrayClass<T> extends BaseClass {
    * @return {T[]} returns a new filtered array
    */
   @CordovaInstance({ sync: true })
-  filter(fn: (element: T, index: number) => boolean): T[] { return; }
+  filter(fn: (element: T, index: number) => boolean): T[] {
+    return;
+  }
 
   /**
    * The filterAsync() method creates a new array with all elements that pass the test implemented by the provided function.
@@ -1564,10 +1749,9 @@ export class BaseArrayClass<T> extends BaseClass {
    * @param callback {Function}
    * @return {Promise<T[]>} returns a new filtered array
    */
-  @CordovaCheck()
   filterAsync(fn: (element: T, callback: (result: boolean) => void) => void): Promise<T[]> {
     return new Promise<any[]>((resolve) => {
-      this._objectInstance.filterAsync(fn, resolve);
+      this._objectInstance.filter(fn, resolve);
     });
   }
 
@@ -1576,7 +1760,9 @@ export class BaseArrayClass<T> extends BaseClass {
    * @return {Object[]}
    */
   @CordovaInstance({ sync: true })
-  getArray(): T[] { return; }
+  getArray(): T[] {
+    return;
+  }
 
   /**
    * Returns the element at the specified index.
@@ -1584,14 +1770,17 @@ export class BaseArrayClass<T> extends BaseClass {
    * @return {Object}
    */
   @CordovaInstance({ sync: true })
-  getAt(index: number): any {}
+  getAt(index: number): any {
+  }
 
   /**
    * Returns the number of the elements.
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getLength(): number { return; }
+  getLength(): number {
+    return;
+  }
 
   /**
    * The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.
@@ -1599,19 +1788,23 @@ export class BaseArrayClass<T> extends BaseClass {
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  indexOf(element: T): number { return; }
+  indexOf(element: T): number {
+    return;
+  }
 
   /**
    * The reverse() method reverses an array in place.
    */
   @CordovaInstance({ sync: true })
-  reverse(): void {}
+  reverse(): void {
+  }
 
   /**
    * The sort() method sorts the elements of an array in place and returns the array.
    */
   @CordovaInstance({ sync: true })
-  sort(): void {}
+  sort(): void {
+  }
 
   /**
    * Inserts an element at the specified index.
@@ -1621,7 +1814,8 @@ export class BaseArrayClass<T> extends BaseClass {
    * @return {Object}
    */
   @CordovaInstance({ sync: true })
-  insertAt(index: number, element: T, noNotify?: boolean) {}
+  insertAt(index: number, element: T, noNotify?: boolean) {
+  }
 
   /**
    * Removes the last element of the array and returns that element.
@@ -1629,7 +1823,9 @@ export class BaseArrayClass<T> extends BaseClass {
    * @return {Object}
    */
   @CordovaInstance({ sync: true })
-  pop(noNotify?: boolean): T { return; }
+  pop(noNotify?: boolean): T {
+    return;
+  }
 
   /**
    * Adds one element to the end of the array and returns the new length of the array.
@@ -1637,7 +1833,8 @@ export class BaseArrayClass<T> extends BaseClass {
    * @param noNotify? {boolean} Set true to prevent insert_at events.
    */
   @CordovaInstance({ sync: true })
-  push(element: T, noNotify?: boolean): void {}
+  push(element: T, noNotify?: boolean): void {
+  }
 
   /**
    * Removes an element from the specified index.
@@ -1654,7 +1851,8 @@ export class BaseArrayClass<T> extends BaseClass {
    * @param noNotify? {boolean} [options] Set true to prevent set_at event.
    */
   @CordovaInstance({ sync: true })
-  setAt(index: number, element: T, noNotify?: boolean): void {}
+  setAt(index: number, element: T, noNotify?: boolean): void {
+  }
 }
 
 /**
@@ -1666,9 +1864,8 @@ export class Circle extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -1676,138 +1873,172 @@ export class Circle extends BaseClass {
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getId(): string { return; }
+  getId(): string {
+    return;
+  }
 
   /**
    * Returns the map instance.
    * @return {GoogleMap}
    */
-  getMap(): GoogleMap { return this._map; }
+  getMap(): any {
+    return this._map;
+  }
 
   /**
    * Changes the center position.
    * @param latLng {ILatLng}
    */
   @CordovaInstance({ sync: true })
-  setCenter(latLng: ILatLng): void {}
+  setCenter(latLng: ILatLng): void {
+  }
 
   /**
    * Returns the current center position
    * @return {ILatLng}
    */
   @CordovaInstance({ sync: true })
-  getCenter(): ILatLng { return; }
+  getCenter(): ILatLng {
+    return;
+  }
 
   /**
    * Returns the current circle radius.
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getRadius(): number { return; }
+  getRadius(): number {
+    return;
+  }
 
   /**
    * Changes the circle radius.
    * @param radius {number}
    */
   @CordovaInstance({ sync: true })
-  setRadius(radius: number): void {}
+  setRadius(radius: number): void {
+  }
 
   /**
    * Changes the filling color (inner color).
    * @param color {string}
    */
   @CordovaInstance({ sync: true })
-  setFillColor(color: string): void {}
+  setFillColor(color: string): void {
+  }
 
   /**
    * Returns the current circle filling color (inner color).
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getFillColor(): string { return; }
+  getFillColor(): string {
+    return;
+  }
 
   /**
    * Changes the stroke width.
    * @param strokeWidth {number}
    */
   @CordovaInstance({ sync: true })
-  setStrokeWidth(strokeWidth: number): void {}
+  setStrokeWidth(strokeWidth: number): void {
+  }
 
   /**
    * Returns the current circle stroke width (unit: pixel).
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getStrokeWidth(): number { return; }
+  getStrokeWidth(): number {
+    return;
+  }
 
   /**
    * Changes the stroke color (outter color).
    * @param strokeColor {string}
    */
   @CordovaInstance({ sync: true })
-  setStrokeColor(strokeColor: string): void {}
+  setStrokeColor(strokeColor: string): void {
+  }
 
   /**
    * Returns the current circle stroke color (outer color).
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getStrokeColor(): string { return; }
+  getStrokeColor(): string {
+    return;
+  }
 
   /**
    * Changes click-ability of the circle.
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setClickable(clickable: boolean): void {}
+  setClickable(clickable: boolean): void {
+  }
 
   /**
    * Returns true if the circle is clickable.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  getClickable(): boolean { return; }
+  getClickable(): boolean {
+    return;
+  }
 
   /**
    * Changes the circle zIndex order.
    * @param zIndex {number}
    */
   @CordovaInstance({ sync: true })
-  setZIndex(zIndex: number): void {}
+  setZIndex(zIndex: number): void {
+  }
 
   /**
    * Returns the current circle zIndex.
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getZIndex(): number { return; }
+  getZIndex(): number {
+    return;
+  }
 
   /**
    * Remove the circle.
    */
-  @CordovaInstance({ sync: true })
-  remove(): void {}
+  @CordovaInstance()
+  remove(): void {
+    delete this._objectInstance.getMap().get('_overlays')[this.getId()];
+    this._objectInstance.remove();
+    this.destroy();
+  }
 
   /**
    * Returns the latLngBounds (rectangle) that contains the circle.
    * @return {LatLngBounds}
    */
   @CordovaInstance({ sync: true })
-  getBounds(): LatLngBounds { return; }
+  getBounds(): LatLngBounds {
+    return;
+  }
 
   /**
    * Set circle visibility
    * @param visible {boolean}
    */
   @CordovaInstance({ sync: true })
-  setVisible(visible: boolean): void {}
+  setVisible(visible: boolean): void {
+  }
 
   /**
    * Returns true if the circle is visible.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  getVisible(): boolean { return; }
+  getVisible(): boolean {
+    return;
+  }
 }
 
 /**
@@ -1825,6 +2056,9 @@ export class Environment {
    * Set environment variables.
    */
   static setEnv(envOptions: EnvOptions): void {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     GoogleMaps.getPlugin().environment.setEnv(envOptions);
   }
 
@@ -1833,13 +2067,27 @@ export class Environment {
    * @return {Promise<any>}
    */
   static getLicenseInfo(): Promise<any> {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return new Promise<any>((resolve) => {
       GoogleMaps.getPlugin().environment.getLicenseInfo((text: string) => resolve(text));
     });
   }
 
   /**
-   * @deprecation
+   * Specifies the background color of the app.
+   * @param color
+   */
+  static setBackgroundColor(color: string): void {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
+    GoogleMaps.getPlugin().environment.setBackgroundColor(color);
+  }
+
+  /**
+   * @deprecation This method is static. Please use Environment.getLicenseInfo()
    * @hidden
    */
   getLicenseInfo(): Promise<any> {
@@ -1848,15 +2096,7 @@ export class Environment {
   }
 
   /**
-   * Specifies the background color of the app.
-   * @param color
-   */
-  static setBackgroundColor(color: string): void {
-    GoogleMaps.getPlugin().environment.setBackgroundColor(color);
-  }
-
-  /**
-   * @deprecation
+   * @deprecation This method is static. Please use Environment.setBackgroundColor()
    * @hidden
    */
   setBackgroundColor(color: string): void {
@@ -1877,7 +2117,7 @@ export class Environment {
 export class Geocoder {
 
   /**
-   * @deprecation
+   * @deprecation This method is static. Please use Geocoder.geocode()
    * @hidden
    */
   geocode(request: GeocoderRequest): Promise<GeocoderResult[] | BaseArrayClass<GeocoderResult[]>> {
@@ -1892,6 +2132,9 @@ export class Geocoder {
    */
   static geocode(request: GeocoderRequest): Promise<GeocoderResult[] | BaseArrayClass<GeocoderResult[]>> {
 
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     if (request.address instanceof Array || Array.isArray(request.address) ||
       request.position instanceof Array || Array.isArray(request.position)) {
       // -------------------------
@@ -1928,6 +2171,7 @@ export class Geocoder {
       });
     }
   }
+
 }
 
 /**
@@ -1946,6 +2190,9 @@ export class LocationService {
    * @return {Promise<MyLocation>}
    */
   static getMyLocation(options?: MyLocationOptions): Promise<MyLocation> {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return new Promise<MyLocation>((resolve, reject) => {
       GoogleMaps.getPlugin().LocationService.getMyLocation(options, resolve, reject);
     });
@@ -1955,6 +2202,9 @@ export class LocationService {
    * @return {Promise<boolean>}
    */
   static hasPermission(): Promise<boolean> {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return new Promise<boolean>((resolve, reject) => {
       GoogleMaps.getPlugin().LocationService.hasPermission(resolve, reject);
     });
@@ -1973,31 +2223,16 @@ export class LocationService {
 export class Encoding {
 
   /**
-   * @deprecation
-   * @hidden
-   */
-  decodePath(encoded: string, precision?: number): ILatLng[] {
-    console.error('GoogleMaps', '[deprecated] This method is static. Please use Encoding.decodePath()');
-    return Encoding.decodePath(encoded, precision);
-  }
-
-  /**
-   * @deprecation
-   * @hidden
-   */
-  encodePath(path: ILatLng[] | BaseArrayClass<ILatLng>): string {
-    console.error('GoogleMaps', '[deprecated] This method is static. Please use Encoding.encodePath()');
-    return Encoding.encodePath(path);
-  }
-
-  /**
    * Decodes an encoded path string into a sequence of LatLngs.
    * @param encoded {string} an encoded path string
    * @param precision? {number} default: 5
-   * @return {ILatLng[]}
+   * @return {LatLng}
    */
   static decodePath(encoded: string, precision?: number): ILatLng[] {
-    return GoogleMaps.getPlugin().geometry.encoding.decodePath(encoded, precision);
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
+    return GoogleMaps.getPlugin().Encoding.decodePath(encoded, precision);
   }
 
   /**
@@ -2006,7 +2241,28 @@ export class Encoding {
    * @return {string}
    */
   static encodePath(path: ILatLng[] | BaseArrayClass<ILatLng>): string {
-    return GoogleMaps.getPlugin().geometry.encoding.encodePath(path);
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
+    return GoogleMaps.getPlugin().Encoding.encodePath(path);
+  }
+
+  /**
+   * @deprecation This method is static. Please use Encoding.decodePath()
+   * @hidden
+   */
+  decodePath(encoded: string, precision?: number): ILatLng[] {
+    console.error('GoogleMaps', '[deprecated] This method is static. Please use Encoding.decodePath()');
+    return Encoding.decodePath(encoded, precision);
+  }
+
+  /**
+   * @deprecation This method is static. Please use Encoding.encodePath()
+   * @hidden
+   */
+  encodePath(path: ILatLng[] | BaseArrayClass<ILatLng>): string {
+    console.error('GoogleMaps', '[deprecated] This method is static. Please use Encoding.encodePath()');
+    return Encoding.encodePath(path);
   }
 }
 
@@ -2028,6 +2284,9 @@ export class Poly {
    * @return {boolean}
    */
   static containsLocation(location: ILatLng, path: ILatLng[]): boolean {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return GoogleMaps.getPlugin().geometry.poly.containsLocation(location, path);
   }
 
@@ -2038,6 +2297,9 @@ export class Poly {
    * @return {boolean}
    */
   static isLocationOnEdge(location: ILatLng, path: ILatLng[]): boolean {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return GoogleMaps.getPlugin().geometry.poly.isLocationOnEdge(location, path);
   }
 }
@@ -2054,90 +2316,15 @@ export class Poly {
 export class Spherical {
 
   /**
-   * @deprecation
-   * @hidden
-   */
-  computeDistanceBetween(from: ILatLng, to: ILatLng): number {
-    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeDistanceBetween()');
-    return Spherical.computeDistanceBetween(from, to);
-  }
-
-  /**
-   * @deprecation
-   * @hidden
-   */
-  computeOffset(from: ILatLng, distance: number, heading: number): LatLng {
-    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeOffset()');
-    return Spherical.computeOffset(from, distance, heading);
-  }
-
-  /**
-   * @deprecation
-   * @hidden
-   */
-  computeOffsetOrigin(to: ILatLng, distance: number, heading: number): LatLng {
-    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeOffsetOrigin()');
-    return Spherical.computeOffsetOrigin(to, distance, heading);
-  }
-
-  /**
-   * @deprecation
-   * @hidden
-   */
-  computeLength(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
-    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeLength()');
-    return Spherical.computeLength(path);
-  }
-
-  /**
-   * @deprecation
-   * @hidden
-   */
-  computeArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
-    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeArea()');
-    return Spherical.computeArea(path);
-  }
-
-  /**
-   * @deprecation
-   * @hidden
-   */
-  computeSignedArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
-    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeSignedArea()');
-    return Spherical.computeSignedArea(path);
-  }
-
-  /**
-   * @deprecation
-   * @hidden
-   */
-  computeHeading(from: ILatLng, to: ILatLng): number {
-    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeHeading()');
-    return Spherical.computeHeading(from, to);
-  }
-
-  /**
-   * @deprecation
-   * @hidden
-   */
-  interpolate(from: ILatLng, to: ILatLng, fraction: number): LatLng {
-    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.interpolate()');
-    return Spherical.interpolate(from, to, fraction);
-  }
-
-
-
-
-
-
-
-  /**
    * Returns the distance, in meters, between two LatLngs.
    * @param locationA {ILatLng}
    * @param locationB {ILatLng}
    * @return {number}
    */
   static computeDistanceBetween(from: ILatLng, to: ILatLng): number {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return GoogleMaps.getPlugin().geometry.spherical.computeDistanceBetween(from, to);
   }
 
@@ -2149,6 +2336,9 @@ export class Spherical {
    * @return {LatLng}
    */
   static computeOffset(from: ILatLng, distance: number, heading: number): LatLng {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return GoogleMaps.getPlugin().geometry.spherical.computeOffset(from, distance, heading);
   }
 
@@ -2160,6 +2350,9 @@ export class Spherical {
    * @return {LatLng}
    */
   static computeOffsetOrigin(to: ILatLng, distance: number, heading: number): LatLng {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return GoogleMaps.getPlugin().geometry.spherical.computeOffsetOrigin(to, distance, heading);
   }
 
@@ -2169,6 +2362,9 @@ export class Spherical {
    * @return {number}
    */
   static computeLength(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return GoogleMaps.getPlugin().geometry.spherical.computeLength(path);
   }
 
@@ -2178,7 +2374,10 @@ export class Spherical {
    * @return {number}
    */
   static computeArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
-    return GoogleMaps.getPlugin().geometry.spherical.computeArea(path);
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
+    return GoogleMaps.getPlugin().geometry.spherical.computeLength(path);
   }
 
   /**
@@ -2187,6 +2386,9 @@ export class Spherical {
    * @return {number}
    */
   static computeSignedArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return GoogleMaps.getPlugin().geometry.spherical.computeSignedArea(path);
   }
 
@@ -2197,6 +2399,9 @@ export class Spherical {
    * @return {number}
    */
   static computeHeading(from: ILatLng, to: ILatLng): number {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return GoogleMaps.getPlugin().geometry.spherical.computeHeading(from, to);
   }
 
@@ -2208,7 +2413,82 @@ export class Spherical {
    * @return {LatLng}
    */
   static interpolate(from: ILatLng, to: ILatLng, fraction: number): LatLng {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
     return GoogleMaps.getPlugin().geometry.spherical.interpolate(from, to, fraction);
+  }
+
+  /**
+   * @deprecation This method is static. Please use Spherical.computeDistanceBetween()
+   * @hidden
+   */
+  computeDistanceBetween(from: ILatLng, to: ILatLng): number {
+    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeDistanceBetween()');
+    return Spherical.computeDistanceBetween(from, to);
+  }
+
+  /**
+   * @deprecation This method is static. Please use Spherical.computeOffset()
+   * @hidden
+   */
+  computeOffset(from: ILatLng, distance: number, heading: number): LatLng {
+    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeOffset()');
+    return Spherical.computeOffset(from, distance, heading);
+  }
+
+  /**
+   * @deprecation This method is static. Please use Spherical.computeOffsetOrigin()
+   * @hidden
+   */
+  computeOffsetOrigin(to: ILatLng, distance: number, heading: number): LatLng {
+    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeOffsetOrigin()');
+    return Spherical.computeOffsetOrigin(to, distance, heading);
+  }
+
+  /**
+   * @deprecation This method is static. Please use Spherical.computeLength()
+   * @hidden
+   */
+  computeLength(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
+    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeLength()');
+    return Spherical.computeLength(path);
+  }
+
+  /**
+   * @deprecation This method is static. Please use Spherical.computeArea()
+   * @hidden
+   */
+  computeArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
+    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeArea()');
+    return Spherical.computeArea(path);
+  }
+
+  /**
+   * @deprecation This method is static. Please use Spherical.computeSignedArea()
+   * @hidden
+   */
+  computeSignedArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
+    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeSignedArea()');
+    return Spherical.computeSignedArea(path);
+  }
+
+  /**
+   * @deprecation This method is static. Please use Spherical.computeHeading()
+   * @hidden
+   */
+  computeHeading(from: ILatLng, to: ILatLng): number {
+    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.computeHeading()');
+    return Spherical.computeHeading(from, to);
+  }
+
+  /**
+   * @deprecation This method is static. Please use Spherical.interpolate()
+   * @hidden
+   */
+  interpolate(from: ILatLng, to: ILatLng, fraction: number): LatLng {
+    console.error('GoogleMaps', '[deprecated] This method is static. Please use Spherical.interpolate()');
+    return Spherical.interpolate(from, to, fraction);
   }
 }
 
@@ -2221,32 +2501,81 @@ export class Spherical {
 })
 export class StreetViewPanorama extends BaseClass {
   constructor(element: string | HTMLElement, options?: StreetViewOptions) {
-    super();
+
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      // -------------------
+      // Create a panorama
+      // -------------------
       if (element instanceof HTMLElement) {
-        this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(element, options);
+        if (element.offsetWidth >= 100 && element.offsetHeight >= 100) {
+          super(GoogleMaps.getPlugin().StreetView.getPanorama(element, options));
+        } else {
+          throw new Error(element.tagName + ' is too small. Must be bigger than 100x100.');
+        }
       } else if (typeof element === 'string') {
 
-        this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(new Promise<any[]>((resolve, reject) => {
-          let count = 0;
+        super(GoogleMaps.getPlugin().StreetView.getPanorama(new Promise<any[]>((resolve, reject) => {
+          let count: number;
+          let i: number;
+          count = 0;
           const timer: any = setInterval(() => {
-            const target = document.querySelector('.show-page #' + element);
-            if (target) {
-              clearInterval(timer);
-              resolve([target, options]);
-            } else {
-              if (count++ < 20) {
+            let targets: any[];
+            for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
+              targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element));
+              if (targets.length > 0) {
+                targets = targets.filter((target) => {
+                  return !target.hasAttribute('__pluginmapid');
+                });
+              }
+              if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
+                clearInterval(timer);
+                resolve([targets[0], options]);
                 return;
               }
-              clearInterval(timer);
-              this._objectInstance.remove();
-              console.error('Can not find the element [#' + element + ']');
-              reject();
+
+            }
+            if (count++ < 20) {
+              return;
+            }
+            clearInterval(timer);
+            this._objectInstance.remove();
+            if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
+              reject(new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.'));
+            } else {
+              reject(new Error('Can not find the element [#' + element + ']'));
             }
           }, 100);
-        }), options);
+        }), options));
+
       }
+    } else {
+
+      const errorMessage: string[] = [
+        '[GoogleMaps]'
+      ];
+      if (!window.cordova) {
+        errorMessage.push('You need to execute "$> ionic cordova run browser".');
+        errorMessage.push('"$> ionic serve" is not supported.');
+      } else {
+        errorMessage.push('cordova-plugin-googlemaps is not installed or not ready yet.');
+      }
+
+      if (element instanceof HTMLElement) {
+        displayErrorMessage(element, errorMessage.join('<br />'));
+      } else if (typeof element === 'string') {
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
+        if (targets.length > 0) {
+          targets = targets.filter((target) => {
+            return !target.hasAttribute('__pluginmapid');
+          });
+        }
+        if (targets.length === 1 && targets[0]) {
+          displayErrorMessage(targets[0], errorMessage.join('<br />'));
+        }
+      }
+      throw new Error(errorMessage.join(''));
     }
+
   }
 
 
@@ -2264,10 +2593,10 @@ export class StreetViewPanorama extends BaseClass {
 
   /**
    * Toggles the ability for users to use pan around on the panorama using gestures.
-   * @param enable {boolean}
+   * @param gestureEnable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setPanningGesturesEnabled(enable: boolean): void {}
+  setPanningGesturesEnabled(gestureEnable: boolean): void {}
 
   /**
    * Return true if the panning gesture is enabled.
@@ -2278,10 +2607,10 @@ export class StreetViewPanorama extends BaseClass {
 
   /**
    * Toggles the ability for users to zoom on the panorama using gestures.
-   * @param enable {boolean}
+   * @param gestureEnable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setZoomGesturesEnabled(enable: boolean): void {}
+  setZoomGesturesEnabled(gestureEnable: boolean): void {}
 
   /**
    * Return true if the zooming gesture is enabled.
@@ -2292,10 +2621,10 @@ export class StreetViewPanorama extends BaseClass {
 
   /**
    * Toggles the ability for users to see street names on the panorama.
-   * @param enable {boolean}
+   * @param gestureEnable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setStreetNamesEnabled(enable: boolean): void {}
+  setStreetNamesEnabled(gestureEnable: boolean): void {}
 
   /**
    * Return true if the street names control is enabled.
@@ -2309,7 +2638,7 @@ export class StreetViewPanorama extends BaseClass {
    * @param gestureEnable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setNavigationEnabled(enable: boolean): void {}
+  setNavigationEnabled(gestureEnable: boolean): void {}
 
   /**
    * Return true if the navigation control is enabled.
@@ -2347,7 +2676,7 @@ export class StreetViewPanorama extends BaseClass {
   getPosition(): ILatLng { return; }
 
   /**
-   * Destroy a panorama view completely
+   * Destroy a panorama completely
    * @return {Promise<any>}
    */
   @CordovaInstance()
@@ -2368,34 +2697,85 @@ export class StreetViewPanorama extends BaseClass {
 })
 export class GoogleMap extends BaseClass {
   constructor(element: any, options?: GoogleMapOptions) {
-    super();
+
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      // ---------------
+      // Create a map
+      // ---------------
       if (element instanceof HTMLElement) {
-        this._objectInstance = GoogleMaps.getPlugin().Map.getMap(element, options);
+        if (!element.offsetParent) {
+          throw new Error('Element must be under <body>');
+        }
+        if (element.offsetWidth >= 100 && element.offsetHeight >= 100) {
+          super(GoogleMaps.getPlugin().Map.getMap(element, options));
+        } else {
+          throw new Error(element.tagName + ' is too small. Must be bigger than 100x100.');
+        }
       } else if (typeof element === 'string') {
 
-        this._objectInstance = GoogleMaps.getPlugin().Map.getMap(new Promise<any[]>((resolve, reject) => {
-          let count = 0;
+        super(GoogleMaps.getPlugin().Map.getMap(new Promise<any[]>((resolve, reject) => {
+          let count: number;
+          let i: number;
+          count = 0;
           const timer: any = setInterval(() => {
-            const target = document.querySelector('.show-page #' + element);
-            if (target) {
-              clearInterval(timer);
-              resolve([target, options]);
-            } else {
-              if (count++ < 20) {
+            let targets: any[];
+            for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
+              targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element));
+              if (targets.length > 0) {
+                targets = targets.filter((target) => {
+                  return !target.hasAttribute('__pluginmapid');
+                });
+              }
+              if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
+                clearInterval(timer);
+                resolve([targets[0], options]);
                 return;
               }
-              clearInterval(timer);
-              this._objectInstance.remove();
-              console.error('Can not find the element [#' + element + ']');
-              reject();
+
+            }
+            if (count++ < 20) {
+              return;
+            }
+            clearInterval(timer);
+            this._objectInstance.remove();
+            if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
+              reject(new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.'));
+            } else {
+              reject(new Error('Can not find the element [#' + element + ']'));
             }
           }, 100);
-        }), options);
+        }), options));
 
       } else if (element === null && options) {
-        this._objectInstance = GoogleMaps.getPlugin().Map.getMap(null, options);
+        super(GoogleMaps.getPlugin().Map.getMap(null, options));
       }
+    } else {
+
+      const errorMessage: string[] = [
+        '[GoogleMaps]'
+      ];
+      if (!window.cordova) {
+        errorMessage.push('You need to execute "$> ionic cordova run browser".');
+        errorMessage.push('"$> ionic serve" is not supported.');
+      } else {
+        errorMessage.push('cordova-plugin-googlemaps is not installed or not ready yet.');
+      }
+      console.error(errorMessage.join(''));
+
+      if (element instanceof HTMLElement) {
+        displayErrorMessage(element, errorMessage.join('<br />'));
+      } else if (typeof element === 'string') {
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
+        if (targets.length > 0) {
+          targets = targets.filter((target) => {
+            return !target.hasAttribute('__pluginmapid');
+          });
+        }
+        if (targets.length === 1 && targets[0]) {
+          displayErrorMessage(targets[0], errorMessage.join('<br />'));
+        }
+      }
+
     }
   }
 
@@ -2406,9 +2786,34 @@ export class GoogleMap extends BaseClass {
   @InstanceCheck()
   setDiv(domNode?: HTMLElement | string): void {
     if (typeof domNode === 'string') {
-      this._objectInstance.setDiv(document.querySelector('.show-page #' + domNode));
+      (new Promise<any>((resolve, reject) => {
+        let i, targets: any[];
+        for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
+          targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + domNode));
+          if (targets.length > 0) {
+            targets = targets.filter((target) => {
+              return !target.hasAttribute('__pluginmapid');
+            });
+          }
+          if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
+            resolve(targets[0] as HTMLElement);
+            return;
+          }
+
+        }
+        reject('Can not find [#' + domNode + '] element');
+      }))
+      .then((element: HTMLElement) => {
+        this._objectInstance.setDiv(element);
+      });
     } else {
-      this._objectInstance.setDiv(domNode);
+      if (domNode instanceof HTMLElement &&
+          !domNode.offsetParent &&
+          domNode.offsetWidth >= 100 && domNode.offsetHeight >= 100) {
+        this._objectInstance.setDiv(domNode);
+      } else {
+        throw new Error(domNode.tagName + ' is too small. Must be bigger than 100x100.');
+      }
     }
   }
 
@@ -2417,105 +2822,132 @@ export class GoogleMap extends BaseClass {
    * @return {HTMLElement}
    */
   @CordovaInstance({ sync: true })
-  getDiv(): HTMLElement { return; }
+  getDiv(): HTMLElement {
+    return;
+  }
 
   /**
    * Changes the map type id
    * @param mapTypeId {string}
    */
   @CordovaInstance({ sync: true })
-  setMapTypeId(mapTypeId: MapType | string): void { }
+  setMapTypeId(mapTypeId: MapType | string): void {
+  }
 
   /**
    * Moves the camera with animation
    * @return {Promise<any>}
    */
   @CordovaInstance()
-  animateCamera(cameraPosition: CameraPosition<any>): Promise<any> { return; }
+  animateCamera(cameraPosition: CameraPosition<any>): Promise<any> {
+    return;
+  }
 
   /**
    * Zooming in the camera with animation
    * @return {Promise<any>}
    */
   @CordovaInstance()
-  animateCameraZoomIn(): Promise<any> { return; }
+  animateCameraZoomIn(): Promise<any> {
+    return;
+  }
 
   /**
    * Zooming out the camera with animation
    * @return {Promise<any>}
    */
   @CordovaInstance()
-  animateCameraZoomOut(): Promise<any> { return; }
+  animateCameraZoomOut(): Promise<any> {
+    return;
+  }
 
   /**
    * Moves the camera without animation
    * @return {Promise<any>}
    */
   @CordovaInstance()
-  moveCamera(cameraPosition: CameraPosition<any>): Promise<any> { return; }
+  moveCamera(cameraPosition: CameraPosition<any>): Promise<any> {
+    return;
+  }
 
   /**
    * Zooming in the camera without animation
    * @return {Promise<any>}
    */
   @CordovaInstance()
-  moveCameraZoomIn(): Promise<any> { return; }
+  moveCameraZoomIn(): Promise<any> {
+    return;
+  }
 
   /**
    * Zooming out the camera without animation
    * @return {Promise<any>}
    */
   @CordovaInstance()
-  moveCameraZoomOut(): Promise<any> { return; }
+  moveCameraZoomOut(): Promise<any> {
+    return;
+  }
 
   /**
    * Get the position of the camera.
    * @return {CameraPosition}
    */
   @CordovaInstance({ sync: true })
-  getCameraPosition(): CameraPosition<ILatLng> { return; }
+  getCameraPosition(): CameraPosition<ILatLng> {
+    return;
+  }
 
   /**
    * Get the current camera target position
    * @return {ILatLng}
    */
   @CordovaInstance({ sync: true })
-  getCameraTarget(): ILatLng { return; }
+  getCameraTarget(): ILatLng {
+    return;
+  }
 
   /**
    * Get the current camera zoom level
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getCameraZoom(): number { return; }
+  getCameraZoom(): number {
+    return;
+  }
 
   /**
    * Get the current camera bearing
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getCameraBearing(): number { return; }
+  getCameraBearing(): number {
+    return;
+  }
 
   /**
    * Get the current camera tilt (view angle)
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getCameraTilt(): number { return; }
+  getCameraTilt(): number {
+    return;
+  }
 
   /**
    * Set the center position of the camera view
    * @param latLng {ILatLng | ILatLng[]}
    */
   @CordovaInstance({ sync: true })
-  setCameraTarget(latLng: ILatLng | ILatLng[]): void { }
+  setCameraTarget(latLng: ILatLng | ILatLng[]): void {
+  }
 
   /**
    * Set zoom level of the camera
    * @param zoomLevel {number} Zoom level
    */
   @CordovaInstance({ sync: true })
-  setCameraZoom(zoomLevel: number): void {}
+  setCameraZoom(zoomLevel: number): void {
+  }
 
   /**
    * Set the camera view angle
@@ -2529,7 +2961,8 @@ export class GoogleMap extends BaseClass {
    * @param bearing {any}
    */
   @CordovaInstance({ sync: true })
-  setCameraBearing(bearing: any): void {}
+  setCameraBearing(bearing: any): void {
+  }
 
   /**
    * Changes the center of the map by the given distance in pixels
@@ -2544,7 +2977,9 @@ export class GoogleMap extends BaseClass {
    * @return {VisibleRegion}
    */
   @CordovaInstance({ sync: true })
-  getVisibleRegion(): VisibleRegion { return; }
+  getVisibleRegion(): VisibleRegion {
+    return;
+  }
 
   /**
    * Get the current device location
@@ -2562,7 +2997,8 @@ export class GoogleMap extends BaseClass {
    * @param isClickable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setClickable(isClickable: boolean): void {}
+  setClickable(isClickable: boolean): void {
+  }
 
   /**
    * Destroy a map completely
@@ -2603,7 +3039,9 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<any>}
    */
   @CordovaInstance()
-  fromLatLngToPoint(latLng: ILatLng): Promise<any[]> { return; }
+  fromLatLngToPoint(latLng: ILatLng): Promise<any[]> {
+    return;
+  }
 
   /**
    * Convert the unit from the pixels from the left/top to the LatLng
@@ -2617,7 +3055,8 @@ export class GoogleMap extends BaseClass {
    * @param enabled {boolean}
    */
   @CordovaInstance({ sync: true })
-  setMyLocationEnabled(enabled: boolean): void {}
+  setMyLocationEnabled(enabled: boolean): void {
+  }
 
   /**
    * Set true if you want to show the MyLocation button
@@ -2631,42 +3070,49 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<any>}
    */
   @CordovaInstance()
-  getFocusedBuilding(): Promise<any> { return; }
+  getFocusedBuilding(): Promise<any> {
+    return;
+  }
 
   /**
    * Set true if you want to show the indoor map
    * @param enabled {boolean}
    */
   @CordovaInstance({ sync: true })
-  setIndoorEnabled(enabled: boolean): void {}
+  setIndoorEnabled(enabled: boolean): void {
+  }
 
   /**
    * Set true if you want to show the traffic layer
    * @param enabled {boolean}
    */
   @CordovaInstance({ sync: true })
-  setTrafficEnabled(enabled: boolean): void {}
+  setTrafficEnabled(enabled: boolean): void {
+  }
 
   /**
    * Set true if you want to show the compass button
    * @param enabled {boolean}
    */
   @CordovaInstance({ sync: true })
-  setCompassEnabled(enabled: boolean): void {}
+  setCompassEnabled(enabled: boolean): void {
+  }
 
   /**
    * Sets the preference for whether all gestures should be enabled or disabled
    * @param enabled {boolean}
    */
   @CordovaInstance({ sync: true })
-  setAllGesturesEnabled(enabled: boolean): void {}
+  setAllGesturesEnabled(enabled: boolean): void {
+  }
 
   /**
    * Set visibility of the map
    * @param visible {boolean}
    */
   @CordovaInstance({ sync: true })
-  setVisible(visible: boolean): void {}
+  setVisible(visible: boolean): void {
+  }
 
   /**
    * Adjust the map padding (same as CSS padding rule)
@@ -2683,7 +3129,8 @@ export class GoogleMap extends BaseClass {
    * @param options
    */
   @CordovaInstance({ sync: true })
-  setOptions(options: GoogleMapOptions): void {}
+  setOptions(options: GoogleMapOptions): void {
+  }
 
   /**
    * Adds a marker
@@ -2691,7 +3138,7 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<Marker>}
    */
   @InstanceCheck()
-  addMarker(options: MarkerOptions): Promise<Marker> {
+  addMarker(options: MarkerOptions): Promise<Marker | any> {
     return new Promise<Marker>((resolve, reject) => {
       this._objectInstance.addMarker(options, (marker: any) => {
         if (marker) {
@@ -2738,7 +3185,7 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<MarkerCluster>}
    */
   @InstanceCheck()
-  addMarkerCluster(options: MarkerClusterOptions): Promise<MarkerCluster> {
+  addMarkerCluster(options: MarkerClusterOptions): Promise<MarkerCluster | any> {
     return new Promise<MarkerCluster>((resolve, reject) => {
       this._objectInstance.addMarkerCluster(options, (markerCluster: any) => {
         if (markerCluster) {
@@ -2787,7 +3234,7 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<Circle>}
    */
   @InstanceCheck()
-  addCircle(options: CircleOptions): Promise<Circle> {
+  addCircle(options: CircleOptions): Promise<Circle | any> {
     return new Promise<Circle>((resolve, reject) => {
       this._objectInstance.addCircle(options, (circle: any) => {
         if (circle) {
@@ -2833,7 +3280,7 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<Polygon>}
    */
   @InstanceCheck()
-  addPolygon(options: PolygonOptions): Promise<Polygon> {
+  addPolygon(options: PolygonOptions): Promise<Polygon | any> {
     return new Promise<Polygon>((resolve, reject) => {
       this._objectInstance.addPolygon(options, (polygon: any) => {
         if (polygon) {
@@ -2880,7 +3327,7 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<Polyline>}
    */
   @InstanceCheck()
-  addPolyline(options: PolylineOptions): Promise<Polyline> {
+  addPolyline(options: PolylineOptions): Promise<Polyline | any> {
     return new Promise<Polyline>((resolve, reject) => {
       this._objectInstance.addPolyline(options, (polyline: any) => {
         if (polyline) {
@@ -2927,7 +3374,7 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<TileOverlay>}
    */
   @InstanceCheck()
-  addTileOverlay(options: TileOverlayOptions): Promise<TileOverlay> {
+  addTileOverlay(options: TileOverlayOptions): Promise<TileOverlay | any> {
     return new Promise<TileOverlay>((resolve, reject) => {
       this._objectInstance.addTileOverlay(options, (tileOverlay: any) => {
         if (tileOverlay) {
@@ -2974,7 +3421,7 @@ export class GoogleMap extends BaseClass {
    * @return {Promise<GroundOverlay>}
    */
   @InstanceCheck()
-  addGroundOverlay(options: GroundOverlayOptions): Promise<GroundOverlay> {
+  addGroundOverlay(options: GroundOverlayOptions): Promise<GroundOverlay | any> {
     return new Promise<GroundOverlay>((resolve, reject) => {
       this._objectInstance.addGroundOverlay(options, (groundOverlay: any) => {
         if (groundOverlay) {
@@ -3043,6 +3490,33 @@ export class GoogleMap extends BaseClass {
   }
 
   /**
+   * Adds a fusionTable overlay
+   * @param options {FusionTableOverlayOptions} options
+   * @return {Promise<FusionTableOverlay>}
+   */
+  @InstanceCheck()
+  addFusionTableOverlay(options: FusionTableOverlayOptions): Promise<FusionTableOverlay> {
+    return new Promise<FusionTableOverlay>((resolve, reject) => {
+      this._objectInstance.addFusionTableOverlay(options, (fusionTableOverlay: any) => {
+        if (fusionTableOverlay) {
+          const overlayId: string = fusionTableOverlay.getId();
+          const overlay = new FusionTableOverlay(this, fusionTableOverlay);
+          this.get('_overlays')[overlayId] = overlay;
+          fusionTableOverlay.one(overlayId + '_remove', () => {
+            if (this.get('_overlays')) {
+              this.get('_overlays')[overlayId] = null;
+              overlay.destroy();
+            }
+          });
+          resolve(overlay);
+        } else {
+          reject();
+        }
+      });
+    });
+  }
+
+  /**
    * Returns the base64 encoded screen capture of the map.
    * @param options {ToDataUrlOptions} [options] options
    * @return {Promise<string>}
@@ -3060,9 +3534,8 @@ export class GroundOverlay extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -3070,33 +3543,41 @@ export class GroundOverlay extends BaseClass {
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getId(): string { return; }
+  getId(): string {
+    return;
+  }
 
   /**
    * Returns the map instance.
    * @return {GoogleMap}
    */
-  getMap(): GoogleMap { return this._map; }
+  getMap(): any {
+    return this._map;
+  }
 
   /**
    * Changes the bounds of the GroundOverlay
    * @param bounds { ILatLng[]}
    */
   @CordovaInstance({ sync: true })
-  setBounds(bounds: ILatLng[]): void {}
+  setBounds(bounds: ILatLng[]): void {
+  }
 
   /**
    * Changes the bearing of the ground overlay
    * @param bearing {number}
    */
   @CordovaInstance({ sync: true })
-  setBearing(bearing: number): void { }
+  setBearing(bearing: number): void {
+  }
 
   /**
    * Returns the current bearing value
    */
   @CordovaInstance({ sync: true })
-  getBearing(): number { return; }
+  getBearing(): number {
+    return;
+  }
 
   /**
    * Changes the image of the ground overlay
@@ -3110,61 +3591,73 @@ export class GroundOverlay extends BaseClass {
    * @param opacity {number}
    */
   @CordovaInstance({ sync: true })
-  setOpacity(opacity: number): void { }
+  setOpacity(opacity: number): void {
+  }
 
   /**
    * Returns the current opacity
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getOpacity(): number { return; }
+  getOpacity(): number {
+    return;
+  }
 
   /**
    * Changes click-ability of the ground overlay
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setClickable(clickable: boolean): void {}
+  setClickable(clickable: boolean): void {
+  }
 
   /**
    * Returns true if the ground overlay is clickable
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  getClickable(): boolean { return; }
+  getClickable(): boolean {
+    return;
+  }
 
   /**
    * Changes visibility of the ground overlay
    * @param visible {boolean}
    */
   @CordovaInstance({ sync: true })
-  setVisible(visible: boolean): void { }
+  setVisible(visible: boolean): void {
+  }
 
   /**
    * Returns true if the ground overlay is visible
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  getVisible(): boolean { return; }
+  getVisible(): boolean {
+    return;
+  }
 
   /**
    * Changes the ground overlay zIndex order
    * @param index {number}
    */
   @CordovaInstance({ sync: true })
-  setZIndex(index: number): void {}
+  setZIndex(index: number): void {
+  }
 
   /**
    * Returns the current ground overlay zIndex
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getZIndex(): number { return; }
+  getZIndex(): number {
+    return;
+  }
 
   /**
    * Remove the ground overlay
    */
-  @CordovaCheck()
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();
@@ -3184,8 +3677,7 @@ export class GroundOverlay extends BaseClass {
 export class HtmlInfoWindow extends BaseClass {
 
   constructor() {
-    super();
-    this._objectInstance = new (GoogleMaps.getPlugin().HtmlInfoWindow)();
+    super(new (GoogleMaps.getPlugin().HtmlInfoWindow)());
   }
 
   /**
@@ -3193,7 +3685,8 @@ export class HtmlInfoWindow extends BaseClass {
    * @param color {string}
    */
   @CordovaInstance()
-  setBackgroundColor(color: string): void {}
+  setBackgroundColor(color: string): void {
+  }
 
   /**
    * Set your HTML contents.
@@ -3201,20 +3694,23 @@ export class HtmlInfoWindow extends BaseClass {
    * @param cssOptions? {any} CSS styles for the container element of HTMLInfoWindow
    */
   @CordovaInstance()
-  setContent(content: string | Element, cssOptions?: any): void {}
+  setContent(content: string | Element, cssOptions?: any): void {
+  }
 
   /**
    * Open the htmlInfoWindow
    * @param marker {Marker}
    */
   @CordovaInstance()
-  open(marker: any): any {}
+  open(marker: any): any {
+  }
 
   /**
    * Close the htmlInfoWindow
    */
   @CordovaInstance()
-  close(): void {}
+  close(): void {
+  }
 
 }
 
@@ -3226,9 +3722,8 @@ export class Marker extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -3236,113 +3731,137 @@ export class Marker extends BaseClass {
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getId(): string { return; }
+  getId(): string {
+    return;
+  }
 
   /**
    * Returns the map instance.
    * @return {GoogleMap}
    */
-  getMap(): GoogleMap { return this._map; }
+  getMap(): any {
+    return this._map;
+  }
 
   /**
    * Set the marker position.
    * @param latLng {ILatLng}
    */
   @CordovaInstance({ sync: true })
-  setPosition(latLng: ILatLng): void { return; }
+  setPosition(latLng: ILatLng): void {
+    return;
+  }
 
   /**
    * Returns the marker position.
    * @return {ILatLng}
    */
   @CordovaInstance({ sync: true })
-  getPosition(): ILatLng { return; }
+  getPosition(): ILatLng {
+    return;
+  }
 
   /**
    * Show the normal infoWindow of the marker.
    */
   @CordovaInstance({ sync: true })
-  showInfoWindow(): void {}
+  showInfoWindow(): void {
+  }
 
   /**
    * Hide the normal infoWindow of the marker.
    */
   @CordovaInstance({ sync: true })
-  hideInfoWindow(): void {}
+  hideInfoWindow(): void {
+  }
 
   /**
    * Specify the animation either `DROP` or `BOUNCE`
    * @param animation {string}
    */
   @CordovaInstance({ sync: true })
-  setAnimation(animation: string): void {}
+  setAnimation(animation: string): void {
+  }
 
   /**
    * Set true if you **do not want** to move the map when you click on the marker.
    * @param disableAutoPan {boolean}
    */
   @CordovaInstance({ sync: true })
-  setDisableAutoPan(disableAutoPan: boolean): void {}
+  setDisableAutoPan(disableAutoPan: boolean): void {
+  }
 
   /**
    * Set false if you want to hide the marker.
    * @param visible
    */
   @CordovaInstance({ sync: true })
-  setVisible(visible: boolean): void {}
+  setVisible(visible: boolean): void {
+  }
 
   /**
    * Returns true if the marker is visible
    */
   @CordovaInstance({ sync: true })
-  isVisible(): boolean { return; }
+  isVisible(): boolean {
+    return;
+  }
 
   /**
    * Changes title of the normal infoWindow.
    * @param title {string}
    */
   @CordovaInstance({ sync: true })
-  setTitle(title: string): void {}
+  setTitle(title: string): void {
+  }
 
   /**
    * Returns the title strings.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getTitle(): string { return; }
+  getTitle(): string {
+    return;
+  }
 
   /**
    * Changes snippet of the normal infoWindow.
    * @param snippet {string}
    */
   @CordovaInstance({ sync: true })
-  setSnippet(snippet: string): void {}
+  setSnippet(snippet: string): void {
+  }
 
   /**
    * Returns the snippet strings.
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getSnippet(): string { return; }
+  getSnippet(): string {
+    return;
+  }
 
   /**
    * Changes the marker opacity from 0.0 to 1.0.
    * @param alpha {number} Opacity
    */
   @CordovaInstance({ sync: true })
-  setOpacity(alpha: number): void {}
+  setOpacity(alpha: number): void {
+  }
 
   /**
    * Returns the marker opacity.
    * @return {number} Opacity
    */
   @CordovaInstance({ sync: true })
-  getOpacity(): number { return; }
+  getOpacity(): number {
+    return;
+  }
 
   /**
    * Remove the marker.
    */
-  @CordovaCheck()
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();
@@ -3355,7 +3874,8 @@ export class Marker extends BaseClass {
    * @param y {number} Distance from top of the icon image in pixels.
    */
   @CordovaInstance({ sync: true })
-  setIconAnchor(x: number, y: number): void {}
+  setIconAnchor(x: number, y: number): void {
+  }
 
   /**
    * Changes the info window anchor. This defaults to 50% from the left of the image and at the top of the image.
@@ -3363,70 +3883,86 @@ export class Marker extends BaseClass {
    * @param y {number} Distance from top of the icon image in pixels.
    */
   @CordovaInstance({ sync: true })
-  setInfoWindowAnchor(x: number, y: number): void {}
+  setInfoWindowAnchor(x: number, y: number): void {
+  }
 
   /**
    * Returns true if the infoWindow is shown on the marker
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  isInfoWindowShown(): boolean { return; }
+  isInfoWindowShown(): boolean {
+    return;
+  }
 
   /**
    * Higher zIndex value overlays will be drawn on top of lower zIndex value tile layers and overlays.
    * @param y {number} z-index
    */
   @CordovaInstance({ sync: true })
-  setZIndex(zIndex: number): void {}
+  setZIndex(zIndex: number): void {
+  }
 
   /**
    * Get z-index
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getZIndex(): number { return; }
+  getZIndex(): number {
+    return;
+  }
 
   /**
    * Set true if you allow all users to drag the marker.
    * @param draggable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setDraggable(draggable: boolean): void { }
+  setDraggable(draggable: boolean): void {
+  }
 
   /**
    * Returns true if the marker drag is enabled.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  isDraggable(): boolean { return; }
+  isDraggable(): boolean {
+    return;
+  }
 
   /**
    * Set true if you want to be flat marker.
    * @param flat {boolean}
    */
   @CordovaInstance({ sync: true })
-  setFlat(flat: boolean): void { return; }
+  setFlat(flat: boolean): void {
+    return;
+  }
 
   /**
    * Changes icon url and/or size
    * @param icon
    */
   @CordovaInstance({ sync: true })
-  setIcon(icon: MarkerIcon): void { return; }
+  setIcon(icon: MarkerIcon): void {
+    return;
+  }
 
   /**
    * Set the marker rotation angle.
    * @param rotation {number}
    */
   @CordovaInstance({ sync: true })
-  setRotation(rotation: number): void { }
+  setRotation(rotation: number): void {
+  }
 
   /**
    * Returns the marker rotation angle.
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getRotation(): number { return; }
+  getRotation(): number {
+    return;
+  }
 
 }
 
@@ -3438,9 +3974,8 @@ export class MarkerCluster extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -3448,7 +3983,9 @@ export class MarkerCluster extends BaseClass {
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getId(): string { return; }
+  getId(): string {
+    return;
+  }
 
   /**
    * Add one marker location
@@ -3456,19 +3993,21 @@ export class MarkerCluster extends BaseClass {
    * @param skipRedraw? {boolean} marker cluster does not redraw the marker cluster if true.
    */
   @CordovaInstance({ sync: true })
-  addMarker(marker: MarkerOptions, skipRedraw?: boolean): void {}
+  addMarker(marker: MarkerOptions): void {
+  }
 
   /**
    * Add marker locations
    * @param markers {MarkerOptions[]} multiple location
    */
   @CordovaInstance({ sync: true })
-  addMarkers(markers: MarkerOptions[]): void {}
+  addMarkers(markers: MarkerOptions[]): void {
+  }
 
   /**
    * Remove the marker cluster
    */
-  @InstanceCheck()
+  @CordovaInstance()
   remove(): void {
     this._objectInstance.set('_overlays', undefined);
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
@@ -3480,7 +4019,9 @@ export class MarkerCluster extends BaseClass {
    * Returns the map instance.
    * @return {GoogleMap}
    */
-  getMap(): GoogleMap { return this._map; }
+  getMap(): any {
+    return this._map;
+  }
 
 }
 
@@ -3492,9 +4033,8 @@ export class Polygon extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -3502,27 +4042,31 @@ export class Polygon extends BaseClass {
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getId(): string { return; }
+  getId(): string {
+    return;
+  }
 
   /**
    * Returns the map instance.
    * @return {GoogleMap}
    */
-  getMap(): GoogleMap { return this._map; }
+  getMap(): any {
+    return this._map;
+  }
 
   /**
    * Changes the polygon points.
    * @param points {ILatLng[]}
    */
   @CordovaInstance({ sync: true })
-  setPoints(points: ILatLng[]): void {}
+  setPoints(points: ILatLng[]): void {
+  }
 
   /**
    * Returns an instance of the BaseArrayClass.
    * You can modify the points.
    * @return {BaseArrayClass<ILatLng>}
    */
-  @CordovaCheck()
   getPoints(): BaseArrayClass<ILatLng> {
     return new BaseArrayClass<ILatLng>(this._objectInstance.getPoints());
   }
@@ -3532,14 +4076,14 @@ export class Polygon extends BaseClass {
    * @param holes {ILatLng[][]}
    */
   @CordovaInstance({ sync: true })
-  setHoles(holes: ILatLng[][]): void {}
+  setHoles(holes: ILatLng[][]): void {
+  }
 
   /**
    * Returns an instance of the BaseArrayClass.
    * You can modify the holes.
    * @return {BaseArrayClass<ILatLng[]>}
    */
-  @CordovaCheck()
   getHoles(): BaseArrayClass<ILatLng[]> {
     const holes: ILatLng[][] = this._objectInstance.getPoints();
     const results: BaseArrayClass<ILatLng[]> = new BaseArrayClass<ILatLng[]>();
@@ -3547,81 +4091,96 @@ export class Polygon extends BaseClass {
       results.push(hole);
     });
     return results;
- }
+  }
 
   /**
    * Changes the filling color (inner color)
    * @param fillColor {string}
    */
   @CordovaInstance({ sync: true })
-  setFillColor(fillColor: string): void {}
+  setFillColor(fillColor: string): void {
+  }
 
   /**
    * Returns the current polygon filling color (inner color).
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getFillColor(): string { return; }
+  getFillColor(): string {
+    return;
+  }
 
   /**
    * Changes the stroke color (outer color)
    * @param strokeColor {string}
    */
   @CordovaInstance({ sync: true })
-  setStrokeColor(strokeColor: string): void {}
+  setStrokeColor(strokeColor: string): void {
+  }
 
   /**
    * Returns the current polygon stroke color (outer color)
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getStrokeColor(): string { return; }
+  getStrokeColor(): string {
+    return;
+  }
 
   /**
    * Changes click-ability of the polygon
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setClickable(clickable: boolean): void {}
+  setClickable(clickable: boolean): void {
+  }
 
   /**
    * Returns true if the polygon is clickable
    */
   @CordovaInstance({ sync: true })
-  getClickable(): boolean { return; }
+  getClickable(): boolean {
+    return;
+  }
 
   /**
    * Changes visibility of the polygon
    * @param visible {boolean}
    */
   @CordovaInstance({ sync: true })
-  setVisible(visible: boolean): void {}
+  setVisible(visible: boolean): void {
+  }
 
   /**
    * Returns true if the polygon is visible
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  getVisible(): boolean { return; }
+  getVisible(): boolean {
+    return;
+  }
 
   /**
    * Changes the polygon zIndex order.
    * @param zIndex {number}
    */
   @CordovaInstance({ sync: true })
-  setZIndex(zIndex: number): void {}
+  setZIndex(zIndex: number): void {
+  }
 
   /**
    * Returns the current polygon zIndex
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getZIndex(): number { return; }
+  getZIndex(): number {
+    return;
+  }
 
   /**
    * Remove the polygon.
    */
-  @InstanceCheck()
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();
@@ -3632,27 +4191,33 @@ export class Polygon extends BaseClass {
    * Changes the polygon stroke width
    */
   @CordovaInstance({ sync: true })
-  setStrokeWidth(strokeWidth: number): void {}
+  setStrokeWidth(strokeWidth: number): void {
+  }
 
   /**
    * Returns the polygon stroke width
    */
   @CordovaInstance({ sync: true })
-  getStrokeWidth(): number { return; }
+  getStrokeWidth(): number {
+    return;
+  }
 
   /**
    * When true, edges of the polygon are interpreted as geodesic and will follow the curvature of the Earth.
    * @param geodesic {boolean}
    */
   @CordovaInstance({ sync: true })
-  setGeodesic(geodesic: boolean): void {}
+  setGeodesic(geodesic: boolean): void {
+  }
 
   /**
    * Returns true if the polygon is geodesic.
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  getGeodesic(): boolean { return; }
+  getGeodesic(): boolean {
+    return;
+  }
 
 }
 
@@ -3664,9 +4229,8 @@ export class Polyline extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -3674,27 +4238,31 @@ export class Polyline extends BaseClass {
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getId(): string { return; }
+  getId(): string {
+    return;
+  }
 
   /**
    * Returns the map instance.
    * @return {GoogleMap}
    */
-  getMap(): GoogleMap { return this._map; }
+  getMap(): any {
+    return this._map;
+  }
 
   /**
    * Changes the polyline points.
    * @param points {ILatLng[]}
    */
   @CordovaInstance({ sync: true })
-  setPoints(points: ILatLng[]): void {}
+  setPoints(points: ILatLng[]): void {
+  }
 
   /**
    * Returns an instance of the BaseArrayClass
    * You can modify the points.
    * @return {BaseArrayClass<ILatLng>}
    */
-  @CordovaCheck()
   getPoints(): BaseArrayClass<ILatLng> {
     return new BaseArrayClass<ILatLng>(this._objectInstance.getPoints());
   }
@@ -3704,88 +4272,106 @@ export class Polyline extends BaseClass {
    * @param geoDesic {boolean}
    */
   @CordovaInstance({ sync: true })
-  setGeoDesic(geoDesic: boolean): void {}
+  setGeoDesic(geoDesic: boolean): void {
+  }
 
   /**
    * Returns true if the polyline is geodesic
    */
   @CordovaInstance({ sync: true })
-  getGeodesic(): boolean { return; }
+  getGeodesic(): boolean {
+    return;
+  }
 
   /**
    * Changes visibility of the polyline
    * @param visible {boolean}
    */
   @CordovaInstance({ sync: true })
-  setVisible(visible: boolean): void {}
+  setVisible(visible: boolean): void {
+  }
 
   /**
    * Returns true if the polyline is visible
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  getVisible(): boolean { return; }
+  getVisible(): boolean {
+    return;
+  }
 
   /**
    * Changes click-ability of the polyline
    * @param clickable {boolean}
    */
   @CordovaInstance({ sync: true })
-  setClickable(clickable: boolean): void {}
+  setClickable(clickable: boolean): void {
+  }
 
   /**
    * Returns true if the polyline is clickable
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  getClickable(): boolean { return; }
+  getClickable(): boolean {
+    return;
+  }
 
   /**
    * Changes the polyline color
    * @param strokeColor {string}
    */
   @CordovaInstance({ sync: true })
-  setStrokeColor(strokeColor: string): void {}
+  setStrokeColor(strokeColor: string): void {
+  }
 
   /**
    * Returns the current polyline color
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getStrokeColor(): string { return; }
+  getStrokeColor(): string {
+    return;
+  }
 
   /**
    * Changes the polyline stroke width
    * @param strokeWidth {number}
    */
   @CordovaInstance({ sync: true })
-  setStrokeWidth(strokeWidth: number): void {}
+  setStrokeWidth(strokeWidth: number): void {
+  }
 
   /**
    * Returns the current stroke width (unit: pixel).
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getStrokeWidth(): number { return; }
+  getStrokeWidth(): number {
+    return;
+  }
 
   /**
    * Changes the polyline zIndex order.
    * @param index {number}
    */
   @CordovaInstance({ sync: true })
-  setZIndex(index: number): void {}
+  setZIndex(index: number): void {
+  }
 
   /**
    * Returns the current polyline zIndex
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getZIndex(): number { return; }
+  getZIndex(): number {
+    return;
+  }
 
   /**
    * Remove the polyline
    */
-  @InstanceCheck()
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();
@@ -3801,9 +4387,8 @@ export class TileOverlay extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -3811,80 +4396,98 @@ export class TileOverlay extends BaseClass {
    * @return {string}
    */
   @CordovaInstance({ sync: true })
-  getId(): string { return; }
+  getId(): string {
+    return;
+  }
 
   /**
    * Returns the map instance.
    * @return {GoogleMap}
    */
-  getMap(): GoogleMap { return this._map; }
+  getMap(): any {
+    return this._map;
+  }
 
   /**
    * Set whether the tiles should fade in.
    * @param fadeIn {boolean}
    */
   @CordovaInstance({ sync: true })
-  setFadeIn(fadeIn: boolean): void {}
+  setFadeIn(fadeIn: boolean): void {
+  }
 
   /**
    * Get whether the tiles should fade in
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  getFadeIn(): boolean { return; }
+  getFadeIn(): boolean {
+    return;
+  }
 
   /**
    * Set the zIndex of the tile overlay
    * @param zIndex {number}
    */
   @CordovaInstance({ sync: true })
-  setZIndex(zIndex: number): void {}
+  setZIndex(zIndex: number): void {
+  }
 
   /**
    * Returns the zIndex of the tile overlay
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getZIndex(): number { return; }
+  getZIndex(): number {
+    return;
+  }
 
   /**
    * Set the opacity of the tile overlay
    * @param opacity {number}
    */
   @CordovaInstance({ sync: true })
-  setOpacity(opacity: number): void {}
+  setOpacity(opacity: number): void {
+  }
 
   /**
    * Returns the opacity of the tile overlay
    * @return {number}
    */
   @CordovaInstance({ sync: true })
-  getOpacity(): number { return; }
+  getOpacity(): number {
+    return;
+  }
 
   /**
    * Set false if you want to hide
    * @param visible {boolean}
    */
   @CordovaInstance({ sync: true })
-  setVisible(visible: boolean): void {}
+  setVisible(visible: boolean): void {
+  }
 
   /**
    * Returns true if the tile overlay is visible
    * @return {boolean}
    */
   @CordovaInstance({ sync: true })
-  getVisible(): boolean { return; }
+  getVisible(): boolean {
+    return;
+  }
 
   /**
    * Get tile size
    */
   @CordovaInstance({ sync: true })
-  getTileSize(): any { return; }
+  getTileSize(): any {
+    return;
+  }
 
   /**
    * Remove the tile overlay
    */
-  @CordovaCheck()
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();
@@ -3900,9 +4503,8 @@ export class KmlOverlay extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
 
     Object.defineProperty(self, 'camera', {
         value: this._objectInstance.camera,
@@ -3964,7 +4566,79 @@ export class KmlOverlay extends BaseClass {
   /**
    * Remove the KmlOverlay
    */
-  @InstanceCheck()
+  @CordovaInstance()
+  remove(): void {
+    delete this._objectInstance.getMap().get('_overlays')[this.getId()];
+    this._objectInstance.remove();
+    this.destroy();
+  }
+}
+
+/**
+ * @hidden
+ */
+export class FusionTableOverlay extends BaseClass {
+
+  private _map: GoogleMap;
+
+  constructor(_map: GoogleMap, _objectInstance: any) {
+    super(_objectInstance);
+    this._map = _map;
+
+  }
+
+  /**
+   *
+   * @param queryOpts {FusionTableQueryOptions}
+   */
+  @CordovaInstance({ sync: true })
+  query(queryOpts: FusionTableQueryOptions): void {}
+
+  /**
+   * Returns the ID of instance.
+   * @return {string}
+   */
+  @CordovaInstance({ sync: true })
+  getId(): string { return; }
+
+  /**
+   * Returns the map instance.
+   * @return {GoogleMap}
+   */
+  getMap(): GoogleMap { return this._map; }
+
+  /**
+   * Changes visibility of the kml overlay
+   * @param visible {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setVisible(visible: boolean): void {}
+
+  /**
+   * Returns true if the kml overlay is visible
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getVisible(): boolean { return; }
+
+  /**
+   * Changes click-ability of the KmlOverlay
+   * @param clickable {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setClickable(clickable: boolean): void {}
+
+  /**
+   * Returns true if the KmlOverlay is clickable
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getClickable(): boolean { return; }
+
+  /**
+   * Remove the KmlOverlay
+   */
+  @CordovaInstance()
   remove(): void {
     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
     this._objectInstance.remove();

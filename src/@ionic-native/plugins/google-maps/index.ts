@@ -2711,8 +2711,6 @@ export class StreetViewPanorama extends BaseClass {
 })
 export class GoogleMap extends BaseClass {
   constructor(element: HTMLElement | string, options?: GoogleMapOptions) {
-    super();
-
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       // ---------------
       // Create a map

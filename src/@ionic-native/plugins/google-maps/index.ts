@@ -1349,7 +1349,7 @@ export class GoogleMaps extends IonicNativePlugin {
       if (element instanceof HTMLElement) {
         displayErrorMessage(element, errorMessage.join('<br />'));
       } else if (typeof element === 'string') {
-        let targets: any[] = document.querySelectorAll('#' + element);
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         targets = Array.prototype.slice.call(targets, 0);
         if (targets.length > 0) {
           targets = targets.filter((target) => {
@@ -1396,7 +1396,7 @@ export class GoogleMaps extends IonicNativePlugin {
       if (element instanceof HTMLElement) {
         displayErrorMessage(element, errorMessage.join('<br />'));
       } else if (typeof element === 'string') {
-        let targets: any[] = document.querySelectorAll('#' + element);
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         targets = Array.prototype.slice.call(targets, 0);
         if (targets.length > 0) {
           targets = targets.filter((target) => {
@@ -1420,11 +1420,11 @@ const displayErrorMessage = (element: HTMLElement, message: string) => {
   errorDiv.style.position = 'absolute';
   errorDiv.style.width = '80%';
   errorDiv.style.height = '50%';
-  errorDiv.style.top = 0;
-  errorDiv.style.bottom = 0;
-  errorDiv.style.right = 0;
-  errorDiv.style.left = 0;
-  errorDiv.style.padding = 0;
+  errorDiv.style.top = '0';
+  errorDiv.style.bottom = '0';
+  errorDiv.style.right = '0';
+  errorDiv.style.left = '0';
+  errorDiv.style.padding = '0';
   errorDiv.style.margin = 'auto';
 
   element.style.position = 'relative';
@@ -1613,6 +1613,7 @@ export class BaseClass {
    */
   @CordovaInstance({ sync: true })
   hasEventListener(): boolean {
+    return;
   }
 
   /**
@@ -2175,7 +2176,8 @@ export class Geocoder {
       //   ]
       // })
       // -------------------------
-      return getPromise<BaseArrayClass<GeocoderResult>>((resolve, reject) => {
+
+      return getPromise<BaseArrayClass<GeocoderResult[]>>((resolve, reject) => {
         GoogleMaps.getPlugin().Geocoder.geocode(request, (mvcArray: any) => {
           if (mvcArray) {
             resolve(new BaseArrayClass(mvcArray));
@@ -2200,15 +2202,6 @@ export class Geocoder {
         });
       });
     }
-  }
-
-  /**
-   * @deprecation This method is static. Please use Geocoder.geocode()
-   * @hidden
-   */
-  geocode(request: GeocoderRequest): Promise<GeocoderResult[] | BaseArrayClass<GeocoderResult>> {
-    console.error('GoogleMaps', '[deprecated] This method is static. Please use Geocoder.geocode()');
-    return Geocoder.geocode(request);
   }
 }
 
@@ -2297,7 +2290,7 @@ export class Encoding {
    */
   decodePath(encoded: string, precision?: number): ILatLng[] {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Encoding.decodePath()');
-    return Encoding.decodePath(encoded, precision);
+    return [Encoding.decodePath(encoded, precision)];
   }
 
   /**
@@ -2568,10 +2561,10 @@ export class StreetViewPanorama extends BaseClass {
       // Create a panorama
       // -------------------
       if (element instanceof HTMLElement) {
-        if (domNode.offsetWidth >= 100 && domNode.offsetHeight >= 100) {
+        if (element.offsetWidth >= 100 && element.offsetHeight >= 100) {
           this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(element, options);
         } else {
-          console.error(domNode.tagName + ' is too small. Must be bigger than 100x100.');
+          console.error(element.tagName + ' is too small. Must be bigger than 100x100.');
         }
       } else if (typeof element === 'string') {
 
@@ -2582,7 +2575,7 @@ export class StreetViewPanorama extends BaseClass {
           const timer: any = setInterval(() => {
             let targets: any[];
             for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
-              targets = document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element);
+              targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element));
               targets = Array.prototype.slice.call(targets, 0);
               if (targets.length > 0) {
                 targets = targets.filter((target) => {
@@ -2627,7 +2620,7 @@ export class StreetViewPanorama extends BaseClass {
       if (element instanceof HTMLElement) {
         displayErrorMessage(element, errorMessage.join('<br />'));
       } else if (typeof element === 'string') {
-        let targets: any[] = document.querySelectorAll('#' + element);
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         targets = Array.prototype.slice.call(targets, 0);
         if (targets.length > 0) {
           targets = targets.filter((target) => {
@@ -2769,10 +2762,10 @@ export class GoogleMap extends BaseClass {
       // Create a map
       // ---------------
       if (element instanceof HTMLElement) {
-        if (domNode.offsetWidth >= 100 && domNode.offsetHeight >= 100) {
+        if (element.offsetWidth >= 100 && element.offsetHeight >= 100) {
           this._objectInstance = GoogleMaps.getPlugin().Map.getMap(element, options);
         } else {
-          console.error(domNode.tagName + ' is too small. Must be bigger than 100x100.');
+          console.error(element.tagName + ' is too small. Must be bigger than 100x100.');
         }
       } else if (typeof element === 'string') {
 
@@ -2783,7 +2776,7 @@ export class GoogleMap extends BaseClass {
           const timer: any = setInterval(() => {
             let targets: any[];
             for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
-              targets = document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element);
+              targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element));
               targets = Array.prototype.slice.call(targets, 0);
               if (targets.length > 0) {
                 targets = targets.filter((target) => {
@@ -2830,7 +2823,7 @@ export class GoogleMap extends BaseClass {
       if (element instanceof HTMLElement) {
         displayErrorMessage(element, errorMessage.join('<br />'));
       } else if (typeof element === 'string') {
-        let targets: any[] = document.querySelectorAll('#' + element);
+        let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         targets = Array.prototype.slice.call(targets, 0);
         if (targets.length > 0) {
           targets = targets.filter((target) => {
@@ -2854,8 +2847,8 @@ export class GoogleMap extends BaseClass {
     if (typeof domNode === 'string') {
 
       let targets: any[];
-      for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
-        targets = document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element);
+      for (let i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
+        targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + domNode));
         targets = Array.prototype.slice.call(targets, 0);
         if (targets.length > 0) {
           targets = targets.filter((target) => {
@@ -2863,8 +2856,7 @@ export class GoogleMap extends BaseClass {
           });
         }
         if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
-          clearInterval(timer);
-          resolve([targets[0], options]);
+          this._objectInstance.setDiv(domNode);
           return;
         }
 
@@ -2873,7 +2865,7 @@ export class GoogleMap extends BaseClass {
         if (targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
           this._objectInstance.setDiv(targets[0]);
         } else {
-          console.error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
+          console.error(targets[0].tagName + '[#' + domNode + '] is too small. Must be bigger than 100x100.');
         }
       } else {
         console.error('Can not find [#' + domNode + '] element');

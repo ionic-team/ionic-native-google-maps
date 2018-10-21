@@ -9,12 +9,7 @@ import {
   getPromise
 } from '@ionic-native/core';
 import { Injectable } from '@angular/core';
-
-
-
 import { Observable } from 'rxjs';
-// import 'rxjs/add/observable/fromEvent';
-
 
 const TARGET_ELEMENT_FINDING_QUERYS: string[] = [
   'ion-router-outlet #',
@@ -923,11 +918,6 @@ export interface FusionTableOverlayOptions {
    */
   suppressInfoWindows?: boolean;
 
-  /*
-   * icon option
-   */
-  icon?: string | MarkerIcon;
-
   /**
    * Accept own properties for future update
    */
@@ -1467,8 +1457,8 @@ const normalizeArgumentsOfEventListener = (_objectInstance: any, ...args: any[])
 export class BaseClass {
   protected _objectInstance: any;
 
-  constructor() {
-    this._objectInstance = new (GoogleMaps.getPlugin().BaseClass)();
+  constructor(_objectInstance?: any) {
+    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -1519,6 +1509,7 @@ export class BaseClass {
   }
 
   /**
+   * @deprecated
    * Adds an event listener that works once.
    * @param eventName {string} event name you want to observe.
    * @return {Promise<any>}
@@ -1683,13 +1674,12 @@ export class BaseClass {
 export class BaseArrayClass<T> extends BaseClass {
 
   constructor(initialData?: T[] | any) {
-    super();
     if (initialData instanceof GoogleMaps.getPlugin().BaseArrayClass) {
-      this._objectInstance = initialData;
+      super(initialData);
     } else if (Array.isArray(initialData)) {
-      this._objectInstance = new (GoogleMaps.getPlugin().BaseArrayClass)(initialData);
+      super(new (GoogleMaps.getPlugin().BaseArrayClass)(initialData));
     } else {
-      this._objectInstance = new (GoogleMaps.getPlugin().BaseArrayClass)([]);
+      super(GoogleMaps.getPlugin().BaseArrayClass)([]));
     }
   }
 
@@ -1887,9 +1877,8 @@ export class Circle extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -2081,8 +2070,7 @@ export class Environment {
    */
   static setEnv(envOptions: EnvOptions): void {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
-      return;
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
     GoogleMaps.getPlugin().environment.setEnv(envOptions);
   }
@@ -2093,8 +2081,7 @@ export class Environment {
    */
   static getLicenseInfo(): Promise<any> {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
-      return null;
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
     return getPromise<any>((resolve) => {
       GoogleMaps.getPlugin().environment.getLicenseInfo((text: string) => resolve(text));
@@ -2107,8 +2094,7 @@ export class Environment {
    */
   static setBackgroundColor(color: string): void {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
-      return;
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
     GoogleMaps.getPlugin().environment.setBackgroundColor(color);
   }
@@ -2160,8 +2146,7 @@ export class Geocoder {
   static geocode(request: GeocoderRequest): Promise<GeocoderResult[] | BaseArrayClass<GeocoderResult[]>> {
 
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
-      return null;
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
     if (request.address instanceof Array || Array.isArray(request.address) ||
       request.position instanceof Array || Array.isArray(request.position)) {
@@ -2173,7 +2158,7 @@ export class Geocoder {
       //   ]
       // })
       // -------------------------
-      return getPromise<BaseArrayClass<GeocoderResult>>((resolve, reject) => {
+      return getPromise<BaseArrayClass<GeocoderResult[]>>((resolve, reject) => {
         GoogleMaps.getPlugin().Geocoder.geocode(request, (mvcArray: any) => {
           if (mvcArray) {
             resolve(new BaseArrayClass(mvcArray));
@@ -2227,8 +2212,7 @@ export class LocationService {
    */
   static getMyLocation(options?: MyLocationOptions): Promise<MyLocation> {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
-      return null;
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
     return new Promise<MyLocation>((resolve, reject) => {
       GoogleMaps.getPlugin().LocationService.getMyLocation(options, resolve, reject);
@@ -2240,8 +2224,7 @@ export class LocationService {
    */
   static hasPermission(): Promise<boolean> {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
-      return null;
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
     return new Promise<boolean>((resolve, reject) => {
       GoogleMaps.getPlugin().LocationService.hasPermission(resolve, reject);
@@ -2268,11 +2251,10 @@ export class Encoding {
    */
   static decodePath(encoded: string, precision?: number): ILatLng[] {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
-    } else {
-      return GoogleMaps.getPlugin().Encoding.decodePath(encoded, precision);
     }
+    return GoogleMaps.getPlugin().Encoding.decodePath(encoded, precision);
   }
 
   /**
@@ -2282,11 +2264,10 @@ export class Encoding {
    */
   static encodePath(path: ILatLng[] | BaseArrayClass<ILatLng>): string {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
-    } else {
-      return GoogleMaps.getPlugin().Encoding.encodePath(path);
     }
+    return GoogleMaps.getPlugin().Encoding.encodePath(path);
   }
 
   /**
@@ -2327,11 +2308,10 @@ export class Poly {
    */
   static containsLocation(location: ILatLng, path: ILatLng[]): boolean {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
-    } else {
-      return GoogleMaps.getPlugin().geometry.poly.containsLocation(location, path);
     }
+    return GoogleMaps.getPlugin().geometry.poly.containsLocation(location, path);
   }
 
   /**
@@ -2342,11 +2322,10 @@ export class Poly {
    */
   static isLocationOnEdge(location: ILatLng, path: ILatLng[]): boolean {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
-    } else {
-      return GoogleMaps.getPlugin().geometry.poly.isLocationOnEdge(location, path);
     }
+    return GoogleMaps.getPlugin().geometry.poly.isLocationOnEdge(location, path);
   }
 }
 
@@ -2369,11 +2348,10 @@ export class Spherical {
    */
   static computeDistanceBetween(from: ILatLng, to: ILatLng): number {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
-    } else {
-      return GoogleMaps.getPlugin().geometry.spherical.computeDistanceBetween(from, to);
     }
+    return GoogleMaps.getPlugin().geometry.spherical.computeDistanceBetween(from, to);
   }
 
   /**
@@ -2385,11 +2363,10 @@ export class Spherical {
    */
   static computeOffset(from: ILatLng, distance: number, heading: number): LatLng {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
-    } else {
-      return GoogleMaps.getPlugin().geometry.spherical.computeOffset(from, distance, heading);
     }
+    return GoogleMaps.getPlugin().geometry.spherical.computeOffset(from, distance, heading);
   }
 
   /**
@@ -2401,11 +2378,10 @@ export class Spherical {
    */
   static computeOffsetOrigin(to: ILatLng, distance: number, heading: number): LatLng {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
-    } else {
-      return GoogleMaps.getPlugin().geometry.spherical.computeOffsetOrigin(to, distance, heading);
     }
+    return GoogleMaps.getPlugin().geometry.spherical.computeOffsetOrigin(to, distance, heading);
   }
 
   /**
@@ -2415,11 +2391,10 @@ export class Spherical {
    */
   static computeLength(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
-    } else {
-      return GoogleMaps.getPlugin().geometry.spherical.computeLength(path);
     }
+    return GoogleMaps.getPlugin().geometry.spherical.computeLength(path);
   }
 
   /**
@@ -2429,7 +2404,7 @@ export class Spherical {
    */
   static computeArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
     }
     return GoogleMaps.getPlugin().geometry.spherical.computeLength(path);
@@ -2442,7 +2417,7 @@ export class Spherical {
    */
   static computeSignedArea(path: ILatLng[] | BaseArrayClass<ILatLng>): number {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
     }
     return GoogleMaps.getPlugin().geometry.spherical.computeSignedArea(path);
@@ -2456,7 +2431,7 @@ export class Spherical {
    */
   static computeHeading(from: ILatLng, to: ILatLng): number {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
     }
     return GoogleMaps.getPlugin().geometry.spherical.computeHeading(from, to);
@@ -2471,7 +2446,7 @@ export class Spherical {
    */
   static interpolate(from: ILatLng, to: ILatLng, fraction: number): LatLng {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
-      console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
     }
     return GoogleMaps.getPlugin().geometry.spherical.interpolate(from, to, fraction);
@@ -2559,7 +2534,6 @@ export class Spherical {
 })
 export class StreetViewPanorama extends BaseClass {
   constructor(element: string | HTMLElement, options?: StreetViewOptions) {
-    super();
 
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       // -------------------
@@ -2567,13 +2541,13 @@ export class StreetViewPanorama extends BaseClass {
       // -------------------
       if (element instanceof HTMLElement) {
         if (element.offsetWidth >= 100 && element.offsetHeight >= 100) {
-          this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(element, options);
+          super(GoogleMaps.getPlugin().StreetView.getPanorama(element, options));
         } else {
           throw new Error(element.tagName + ' is too small. Must be bigger than 100x100.');
         }
       } else if (typeof element === 'string') {
 
-        this._objectInstance = GoogleMaps.getPlugin().StreetView.getPanorama(getPromise<any[]>((resolve, reject) => {
+        super(GoogleMaps.getPlugin().StreetView.getPanorama(getPromise<any[]>((resolve, reject) => {
           let count: number;
           let i: number;
           count = 0;
@@ -2604,7 +2578,7 @@ export class StreetViewPanorama extends BaseClass {
               reject(new Error('Can not find the element [#' + element + ']'));
             }
           }, 100);
-        }), options);
+        }), options));
 
       }
     } else {
@@ -2756,7 +2730,6 @@ export class StreetViewPanorama extends BaseClass {
 })
 export class GoogleMap extends BaseClass {
   constructor(element: any, options?: GoogleMapOptions) {
-    super();
 
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       // ---------------
@@ -2767,13 +2740,13 @@ export class GoogleMap extends BaseClass {
           throw new Error('Element must be under <body>');
         }
         if (element.offsetWidth >= 100 && element.offsetHeight >= 100) {
-          this._objectInstance = GoogleMaps.getPlugin().Map.getMap(element, options);
+          super(GoogleMaps.getPlugin().Map.getMap(element, options));
         } else {
           throw new Error(element.tagName + ' is too small. Must be bigger than 100x100.');
         }
       } else if (typeof element === 'string') {
 
-        this._objectInstance = GoogleMaps.getPlugin().Map.getMap(getPromise<any[]>((resolve, reject) => {
+        super(GoogleMaps.getPlugin().Map.getMap(getPromise<any[]>((resolve, reject) => {
           let count: number;
           let i: number;
           count = 0;
@@ -2804,10 +2777,10 @@ export class GoogleMap extends BaseClass {
               reject(new Error('Can not find the element [#' + element + ']'));
             }
           }, 100);
-        }), options);
+        }), options));
 
       } else if (element === null && options) {
-        this._objectInstance = GoogleMaps.getPlugin().Map.getMap(null, options);
+        super(GoogleMaps.getPlugin().Map.getMap(null, options));
       }
     } else {
 
@@ -3596,9 +3569,8 @@ export class GroundOverlay extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -3740,8 +3712,7 @@ export class GroundOverlay extends BaseClass {
 export class HtmlInfoWindow extends BaseClass {
 
   constructor() {
-    super();
-    this._objectInstance = new (GoogleMaps.getPlugin().HtmlInfoWindow)();
+    super(new (GoogleMaps.getPlugin().HtmlInfoWindow)());
   }
 
   /**
@@ -3786,9 +3757,8 @@ export class Marker extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -4039,9 +4009,8 @@ export class MarkerCluster extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -4099,9 +4068,8 @@ export class Polygon extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -4296,9 +4264,8 @@ export class Polyline extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -4455,9 +4422,8 @@ export class TileOverlay extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
   }
 
   /**
@@ -4572,9 +4538,8 @@ export class KmlOverlay extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
 
     Object.defineProperty(self, 'camera', {
         value: this._objectInstance.camera,
@@ -4652,9 +4617,8 @@ export class FusionTableOverlay extends BaseClass {
   private _map: GoogleMap;
 
   constructor(_map: GoogleMap, _objectInstance: any) {
-    super();
+    super(_objectInstance);
     this._map = _map;
-    this._objectInstance = _objectInstance;
 
   }
 

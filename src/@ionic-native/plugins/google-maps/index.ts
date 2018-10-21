@@ -1331,7 +1331,7 @@ export class GoogleMaps extends IonicNativePlugin {
         options = element as GoogleMapOptions;
         element = null;
       }
-      const googleMap: GoogleMap = new GoogleMap(element, options);
+      const googleMap: GoogleMap = new GoogleMap(element as HTMLElement | string, options);
       googleMap.set('_overlays', {});
       return googleMap;
     } else {
@@ -2261,7 +2261,7 @@ export class Encoding {
    * @param precision? {number} default: 5
    * @return {LatLng}
    */
-  static decodePath(encoded: string, precision?: number): LatLng {
+  static decodePath(encoded: string, precision?: number): LatLng[] {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       console.error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
       return null;
@@ -2290,7 +2290,7 @@ export class Encoding {
    */
   decodePath(encoded: string, precision?: number): ILatLng[] {
     console.error('GoogleMaps', '[deprecated] This method is static. Please use Encoding.decodePath()');
-    return [Encoding.decodePath(encoded, precision)];
+    return Encoding.decodePath(encoded, precision);
   }
 
   /**
@@ -2754,7 +2754,7 @@ export class StreetViewPanorama extends BaseClass {
   plugin: 'cordova-plugin-googlemaps'
 })
 export class GoogleMap extends BaseClass {
-  constructor(element: any, options?: GoogleMapOptions) {
+  constructor(element: HTMLElement | string, options?: GoogleMapOptions) {
     super();
 
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {

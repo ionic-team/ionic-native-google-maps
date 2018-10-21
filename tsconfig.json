@@ -8,6 +8,7 @@
     "noImplicitAny": true,
     "module": "es2015",
     "moduleResolution": "node",
+    "noUnusedLocals": true,
     "paths": {
       "@ionic-native/core": ["./dist/@ionic-native/core"]
     },
@@ -19,9 +20,7 @@
     "inlineSources": true,
     "inlineSourceMap": true
   },
-  "include": [
-    "src/@ionic-native/plugins/**/*.ts"
-  ],
+  "include": ["src/@ionic-native/plugins/**/*.ts"],
   "angularCompilerOptions": {
     "genDir": "aot"
   }

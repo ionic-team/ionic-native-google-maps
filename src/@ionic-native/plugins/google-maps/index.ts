@@ -2596,14 +2596,13 @@ export class StreetViewPanorama extends BaseClass {
             if (count++ < 20) {
               return;
             }
-            if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
-              throw new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.');
-            } else {
-              throw new Error('Can not find the element [#' + element + ']');
-            }
             clearInterval(timer);
             this._objectInstance.remove();
-            reject();
+            if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
+              reject(new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.'));
+            } else {
+              reject(new Error('Can not find the element [#' + element + ']'));
+            }
           }, 100);
         }), options);
 
@@ -2800,9 +2799,9 @@ export class GoogleMap extends BaseClass {
             clearInterval(timer);
             this._objectInstance.remove();
             if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
-              reject(throw new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.'));
+              reject(new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.'));
             } else {
-              reject(throw new Error('Can not find the element [#' + element + ']'));
+              reject(new Error('Can not find the element [#' + element + ']'));
             }
           }, 100);
         }), options);
@@ -2875,7 +2874,7 @@ export class GoogleMap extends BaseClass {
       if (domNode.offsetWidth >= 100 && domNode.offsetHeight >= 100) {
         this._objectInstance.setDiv(domNode);
       } else {
-        console.error(domNode.tagName + ' is too small. Must be bigger than 100x100.');
+        throw new Error(domNode.tagName + ' is too small. Must be bigger than 100x100.');
       }
     }
   }

@@ -1,68 +1,44 @@
-<a name="4.15.0"></a>
-## 4.15.0 (2018-10-23)
-*Build to compatible with `@ionic-native/core@4.16.0`
-*Update: The code for displaying error message.
-*Fix: BaseClass is null error.
+## 4.15.0
+  - Build to compatible with `@ionic-native/core@4.16.0`
+  - Update: The code for displaying error message.
+  - Fix: BaseClass is null error.
 
-<a name="4.13.0"></a>
-## 4.13.0 (2018-09-14)
-*Add: `GoogleMapOptions.preferences.gestureBounds` property
+## 4.13.0
+  - Add: `GoogleMapOptions.preferences.gestureBounds` property
 
-<a name="4.12.0"></a>
-## 4.12.0 (2018-08-24)
-*Add: `Environment` class
+## 4.12.0
+  - Add: `Environment` class
 
-<a name="4.9.1"></a>
-## 4.9.1 (2018-07-17)
+## 4.9.1
+  - Fix: only README.md (sorry)
 
-*Fix: only README.md (sorry)
+## 4.9.0
+  - Add: LocationService.hasPermission()
 
-<a name="4.9.0"></a>
-## 4.9.0 (2018-07-17)
+## 4.8.2
+  - Fix: only README.md (sorry)
 
-*Add: LocationService.hasPermission()
+## 4.8.1
+  - Fix: only README.md (sorry)
 
-<a name="4.8.2"></a>
-## 4.8.2 (2018-05-11)
+## 4.8.0
+  - Adds `addMarkerSync()`, `addMarkerClusterSync()`, `addCircleSync()`, `addPolygonSync()`, `addPolylineSync()`, `addTileOverlaySync()`, and  `addGroundOverlaySync()` methods.
+  - Adds `GoogleMaps.createPanorama()` method, and `StreetViewPanorama` class.
+  - Merge pull request (#15) from TheDuc/master - pass reject to getMyLocation
 
-*Fix: only README.md (sorry)
+## 4.7.0
+  - small fixes
 
-<a name="4.8.1"></a>
-## 4.8.1 (2018-05-11)
-
-*Fix: only README.md (sorry)
-
-<a name="4.8.0"></a>
-## 4.8.0 (2018-05-11)
-
-* Adds `addMarkerSync()`, `addMarkerClusterSync()`, `addCircleSync()`, `addPolygonSync()`, `addPolylineSync()`, `addTileOverlaySync()`, and  `addGroundOverlaySync()` methods.
-
-* Adds `GoogleMaps.createPanorama()` method, and `StreetViewPanorama` class.
-
-* Merge pull request (#15) from TheDuc/master - pass reject to getMyLocation
-
-<a name="4.7.0"></a>
-## 4.7.0 (2018-04-11)
-
-* small fixes
-
-<a name="4.6.3"></a>
-## 4.6.3 (2018-04-02)
-
-* `@ionic-native/google-maps@4.6.2` is not found even it is installed for some reason.
+## 4.6.3
+  - `@ionic-native/google-maps@4.6.2` is not found even it is installed for some reason.
   (Sorry about the trouble)
 
-<a name="4.6.2"></a>
-## 4.6.2 (2018-04-02)
+## 4.6.2
 
-### Bug Fix
-* TypeError: Right-hand side of 'instanceof' is not an object ([a188d5f](https://github.com/ionic-team/ionic-native-google-maps/commit/a188d5f))
+  - TypeError: Right-hand side of 'instanceof' is not an object ([a188d5f](https://github.com/ionic-team/ionic-native-google-maps/commit/a188d5f))
 
-<a name="4.6.1"></a>
-## 4.6.1 (2018-03-28)
-
-Spin-out from [ionic-native/ionic-native](https://github.com/ionic-team/ionic-native/) repository.
+## 4.6.1
+  - Spin-out from [ionic-native/ionic-native](https://github.com/ionic-team/ionic-native/) repository.
 From this version, the author of [cordova-plugin-googlemaps](https://github.com/mapsplugin/cordova-plugin-googlemaps) mainly manages this plugin.
 
-### Bug Fix
-* map.remove() generates empty map ([321f06f](https://github.com/ionic-team/ionic-native-google-maps/commit/321f06f))
+  - map.remove() generates empty map ([321f06f](https://github.com/ionic-team/ionic-native-google-maps/commit/321f06f))

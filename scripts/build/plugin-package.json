@@ -4,7 +4,7 @@
   "description": "Ionic Native plugin for Google Maps",
   "module": "index.js",
   "typings": "index.d.ts",
-  "author": "ionic",
+  "author": "Masashi Katsumata,ionic",
   "license": "MIT",
   "peerDependencies": {},
   "repository": {

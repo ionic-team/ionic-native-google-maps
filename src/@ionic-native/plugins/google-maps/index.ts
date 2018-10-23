@@ -782,7 +782,8 @@ export interface TileOverlayOptions {
    * This callback must Returns string of image URL, or Promise.
    * If no tile, you need to Returns null.
    */
-  getTile: (x: number, y: number, zoom: number) => string | Promise<string>;
+  // getTile: (x: number, y: number, zoom: number) => string | Promise<string>;
+  getTile: (x: number, y: number, zoom: number) => string;
 
   /**
    * Set false if you want to create invisible tilelayer
@@ -859,69 +860,69 @@ export interface KmlOverlayOptions {
 /**
  * Options for FusionTableOverlayOptions.query
  */
-export interface FusionTableQueryOptions {
-
-  /*
-   * The ID of the Fusion Tables table to display. This ID can be found in the table's URL, as the value of the **dsrcid** parameter. Required.
-   */
-  from: boolean;
-
-  /*
-   * Limit on the number of results returned by the query.
-   */
-  limit?: number;
-
-  /*
-   * Offset into the sorted results.
-   */
-  offset?: number;
-
-  /*
-   * The method by which to sort the results. Accepts either of:
-   *  - A column name.
-   *    The column name may be suffixed with ASC or DESC (e.g. col2 DESC) to specify ascending or descending sort.
-   *
-   *  - An ST_DISTANCE spatial relationship (sort by distance).
-   *    A column and the coordinate from which to calculate distance must be passed, for example, orderBy: 'ST_DISTANCE(col1, LATLNG(1.2, 3.4))'.
-   */
-  orderBy?: string;
-
-  /*
-   * A column, containing geographic features to be displayed on the map. See [Fusion Tables Setup](https://developers.google.com/maps/documentation/javascript/fusiontableslayer#fusion_table_setup) in the Maps API documentation for information about valid columns.
-   */
-  select: string;
-
-  /*
-   * The SQL predicate to be applied to the layer.
-   */
-  where?: string;
-
-}
+// export interface FusionTableQueryOptions {
+//
+//   /*
+//    * The ID of the Fusion Tables table to display. This ID can be found in the table's URL, as the value of the **dsrcid** parameter. Required.
+//    */
+//   from: boolean;
+//
+//   /*
+//    * Limit on the number of results returned by the query.
+//    */
+//   limit?: number;
+//
+//   /*
+//    * Offset into the sorted results.
+//    */
+//   offset?: number;
+//
+//   /*
+//    * The method by which to sort the results. Accepts either of:
+//    *  - A column name.
+//    *    The column name may be suffixed with ASC or DESC (e.g. col2 DESC) to specify ascending or descending sort.
+//    *
+//    *  - An ST_DISTANCE spatial relationship (sort by distance).
+//    *    A column and the coordinate from which to calculate distance must be passed, for example, orderBy: 'ST_DISTANCE(col1, LATLNG(1.2, 3.4))'.
+//    */
+//   orderBy?: string;
+//
+//   /*
+//    * A column, containing geographic features to be displayed on the map. See [Fusion Tables Setup](https://developers.google.com/maps/documentation/javascript/fusiontableslayer#fusion_table_setup) in the Maps API documentation for information about valid columns.
+//    */
+//   select: string;
+//
+//   /*
+//    * The SQL predicate to be applied to the layer.
+//    */
+//   where?: string;
+//
+// }
 
 /**
  * Options for map.addFusionTableOverlay() method
  */
-export interface FusionTableOverlayOptions {
-  /*
-   * Query for Fusion Table
-   */
-  query: FusionTableQueryOptions;
-
-  /*
-   * Do not fire the FUSION_TABLE_CLICK event if false. Default is true.
-   */
-  clickable?: boolean;
-
-  /*
-   * Do not display the default infoWindow if true. Default is false.
-   */
-  suppressInfoWindows?: boolean;
-
-  /**
-   * Accept own properties for future update
-   */
-  [key: string]: any;
-}
+// export interface FusionTableOverlayOptions {
+//   /*
+//    * Query for Fusion Table
+//    */
+//   query: FusionTableQueryOptions;
+//
+//   /*
+//    * Do not fire the FUSION_TABLE_CLICK event if false. Default is true.
+//    */
+//   clickable?: boolean;
+//
+//   /*
+//    * Do not display the default infoWindow if true. Default is false.
+//    */
+//   suppressInfoWindows?: boolean;
+//
+//   /**
+//    * Accept own properties for future update
+//    */
+//   [key: string]: any;
+// }
 
 
 /**
@@ -1469,14 +1470,14 @@ export class BaseClass {
    * @param throttleInterval {number} throttle interval in milliseconds
    * @return {Observable<any>}
    */
-  addThrottledEventListener(eventName: string, throttleInterval: number): Observable<any> {
-    return new Observable((observer) => {
-      this._objectInstance.addThrottledEventListener(eventName, (...args: any[]) => {
-        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
-        observer.next(newArgs);
-      });
-    });
-  }
+  // addThrottledEventListener(eventName: string, throttleInterval: number): Observable<any> {
+  //   return new Observable((observer) => {
+  //     this._objectInstance.addThrottledEventListener(eventName, (...args: any[]) => {
+  //       const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+  //       observer.next(newArgs);
+  //     });
+  //   });
+  // }
 
 
   /**
@@ -1556,15 +1557,15 @@ export class BaseClass {
    * @param key {string} The property name you want to observe.
    * @return {Observable<any>}
    */
-  @InstanceCheck({ observable: true })
-  onThrottled(eventName: string): Observable<any> {
-    return new Observable((observer) => {
-      this._objectInstance.onThrottled(eventName, (...args: any[]) => {
-        const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
-        observer.next(newArgs);
-      });
-    });
-  }
+  // @InstanceCheck({ observable: true })
+  // onThrottled(eventName: string): Observable<any> {
+  //   return new Observable((observer) => {
+  //     this._objectInstance.onThrottled(eventName, (...args: any[]) => {
+  //       const newArgs = normalizeArgumentsOfEventListener(this._objectInstance, args);
+  //       observer.next(newArgs);
+  //     });
+  //   });
+  // }
 
   /**
    * Alias of `addEventListenerOnce`
@@ -3494,27 +3495,27 @@ export class GoogleMap extends BaseClass {
    * @param options {FusionTableOverlayOptions} options
    * @return {Promise<FusionTableOverlay>}
    */
-  @InstanceCheck()
-  addFusionTableOverlay(options: FusionTableOverlayOptions): Promise<FusionTableOverlay> {
-    return new Promise<FusionTableOverlay>((resolve, reject) => {
-      this._objectInstance.addFusionTableOverlay(options, (fusionTableOverlay: any) => {
-        if (fusionTableOverlay) {
-          const overlayId: string = fusionTableOverlay.getId();
-          const overlay = new FusionTableOverlay(this, fusionTableOverlay);
-          this.get('_overlays')[overlayId] = overlay;
-          fusionTableOverlay.one(overlayId + '_remove', () => {
-            if (this.get('_overlays')) {
-              this.get('_overlays')[overlayId] = null;
-              overlay.destroy();
-            }
-          });
-          resolve(overlay);
-        } else {
-          reject();
-        }
-      });
-    });
-  }
+  // @InstanceCheck()
+  // addFusionTableOverlay(options: FusionTableOverlayOptions): Promise<FusionTableOverlay> {
+  //   return new Promise<FusionTableOverlay>((resolve, reject) => {
+  //     this._objectInstance.addFusionTableOverlay(options, (fusionTableOverlay: any) => {
+  //       if (fusionTableOverlay) {
+  //         const overlayId: string = fusionTableOverlay.getId();
+  //         const overlay = new FusionTableOverlay(this, fusionTableOverlay);
+  //         this.get('_overlays')[overlayId] = overlay;
+  //         fusionTableOverlay.one(overlayId + '_remove', () => {
+  //           if (this.get('_overlays')) {
+  //             this.get('_overlays')[overlayId] = null;
+  //             overlay.destroy();
+  //           }
+  //         });
+  //         resolve(overlay);
+  //       } else {
+  //         reject();
+  //       }
+  //     });
+  //   });
+  // }
 
   /**
    * Returns the base64 encoded screen capture of the map.
@@ -4577,71 +4578,71 @@ export class KmlOverlay extends BaseClass {
 /**
  * @hidden
  */
-export class FusionTableOverlay extends BaseClass {
-
-  private _map: GoogleMap;
-
-  constructor(_map: GoogleMap, _objectInstance: any) {
-    super(_objectInstance);
-    this._map = _map;
-
-  }
-
-  /**
-   *
-   * @param queryOpts {FusionTableQueryOptions}
-   */
-  @CordovaInstance({ sync: true })
-  query(queryOpts: FusionTableQueryOptions): void {}
-
-  /**
-   * Returns the ID of instance.
-   * @return {string}
-   */
-  @CordovaInstance({ sync: true })
-  getId(): string { return; }
-
-  /**
-   * Returns the map instance.
-   * @return {GoogleMap}
-   */
-  getMap(): GoogleMap { return this._map; }
-
-  /**
-   * Changes visibility of the kml overlay
-   * @param visible {boolean}
-   */
-  @CordovaInstance({ sync: true })
-  setVisible(visible: boolean): void {}
-
-  /**
-   * Returns true if the kml overlay is visible
-   * @return {boolean}
-   */
-  @CordovaInstance({ sync: true })
-  getVisible(): boolean { return; }
-
-  /**
-   * Changes click-ability of the KmlOverlay
-   * @param clickable {boolean}
-   */
-  @CordovaInstance({ sync: true })
-  setClickable(clickable: boolean): void {}
-
-  /**
-   * Returns true if the KmlOverlay is clickable
-   * @return {boolean}
-   */
-  @CordovaInstance({ sync: true })
-  getClickable(): boolean { return; }
-
-  /**
-   * Remove the KmlOverlay
-   */
-  @CordovaInstance()
-  remove(): void {
-    delete this._objectInstance.getMap().get('_overlays')[this.getId()];
-    this._objectInstance.remove();
-    this.destroy();
-  }
-}
+// export class FusionTableOverlay extends BaseClass {
+//
+//   private _map: GoogleMap;
+//
+//   constructor(_map: GoogleMap, _objectInstance: any) {
+//     super(_objectInstance);
+//     this._map = _map;
+//
+//   }
+//
+//   /**
+//    *
+//    * @param queryOpts {FusionTableQueryOptions}
+//    */
+//   @CordovaInstance({ sync: true })
+//   query(queryOpts: FusionTableQueryOptions): void {}
+//
+//   /**
+//    * Returns the ID of instance.
+//    * @return {string}
+//    */
+//   @CordovaInstance({ sync: true })
+//   getId(): string { return; }
+//
+//   /**
+//    * Returns the map instance.
+//    * @return {GoogleMap}
+//    */
+//   getMap(): GoogleMap { return this._map; }
+//
+//   /**
+//    * Changes visibility of the kml overlay
+//    * @param visible {boolean}
+//    */
+//   @CordovaInstance({ sync: true })
+//   setVisible(visible: boolean): void {}
+//
+//   /**
+//    * Returns true if the kml overlay is visible
+//    * @return {boolean}
+//    */
+//   @CordovaInstance({ sync: true })
+//   getVisible(): boolean { return; }
+//
+//   /**
+//    * Changes click-ability of the KmlOverlay
+//    * @param clickable {boolean}
+//    */
+//   @CordovaInstance({ sync: true })
+//   setClickable(clickable: boolean): void {}
+//
+//   /**
+//    * Returns true if the KmlOverlay is clickable
+//    * @return {boolean}
+//    */
+//   @CordovaInstance({ sync: true })
+//   getClickable(): boolean { return; }
+//
+//   /**
+//    * Remove the KmlOverlay
+//    */
+//   @CordovaInstance()
+//   remove(): void {
+//     delete this._objectInstance.getMap().get('_overlays')[this.getId()];
+//     this._objectInstance.remove();
+//     this.destroy();
+//   }
+// }

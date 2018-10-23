@@ -1,42 +1,45 @@
-<a name="5.0.0-beta.24"></a>
-Update: Rebuild to compatible with `@ionic-native/core@5.0.0-beta.21`.
-Update: The code for displaying error message.
-Fix: BaseClass not found error.
+## 5.0.0-beta.24
 
-<a name="5.0.0-beta.23"></a>
-Update: Rebuild to compatible with `@ionic-native/core@5.0.0-beta.20`.
+  - Update: Rebuild to compatible with `@ionic-native/core@5.0.0-beta.21`.
+  - Update: The code for displaying error message.
+  - Fix: BaseClass not found error.
 
-<a name="5.0.0-beta.22"></a>
-Fix: Can not display map/streetviewPanorama if application uses `NavController` instead of `Ionic Router outlet`.
-Fix: `Encoding.encodePath()` and `Encoding.decodePath()` do not work.
-Fix: Small problems.
-Add: `GoogleMapOptions.preferences.gestureBounds` property
+## 5.0.0-beta.23
+  - Update: Rebuild to compatible with `@ionic-native/core@5.0.0-beta.20`.
 
-<a name="5.0.0-beta.21"></a>
-Fix: `remove()`, `destroy()`, `clear()` cause `plugin.constructor.getPluginRef is not a function` error.
+## 5.0.0-beta.22
+  - Fix: Can not display map/streetviewPanorama if application uses `NavController` instead of `Ionic Router outlet`.
+  - Fix: `Encoding.encodePath()` and `Encoding.decodePath()` do not work.
+  - Fix: Small problems.
+  - Add: `GoogleMapOptions.preferences.gestureBounds` property
 
-<a name="5.0.0-beta.20"></a>
-Fix: `GoogleMaps.create()` does not create a map if tab template uses.
+## 5.0.0-beta.21
+  - Fix: `remove()`, `destroy()`, `clear()` cause `plugin.constructor.getPluginRef is not a function` error.
 
-<a name="5.0.0-beta.19"></a>
-Fix: Error: Can't resolve 'rxjs/Observable' in '/node_modules/@ionic-native/google-maps/ngx'
+## 5.0.0-beta.20
+  - Fix: `GoogleMaps.create()` does not create a map if tab template uses.
 
-<a name="5.0.0-beta.18"></a>
-Fix: GoogleMaps.create() targets incorrect node when page changing.
 
-<a name="5.0.0-beta.17"></a>
-Update: Add `icon` option to `KmlOverlayOptions`.
-Update: Adapt browser platform.
+## 5.0.0-beta.19
+  - Fix: Error: Can't resolve 'rxjs/Observable' in '/node_modules/@ionic-native/google-maps/ngx'
 
-<a name="5.0.0-beta.16"></a>
-The same as v5.0.0-beta.15, but republished to fix a mistake.
+## 5.0.0-beta.18
+  - Fix: GoogleMaps.create() targets incorrect node when page changing.
 
-<a name="5.0.0-beta.15"></a>
-Fix: Some methods of `v5.0.0-beta.14` does not work
-Update: Adjust code for ionic v4/beta.
 
-<a name="5.0.0-beta.14"></a>
-# [5.0.0-beta.14](https://github.com/ionic-team/ionic-native/compare/v4.7.0...v5.0.0-beta.14) (2018-08-02)
+## 5.0.0-beta.17
+  - Update: Add `icon` option to `KmlOverlayOptions`.
+  - Update: Adapt browser platform.
+
+## 5.0.0-beta.16
+  - The same as v5.0.0-beta.15, but republished to fix a mistake.
+
+## 5.0.0-beta.15
+  - Fix: Some methods of `v5.0.0-beta.14` does not work
+  - Update: Adjust code for ionic v4/beta.
+
+## 5.0.0-beta.14
+  - [5.0.0-beta.14](https://github.com/ionic-team/ionic-native/compare/v4.7.0...v5.0.0-beta.14) (2018-08-02)
 
 
 

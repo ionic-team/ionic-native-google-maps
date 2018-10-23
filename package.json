@@ -6,7 +6,7 @@
   "author": "Masashi Katsumata, Ionic Team <hi@ionic.io> (https://ionic.io)",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
+    "test": "jest && npm run lint",
     "test:watch": "jest --watch",
     "build:core": "tsc -p tsconfig.core.json",
     "build:esm": "ts-node -P scripts/tsconfig.json scripts/tasks/build-esm",
@@ -19,8 +19,8 @@
     "readmes": "gulp readmes",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "postchangelog": "git commit -am \"chore(): update changelog\"",
-    "shipit": "npm run build && npm run readmes && npm login && npm run npmpub && npm logout",
-    "dev": "npm run lint && npm run build && cp package.json dist/@ionic-native/plugins/google-maps"
+    "shipit": "npm run dev && cp README.md  dist/@ionic-native/plugins/google-maps && npm login && npm run npmpub && npm logout",
+    "dev": "npm run test && npm run build && cp package.json dist/@ionic-native/plugins/google-maps"
   },
   "devDependencies": {
     "@angular/common": "^6.1.8",

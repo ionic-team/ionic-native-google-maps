@@ -2,7 +2,7 @@
 
   - Update: Rebuild to compatible with `@ionic-native/core@5.0.0-beta.21`.
   - Update: The code for displaying error message.
-  - Fix: BaseClass not found error.
+  - Fix: `BaseClass is null` error.
 
 ## 5.0.0-beta.23
   - Update: Rebuild to compatible with `@ionic-native/core@5.0.0-beta.20`.

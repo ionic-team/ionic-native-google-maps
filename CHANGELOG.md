@@ -1,3 +1,6 @@
+## 5.0.0-beta.25
+  - Fix: BaseClass constructor is incorrect.
+
 ## 5.0.0-beta.24
 
   - Update: Build to compatible with `@ionic-native/core@5.0.0-beta.21`.

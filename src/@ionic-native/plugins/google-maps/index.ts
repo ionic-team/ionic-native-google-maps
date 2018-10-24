@@ -1454,7 +1454,17 @@ const normalizeArgumentsOfEventListener = (_objectInstance: any, ...args: any[])
   pluginRef: 'plugin.google.maps.BaseClass'
 })
 export class BaseClass {
-  constructor(protected _objectInstance: any = new (GoogleMaps.getPlugin().BaseClass)()) {
+  protected _objectInstance: any;
+
+  constructor(_objectInstance?: any) {
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      if (!_objectInstance) {
+        _objectInstance = new (GoogleMaps.getPlugin().BaseClass)();
+      }
+      this._objectInstance = _objectInstance;
+    } else {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before executing any methods.');
+    }
   }
 
   /**

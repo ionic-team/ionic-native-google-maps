@@ -15,5 +15,5 @@ module.exports = {
   moduleNameMapper: {
     '^@ionic-native/core$': '<rootDir>/dist/@ionic-native/core'
   },
-  setupTestFrameworkScriptFile: '<rootDir>/setupJest.js'
+  setupTestFrameworkScriptFile: '<rootDir>/src/test/setupJest.js'
 }

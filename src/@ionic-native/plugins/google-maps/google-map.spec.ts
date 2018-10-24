@@ -1,45 +1,8 @@
 import { GoogleMap, GoogleMaps } from '../../../../dist/@ionic-native/plugins/google-maps';
 
-import { BaseArrayClass, BaseClass } from '../../../../mocks';
+import { GoogleMapMock, GoogleMapsMock } from '../../../test/mocks';
+import { mockCordova, nextId } from '../../../test/utils';
 
-export class MapMock {
-  remove = jest.fn();
-}
-
-export class BaseClassMock {
-  // getMap = jest.fn();
-}
-
-export class GoogleMapsMock {
-  // getMap = jest.fn();
-}
-
-export class GoogleMapMock {
-  getMap = jest.fn(() => new MapMock());
-}
-
-export function mockCordova(plugins: {}) {
-  (window as any).cordova = {
-
-  };
-
-  (window as any).plugin = {
-    google: {
-      maps: {
-        BaseArrayClass,
-        BaseClass,
-        ...plugins,
-
-      }
-    }
-  };
-}
-
-export const nextId = (() => {
-  let i = 0;
-
-  return () => `uniqueId-${i++}`;
-})();
 
 describe('GoogleMap', () => {
   let googleMaps: GoogleMapsMock;

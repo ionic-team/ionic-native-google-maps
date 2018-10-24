@@ -50,8 +50,6 @@ describe('GoogleMap', () => {
       </div>
     `;
 
-    console.log(document.querySelector(`.show-page #${mapId}`));
-
     const _ = new GoogleMap(mapId);
     const [promise] = googleMap.getMap.mock.calls[0];
     expect(googleMap.getMap).toHaveBeenCalled();

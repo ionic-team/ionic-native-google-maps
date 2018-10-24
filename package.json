@@ -6,7 +6,7 @@
   "author": "Masashi Katsumata, Ionic Team <hi@ionic.io> (https://ionic.io)",
   "license": "MIT",
   "scripts": {
-    "test": "jest && npm run lint",
+    "test": "npm run build:core && npm run build:esm && jest && npm run lint",
     "test:watch": "jest --watch",
     "build:core": "tsc -p tsconfig.core.json",
     "build:esm": "ts-node -P scripts/tsconfig.json scripts/tasks/build-esm",

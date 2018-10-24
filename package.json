@@ -29,13 +29,15 @@
     "@angular/core": "^6.1.8",
     "@types/cordova": "0.0.34",
     "@types/fs-extra": "^5.0.4",
-    "@types/jest": "^23.3.2",
+    "@types/jest": "^23.3.7",
     "@types/lodash": "^4.14.116",
     "@types/node": "^9.6.32",
     "@types/rimraf": "^2.0.2",
     "@types/webpack": "^4.4.12",
     "ajv": "^6.5.4",
     "async-promise-queue": "^1.0.4",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
     "conventional-changelog-cli": "^2.0.5",
     "cz-conventional-changelog": "^2.1.0",
     "dgeni": "^0.4.10",
@@ -51,7 +53,7 @@
     "natives": "^1.1.5",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.2",
-    "ts-jest": "23.1.4",
+    "ts-jest": "23.10.4",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-ionic-rules": "0.0.19",
@@ -61,19 +63,6 @@
     "webpack": "^4.20.1",
     "winston": "^3.1.0",
     "zone.js": "^0.8.26"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(js?|ts?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json"
-    ]
   },
   "repository": {
     "type": "git",

@@ -1454,13 +1454,7 @@ const normalizeArgumentsOfEventListener = (_objectInstance: any, ...args: any[])
   pluginRef: 'plugin.google.maps.BaseClass'
 })
 export class BaseClass {
-  protected _objectInstance: any;
-
-  constructor(_objectInstance?: any) {
-    if (!this._objectInstance) {
-      _objectInstance = new (GoogleMaps.getPlugin().BaseClass)();
-    }
-    this._objectInstance = _objectInstance;
+  constructor(protected _objectInstance: any = new (GoogleMaps.getPlugin().BaseClass)()) {
   }
 
   /**
@@ -2735,18 +2729,17 @@ export class GoogleMap extends BaseClass {
           const timer: any = setInterval(() => {
             let targets: any[];
             for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
-              targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element));
-              if (targets.length > 0) {
-                targets = targets.filter((target) => {
+              targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element))
+                // Filter out maps which are already
+                .filter((target) => {
                   return !target.hasAttribute('__pluginmapid');
                 });
-              }
+
               if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
                 clearInterval(timer);
                 resolve([targets[0], options]);
                 return;
               }
-
             }
             if (count++ < 20) {
               return;

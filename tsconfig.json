@@ -17,7 +17,9 @@
     "skipLibCheck": true,
     "lib": ["es2017", "dom"],
     "inlineSources": true,
-    "inlineSourceMap": true
+    "inlineSourceMap": true,
+    "allowJs": true,
+    "esModuleInterop": true
   },
   "include": [
     "src/@ionic-native/plugins/**/*.ts"

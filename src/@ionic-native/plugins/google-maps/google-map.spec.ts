@@ -1,10 +1,11 @@
 import { GoogleMap } from '../../../../dist/@ionic-native/plugins/google-maps';
 
 import { GoogleMapCordovaMock, GoogleMapsCordovaMock } from '../../../test/mocks';
-import { mockCordova, mockCordovaRestore, nextId } from '../../../test/utils';
+import { mockCordova, mockCordovaRestore } from '../../../test/utils';
 
 
 describe('GoogleMap', () => {
+  beforeEach(() => document.body.innerHTML = '');
   afterEach(mockCordovaRestore);
 
   describe('with cordova', () => {
@@ -23,13 +24,13 @@ describe('GoogleMap', () => {
 
     describe('should throw', () => {
       it('when the element does not exist', async () => {
-        const _ = new GoogleMap(nextId());
+        const _ = new GoogleMap('testId', null, 0);
         const [promise] = googleMap.getMap.mock.calls[0];
         await expect(promise).rejects.toMatchSnapshot();
       });
 
       it('when the element is too small', async () => {
-        const mapId = nextId();
+        const mapId = 'testId';
 
         document.body.innerHTML = `
           <div class="show-page">
@@ -45,7 +46,7 @@ describe('GoogleMap', () => {
     });
 
     it('should work when the dom element is present and an ID is passed', async () => {
-      const mapId = nextId();
+      const mapId = 'testId';
 
       document.body.innerHTML = `
         <div class="show-page">
@@ -60,7 +61,7 @@ describe('GoogleMap', () => {
     });
 
     it('should work when the dom element is present and an element is passed', async () => {
-      const mapId = nextId();
+      const mapId = 'testId';
 
       document.body.innerHTML = `
         <div class="show-page">
@@ -75,13 +76,51 @@ describe('GoogleMap', () => {
       expect(googleMap.getMap).toHaveBeenCalled();
       await expect(mapEl).toMatchSnapshot();
     });
+
+    describe('with async DOM modifications', () => {
+      it('should find the target element if it is initially not present in the DOM', async () => {
+        const mapId = 'testId';
+
+        const _ = new GoogleMap(mapId);
+
+        setTimeout(() => {
+          document.body.innerHTML = `
+            <div class="show-page">
+              <div id="${mapId}" style="width: 100px; height: 100px;"></div>
+            </div>
+          `;
+        }, 250);
+
+        const [mapEl] = googleMap.getMap.mock.calls[0];
+        expect(googleMap.getMap).toHaveBeenCalled();
+        await expect(mapEl).resolves.toMatchSnapshot();
+      });
+    });
+
+    it('should error when the target element does not appear in time with custom timeout', async () => {
+      const mapId = 'testId';
+
+      const _ = new GoogleMap(mapId, null, 100);
+
+      setTimeout(() => {
+        document.body.innerHTML = `
+          <div class="show-page">
+            <div id="${mapId}" style="width: 100px; height: 100px;"></div>
+          </div>
+        `;
+      }, 300);
+
+      const [mapEl] = googleMap.getMap.mock.calls[0];
+      expect(googleMap.getMap).toHaveBeenCalled();
+      await expect(mapEl).rejects.toMatchSnapshot();
+    });
   });
 
   describe('without cordova', () => {
     beforeEach(() => window.cordova = null);
 
     it('should display a message in the target element', async () => {
-      const mapId = nextId();
+      const mapId = 'testId';
 
       document.body.innerHTML = `
         <div class="show-page">
@@ -98,7 +137,7 @@ describe('GoogleMap', () => {
     beforeEach(() => (window as any).cordova = {});
 
     it('should display a message in the target element', async () => {
-      const mapId = nextId();
+      const mapId = 'testId';
 
       document.body.innerHTML = `
         <div class="show-page">

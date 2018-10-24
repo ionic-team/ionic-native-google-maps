@@ -2739,25 +2739,24 @@ export class GoogleMap extends BaseClass {
           const timer: any = setInterval(() => {
             let targets: any[];
             for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
-              targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element));
-              if (targets.length > 0) {
-                targets = targets.filter((target) => {
+              targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element))
+                // Filter out el which are already map layers
+                .filter((target) => {
                   return !target.hasAttribute('__pluginmapid');
                 });
-              }
+
               if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
                 clearInterval(timer);
                 resolve([targets[0], options]);
                 return;
               }
-
             }
             if (count++ < 20) {
               return;
             }
             clearInterval(timer);
             this._objectInstance.remove();
-            if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
+            if (targets.length > 0 && targets[0] && (targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100)) {
               reject(new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.'));
             } else {
               reject(new Error('Can not find the element [#' + element + ']'));

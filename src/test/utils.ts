@@ -1,4 +1,4 @@
-import { BaseArrayClass, BaseClass } from './';
+import { BaseArrayClass, BaseClass } from './cordova-plugin-google-maps-proxy';
 
 /**
  * Use when you need a sequential id in tests

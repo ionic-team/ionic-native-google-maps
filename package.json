@@ -39,6 +39,8 @@
     "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
     "conventional-changelog-cli": "^2.0.5",
+    "cordova-js": "^4.2.4",
+    "cordova-plugin-googlemaps": "^2.4.6",
     "cz-conventional-changelog": "^2.1.0",
     "dgeni": "^0.4.10",
     "dgeni-packages": "0.16.10",

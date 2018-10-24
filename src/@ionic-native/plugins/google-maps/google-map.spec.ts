@@ -19,46 +19,42 @@ describe('GoogleMap', () => {
   });
 
   describe('should throw', () => {
-    it('when the element does not exist', () => {
+    it('when the element does not exist', async () => {
       const _ = new GoogleMap(nextId());
       const [promise] = googleMap.getMap.mock.calls[0];
-      expect(promise).rejects.toBeTruthy();
+      await expect(promise).rejects.toMatchSnapshot();
     });
 
-    it('when the element is too small', () => {
+    it('when the element is too small', async () => {
       const mapId = nextId();
 
-      const mapEl = document.createElement('div');
-      mapEl.id = mapId;
-      mapEl.style.height = '99px';
-      mapEl.style.width = '99px';
-
-      const containerEl = document.createElement('div');
-      containerEl.className = 'show-page';
-      containerEl.appendChild(mapEl);
-      document.body.appendChild(containerEl);
+      document.body.innerHTML = `
+        <div class="show-page">
+          <div id="${mapId}" style="width: 99px; height: 99px;"></div>
+        </div>
+      `;
 
       const _ = new GoogleMap(mapId);
+      const [promise] = googleMap.getMap.mock.calls[0];
       expect(googleMap.getMap).toHaveBeenCalled();
+      await expect(promise).rejects.toMatchSnapshot();
     });
   });
 
-  it('should work...', () => {
+  it('should work...', async () => {
     const mapId = nextId();
 
-    const mapEl = document.createElement('div');
-    mapEl.id = mapId;
-    mapEl.style.height = '100px';
-    mapEl.style.width = '100px';
+    document.body.innerHTML = `
+      <div class="show-page">
+        <div id="${mapId}" style="width: 100px; height: 100px;"></div>
+      </div>
+    `;
 
-    const containerEl = document.createElement('div');
-    containerEl.className = 'show-page';
-    containerEl.appendChild(mapEl);
-    document.body.appendChild(containerEl);
+    console.log(document.querySelector(`.show-page #${mapId}`));
 
     const _ = new GoogleMap(mapId);
     const [promise] = googleMap.getMap.mock.calls[0];
     expect(googleMap.getMap).toHaveBeenCalled();
-    expect(promise).resolves.toBeTruthy();
+    await expect(promise).resolves.toMatchSnapshot();
   });
 });

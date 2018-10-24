@@ -3,7 +3,6 @@ export class GoogleMapMock {
 }
 
 export class GoogleMapsMock {
-  // getMap = jest.fn();
 }
 
 export class MapMock {

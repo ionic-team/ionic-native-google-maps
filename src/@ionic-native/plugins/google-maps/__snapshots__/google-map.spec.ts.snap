@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoogleMap should throw when the element does not exist 1`] = `[Error: Can not find the element [#uniqueId-0]]`;
+
+exports[`GoogleMap should throw when the element is too small 1`] = `[Error: DIV[#uniqueId-1] is too small. Must be bigger than 100x100.]`;
+
+exports[`GoogleMap should work... 1`] = `
+Array [
+  <div
+    id="uniqueId-2"
+    style="width: 100px; height: 100px;"
+  />,
+  undefined,
+]
+`;

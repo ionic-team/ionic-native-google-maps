@@ -2716,7 +2716,7 @@ export class StreetViewPanorama extends BaseClass {
   plugin: 'cordova-plugin-googlemaps'
 })
 export class GoogleMap extends BaseClass {
-  constructor(element: HTMLElement | string, options?: GoogleMapOptions) {
+  constructor(element: HTMLElement | string, options?: GoogleMapOptions, elFindTimeout = 2000) {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       // ---------------
       // Create a map
@@ -2733,12 +2733,13 @@ export class GoogleMap extends BaseClass {
       } else if (typeof element === 'string') {
 
         super(GoogleMaps.getPlugin().Map.getMap(getPromise<any[]>((resolve, reject) => {
-          let count: number;
-          let i: number;
-          count = 0;
+          let numAttempts = 0;
+          const durationBetweenAttemptsMs = 100;
+          const maxAttempts = Math.floor(elFindTimeout / durationBetweenAttemptsMs);
+
           const timer: any = setInterval(() => {
             let targets: any[];
-            for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
+            for (let i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
               targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element))
                 // Filter out el which are already map layers
                 .filter((target) => {
@@ -2751,7 +2752,7 @@ export class GoogleMap extends BaseClass {
                 return;
               }
             }
-            if (count++ < 20) {
+            if (numAttempts++ < maxAttempts) {
               return;
             }
             clearInterval(timer);
@@ -2761,7 +2762,7 @@ export class GoogleMap extends BaseClass {
             } else {
               reject(new Error('Can not find the element [#' + element + ']'));
             }
-          }, 100);
+          }, durationBetweenAttemptsMs);
         }), options));
 
       } else if (element === null && options) {

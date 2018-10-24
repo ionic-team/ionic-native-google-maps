@@ -21,10 +21,6 @@ describe('GoogleMap', () => {
       });
     });
 
-    /**
-     * TODO: Find a clean way to configure the timeout when searching
-     * for an element so that we can error more quickly
-     */
     describe('should throw', () => {
       it('when the element does not exist', async () => {
         const _ = new GoogleMap(nextId());
@@ -41,7 +37,7 @@ describe('GoogleMap', () => {
           </div>
         `;
 
-        const _ = new GoogleMap(mapId);
+        const _ = new GoogleMap(mapId, undefined, 100);
         const [promise] = googleMap.getMap.mock.calls[0];
         expect(googleMap.getMap).toHaveBeenCalled();
         await expect(promise).rejects.toMatchSnapshot();
@@ -57,7 +53,7 @@ describe('GoogleMap', () => {
         </div>
       `;
 
-      const _ = new GoogleMap(mapId);
+      const _ = new GoogleMap(mapId, undefined, 100);
       const [promise] = googleMap.getMap.mock.calls[0];
       expect(googleMap.getMap).toHaveBeenCalled();
       await expect(promise).resolves.toMatchSnapshot();
@@ -93,7 +89,7 @@ describe('GoogleMap', () => {
         </div>
       `;
 
-      const _ = new GoogleMap(mapId);
+      const _ = new GoogleMap(mapId, undefined, 100);
       expect(document.body.innerHTML).toMatchSnapshot();
     });
   });
@@ -110,7 +106,7 @@ describe('GoogleMap', () => {
         </div>
       `;
 
-      const _ = new GoogleMap(mapId);
+      const _ = new GoogleMap(mapId, undefined, 100);
       expect(document.body.innerHTML).toMatchSnapshot();
     });
   });

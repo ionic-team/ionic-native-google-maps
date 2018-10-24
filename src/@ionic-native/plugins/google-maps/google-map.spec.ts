@@ -5,75 +5,115 @@ import { mockCordova, nextId } from '../../../test/utils';
 
 
 describe('GoogleMap', () => {
-  let googleMaps: GoogleMapsCordovaMock;
-  let googleMap: GoogleMapCordovaMock;
+  describe('with cordova', () => {
+    let googleMaps: GoogleMapsCordovaMock;
+    let googleMap: GoogleMapCordovaMock;
 
-  beforeEach(() => {
-    googleMaps = new GoogleMapsCordovaMock();
-    googleMap = new GoogleMapCordovaMock();
+    beforeEach(() => {
+      googleMaps = new GoogleMapsCordovaMock();
+      googleMap = new GoogleMapCordovaMock();
 
-    mockCordova({
-      GoogleMaps: googleMaps,
-      Map: googleMap,
-    });
-  });
-
-  /**
-   * TODO: Find a clean way to configure the timeout when searching
-   * for an element so that we can error more quickly
-   */
-  describe('should throw', () => {
-    it('when the element does not exist', async () => {
-      const _ = new GoogleMap(nextId());
-      const [promise] = googleMap.getMap.mock.calls[0];
-      await expect(promise).rejects.toMatchSnapshot();
+      mockCordova({
+        GoogleMaps: googleMaps,
+        Map: googleMap,
+      });
     });
 
-    it('when the element is too small', async () => {
+    afterEach(() => {
+      (window as any).plugin = {};
+      (window as any).cordova = null;
+    });
+
+    /**
+     * TODO: Find a clean way to configure the timeout when searching
+     * for an element so that we can error more quickly
+     */
+    describe('should throw', () => {
+      it('when the element does not exist', async () => {
+        const _ = new GoogleMap(nextId());
+        const [promise] = googleMap.getMap.mock.calls[0];
+        await expect(promise).rejects.toMatchSnapshot();
+      });
+
+      it('when the element is too small', async () => {
+        const mapId = nextId();
+
+        document.body.innerHTML = `
+          <div class="show-page">
+            <div id="${mapId}" style="width: 99px; height: 99px;"></div>
+          </div>
+        `;
+
+        const _ = new GoogleMap(mapId);
+        const [promise] = googleMap.getMap.mock.calls[0];
+        expect(googleMap.getMap).toHaveBeenCalled();
+        await expect(promise).rejects.toMatchSnapshot();
+      });
+    });
+
+    it('should work when the dom element is present and an ID is passed', async () => {
       const mapId = nextId();
 
       document.body.innerHTML = `
         <div class="show-page">
-          <div id="${mapId}" style="width: 99px; height: 99px;"></div>
+          <div id="${mapId}" style="width: 100px; height: 100px;"></div>
         </div>
       `;
 
       const _ = new GoogleMap(mapId);
       const [promise] = googleMap.getMap.mock.calls[0];
       expect(googleMap.getMap).toHaveBeenCalled();
-      await expect(promise).rejects.toMatchSnapshot();
+      await expect(promise).resolves.toMatchSnapshot();
+    });
+
+    it('should work when the dom element is present and an element is passed', async () => {
+      const mapId = nextId();
+
+      document.body.innerHTML = `
+        <div class="show-page">
+          <div id="${mapId}" style="width: 100px; height: 100px;"></div>
+        </div>
+      `;
+
+      const el = document.getElementById(mapId);
+
+      const _ = new GoogleMap(el);
+      const [mapEl] = googleMap.getMap.mock.calls[0];
+      expect(googleMap.getMap).toHaveBeenCalled();
+      await expect(mapEl).toMatchSnapshot();
     });
   });
 
-  it('should work when the dom element is present and an ID is passed', async () => {
-    const mapId = nextId();
+  describe('without cordova', () => {
+    beforeEach(() => window.cordova = null);
+    it('should display a message in the target element', async () => {
+      const mapId = nextId();
 
-    document.body.innerHTML = `
-      <div class="show-page">
-        <div id="${mapId}" style="width: 100px; height: 100px;"></div>
-      </div>
-    `;
+      document.body.innerHTML = `
+        <div class="show-page">
+          <div id="${mapId}" style="width: 100px; height: 100px;"></div>
+        </div>
+      `;
 
-    const _ = new GoogleMap(mapId);
-    const [promise] = googleMap.getMap.mock.calls[0];
-    expect(googleMap.getMap).toHaveBeenCalled();
-    await expect(promise).resolves.toMatchSnapshot();
+      const _ = new GoogleMap(mapId);
+      expect(document.body.innerHTML).toMatchSnapshot();
+    });
   });
 
-  it('should work when the dom element is present and an element is passed', async () => {
-    const mapId = nextId();
+  describe('without plugin', () => {
+    beforeEach(() => (window as any).cordova = {});
 
-    document.body.innerHTML = `
-      <div class="show-page">
-        <div id="${mapId}" style="width: 100px; height: 100px;"></div>
-      </div>
-    `;
+    it('should display a message in the target element', async () => {
+      const mapId = nextId();
 
-    const el = document.getElementById(mapId);
+      document.body.innerHTML = `
+        <div class="show-page">
+          <div id="${mapId}" style="width: 100px; height: 100px;"></div>
+        </div>
+      `;
 
-    const _ = new GoogleMap(el);
-    const [mapEl] = googleMap.getMap.mock.calls[0];
-    expect(googleMap.getMap).toHaveBeenCalled();
-    await expect(mapEl).toMatchSnapshot();
+      const _ = new GoogleMap(mapId);
+      expect(document.body.innerHTML).toMatchSnapshot();
+    });
   });
 });

@@ -1,3 +1,7 @@
+## 4.15.1
+  - Fix: `GoogleMaps.create()` is missing.
+  - Fix: BaseClass constructor is incorrect.
+
 ## 4.15.0
   - Build to compatible with `@ionic-native/core@4.16.0`
   - Update: The code for displaying error message.

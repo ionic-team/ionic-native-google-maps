@@ -1297,7 +1297,7 @@ export class GoogleMaps extends IonicNativePlugin {
    * @param options {GoogleMapOptions} [options] Options
    * @return {GoogleMap}
    */
-  create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
+  static create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       if (element instanceof HTMLElement) {
         if (!element.offsetParent) {
@@ -1343,12 +1343,21 @@ export class GoogleMaps extends IonicNativePlugin {
   }
 
   /**
+   * @deprecation keep this for backward compatibility.
+   * @hidden
+   */
+  create(element: string | HTMLElement | GoogleMapOptions, options?: GoogleMapOptions): GoogleMap {
+    console.error('GoogleMaps', '[deprecated] Please use GoogleMaps.create()');
+    return GoogleMaps.create(element, options);
+  }
+
+  /**
    * Creates a new StreetView instance
    * @param element {string | HTMLElement} Element ID or reference to attach the map to
    * @param options {StreetViewOptions} [options] Options
    * @return {StreetViewPanorama}
    */
-  createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
+  static createPanorama(element: string | HTMLElement, options?: StreetViewOptions): StreetViewPanorama {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       if (element instanceof HTMLElement) {
         if (!element.offsetParent) {
@@ -1445,7 +1454,14 @@ export class BaseClass {
   protected _objectInstance: any;
 
   constructor(_objectInstance?: any) {
-    this._objectInstance = _objectInstance;
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      if (!_objectInstance) {
+        _objectInstance = new (GoogleMaps.getPlugin().BaseClass)();
+      }
+      this._objectInstance = _objectInstance;
+    } else {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before executing any methods.');
+    }
   }
 
   /**

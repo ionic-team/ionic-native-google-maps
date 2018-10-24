@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/en/snapshot-testing
 
 exports[`GoogleMap should throw when the element does not exist 1`] = `[Error: Can not find the element [#uniqueId-0]]`;
 

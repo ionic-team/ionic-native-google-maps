@@ -1457,10 +1457,14 @@ export class BaseClass {
   protected _objectInstance: any;
 
   constructor(_objectInstance?: any) {
-    if (!this._objectInstance) {
-      _objectInstance = new (GoogleMaps.getPlugin().BaseClass)();
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
+      if (!_objectInstance) {
+        _objectInstance = new (GoogleMaps.getPlugin().BaseClass)();
+      }
+      this._objectInstance = _objectInstance;
+    } else {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before executing any methods.');
     }
-    this._objectInstance = _objectInstance;
   }
 
   /**

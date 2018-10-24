@@ -1,16 +1,16 @@
-import { GoogleMap, GoogleMaps } from '../../../../dist/@ionic-native/plugins/google-maps';
+import { GoogleMap } from '../../../../dist/@ionic-native/plugins/google-maps';
 
-import { GoogleMapMock, GoogleMapsMock } from '../../../test/mocks';
+import { GoogleMapCordovaMock, GoogleMapsCordovaMock } from '../../../test/mocks';
 import { mockCordova, nextId } from '../../../test/utils';
 
 
 describe('GoogleMap', () => {
-  let googleMaps: GoogleMapsMock;
-  let googleMap: GoogleMapMock;
+  let googleMaps: GoogleMapsCordovaMock;
+  let googleMap: GoogleMapCordovaMock;
 
   beforeEach(() => {
-    googleMaps = new GoogleMapsMock();
-    googleMap = new GoogleMapMock();
+    googleMaps = new GoogleMapsCordovaMock();
+    googleMap = new GoogleMapCordovaMock();
 
     mockCordova({
       GoogleMaps: googleMaps,
@@ -18,6 +18,10 @@ describe('GoogleMap', () => {
     });
   });
 
+  /**
+   * TODO: Find a clean way to configure the timeout when searching
+   * for an element so that we can error more quickly
+   */
   describe('should throw', () => {
     it('when the element does not exist', async () => {
       const _ = new GoogleMap(nextId());
@@ -41,7 +45,7 @@ describe('GoogleMap', () => {
     });
   });
 
-  it('should work...', async () => {
+  it('should work when the dom element is present and an ID is passed', async () => {
     const mapId = nextId();
 
     document.body.innerHTML = `
@@ -54,5 +58,22 @@ describe('GoogleMap', () => {
     const [promise] = googleMap.getMap.mock.calls[0];
     expect(googleMap.getMap).toHaveBeenCalled();
     await expect(promise).resolves.toMatchSnapshot();
+  });
+
+  it('should work when the dom element is present and an element is passed', async () => {
+    const mapId = nextId();
+
+    document.body.innerHTML = `
+      <div class="show-page">
+        <div id="${mapId}" style="width: 100px; height: 100px;"></div>
+      </div>
+    `;
+
+    const el = document.getElementById(mapId);
+
+    const _ = new GoogleMap(el);
+    const [mapEl] = googleMap.getMap.mock.calls[0];
+    expect(googleMap.getMap).toHaveBeenCalled();
+    await expect(mapEl).toMatchSnapshot();
   });
 });

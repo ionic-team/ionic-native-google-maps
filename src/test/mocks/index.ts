@@ -1,8 +1,8 @@
-export class GoogleMapMock {
+export class GoogleMapCordovaMock {
   getMap = jest.fn(() => new MapMock());
 }
 
-export class GoogleMapsMock {
+export class GoogleMapsCordovaMock {
 }
 
 export class MapMock {

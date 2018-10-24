@@ -2740,7 +2740,7 @@ export class GoogleMap extends BaseClass {
             let targets: any[];
             for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
               targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element))
-                // Filter out maps which are already
+                // Filter out el which are already map layers
                 .filter((target) => {
                   return !target.hasAttribute('__pluginmapid');
                 });

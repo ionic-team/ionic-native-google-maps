@@ -37,7 +37,7 @@ describe('GoogleMap', () => {
           </div>
         `;
 
-        const _ = new GoogleMap(mapId, undefined, 100);
+        const _ = new GoogleMap(mapId, undefined, 0);
         const [promise] = googleMap.getMap.mock.calls[0];
         expect(googleMap.getMap).toHaveBeenCalled();
         await expect(promise).rejects.toMatchSnapshot();
@@ -53,7 +53,7 @@ describe('GoogleMap', () => {
         </div>
       `;
 
-      const _ = new GoogleMap(mapId, undefined, 100);
+      const _ = new GoogleMap(mapId, undefined, 0);
       const [promise] = googleMap.getMap.mock.calls[0];
       expect(googleMap.getMap).toHaveBeenCalled();
       await expect(promise).resolves.toMatchSnapshot();
@@ -89,7 +89,7 @@ describe('GoogleMap', () => {
         </div>
       `;
 
-      const _ = new GoogleMap(mapId, undefined, 100);
+      const _ = new GoogleMap(mapId, undefined, 0);
       expect(document.body.innerHTML).toMatchSnapshot();
     });
   });
@@ -106,7 +106,7 @@ describe('GoogleMap', () => {
         </div>
       `;
 
-      const _ = new GoogleMap(mapId, undefined, 100);
+      const _ = new GoogleMap(mapId, undefined, 0);
       expect(document.body.innerHTML).toMatchSnapshot();
     });
   });

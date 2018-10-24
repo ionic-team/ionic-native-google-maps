@@ -6,3 +6,4 @@ aot/
 scripts/ionic-native-bower
 dist/
 *.log
+injectable-classes.json

@@ -1,10 +1,12 @@
 import { GoogleMap } from '../../../../dist/@ionic-native/plugins/google-maps';
 
 import { GoogleMapCordovaMock, GoogleMapsCordovaMock } from '../../../test/mocks';
-import { mockCordova, nextId } from '../../../test/utils';
+import { mockCordova, mockCordovaRestore, nextId } from '../../../test/utils';
 
 
 describe('GoogleMap', () => {
+  afterEach(mockCordovaRestore);
+
   describe('with cordova', () => {
     let googleMaps: GoogleMapsCordovaMock;
     let googleMap: GoogleMapCordovaMock;
@@ -17,11 +19,6 @@ describe('GoogleMap', () => {
         GoogleMaps: googleMaps,
         Map: googleMap,
       });
-    });
-
-    afterEach(() => {
-      (window as any).plugin = {};
-      (window as any).cordova = null;
     });
 
     /**
@@ -86,6 +83,7 @@ describe('GoogleMap', () => {
 
   describe('without cordova', () => {
     beforeEach(() => window.cordova = null);
+
     it('should display a message in the target element', async () => {
       const mapId = nextId();
 

@@ -1,5 +1,7 @@
 import { BaseArrayClass, BaseClass } from './cordova-plugin-google-maps-proxy';
 
+const untypedWindow: any = window;
+
 /**
  * Use when you need a sequential id in tests
  * Should be needed rarely
@@ -18,11 +20,11 @@ export const nextId = (() => {
  * @param plugins a map of plugins to mock
  */
 export const mockCordova = (plugins: {}) => {
-  (window as any).cordova = {
+  untypedWindow.cordova = {
 
   };
 
-  (window as any).plugin = {
+  untypedWindow.plugin = {
     google: {
       maps: {
         BaseArrayClass,
@@ -32,4 +34,13 @@ export const mockCordova = (plugins: {}) => {
       }
     }
   };
+};
+
+
+/**
+ * Undoes window patching performed by `mockCordova`
+ */
+export const mockCordovaRestore = () => {
+  untypedWindow.cordova = null;
+  untypedWindow.plugin = null;
 };

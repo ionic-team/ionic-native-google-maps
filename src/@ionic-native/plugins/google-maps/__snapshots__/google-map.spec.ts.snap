@@ -34,17 +34,33 @@ Array [
 `;
 
 exports[`GoogleMap without cordova should display a message in the target element 1`] = `
-"
-        <div class=\\"show-page\\">
-          <div id=\\"testId\\" style=\\"width: 100px; height: 100px; position: relative;\\"><div style=\\"color: red; position: absolute; width: 80%; height: 50%; top: 0px; bottom: 0px; right: 0px; left: 0px; padding: 0px; margin: auto;\\">[GoogleMaps]<br>You need to execute \\"$&gt; ionic cordova run browser\\".<br>\\"$&gt; ionic serve\\" is not supported.</div></div>
-        </div>
-      "
+<div
+  id="testId"
+  style="width: 100px; height: 100px; position: relative;"
+>
+  <div
+    style="color: red; position: absolute; width: 80%; height: 50%; top: 0px; bottom: 0px; right: 0px; left: 0px; padding: 0px; margin: auto;"
+  >
+    [GoogleMaps]
+    <br />
+    You need to execute "$&gt; ionic cordova run browser".
+    <br />
+    "$&gt; ionic serve" is not supported.
+  </div>
+</div>
 `;
 
 exports[`GoogleMap without plugin should display a message in the target element 1`] = `
-"
-        <div class=\\"show-page\\">
-          <div id=\\"testId\\" style=\\"width: 100px; height: 100px; position: relative;\\"><div style=\\"color: red; position: absolute; width: 80%; height: 50%; top: 0px; bottom: 0px; right: 0px; left: 0px; padding: 0px; margin: auto;\\">[GoogleMaps]<br>cordova-plugin-googlemaps is not installed or not ready yet.</div></div>
-        </div>
-      "
+<div
+  id="testId"
+  style="width: 100px; height: 100px; position: relative;"
+>
+  <div
+    style="color: red; position: absolute; width: 80%; height: 50%; top: 0px; bottom: 0px; right: 0px; left: 0px; padding: 0px; margin: auto;"
+  >
+    [GoogleMaps]
+    <br />
+    cordova-plugin-googlemaps is not installed or not ready yet.
+  </div>
+</div>
 `;

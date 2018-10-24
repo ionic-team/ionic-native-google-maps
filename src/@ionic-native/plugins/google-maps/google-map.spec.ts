@@ -129,7 +129,7 @@ describe('GoogleMap', () => {
       `;
 
       const _ = new GoogleMap(mapId, undefined, 0);
-      expect(document.body.innerHTML).toMatchSnapshot();
+      expect(document.getElementById(mapId)).toMatchSnapshot();
     });
   });
 
@@ -146,7 +146,7 @@ describe('GoogleMap', () => {
       `;
 
       const _ = new GoogleMap(mapId, undefined, 0);
-      expect(document.body.innerHTML).toMatchSnapshot();
+      expect(document.getElementById(mapId)).toMatchSnapshot();
     });
   });
 });

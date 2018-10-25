@@ -2710,6 +2710,7 @@ export class StreetViewPanorama extends BaseClass {
 
 /**
  * @hidden
+ * elFindTimeout is hidden parameter, mainly for test.
  */
 @Plugin({
   pluginName: 'GoogleMaps',

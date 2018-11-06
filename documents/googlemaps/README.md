@@ -13,7 +13,7 @@ export class MapPage {
   map: GoogleMap;
 
   constructor(private platform: Platform) {
-    this.platforms.ready(()=> {
+    this.platform.ready(()=> {
       this.loadMap();
     });
   }

@@ -34,7 +34,7 @@ export class MapPage {
   map: GoogleMap;
 
   constructor(private platform: Platform) {
-    this.platforms.ready(()=> {
+      this.platform.ready().then(() => {
       this.loadMap();
     });
   }

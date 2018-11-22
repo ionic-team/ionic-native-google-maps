@@ -13,22 +13,23 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
 ## Instance methods
 
-  -### getId()
+  - ### getId()
 
     Returns the ID of instance.
 
     :arrow_right: Returns `string`
 
-  -### getMap()
+  - ### getMap()
 
     Return the map instance.
 
     :arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
 
-  -### setPosition(position)
+  - ### setPosition(position)
 
     Set the marker position.
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -41,25 +42,27 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>new position</td>
     </tr>
     </table>
+    ```
 
-  -### getPosition()
+  - ### getPosition()
 
     Returns the marker position.
 
     :arrow_right: Returns <a href="../ilatlng/README.md">ILatLng</a>.
 
-  -### showInfoWindow()
+  - ### showInfoWindow()
 
     Show the normal infoWindow of the marker.
 
-  -### hideInfoWindow()
+  - ### hideInfoWindow()
 
     Hide the normal infoWindow of the marker.
 
-  -### setAnimation(animation)
+  - ### setAnimation(animation)
 
     Specify the animation either `DROP` or `BOUNCE`.
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -72,11 +75,13 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>`DROP` or `BOUNCE`</td>
     </tr>
     </table>
+    ```
 
-  -### setDisableAutoPan(disableAutoPan)
+  - ### setDisableAutoPan(disableAutoPan)
 
     Set true if you **do not want** to move the map when you click on the marker.
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -89,13 +94,15 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>true or false</td>
     </tr>
     </table>
+    ```
 
 
 
-  -### setTitle(title)
+  - ### setTitle(title)
 
     Changes title of the normal infoWindow.
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -108,9 +115,10 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>new title</td>
     </tr>
     </table>
+    ```
 
 
-  -### getTile()
+  - ### getTile()
 
     Returns the current title strings.
 
@@ -118,10 +126,11 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
 
 
-  -### setSnippet(snippet)
+  - ### setSnippet(snippet)
 
     Changes snippet of the normal infoWindow.
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -134,9 +143,10 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>new snippet</td>
     </tr>
     </table>
+    ```
 
 
-  -### getSnippet()
+  - ### getSnippet()
 
     Returns the current snippet strings.
 
@@ -144,10 +154,11 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
 
 
-  -### setIconAnchor(x, y)
+  - ### setIconAnchor(x, y)
 
     Changes the info window anchor. This defaults to 50% from the left of the image and at the bottom of the image.
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -165,12 +176,14 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>Distance from top of the icon image in pixels.</td>
     </tr>
     </table>
+    ```
 
 
-  -### setInfoWindowAnchor(x, y)
+  - ### setInfoWindowAnchor(x, y)
 
     Changes the info window anchor. This defaults to 50% from the left of the image and at the top of the image.
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -188,19 +201,21 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>Distance from top of the icon image in pixels.</td>
     </tr>
     </table>
+    ```
 
 
-  -### isInfoWindowShown()
+  - ### isInfoWindowShown()
 
     Returns true if the infoWindow is shown on the marker
 
     :arrow_right: Returns `boolean`.
 
 
-  -### setDraggable(draggable)
+  - ### setDraggable(draggable)
 
     Set true if you allow all users to drag the marker.
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -213,18 +228,20 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>true or false</td>
     </tr>
     </table>
+    ```
 
-  -### isDraggable(draggable)
+  - ### isDraggable(draggable)
 
     Returns true if the marker drag is enabled.
 
     :arrow_right: Returns `boolean`.
 
 
-  -### setFlat(flat)
+  - ### setFlat(flat)
 
     Set true if you want to be flat marker.
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -237,11 +254,13 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>true or false</td>
     </tr>
     </table>
+    ```
 
-  -### setIcon(icon)
+  - ### setIcon(icon)
 
     Set true if you want to be flat marker.
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -254,11 +273,13 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>new image</td>
     </tr>
     </table>
+    ```
 
-  -### setOpacity(opacity)
+  - ### setOpacity(opacity)
 
     Changes the opacity of the marker from 0.0 to 1.0
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -271,19 +292,21 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>from 0.0 to 1.0</td>
     </tr>
     </table>
+    ```
 
 
 
-  -### getOpacity()
+  - ### getOpacity()
 
     Returns the marker rotation angle.
 
     :arrow_right: Returns `number`.
 
-  -### setVisible(visible)
+  - ### setVisible(visible)
 
     Set marker visibility
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -296,19 +319,21 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>true or false</td>
     </tr>
     </table>
+    ```
 
 
-  -### isVisible()
+  - ### isVisible()
 
     Returns true if the marker is visible.
 
     :arrow_right: Returns `boolean`.
 
 
-  -### setZIndex(index)
+  - ### setZIndex(index)
 
     Changes the marker zIndex order.
 
+    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -321,14 +346,15 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>z-index</td>
     </tr>
     </table>
+    ```
 
 
-  -### getZIndex()
+  - ### getZIndex()
 
     Returns the current marker zIndex.
 
     :arrow_right: Returns `number`.
 
-  -### remove()
+  - ### remove()
 
     Remove the marker.

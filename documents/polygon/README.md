@@ -13,19 +13,19 @@ this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
 
 ## Instance methods
 
-  -### getId()
+  - ### getId()
 
     Returns the ID of instance.
 
     :arrow_right: Returns `string`
 
-  -### getMap()
+  - ### getMap()
 
     Return the map instance.
 
     :arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
 
-  -### setPoints(points)
+  - ### setPoints(points)
 
     Changes the polygon points.
 
@@ -43,14 +43,14 @@ this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
     </table>
 
 
-  -### getPoints()
+  - ### getPoints()
 
     Returns an instance of the BaseArrayClass. You can modify the points.
 
     :arrow_right: Returns [BaseArrayClass](../basearrayclass/README.md)&lt;<a href="../ilatlng/README.md">ILatLng</a>&gt;.
 
 
-  -### setHoles(holes)
+  - ### setHoles(holes)
 
     Changes the polygon holes.
 
@@ -68,13 +68,13 @@ this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
     </table>
 
 
-  -### getHoles()
+  - ### getHoles()
 
     Returns an instance of the BaseArrayClass. You can modify the points.
 
     :arrow_right: Returns [BaseArrayClass](../basearrayclass/README.md)&lt;ILatLng[]&gt;.
 
-  -### setGeoDesic(geoDesic)
+  - ### setGeoDesic(geoDesic)
 
     When true, edges of the polygon are interpreted as geodesic and will follow the curvature of the Earth.
 
@@ -92,13 +92,13 @@ this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
     </table>
 
 
-  -### getGeodesic()
+  - ### getGeodesic()
 
     Returns true if the polygon is geodesic
 
     :arrow_right: Returns `boolean`.
 
-  -### setStrokeWidth(strokeWidth)
+  - ### setStrokeWidth(strokeWidth)
 
     Changes the stroke width.
 
@@ -116,13 +116,13 @@ this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
     </table>
 
 
-  -### getStrokeWidth()
+  - ### getStrokeWidth()
 
     Returns the current stroke width (unit: pixel).
 
     :arrow_right: Returns `number`.
 
-  -### setStrokeColor(color)
+  - ### setStrokeColor(color)
 
     Changes the polygon color
 
@@ -140,14 +140,14 @@ this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
     </table>
 
 
-  -### getStrokeColor()
+  - ### getStrokeColor()
 
     Returns the current stroke color.
 
     :arrow_right: Returns `string`.
 
 
-  -### setFillColor(color)
+  - ### setFillColor(color)
 
     Changes the filling color (inner color).
 
@@ -165,13 +165,13 @@ this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
     </table>
 
 
-  -### getFillColor()
+  - ### getFillColor()
 
     Returns the current polygon filling color (inner color).
 
     :arrow_right: Returns `string`.
 
-  -### setClickable(clickable)
+  - ### setClickable(clickable)
 
     Changes click-ability of the polygon
 
@@ -189,13 +189,13 @@ this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
     </table>
 
 
-  -### getClickable()
+  - ### getClickable()
 
     Returns true if the polygon is clickable.
 
     :arrow_right: Returns `boolean`.
 
-  -### setVisible(clickable)
+  - ### setVisible(clickable)
 
     Set polygon visibility
 
@@ -213,14 +213,14 @@ this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
     </table>
 
 
-  -### getVisible()
+  - ### getVisible()
 
     Returns true if the polygon is visible.
 
     :arrow_right: Returns `boolean`.
 
 
-  -### setZIndex(index)
+  - ### setZIndex(index)
 
     Changes the polygon zIndex order.
 
@@ -238,12 +238,12 @@ this.map.addPolygon(options: PolygonOptions).then((polygon: Polygon) => {
     </table>
 
 
-  -### getZIndex()
+  - ### getZIndex()
 
     Returns the current polygon zIndex.
 
     :arrow_right: Returns `number`.
 
-  -### remove()
+  - ### remove()
 
     Remove the polygon.

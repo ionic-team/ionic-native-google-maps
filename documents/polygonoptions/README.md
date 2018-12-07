@@ -15,7 +15,7 @@ let GORYOKAKU_POINTS: ILatLng[] = [
   {lat: 41.79744, lng: 140.75454000000002},
   {lat: 41.79909000000001, lng: 140.75465}
 ];
-let options: PolylineOptions = {
+let options: PoligonOptions = {
   'points': GORYOKAKU_POINTS,
   'strokeColor' : '#AA00FF',
   'fillColor' : '#00FFAA',

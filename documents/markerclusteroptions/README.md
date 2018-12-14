@@ -8,12 +8,10 @@ let labelOptions: MarkerLabel = {
   italic: true
 };
 let clusterIcons: MarkerClusterIcon[] = [
-  {
-    {min: 2, max: 100, url: "./assets/blue.png", anchor: {x: 16, y: 16}, label: labelOptions},
-    {min: 100, max: 1000, url: "./assets/yellow.png", anchor: {x: 16, y: 16}, label: labelOptions},
-    {min: 1000, max: 2000, url: "./assets/purple.png", anchor: {x: 24, y: 24}, label: labelOptions},
-    {min: 2000, url: "./assets/red.png",anchor: {x: 32,y: 32}, label: labelOptions}
-  }
+  {min: 2, max: 100, url: "./assets/blue.png", anchor: {x: 16, y: 16}, label: labelOptions},
+  {min: 100, max: 1000, url: "./assets/yellow.png", anchor: {x: 16, y: 16}, label: labelOptions},
+  {min: 1000, max: 2000, url: "./assets/purple.png", anchor: {x: 24, y: 24}, label: labelOptions},
+  {min: 2000, url: "./assets/red.png",anchor: {x: 32,y: 32}, label: labelOptions}
 ];
 
 let options: MarkerClusterOptions = {

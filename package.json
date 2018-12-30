@@ -68,5 +68,11 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "resolutions": {
+    "natives": "1.1.6"
+  },
+  "dependencies": {
+    "natives": "^1.1.6"
   }
 }

@@ -1354,7 +1354,7 @@ const normalizeArgumentsOfEventListener = (_objectInstance: any, args: any[]): a
     if (args[args.length - 1].type === 'Map' || args[args.length - 1].type === 'StreetViewPanorama') {
       args[args.length - 1] = this;
     } else if (_objectInstance.__pgmId.indexOf('markercluster_') !== -1) {
-      const _overlays: any = _objectInstance.get('_overlays') || {};
+      const _overlays: any = _objectInstance.getMap().get('_overlays') || {};
       let overlay: Marker = _overlays[args[args.length - 1].getId()];
       if (!overlay) {
         const markerJS: any = args[args.length - 1];

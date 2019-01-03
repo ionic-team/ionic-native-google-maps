@@ -1361,9 +1361,10 @@ const normalizeArgumentsOfEventListener = (_objectInstance: any, args: any[]): a
         const markerId: string = markerJS.getId();
         const markerCluster: MarkerCluster = _objectInstance as MarkerCluster;
         overlay = new Marker(markerCluster.getMap(), markerJS);
-        _objectInstance.get('_overlays')[markerId] = overlay;
+        _objectInstance.getMap().get('_overlays')[markerId] = overlay;
         markerJS.one(markerJS.getId() + '_remove', () => {
-          _objectInstance.get('_overlays')[markerId] = null;
+          _objectInstance.getMap().get('_overlays')[markerId] = null;
+          delete _objectInstance.getMap().get('_overlays')[markerId];
         });
       }
       args[args.length - 1] = overlay;

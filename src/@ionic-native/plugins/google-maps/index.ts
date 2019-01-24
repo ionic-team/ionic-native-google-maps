@@ -8,8 +8,7 @@ import {
   checkAvailability
 } from '@ionic-native/core';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
+import { Observable, fromEvent } from 'rxjs';
 
 const TARGET_ELEMENT_FINDING_QUERYS: string[] = [
   '.show-page #',

@@ -1,5 +1,4 @@
-import { Observable } from 'rxjs/Observable';
-import { _throw } from 'rxjs/observable/throw';
+import { Observable, throwError } from 'rxjs';
 
 import { checkAvailability, instanceAvailability, overrideFunction, wrap, wrapInstance } from './plugin';
 import { getPlugin, getPromise } from './util';
@@ -153,7 +152,7 @@ export function CordovaCheck(opts: CordovaCheckOptions = {}) {
           if (opts.sync) {
             return null;
           } else if (opts.observable) {
-            return _throw(new Error(check && check.error));
+            return throwError(new Error(check && check.error));
           }
           return Promise.reject(check && check.error);
         }

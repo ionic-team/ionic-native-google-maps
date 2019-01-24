@@ -1,3 +1,8 @@
+## 4.20.0
+  - Update: Catch up `@ionic-native/4.20.0`
+  - Fix: INFO_CLICK event does not work on marker cluster
+  - Fix: minor bugs
+
 ## 4.15.1
   - Fix: `GoogleMaps.create()` is missing.
   - Fix: BaseClass constructor is incorrect.

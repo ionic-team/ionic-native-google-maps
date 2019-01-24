@@ -1,6 +1,6 @@
 {
   "name": "@ionic-native/google-maps",
-  "version": "5.0.0-beta.25",
+  "version": "5.0.0-beta.26",
   "description": "Native plugin wrappers for Cordova and Ionic with TypeScript, ES6+, Promise and Observable support",
   "homepage": "https://github.com/ionic-team/ionic-native-google-maps/",
   "author": "Masashi Katsumata, Ionic Team <hi@ionic.io> (https://ionic.io)",
@@ -20,27 +20,28 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "postchangelog": "git commit -am \"chore(): update changelog\"",
     "shipit": "npm run dev && cp README.md  dist/@ionic-native/plugins/google-maps && npm login && npm run npmpub && npm logout",
-    "dev": "npm run test && npm run build && cp package.json dist/@ionic-native/plugins/google-maps && rm -rf dist/@ionic-native/core && cp -R  node_modules/@ionic-native/core  dist/@ionic-native/"
+    "dev": "npm run test && npm run build && cp package.json dist/@ionic-native/plugins/google-maps"
   },
   "devDependencies": {
-    "@angular/common": "^7.1.2",
-    "@angular/compiler": "^7.1.2",
-    "@angular/compiler-cli": "^7.1.2",
-    "@angular/core": "^7.1.2",
+    "@angular/common": "^7.2.1",
+    "@angular/compiler": "^7.2.1",
+    "@angular/compiler-cli": "^7.2.1",
+    "@angular/core": "^7.2.1",
     "@types/cordova": "0.0.34",
     "@types/fs-extra": "^5.0.4",
-    "@types/jest": "^23.3.10",
-    "@types/lodash": "^4.14.118",
-    "@types/node": "^10.12.12",
+    "@types/jest": "^23.3.13",
+    "@types/lodash": "^4.14.120",
+    "@types/node": "^10.12.18",
     "@types/rimraf": "^2.0.2",
-    "@types/webpack": "^4.4.20",
-    "ajv": "^6.6.1",
+    "@types/webpack": "^4.4.23",
+    "ajv": "^6.7.0",
     "async-promise-queue": "^1.0.4",
+    "babel-preset-env": "^1.7.0",
     "conventional-changelog-cli": "^2.0.11",
     "cordova-js": "^5.0.0",
     "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git",
     "cz-conventional-changelog": "^2.1.0",
-    "dgeni": "^0.4.10",
+    "dgeni": "^0.4.11",
     "dgeni-packages": "0.16.10",
     "fs-extra": "^7.0.1",
     "gulp": "3.9.1",
@@ -51,18 +52,31 @@
     "lodash": "^4.17.11",
     "minimist": "1.2.0",
     "natives": "^1.1.6",
-    "rimraf": "^2.6.2",
+    "rimraf": "^2.6.3",
     "rxjs": "^6.3.3",
     "ts-jest": "^23.10.5",
     "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
+    "tslint": "^5.12.1",
     "tslint-ionic-rules": "0.0.21",
-    "typescript": "3.1.6",
-    "uglifyjs-webpack-plugin": "^2.0.1",
+    "typescript": "3.2.4",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "unminified-webpack-plugin": "^2.0.0",
-    "webpack": "^4.27.1",
+    "webpack": "^4.28.4",
     "winston": "^3.1.0",
     "zone.js": "^0.8.26"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(js?|ts?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
   },
   "repository": {
     "type": "git",
@@ -75,8 +89,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {
-    "babel-preset-env": "^1.7.0"
   }
 }

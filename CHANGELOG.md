@@ -1,3 +1,7 @@
+## 5.0.0-beta.26
+  - Fix: MarkerCluster of v2.5.0 does not work
+  - Fix: Encoding.encodePath()/decodePath() methods() do not work
+
 ## 5.0.0-beta.25
   - Fix: BaseClass constructor is incorrect.
 

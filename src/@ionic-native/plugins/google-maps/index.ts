@@ -2987,7 +2987,7 @@ export class GoogleMap extends BaseClass {
       });
     }
     return getPromise<any>((resolve) => {
-      this._objectInstance.clear(() => resolve());
+      this._objectInstance.clear((data: any) => resolve(data));
     });
   }
 

@@ -2737,34 +2737,38 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   setDiv(domNode?: HTMLElement | string): void {
-    if (typeof domNode === 'string') {
-      (new Promise<any>((resolve, reject) => {
-        let i, targets: any[];
-        for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
-          targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + domNode));
-          if (targets.length > 0) {
-            targets = targets.filter((target) => {
-              return !target.hasAttribute('__pluginmapid');
-            });
-          }
-          if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
-            resolve(targets[0] as HTMLElement);
-            return;
-          }
-
-        }
-        reject('Can not find [#' + domNode + '] element');
-      }))
-      .then((element: HTMLElement) => {
-        this._objectInstance.setDiv(element);
-      });
+    if (!domNode) {
+      this._objectInstance.setDiv(null);
     } else {
-      if (domNode instanceof HTMLElement &&
-          !domNode.offsetParent &&
-          domNode.offsetWidth >= 100 && domNode.offsetHeight >= 100) {
-        this._objectInstance.setDiv(domNode);
+      if (typeof domNode === 'string') {
+        (new Promise<any>((resolve, reject) => {
+          let i, targets: any[];
+          for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
+            targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + domNode));
+            if (targets.length > 0) {
+              targets = targets.filter((target) => {
+                return !target.hasAttribute('__pluginmapid');
+              });
+            }
+            if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
+              resolve(targets[0] as HTMLElement);
+              return;
+            }
+
+          }
+          reject('Can not find [#' + domNode + '] element');
+        }))
+            .then((element: HTMLElement) => {
+              this._objectInstance.setDiv(element);
+            });
       } else {
-        throw new Error(domNode.tagName + ' is too small. Must be bigger than 100x100.');
+        if (domNode instanceof HTMLElement &&
+            !domNode.offsetParent &&
+            domNode.offsetWidth >= 100 && domNode.offsetHeight >= 100) {
+          this._objectInstance.setDiv(domNode);
+        } else {
+          throw new Error(domNode.tagName + ' is too small. Must be bigger than 100x100.');
+        }
       }
     }
   }
@@ -2775,7 +2779,7 @@ export class GoogleMap extends BaseClass {
    */
   @CordovaInstance({ sync: true })
   getDiv(): HTMLElement {
-    return;
+    return this._objectInstance.getDiv();
   }
 
   /**

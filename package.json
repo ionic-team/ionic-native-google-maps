@@ -27,6 +27,7 @@
     "@angular/compiler": "^7.2.1",
     "@angular/compiler-cli": "^7.2.1",
     "@angular/core": "^7.2.1",
+    "@ionic-native/core": "^5.0.0",
     "@types/cordova": "0.0.34",
     "@types/fs-extra": "^5.0.4",
     "@types/jest": "^23.3.13",

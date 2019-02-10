@@ -2737,6 +2737,10 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   setDiv(domNode?: HTMLElement | string): void {
+    if (!domNode) {
+      this._objectInstance.setDiv();
+      return;
+    }
     if (typeof domNode === 'string') {
       (new Promise<any>((resolve, reject) => {
         let i, targets: any[];

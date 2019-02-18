@@ -1,3 +1,7 @@
+## 5.0.0-beta.27
+  - Fix: GoogleMapsEvent.MAP_READY does not fire (and other errors)
+  - Fix: Fix: setDiv() no longer detaches the map (since 4.15.x)
+
 ## 5.0.0-beta.26
   - Fix: MarkerCluster of v2.5.0 does not work
   - Fix: Encoding.encodePath()/decodePath() methods() do not work

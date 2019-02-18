@@ -1,3 +1,8 @@
+## 4.21.0
+  - Fix: GoogleMapsEvent.MAP_READY does not fire (and other errors)
+  - Fix: Fix: setDiv() no longer detaches the map (since 4.15.x)
+  - This is the last version for ionic 3.
+
 ## 4.20.0
   - Update: Catch up `@ionic-native/4.20.0`
   - Fix: INFO_CLICK event does not work on marker cluster

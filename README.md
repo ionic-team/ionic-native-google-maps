@@ -1,10 +1,14 @@
-# @ionic-native/google-maps
+# @ionic-native/google-maps (for ionic v3 / last release)
 
 @ionic-native/google-maps plugin is a wrapper plugin for [cordova-plugin-googlemaps](https://github.com/mapsplugin/cordova-plugin-googlemaps) for Ionic framework.
 
 Ionic Native wraps plugin callbacks in a Promise or Observable, providing a common interface for all plugins and making it easy to use plugins with Angular change detection.
 
 ------------------------
+
+## Notice
+
+*This is the last release version for ionic 3.*
 
 ## Installation for ionic 3
 

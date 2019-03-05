@@ -137,7 +137,7 @@ Before using the \@ionic-native/google-maps plugin, reading this slides helps yo
 - [PolygonOptions](./polygonoptions/README.md)
 - [PolylineOptions](./polylineoptions/README.md)
 - [TileOverlayOptions](./tileoverlayoptions/README.md)
-- [KmlOverlayOptions](./kmloverlayoption/README.md)
+- [KmlOverlayOptions](./kmloverlayoptions/README.md)
 - [VisibleRegion](./visibleregion/README.md)
 - [ToDataUrlOptions](./todataurloptions/README.md)
 - [EnvOptions](./envoptions/README.md)

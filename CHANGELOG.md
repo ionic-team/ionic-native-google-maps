@@ -1,58 +1,68 @@
-## 4.21.0
+## 5.0.0-beta.27
   - Fix: GoogleMapsEvent.MAP_READY does not fire (and other errors)
   - Fix: Fix: setDiv() no longer detaches the map (since 4.15.x)
-  - This is the last version for ionic 3.
 
-## 4.20.0
-  - Update: Catch up `@ionic-native/4.20.0`
-  - Fix: INFO_CLICK event does not work on marker cluster
-  - Fix: minor bugs
+## 5.0.0-beta.26
+  - Fix: MarkerCluster of v2.5.0 does not work
+  - Fix: Encoding.encodePath()/decodePath() methods() do not work
 
-## 4.15.1
-  - Fix: `GoogleMaps.create()` is missing.
+## 5.0.0-beta.25
   - Fix: BaseClass constructor is incorrect.
 
-## 4.15.0
-  - Build to compatible with `@ionic-native/core@4.16.0`
-  - Update: The code for displaying error message.
-  - Fix: BaseClass is null error.
+## 5.0.0-beta.24
 
-## 4.13.0
+  - Update: Build to compatible with `@ionic-native/core@5.0.0-beta.21`.
+  - Update: The code for displaying error message.
+  - Fix: `BaseClass is null` error.
+
+## 5.0.0-beta.23
+  - Update: Rebuild to compatible with `@ionic-native/core@5.0.0-beta.20`.
+
+## 5.0.0-beta.22
+  - Fix: Can not display map/streetviewPanorama if application uses `NavController` instead of `Ionic Router outlet`.
+  - Fix: `Encoding.encodePath()` and `Encoding.decodePath()` do not work.
+  - Fix: Small problems.
   - Add: `GoogleMapOptions.preferences.gestureBounds` property
 
-## 4.12.0
-  - Add: `Environment` class
+## 5.0.0-beta.21
+  - Fix: `remove()`, `destroy()`, `clear()` cause `plugin.constructor.getPluginRef is not a function` error.
 
-## 4.9.1
-  - Fix: only README.md (sorry)
+## 5.0.0-beta.20
+  - Fix: `GoogleMaps.create()` does not create a map if tab template uses.
 
-## 4.9.0
-  - Add: LocationService.hasPermission()
 
-## 4.8.2
-  - Fix: only README.md (sorry)
+## 5.0.0-beta.19
+  - Fix: Error: Can't resolve 'rxjs/Observable' in '/node_modules/@ionic-native/google-maps/ngx'
 
-## 4.8.1
-  - Fix: only README.md (sorry)
+## 5.0.0-beta.18
+  - Fix: GoogleMaps.create() targets incorrect node when page changing.
 
-## 4.8.0
-  - Adds `addMarkerSync()`, `addMarkerClusterSync()`, `addCircleSync()`, `addPolygonSync()`, `addPolylineSync()`, `addTileOverlaySync()`, and  `addGroundOverlaySync()` methods.
-  - Adds `GoogleMaps.createPanorama()` method, and `StreetViewPanorama` class.
-  - Merge pull request (#15) from TheDuc/master - pass reject to getMyLocation
 
-## 4.7.0
-  - small fixes
+## 5.0.0-beta.17
+  - Update: Add `icon` option to `KmlOverlayOptions`.
+  - Update: Adapt browser platform.
 
-## 4.6.3
-  - `@ionic-native/google-maps@4.6.2` is not found even it is installed for some reason.
-  (Sorry about the trouble)
+## 5.0.0-beta.16
+  - The same as v5.0.0-beta.15, but republished to fix a mistake.
 
-## 4.6.2
+## 5.0.0-beta.15
+  - Fix: Some methods of `v5.0.0-beta.14` does not work
+  - Update: Adjust code for ionic v4/beta.
 
-  - TypeError: Right-hand side of 'instanceof' is not an object ([a188d5f](https://github.com/ionic-team/ionic-native-google-maps/commit/a188d5f))
+## 5.0.0-beta.14
+  - [5.0.0-beta.14](https://github.com/ionic-team/ionic-native/compare/v4.7.0...v5.0.0-beta.14) (2018-08-02)
 
-## 4.6.1
-  - Spin-out from [ionic-native/ionic-native](https://github.com/ionic-team/ionic-native/) repository.
-From this version, the author of [cordova-plugin-googlemaps](https://github.com/mapsplugin/cordova-plugin-googlemaps) mainly manages this plugin.
 
-  - map.remove() generates empty map ([321f06f](https://github.com/ionic-team/ionic-native-google-maps/commit/321f06f))
+
+<a name="4.7.0"></a>
+# [4.7.0](https://github.com/ionic-team/ionic-native/compare/v4.6.3...v4.7.0) (2018-04-12)
+
+
+
+<a name="4.6.3"></a>
+## [4.6.3](https://github.com/ionic-team/ionic-native/compare/v4.6.1...v4.6.3) (2018-04-02)
+
+
+
+<a name="4.6.1"></a>
+## 4.6.1 (2018-03-28)

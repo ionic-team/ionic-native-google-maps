@@ -23,6 +23,11 @@ export type MapType =
   | 'MAP_TYPE_TERRAIN'
   | 'MAP_TYPE_NONE';
 
+export interface ILatLng {
+  lat: number;
+  lng: number;
+}
+
 /**
  * @hidden
  */
@@ -61,9 +66,9 @@ export interface ILatLngBounds {
  */
 export class LatLngBounds implements ILatLngBounds {
 
-  @InstanceProperty northeast: ILatLng;
-  @InstanceProperty southwest: ILatLng;
-  @InstanceProperty type: string;
+  @InstanceProperty() northeast: ILatLng;
+  @InstanceProperty() southwest: ILatLng;
+  @InstanceProperty() type: string;
   private _objectInstance: any;
 
   constructor(points?: ILatLng[]) {
@@ -459,11 +464,6 @@ export interface GroundOverlayOptions {
    * You can get the property later using `get()` method.
    */
   [key: string]: any;
-}
-
-export interface ILatLng {
-  lat: number;
-  lng: number;
 }
 
 export interface MarkerIcon {
@@ -888,38 +888,38 @@ export class VisibleRegion implements ILatLngBounds {
    * The northeast of the bounds that contains the farLeft, farRight, nearLeft and nearRight.
    * Since the map view is able to rotate, the farRight is not the same as the northeast.
    */
-  @InstanceProperty northeast: ILatLng;
+  @InstanceProperty() northeast: ILatLng;
 
   /**
    * The southwest of the bounds that contains the farLeft, farRight, nearLeft and nearRight.
    * Since the map view is able to rotate, the nearLeft is not the same as the southwest.
    */
-  @InstanceProperty southwest: ILatLng;
+  @InstanceProperty() southwest: ILatLng;
 
   /**
    * The farLeft indicates the lat/lng of the top-left of the map view.
    */
-  @InstanceProperty farLeft: ILatLng;
+  @InstanceProperty() farLeft: ILatLng;
 
   /**
    * The farRight indicates the lat/lng of the top-right of the map view.
    */
-  @InstanceProperty farRight: ILatLng;
+  @InstanceProperty() farRight: ILatLng;
 
   /**
    * The nearLeft indicates the lat/lng of the bottom-left of the map view.
    */
-  @InstanceProperty nearLeft: ILatLng;
+  @InstanceProperty() nearLeft: ILatLng;
 
   /**
    * The nearRight indicates the lat/lng of the bottom-right of the map view.
    */
-  @InstanceProperty nearRight: ILatLng;
+  @InstanceProperty() nearRight: ILatLng;
 
   /**
    * constant value : `VisibleRegion`
    */
-  @InstanceProperty type: string;
+  @InstanceProperty() type: string;
 
   constructor(southwest: LatLngBounds, northeast: LatLngBounds, farLeft: ILatLng, farRight: ILatLng, nearLeft: ILatLng, nearRight: ILatLng) {
     this._objectInstance = new (GoogleMaps.getPlugin()).VisibleRegion(southwest, northeast, farLeft, farRight, nearLeft, nearRight);

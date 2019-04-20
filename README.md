@@ -1,4 +1,4 @@
-# @ionic-native/google-maps (v5.0.0-beta.27)
+# @ionic-native/google-maps (v5.5.0)
 
 @ionic-native/google-maps plugin is a wrapper plugin for [cordova-plugin-googlemaps](https://github.com/mapsplugin/cordova-plugin-googlemaps) for Ionic framework.
 

@@ -1,3 +1,6 @@
+## 5.5.0
+  - Catch up `@ionic-native/core` v5.5.0
+
 ## 5.0.0-beta.27
   - Fix: GoogleMapsEvent.MAP_READY does not fire (and other errors)
   - Fix: Fix: setDiv() no longer detaches the map (since 4.15.x)

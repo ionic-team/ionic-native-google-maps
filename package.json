@@ -1,18 +1,18 @@
 {
   "name": "@ionic-native/google-maps",
-  "version": "5.0.0",
+  "version": "5.5.0",
   "description": "Native plugin wrappers for Cordova and Ionic with TypeScript, ES6+, Promise and Observable support",
   "homepage": "https://github.com/ionic-team/ionic-native-google-maps/",
   "author": "Masashi Katsumata, Ionic Team <hi@ionic.io> (https://ionic.io)",
   "license": "MIT",
   "scripts": {
-    "test": "npm run build:core && npm run build:esm && jest && npm run lint",
+    "test": "npm run build:esm && jest && npm run lint",
     "test:watch": "jest --watch",
     "build:core": "tsc -p tsconfig.core.json",
     "build:esm": "ts-node -P scripts/tsconfig.json scripts/tasks/build-esm",
     "build:es5": "ts-node -P scripts/tsconfig.json scripts/tasks/build-es5",
     "build:ngx": "ts-node -P scripts/tsconfig.json scripts/tasks/build-ngx",
-    "build": "npm run build:core && npm run build:esm && npm run build:ngx && npm run build:es5",
+    "build": "npm run build:esm && npm run build:ngx && npm run build:es5",
     "prebuild": "rimraf -rf dist",
     "npmpub": "ts-node -P scripts/tsconfig.json scripts/tasks/publish",
     "lint": "gulp lint",
@@ -87,5 +87,9 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "@ionic-native/core": "^5.5.0",
+    "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps"
   }
 }

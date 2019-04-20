@@ -5,14 +5,15 @@ import {
   InstanceProperty,
   IonicNativePlugin,
   Plugin,
-  checkAvailability
+  checkAvailability,
+  getPromise
 } from '@ionic-native/core';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
+import { Observable } from 'rxjs';
 
 const TARGET_ELEMENT_FINDING_QUERYS: string[] = [
   '.show-page #',
+  'ion-router-outlet[main] #',
+  '#'
 ];
 
 export type MapType =
@@ -1221,7 +1222,6 @@ export const GoogleMapsMapTypeId = {
   installVariables: ['API_KEY_FOR_ANDROID', 'API_KEY_FOR_IOS'],
   platforms: ['Android', 'iOS', 'Browser']
 })
-@Injectable()
 export class GoogleMaps extends IonicNativePlugin {
 
   /**
@@ -1438,7 +1438,7 @@ export class BaseClass {
    */
   @InstanceCheck()
   addEventListenerOnce(eventName: string): Promise<any> {
-    return new Promise<any>((resolve) => {
+    return getPromise<any>((resolve) => {
       this._objectInstance.one(eventName, (...args: any[]) => {
         const newArgs = normalizeArgumentsOfEventListener.call(this, this._objectInstance, args);
         resolve(newArgs);
@@ -1525,7 +1525,7 @@ export class BaseClass {
    */
   @InstanceCheck()
   one(eventName: string): Promise<any> {
-    return new Promise<any>((resolve) => {
+    return getPromise<any>((resolve) => {
       this._objectInstance.one(eventName, (...args: any[]) => {
         const newArgs = normalizeArgumentsOfEventListener.call(this, this._objectInstance, args);
         resolve(newArgs);
@@ -1644,7 +1644,7 @@ export class BaseArrayClass<T> extends BaseClass {
    * @return {Promise<void>}
    */
   forEachAsync(fn: ((element: T, callback: () => void) => void)): Promise<void> {
-    return new Promise<void>((resolve) => {
+    return getPromise<void>((resolve) => {
       this._objectInstance.forEach(fn, resolve);
     });
   }
@@ -1668,7 +1668,7 @@ export class BaseArrayClass<T> extends BaseClass {
    * @return {Promise<any>} returns a new array with the results
    */
   mapAsync(fn: ((element: T, callback: (newElement: any) => void) => void)): Promise<any[]> {
-    return new Promise<any[]>((resolve) => {
+    return getPromise<any[]>((resolve) => {
       this._objectInstance.map(fn, resolve);
     });
   }
@@ -1680,7 +1680,7 @@ export class BaseArrayClass<T> extends BaseClass {
    * @return {Promise<any>} returns a new array with the results
    */
   mapSeries(fn: ((element: T, callback: (newElement: any) => void) => void)): Promise<any[]> {
-    return new Promise<any[]>((resolve) => {
+    return getPromise<any[]>((resolve) => {
       this._objectInstance.mapSeries(fn, resolve);
     });
   }
@@ -1702,7 +1702,7 @@ export class BaseArrayClass<T> extends BaseClass {
    * @return {Promise<T[]>} returns a new filtered array
    */
   filterAsync(fn: (element: T, callback: (result: boolean) => void) => void): Promise<T[]> {
-    return new Promise<any[]>((resolve) => {
+    return getPromise<any[]>((resolve) => {
       this._objectInstance.filter(fn, resolve);
     });
   }
@@ -2022,7 +2022,7 @@ export class Environment {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
-    return new Promise<any>((resolve) => {
+    return getPromise<any>((resolve) => {
       GoogleMaps.getPlugin().environment.getLicenseInfo((text: string) => resolve(text));
     });
   }
@@ -2097,7 +2097,7 @@ export class Geocoder {
       //   ]
       // })
       // -------------------------
-      return new Promise<BaseArrayClass<GeocoderResult[]>>((resolve, reject) => {
+      return getPromise<BaseArrayClass<GeocoderResult[]>>((resolve, reject) => {
         GoogleMaps.getPlugin().Geocoder.geocode(request, (mvcArray: any) => {
           if (mvcArray) {
             resolve(new BaseArrayClass(mvcArray));
@@ -2112,7 +2112,7 @@ export class Geocoder {
       //   address: "Kyoto, Japan"
       // })
       // -------------------------
-      return new Promise<GeocoderResult[]>((resolve, reject) => {
+      return getPromise<GeocoderResult[]>((resolve, reject) => {
         GoogleMaps.getPlugin().Geocoder.geocode(request, (results: GeocoderResult[]) => {
           if (results) {
             resolve(results);
@@ -2145,7 +2145,7 @@ export class LocationService {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
-    return new Promise<MyLocation>((resolve, reject) => {
+    return getPromise<MyLocation>((resolve, reject) => {
       GoogleMaps.getPlugin().LocationService.getMyLocation(options, resolve, reject);
     });
   }
@@ -2157,7 +2157,7 @@ export class LocationService {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
-    return new Promise<boolean>((resolve, reject) => {
+    return getPromise<boolean>((resolve, reject) => {
       GoogleMaps.getPlugin().LocationService.hasPermission(resolve, reject);
     });
   }
@@ -2466,7 +2466,7 @@ export class StreetViewPanorama extends BaseClass {
         }
       } else if (typeof element === 'string') {
 
-        super(GoogleMaps.getPlugin().StreetView.getPanorama(new Promise<any[]>((resolve, reject) => {
+        super(GoogleMaps.getPlugin().StreetView.getPanorama(getPromise<any[]>((resolve, reject) => {
           let count: number;
           let i: number;
           count = 0;
@@ -2494,7 +2494,11 @@ export class StreetViewPanorama extends BaseClass {
             if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
               reject(new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.'));
             } else {
-              reject(new Error('Can not find the element [#' + element + ']'));
+              if (targets.length > 1) {
+                reject(new Error('There are multiple "' + element + '" elements. Use different id to prevent error.'));
+              } else {
+                reject(new Error('Can not find the element [#' + element + ']'));
+              }
             }
           }, 100);
         }), options));
@@ -2633,7 +2637,7 @@ export class StreetViewPanorama extends BaseClass {
    */
   @CordovaInstance()
   remove(): Promise<any> {
-    return new Promise<any>((resolve) => {
+    return getPromise<any>((resolve) => {
       this._objectInstance.remove(() => resolve());
     });
   }
@@ -2648,7 +2652,7 @@ export class StreetViewPanorama extends BaseClass {
   plugin: 'cordova-plugin-googlemaps'
 })
 export class GoogleMap extends BaseClass {
-  constructor(element: HTMLElement | string, options?: GoogleMapOptions) {
+  constructor(element: HTMLElement | string, options?: GoogleMapOptions, __timeout?: number) {
 
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === true) {
       // ---------------
@@ -2665,7 +2669,7 @@ export class GoogleMap extends BaseClass {
         }
       } else if (typeof element === 'string') {
 
-        super(GoogleMaps.getPlugin().Map.getMap(new Promise<any[]>((resolve, reject) => {
+        super(GoogleMaps.getPlugin().Map.getMap(getPromise<any[]>((resolve, reject) => {
           let count: number;
           let i: number;
           count = 0;
@@ -2693,9 +2697,13 @@ export class GoogleMap extends BaseClass {
             if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
               reject(new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.'));
             } else {
-              reject(new Error('Can not find the element [#' + element + ']'));
+              if (targets.length > 1) {
+                reject(new Error('There are multiple "' + element + '" elements. Use different id to prevent error.'));
+              } else {
+                reject(new Error('Can not find the element [#' + element + ']'));
+              }
             }
-          }, 100);
+          }, __timeout == null ? 100 : __timeout);
         }), options));
 
       } else if (element === null && options) {
@@ -2742,7 +2750,7 @@ export class GoogleMap extends BaseClass {
       return;
     }
     if (typeof domNode === 'string') {
-      (new Promise<any>((resolve, reject) => {
+      (getPromise<any>((resolve, reject) => {
         let i, targets: any[];
         for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
           targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + domNode));
@@ -2943,7 +2951,7 @@ export class GoogleMap extends BaseClass {
    */
   @CordovaInstance()
   getMyLocation(options?: MyLocationOptions): Promise<MyLocation> {
-    return new Promise<MyLocation>((resolve, reject) => {
+    return getPromise<MyLocation>((resolve, reject) => {
       GoogleMaps.getPlugin().LocationService.getMyLocation(options, resolve, reject);
     });
   }
@@ -2968,7 +2976,7 @@ export class GoogleMap extends BaseClass {
         delete this.get('_overlays')[overlayId];
       });
     }
-    return new Promise<any>((resolve) => {
+    return getPromise<any>((resolve) => {
       this._objectInstance.remove(() => resolve());
     });
   }
@@ -2985,7 +2993,7 @@ export class GoogleMap extends BaseClass {
         delete this.get('_overlays')[overlayId];
       });
     }
-    return new Promise<any>((resolve) => {
+    return getPromise<any>((resolve) => {
       this._objectInstance.clear(() => resolve());
     });
   }
@@ -3095,7 +3103,7 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addMarker(options: MarkerOptions): Promise<Marker | any> {
-    return new Promise<Marker>((resolve, reject) => {
+    return getPromise<Marker>((resolve, reject) => {
       this._objectInstance.addMarker(options, (marker: any) => {
         if (marker) {
           const overlayId: string = marker.getId();
@@ -3142,7 +3150,7 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addMarkerCluster(options: MarkerClusterOptions): Promise<MarkerCluster | any> {
-    return new Promise<MarkerCluster>((resolve, reject) => {
+    return getPromise<MarkerCluster>((resolve, reject) => {
       this._objectInstance.addMarkerCluster(options, (markerCluster: any) => {
         if (markerCluster) {
           const overlayId = markerCluster.getId();
@@ -3191,7 +3199,7 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addCircle(options: CircleOptions): Promise<Circle | any> {
-    return new Promise<Circle>((resolve, reject) => {
+    return getPromise<Circle>((resolve, reject) => {
       this._objectInstance.addCircle(options, (circle: any) => {
         if (circle) {
           const overlayId: string = circle.getId();
@@ -3237,7 +3245,7 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addPolygon(options: PolygonOptions): Promise<Polygon | any> {
-    return new Promise<Polygon>((resolve, reject) => {
+    return getPromise<Polygon>((resolve, reject) => {
       this._objectInstance.addPolygon(options, (polygon: any) => {
         if (polygon) {
           const overlayId: string = polygon.getId();
@@ -3284,7 +3292,7 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addPolyline(options: PolylineOptions): Promise<Polyline | any> {
-    return new Promise<Polyline>((resolve, reject) => {
+    return getPromise<Polyline>((resolve, reject) => {
       this._objectInstance.addPolyline(options, (polyline: any) => {
         if (polyline) {
           const overlayId: string = polyline.getId();
@@ -3331,7 +3339,7 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addTileOverlay(options: TileOverlayOptions): Promise<TileOverlay | any> {
-    return new Promise<TileOverlay>((resolve, reject) => {
+    return getPromise<TileOverlay>((resolve, reject) => {
       this._objectInstance.addTileOverlay(options, (tileOverlay: any) => {
         if (tileOverlay) {
           const overlayId: string = tileOverlay.getId();
@@ -3378,7 +3386,7 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addGroundOverlay(options: GroundOverlayOptions): Promise<GroundOverlay | any> {
-    return new Promise<GroundOverlay>((resolve, reject) => {
+    return getPromise<GroundOverlay>((resolve, reject) => {
       this._objectInstance.addGroundOverlay(options, (groundOverlay: any) => {
         if (groundOverlay) {
           const overlayId: string = groundOverlay.getId();
@@ -3425,7 +3433,7 @@ export class GoogleMap extends BaseClass {
    */
   @InstanceCheck()
   addKmlOverlay(options: KmlOverlayOptions): Promise<KmlOverlay> {
-    return new Promise<KmlOverlay>((resolve, reject) => {
+    return getPromise<KmlOverlay>((resolve, reject) => {
       this._objectInstance.addKmlOverlay(options, (kmlOverlay: any) => {
         if (kmlOverlay) {
           const overlayId: string = kmlOverlay.getId();

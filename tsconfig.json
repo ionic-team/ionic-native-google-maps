@@ -20,7 +20,11 @@
     "inlineSourceMap": true
   },
   "include": [
-    "src/@ionic-native/plugins/**/*.ts"
+    "src/@ionic-native/plugin/google-maps/index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/@ionic-native/plugin/google-maps/*.spec.ts"
   ],
   "angularCompilerOptions": {
     "genDir": "aot"

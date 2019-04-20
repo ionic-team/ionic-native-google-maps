@@ -54,27 +54,30 @@ function writePackageJson(data: any, dir: string) {
 
 function prepare() {
   // write @ionic-native/core package.json
-  writePackageJson(
-    getPackageJsonContent('core', { rxjs: RXJS_VERSION }, { '@types/cordova': 'latest' }),
-    path.resolve(DIST, 'core')
-  );
+  // writePackageJson(
+  //   getPackageJsonContent('core', { rxjs: RXJS_VERSION }, { '@types/cordova': 'latest' }),
+  //   path.resolve(DIST, 'core')
+  // );
 
   // write plugin package.json files
   PLUGIN_PATHS.forEach((pluginPath: string) => {
     const pluginName = pluginPath.split(/[\/\\]+/).slice(-2)[0];
-    const packageJsonContents = getPackageJsonContent(pluginName, PLUGIN_PEER_DEPENDENCIES);
+    const packageJsonContents = getPackageJsonContent(
+      pluginName,
+      PLUGIN_PEER_DEPENDENCIES
+    );
     const dir = path.resolve(DIST, 'plugins', pluginName);
 
     writePackageJson(packageJsonContents, dir);
   });
 }
 
+
 async function publish(ignoreErrors = false) {
-/*
   Logger.profile('Publishing');
   // upload 1 package per CPU thread at a time
-  const worker = Queue.async.asyncify(
-    (pkg: any) =>
+  const worker = Queue.async.asyncify((pkg: any) => {
+    if (/google\-maps$/.test(pkg)) {
       new Promise<any>((resolve, reject) => {
         exec(`npm publish ${pkg} ${FLAGS}`, (err, stdout) => {
           if (stdout) {
@@ -84,7 +87,9 @@ async function publish(ignoreErrors = false) {
           if (err) {
             if (!ignoreErrors) {
               if (
-                err.message.includes('You cannot publish over the previously published version')
+                err.message.includes(
+                  'You cannot publish over the previously published version'
+                )
               ) {
                 Logger.verbose('Ignoring duplicate version error.');
                 return resolve();
@@ -93,8 +98,14 @@ async function publish(ignoreErrors = false) {
             }
           }
         });
-      })
-  );
+      });
+    } else {
+      new Promise<any>((resolve, reject) => {
+        Logger.verbose(`skip ${pkg}`);
+        resolve(`skip ${pkg}`);
+      });
+    }
+  });
 
   try {
     await Queue(worker, PACKAGES, cpus().length);
@@ -104,7 +115,6 @@ async function publish(ignoreErrors = false) {
     Logger.error(e);
   }
   Logger.profile('Publishing');
-*/
 }
 
 prepare();

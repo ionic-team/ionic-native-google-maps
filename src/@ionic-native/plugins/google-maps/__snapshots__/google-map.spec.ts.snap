@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoogleMap with cordova should error when the target element does not appear in time with custom timeout 1`] = `[Error: Can not find the element [#testId]]`;
+
+exports[`GoogleMap with cordova should throw when the element does not exist 1`] = `[Error: Can not find the element [#testId]]`;
+
+exports[`GoogleMap with cordova should throw when the element is too small 1`] = `[Error: DIV[#testId] is too small. Must be bigger than 100x100.]`;
+
+exports[`GoogleMap with cordova should work when the dom element is present and an ID is passed 1`] = `
+Array [
+  <div
+    id="testId"
+    style="width: 100px; height: 100px;"
+  />,
+  undefined,
+]
+`;
+
+exports[`GoogleMap with cordova should work when the dom element is present and an element is passed 1`] = `
+<div
+  id="testId"
+  style="width: 100px; height: 100px;"
+/>
+`;
+
+exports[`GoogleMap with cordova with async DOM modifications should find the target element if it is initially not present in the DOM 1`] = `
+Array [
+  <div
+    id="testId"
+    style="width: 100px; height: 100px;"
+  />,
+  undefined,
+]
+`;
+
+exports[`GoogleMap without cordova should display a message in the target element 1`] = `
+<div
+  id="testId"
+  style="width: 100px; height: 100px; position: relative;"
+>
+  <div
+    style="color: red; position: absolute; width: 80%; height: 50%; top: 0px; bottom: 0px; right: 0px; left: 0px; padding: 0px; margin: auto;"
+  >
+    [GoogleMaps]
+    <br />
+    You need to execute "$&gt; ionic cordova run browser".
+    <br />
+    "$&gt; ionic serve" is not supported.
+  </div>
+</div>
+`;
+
+exports[`GoogleMap without plugin should display a message in the target element 1`] = `
+<div
+  id="testId"
+  style="width: 100px; height: 100px; position: relative;"
+>
+  <div
+    style="color: red; position: absolute; width: 80%; height: 50%; top: 0px; bottom: 0px; right: 0px; left: 0px; padding: 0px; margin: auto;"
+  >
+    [GoogleMaps]
+    <br />
+    cordova-plugin-googlemaps is not installed or not ready yet.
+  </div>
+</div>
+`;

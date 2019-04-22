@@ -1,4 +1,4 @@
-const { jsWithBabel: jestPreset } = require('ts-jest/presets');
+const { jsWithTs: jestPreset } = require('ts-jest/presets');
 
 module.exports = {
   transform: {
@@ -20,4 +20,7 @@ module.exports = {
   setupFilesAfterEnv: [
     '<rootDir>/src/test/setupJest.js'
   ],
+  transformIgnorePatterns: [
+    "node_modules/(?!(@ionic-native)/)"
+  ]
 }

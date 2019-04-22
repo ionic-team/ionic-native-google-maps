@@ -25,7 +25,7 @@ describe('GoogleMap', () => {
     describe('should throw', () => {
       it('when the element does not exist', async () => {
         const _ = new GoogleMap('testId', null, 0);
-        const promise = googleMap.getMap.mock.calls[0];
+        const promise = googleMap.getMap.mock.calls[0][0];
         await expect(promise).rejects.toMatchSnapshot();
       });
 
@@ -39,7 +39,7 @@ describe('GoogleMap', () => {
         `;
 
         const _ = new GoogleMap(mapId, undefined, 0);
-        const promise = googleMap.getMap.mock.calls[0];
+        const promise = googleMap.getMap.mock.calls[0][0];
         expect(googleMap.getMap).toHaveBeenCalled();
         await expect(promise).rejects.toMatchSnapshot();
       });
@@ -55,7 +55,7 @@ describe('GoogleMap', () => {
       `;
 
       const _ = new GoogleMap(mapId, undefined, 0);
-      const promise = googleMap.getMap.mock.calls[0];
+      const promise = googleMap.getMap.mock.calls[0][0];
       expect(googleMap.getMap).toHaveBeenCalled();
       await expect(promise).resolves.toMatchSnapshot();
     });
@@ -72,7 +72,7 @@ describe('GoogleMap', () => {
       const el = document.getElementById(mapId);
 
       const _ = new GoogleMap(el);
-      const mapEl = googleMap.getMap.mock.calls[0];
+      const mapEl = googleMap.getMap.mock.calls[0][0];
       expect(googleMap.getMap).toHaveBeenCalled();
       await expect(mapEl).toMatchSnapshot();
     });
@@ -91,7 +91,7 @@ describe('GoogleMap', () => {
           `;
         }, 250);
 
-        const mapEl = googleMap.getMap.mock.calls[0];
+        const mapEl = googleMap.getMap.mock.calls[0][0];
         expect(googleMap.getMap).toHaveBeenCalled();
         await expect(mapEl).resolves.toMatchSnapshot();
       });
@@ -99,8 +99,11 @@ describe('GoogleMap', () => {
 
     it('should error when the target element does not appear in time with custom timeout', async () => {
       const mapId = 'testId';
-
-      const _ = new GoogleMap(mapId, null, 100);
+      const intervalMs = 10;
+      const maxTries = 20;
+      // The code tries 20 times, we add extra ms for a buffer for timing inconsistencies
+      const expectedTimeout = intervalMs * maxTries + 100;
+      const _ = new GoogleMap(mapId, null, intervalMs);
 
       setTimeout(() => {
         document.body.innerHTML = `
@@ -108,9 +111,9 @@ describe('GoogleMap', () => {
             <div id="${mapId}" style="width: 100px; height: 100px;"></div>
           </div>
         `;
-      }, 300);
+      }, expectedTimeout);
 
-      const mapEl = googleMap.getMap.mock.calls[0];
+      const mapEl = googleMap.getMap.mock.calls[0][0];
       expect(googleMap.getMap).toHaveBeenCalled();
       await expect(mapEl).rejects.toMatchSnapshot();
     });

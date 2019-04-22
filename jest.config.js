@@ -17,5 +17,7 @@ module.exports = {
     '^cordova/utils$': '<rootDir>/node_modules/cordova-js/src/common/utils',
     'rxjs': '<rootDir>/node_modules/rxjs',
   },
-  setupTestFrameworkScriptFile: '<rootDir>/src/test/setupJest.js',
+  setupFilesAfterEnv: [
+    '<rootDir>/src/test/setupJest.js'
+  ],
 }

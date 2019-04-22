@@ -1,3 +1,4 @@
+
 {
   "compilerOptions": {
     "baseUrl": ".",
@@ -17,7 +18,9 @@
     "skipLibCheck": true,
     "lib": ["es2017", "dom"],
     "inlineSources": true,
-    "inlineSourceMap": true
+    "inlineSourceMap": true,
+    "esModuleInterop": true,
+    "allowJs": true
   },
   "include": [
     "src/@ionic-native/plugin/google-maps/index.ts"

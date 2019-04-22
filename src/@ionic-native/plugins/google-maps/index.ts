@@ -2184,7 +2184,7 @@ export class Encoding {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
-    return GoogleMaps.getPlugin().encoding.decodePath(encoded, precision);
+    return GoogleMaps.getPlugin().geometry.encoding.decodePath(encoded, precision);
   }
 
   /**
@@ -2196,7 +2196,7 @@ export class Encoding {
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
-    return GoogleMaps.getPlugin().encoding.encodePath(path);
+    return GoogleMaps.getPlugin().geometry.encoding.encodePath(path);
   }
 
   /**

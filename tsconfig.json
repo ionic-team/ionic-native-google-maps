@@ -23,11 +23,11 @@
     "allowJs": true
   },
   "include": [
-    "src/@ionic-native/plugin/google-maps/index.ts"
+    "src/@ionic-native/plugins/google-maps/index.ts"
   ],
   "exclude": [
     "node_modules",
-    "src/@ionic-native/plugin/google-maps/*.spec.ts"
+    "src/@ionic-native/plugins/google-maps/*.spec.ts"
   ],
   "angularCompilerOptions": {
     "genDir": "aot"

@@ -1218,8 +1218,7 @@ export const GoogleMapsMapTypeId = {
   plugin: 'cordova-plugin-googlemaps',
   repo: 'https://github.com/mapsplugin/cordova-plugin-googlemaps',
   document: 'https://ionicframework.com/docs/native/google-maps/',
-  install: 'ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="YOUR_ANDROID_API_KEY_IS_HERE" --variable API_KEY_FOR_IOS="YOUR_IOS_API_KEY_IS_HERE"',
-  installVariables: ['API_KEY_FOR_ANDROID', 'API_KEY_FOR_IOS'],
+  install: 'ionic cordova plugin add cordova-plugin-googlemaps',
   platforms: ['Android', 'iOS', 'Browser']
 })
 export class GoogleMaps extends IonicNativePlugin {

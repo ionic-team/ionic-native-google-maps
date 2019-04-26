@@ -16,7 +16,18 @@ Second, run following command to install `@ionic-native/core` and `@ionic-native
 ```
 npm install @ionic-native/core@beta @ionic-native/google-maps@beta
 
-ionic cordova plugin add https://github.com/mapsplugin/cordova-plugin-googlemaps#multiple_maps --variable API_KEY_FOR_ANDROID="..." --variable API_KEY_FOR_IOS="..."
+ionic cordova plugin add https://github.com/mapsplugin/cordova-plugin-googlemaps#multiple_maps
+```
+
+Third, update `config.xml` with your API keys.
+
+```xml
+<widget ...>
+  ...
+  <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="(api key)" />
+  <preference name="GOOGLE_MAPS_IOS_API_KEY" value="(api key)" />
+  ...
+</widget>
 ```
 
 ------------------------

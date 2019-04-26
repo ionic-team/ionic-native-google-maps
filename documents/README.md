@@ -10,11 +10,20 @@ Please follow the instruction.
 - [How to generate API keys?](./api_key/generate_api_key.md)
 
 ```
-$> ionic cordova plugin add cordova-plugin-googlemaps \
-  --variable API_KEY_FOR_ANDROID="(API_KEY_FOR_ANDROID)" \
-  --variable API_KEY_FOR_IOS="(API_KEY_FOR_IOS)"
+$> ionic cordova plugin add cordova-plugin-googlemaps
 
 $> npm install --save @ionic-native/core@latest @ionic-native/google-maps@latest
+```
+
+Add API Keys to `config.xml`:
+
+```xml
+<widget ...>
+  ...
+  <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="(api key)" />
+  <preference name="GOOGLE_MAPS_IOS_API_KEY" value="(api key)" />
+  ...
+</widget>
 ```
 
 ## Basic usage (Use \@ionic-native/google-maps@4.8.2)

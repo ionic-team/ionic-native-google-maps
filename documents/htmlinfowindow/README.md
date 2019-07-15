@@ -96,6 +96,6 @@ htmlInfoWindow.open(marker);
     </tr>
     </table>
 
-  -### close()
+  - ### close()
 
     Close the htmlInfoWindow

@@ -38,7 +38,7 @@ htmlInfoWindow.open(marker);
 
 ## Instance method
 
-  -### setBackgroundColor(color)
+  - ### setBackgroundColor(color)
 
     Changes the backgroundColor
 
@@ -56,7 +56,7 @@ htmlInfoWindow.open(marker);
     </table>
 
 
-  -### setContent(string | HTMLElement, cssOptions?)
+  - ### setContent(string | HTMLElement, cssOptions?)
 
     Set your HTML contents.
 
@@ -79,7 +79,7 @@ htmlInfoWindow.open(marker);
     </table>
 
 
-  -### open(marker)
+  - ### open(marker)
 
     Open the htmlInfoWindow
 

@@ -2490,7 +2490,7 @@ export class StreetViewPanorama extends BaseClass {
             }
             clearInterval(timer);
             this._objectInstance.remove();
-            if (targets.length > 0 && targets[0] && targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100) {
+            if (targets.length > 0 && targets[0] && (targets[0].offsetWidth < 100 || targets[0].offsetHeight < 100)) {
               reject(new Error(targets[0].tagName + '[#' + element + '] is too small. Must be bigger than 100x100.'));
             } else {
               if (targets.length > 1) {

@@ -29,7 +29,7 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
     Set the marker position.
 
-    ```typescript
+    
     <table>
     <tr>
       <th>Params</th>
@@ -42,8 +42,7 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>new position</td>
     </tr>
     </table>
-    ```
-
+    
   - ### getPosition()
 
     Returns the marker position.
@@ -62,7 +61,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
     Specify the animation either `DROP` or `BOUNCE`.
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -75,13 +73,11 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>`DROP` or `BOUNCE`</td>
     </tr>
     </table>
-    ```
 
   - ### setDisableAutoPan(disableAutoPan)
 
     Set true if you **do not want** to move the map when you click on the marker.
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -94,7 +90,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>true or false</td>
     </tr>
     </table>
-    ```
 
 
 
@@ -102,7 +97,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
     Changes title of the normal infoWindow.
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -115,7 +109,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>new title</td>
     </tr>
     </table>
-    ```
 
 
   - ### getTile()
@@ -130,7 +123,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
     Changes snippet of the normal infoWindow.
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -143,7 +135,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>new snippet</td>
     </tr>
     </table>
-    ```
 
 
   - ### getSnippet()
@@ -158,7 +149,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
     Changes the info window anchor. This defaults to 50% from the left of the image and at the bottom of the image.
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -176,14 +166,12 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>Distance from top of the icon image in pixels.</td>
     </tr>
     </table>
-    ```
 
 
   - ### setInfoWindowAnchor(x, y)
 
     Changes the info window anchor. This defaults to 50% from the left of the image and at the top of the image.
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -201,7 +189,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>Distance from top of the icon image in pixels.</td>
     </tr>
     </table>
-    ```
 
 
   - ### isInfoWindowShown()
@@ -215,7 +202,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
     Set true if you allow all users to drag the marker.
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -228,7 +214,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>true or false</td>
     </tr>
     </table>
-    ```
 
   - ### isDraggable(draggable)
 
@@ -239,9 +224,8 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
   - ### setFlat(flat)
 
-    Set true if you want to be flat marker.
+    Set true if you want the marker to become flat.
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -254,13 +238,11 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>true or false</td>
     </tr>
     </table>
-    ```
 
   - ### setIcon(icon)
 
-    Set true if you want to be flat marker.
+    Sets the marker's Icon.
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -273,13 +255,11 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>new image</td>
     </tr>
     </table>
-    ```
 
   - ### setOpacity(opacity)
 
     Changes the opacity of the marker from 0.0 to 1.0
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -292,7 +272,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>from 0.0 to 1.0</td>
     </tr>
     </table>
-    ```
 
 
 
@@ -306,7 +285,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
     Set marker visibility
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -319,7 +297,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>true or false</td>
     </tr>
     </table>
-    ```
 
 
   - ### isVisible()
@@ -333,7 +310,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
 
     Changes the marker zIndex order.
 
-    ```typescript
     <table>
     <tr>
       <th>Params</th>
@@ -346,7 +322,6 @@ this.map.addMarker(options: MarkerOptions).then((marker: Marker) => {
       <td>z-index</td>
     </tr>
     </table>
-    ```
 
 
   - ### getZIndex()

@@ -6,7 +6,7 @@
 
 ## Static method
 
-  -### computeDistanceBetween(locationA, locationB)
+  - ### computeDistanceBetween(locationA, locationB)
 
     Returns the distance, in meters, between two LatLngs.
 
@@ -31,7 +31,7 @@
     :arrow_right: `number`
 
 
-  -### computeOffset(from, distance, heading)
+  - ### computeOffset(from, distance, heading)
 
     Returns the LatLng resulting from moving a distance from an origin in the specified heading (expressed in degrees clockwise from north)
 
@@ -60,7 +60,7 @@
 
     :arrow_right: <a href="../latlng">LatLng</a>
 
-  -### computeOffsetOrigin(to, distance, heading)
+  - ### computeOffsetOrigin(to, distance, heading)
 
     Returns the location of origin when provided with a LatLng destination, meters travelled and original heading. Headings are expressed in degrees clockwise from North. This function returns null when no solution is available.
 
@@ -90,7 +90,7 @@
     :arrow_right: <a href="../latlng">LatLng</a>
 
 
-  -### computeLength(path)
+  - ### computeLength(path)
 
     Returns the length of the given path.
 
@@ -110,7 +110,7 @@
     :arrow_right: `number`
 
 
-  -### computeArea(path)
+  - ### computeArea(path)
 
     Returns the area of a closed path. The computed area uses the same units as the radius.
 
@@ -131,7 +131,7 @@
 
 
 
-  -### computeSignedArea(path)
+  - ### computeSignedArea(path)
 
     Returns the signed area of a closed path. The signed area may be used to determine the orientation of the path.
 
@@ -152,7 +152,7 @@
 
 
 
-  -### computeHeading(from, to)
+  - ### computeHeading(from, to)
 
     Returns the heading from one LatLng to another LatLng. Headings are expressed in degrees clockwise from North within the range (-180,180).
 
@@ -178,7 +178,7 @@
 
 
 
-  -### interpolate(from, to, fraction)
+  - ### interpolate(from, to, fraction)
 
     Returns the LatLng which lies the given fraction of the way between the origin LatLng and the destination LatLng.
 

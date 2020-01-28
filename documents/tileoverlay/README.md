@@ -13,20 +13,20 @@ this.map.addTileOverlay(options: TileOverlayOptions).then((tileOverlay: TileOver
 
 ## Instance methods
 
-  -### getId()
+  - ### getId()
 
     Returns the ID of instance.
 
     :arrow_right: Returns `string`
 
-  -### getMap()
+  - ### getMap()
 
     Return the map instance.
 
     :arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
 
 
-  -### setFadeIn(fadeIn)
+  - ### setFadeIn(fadeIn)
 
     Set whether the tiles should fade in.
 
@@ -44,14 +44,14 @@ this.map.addTileOverlay(options: TileOverlayOptions).then((tileOverlay: TileOver
     </table>
 
 
-  -### getFadeIn()
+  - ### getFadeIn()
 
     Get whether the tiles should fade in
 
     :arrow_right: Returns `boolean`.
 
 
-  -### setOpacity(opacity)
+  - ### setOpacity(opacity)
 
     Changes the opacity of the tile overlay from 0.0 to 1.0
 
@@ -69,13 +69,13 @@ this.map.addTileOverlay(options: TileOverlayOptions).then((tileOverlay: TileOver
     </table>
 
 
-  -### getOpacity()
+  - ### getOpacity()
 
     Returns the current opacity
 
     :arrow_right: Returns `number`.
 
-  -### setVisible(clickable)
+  - ### setVisible(clickable)
 
     Set tile overlay visibility
 
@@ -93,14 +93,14 @@ this.map.addTileOverlay(options: TileOverlayOptions).then((tileOverlay: TileOver
     </table>
 
 
-  -### getVisible()
+  - ### getVisible()
 
     Returns true if the tile overlay is visible.
 
     :arrow_right: Returns `boolean`.
 
 
-  -### setZIndex(index)
+  - ### setZIndex(index)
 
     Changes the tile overlay zIndex order.
 
@@ -118,7 +118,7 @@ this.map.addTileOverlay(options: TileOverlayOptions).then((tileOverlay: TileOver
     </table>
 
 
-  -### getZIndex()
+  - ### getZIndex()
 
     Returns the current tile overlay zIndex.
 
@@ -130,6 +130,6 @@ this.map.addTileOverlay(options: TileOverlayOptions).then((tileOverlay: TileOver
 
     :arrow_right: Returns `number`.
 
-  -### remove()
+  - ### remove()
 
     Remove the tile overlay.

@@ -13,19 +13,19 @@ this.map.addMarkerCluster(options: MarkerClusterOptions).then((markercluster: Ma
 
 ## Instance methods
 
-  -### getId()
+  - ### getId()
 
     Returns the ID of instance.
 
     :arrow_right: Returns `string`
 
-  -### getMap()
+  - ### getMap()
 
     Return the map instance.
 
     :arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
 
-  -### addMarker(location, skipRedraw?)
+  - ### addMarker(location, skipRedraw?)
 
     Add one marker location.
 
@@ -47,7 +47,7 @@ this.map.addMarkerCluster(options: MarkerClusterOptions).then((markercluster: Ma
     </tr>
     </table>
 
-  -### addMarkers(markers)
+  - ### addMarkers(markers)
 
     Add marker locations
 
@@ -64,6 +64,6 @@ this.map.addMarkerCluster(options: MarkerClusterOptions).then((markercluster: Ma
     </tr>
     </table>
 
-  -### remove()
+  - ### remove()
 
     Remove the marke cluster.

@@ -6,7 +6,7 @@
 
 ## Static method
 
-  -### containsLocation(location, path)
+  - ### containsLocation(location, path)
 
     Returns true if the specified location is in the polygon path
 
@@ -31,7 +31,7 @@
     :arrow_right: `boolean`
 
 
-  -### isLocationOnEdge(location, path)
+  - ### isLocationOnEdge(location, path)
 
     Returns true if the specified location is on the polyline path
 

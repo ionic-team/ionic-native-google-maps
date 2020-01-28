@@ -13,19 +13,19 @@ this.map.addPolyline(options: PolylineOptions).then((polyline: Polyline) => {
 
 ## Instance methods
 
-  -### getId()
+  - ### getId()
 
     Returns the ID of instance.
 
     :arrow_right: Returns `string`
 
-  -### getMap()
+  - ### getMap()
 
     Return the map instance.
 
     :arrow_right: Returns [GoogleMap](../googlemap/README.md) instance.
 
-  -### setPoints(points)
+  - ### setPoints(points)
 
     Changes the polyline points.
 
@@ -43,13 +43,13 @@ this.map.addPolyline(options: PolylineOptions).then((polyline: Polyline) => {
     </table>
 
 
-  -### getPoints()
+  - ### getPoints()
 
     Returns an instance of the BaseArrayClass. You can modify the points.
 
     :arrow_right: Returns [BaseArrayClass](../basearrayclass/README.md)&lt;ILatLng&gt;.
 
-  -### setGeoDesic(geoDesic)
+  - ### setGeoDesic(geoDesic)
 
     When true, edges of the polyline are interpreted as geodesic and will follow the curvature of the Earth.
 
@@ -67,13 +67,13 @@ this.map.addPolyline(options: PolylineOptions).then((polyline: Polyline) => {
     </table>
 
 
-  -### getGeodesic()
+  - ### getGeodesic()
 
     Returns true if the polyline is geodesic
 
     :arrow_right: Returns `boolean`.
 
-  -### setStrokeWidth(strokeWidth)
+  - ### setStrokeWidth(strokeWidth)
 
     Changes the stroke width.
 
@@ -91,13 +91,13 @@ this.map.addPolyline(options: PolylineOptions).then((polyline: Polyline) => {
     </table>
 
 
-  -### getStrokeWidth()
+  - ### getStrokeWidth()
 
     Returns the current stroke width (unit: pixel).
 
     :arrow_right: Returns `number`.
 
-  -### setStrokeColor(color)
+  - ### setStrokeColor(color)
 
     Changes the polyline color
 
@@ -115,14 +115,14 @@ this.map.addPolyline(options: PolylineOptions).then((polyline: Polyline) => {
     </table>
 
 
-  -### getStrokeColor()
+  - ### getStrokeColor()
 
     Returns the current stroke color.
 
     :arrow_right: Returns `string`.
 
 
-  -### setClickable(clickable)
+  - ### setClickable(clickable)
 
     Changes click-ability of the polyline
 
@@ -140,13 +140,13 @@ this.map.addPolyline(options: PolylineOptions).then((polyline: Polyline) => {
     </table>
 
 
-  -### getClickable()
+  - ### getClickable()
 
     Returns true if the polyline is clickable.
 
     :arrow_right: Returns `boolean`.
 
-  -### setVisible(clickable)
+  - ### setVisible(clickable)
 
     Set polyline visibility
 
@@ -164,14 +164,14 @@ this.map.addPolyline(options: PolylineOptions).then((polyline: Polyline) => {
     </table>
 
 
-  -### getVisible()
+  - ### getVisible()
 
     Returns true if the polyline is visible.
 
     :arrow_right: Returns `boolean`.
 
 
-  -### setZIndex(index)
+  - ### setZIndex(index)
 
     Changes the polyline zIndex order.
 
@@ -189,12 +189,12 @@ this.map.addPolyline(options: PolylineOptions).then((polyline: Polyline) => {
     </table>
 
 
-  -### getZIndex()
+  - ### getZIndex()
 
     Returns the current polyline zIndex.
 
     :arrow_right: Returns `number`.
 
-  -### remove()
+  - ### remove()
 
     Remove the polyline.

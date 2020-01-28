@@ -111,7 +111,7 @@ However, this panoId is **NOT** permanent Id. If Google updates new panorama pho
 
 ### Methods
 
-  -### setPosition(panoId | newPosition)
+  - ### setPosition(panoId | newPosition)
 
     Sets the current LatLng position for the Street View panorama.
 
@@ -128,7 +128,7 @@ However, this panoId is **NOT** permanent Id. If Google updates new panorama pho
     </tr>
     </table>
 
-  -### setPov(pov)
+  - ### setPov(pov)
 
     Sets the point of view for the Street View panorama.
 
@@ -145,7 +145,7 @@ However, this panoId is **NOT** permanent Id. If Google updates new panorama pho
     </tr>
     </table>
 
-  -### setPanningGesturesEnabled(gestureEnable)
+  - ### setPanningGesturesEnabled(gestureEnable)
 
     Toggles the ability for users to use pan around on the panorama using gestures.
 
@@ -162,13 +162,13 @@ However, this panoId is **NOT** permanent Id. If Google updates new panorama pho
     </tr>
     </table>
 
-  -### getPanningGesturesEnabled()
+  - ### getPanningGesturesEnabled()
 
     Return true if panning gesture is enabled.
 
     :arrow_right: `boolean`
 
-  -### setZoomGesturesEnabled(zoomEnabled)
+  - ### setZoomGesturesEnabled(zoomEnabled)
 
     Determines whether the user will be able to pinch to zoom.
 
@@ -185,13 +185,13 @@ However, this panoId is **NOT** permanent Id. If Google updates new panorama pho
     </tr>
     </table>
 
-  -### getZoomGesturesEnabled()
+  - ### getZoomGesturesEnabled()
 
     Return true if zooming gesture is enabled.
 
     :arrow_right: `boolean`
 
-  -### setNavigationEnabled(navigationEnabled)
+  - ### setNavigationEnabled(navigationEnabled)
 
     Determines whether the user will be able to move to a different panorama. Users can use a single tap on navigation links, or double tap the view, to move to a new panorama.
 
@@ -208,13 +208,13 @@ However, this panoId is **NOT** permanent Id. If Google updates new panorama pho
     </tr>
     </table>
 
-  -### getNavigationEnabled()
+  - ### getNavigationEnabled()
 
     Return true if the navigation control is enabled.
 
     :arrow_right: `boolean`
 
-  -### setStreetNamesEnabled(linkEnabled)
+  - ### setStreetNamesEnabled(linkEnabled)
 
     Determines whether the user is able to see street names displayed on the ground.
 
@@ -231,37 +231,37 @@ However, this panoId is **NOT** permanent Id. If Google updates new panorama pho
     </tr>
     </table>
 
-  -### getStreetNamesEnabled()
+  - ### getStreetNamesEnabled()
 
     Returns true if the street name label is enable.
 
     :arrow_right: `boolean`
 
-  -### getLocation()
+  - ### getLocation()
 
     Returns the current location
 
     :arrow_right: [StreetViewLocation](../streetviewlocation/README.md)
 
-  -### getPanoId()
+  - ### getPanoId()
 
     Returns the panorama ID of current location
 
     :arrow_right: string
 
-  -### getPosition()
+  - ### getPosition()
 
     Return the current position (StreetViewLocation.latLng)
 
     :arrow_right: [ILatLng](../ilatlng/README.md)
 
-  -### getLinks()
+  - ### getLinks()
 
     Return links of the last panorama location.
 
     :arrow_right: [StreetViewNavigationLink](../streetviewnavigationlink/README.md)
 
-  -### remove()
+  - ### remove()
 
     Destroy a panorama view completely
 

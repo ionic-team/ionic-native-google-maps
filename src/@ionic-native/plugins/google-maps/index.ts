@@ -423,6 +423,22 @@ export interface GeocoderResult {
   thoroughfare?: string;
 }
 
+export interface PathElevationRequest {
+  path: ILatLng[] | BaseArrayClass<ILatLng>;
+  samples: number;
+}
+
+export interface LocationElevationRequest {
+  locations: ILatLng[] | BaseArrayClass<ILatLng>;
+}
+
+
+export interface ElevationResult {
+  elevation: number;
+  location: ILatLng;
+  resolution: number;
+}
+
 export interface GroundOverlayOptions {
   /**
    * URL of overlay
@@ -2121,6 +2137,52 @@ export class Geocoder {
         });
       });
     }
+  }
+
+}
+
+
+/**
+ * @hidden
+ */
+@Plugin({
+  pluginName: 'GoogleMaps',
+  pluginRef: 'plugin.google.maps.ElevationService',
+  plugin: 'cordova-plugin-googlemaps',
+  repo: ''
+})
+export class ElevationService {
+
+  /**
+   * Makes an elevation request along a path, where the elevation data are returned as distance-based samples along that path.
+   * @param {PathElevationRequest} request
+   * @return {Promise<ElevationResult[]>}
+   */
+  static getElevationAlongPath(request: PathElevationRequest): Promise<ElevationResult[]> {
+
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
+    return getPromise<ElevationResult[]>((resolve, reject) => {
+      GoogleMaps.getPlugin().ElevationService.getElevationAlongPath(request, (result: any[]) => {
+        console.log('result', Date.now(), result);
+      }, reject);
+    });
+  }
+
+  /**
+   * Makes an elevation request for a list of discrete locations.
+   * @param {LocationElevationRequest} request
+   * @return {Promise<ElevationResult[]>}
+   */
+  static getElevationForLocations(request: PathElevationRequest): Promise<ElevationResult[]> {
+
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
+    return getPromise<ElevationResult[]>((resolve, reject) => {
+      GoogleMaps.getPlugin().ElevationService.getElevationForLocations(request, resolve, reject);
+    });
   }
 
 }

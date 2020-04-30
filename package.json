@@ -1,6 +1,6 @@
 {
   "name": "@ionic-native/google-maps",
-  "version": "5.5.0",
+  "version": "5.24.0",
   "description": "Native plugin wrappers for Cordova and Ionic with TypeScript, ES6+, Promise and Observable support",
   "homepage": "https://github.com/ionic-team/ionic-native-google-maps/",
   "author": "Masashi Katsumata, Ionic Team <hi@ionic.io> (https://ionic.io)",
@@ -41,15 +41,15 @@
     "cordova-js": "^5.0.0",
     "cz-conventional-changelog": "^2.1.0",
     "dgeni": "^0.4.12",
-    "dgeni-packages": "0.16.10",
-    "fs-extra": "^7.0.1",
-    "gulp": "3.9.1",
-    "gulp-rename": "^1.4.0",
+    "dgeni-packages": "^0.28.3",
+    "gulp": "^4.0.2",
+    "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.0.0",
     "gulp-tslint": "^8.1.4",
+    "fs-extra": "^7.0.1",
     "jest": "^24.7.1",
-    "lodash": "^4.17.11",
-    "minimist": "1.2.0",
+    "lodash": "^4.17.15",
+    "minimist": "^1.2.5",
     "natives": "^1.1.6",
     "rimraf": "^2.6.3",
     "rxjs": "^6.4.0",
@@ -57,7 +57,7 @@
     "ts-node": "^8.0.3",
     "tslint": "^5.15.0",
     "tslint-ionic-rules": "0.0.21",
-    "typedoc": "^0.14.2",
+    "typedoc": "^0.17.6",
     "typescript": "3.2.4",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "unminified-webpack-plugin": "^2.0.0",
@@ -78,7 +78,7 @@
     }
   },
   "dependencies": {
-    "@ionic-native/core": "^5.5.0",
-    "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps"
+    "@ionic-native/core": "^5.24.0",
+    "cordova-plugin-googlemaps": "^2.7.1"
   }
 }

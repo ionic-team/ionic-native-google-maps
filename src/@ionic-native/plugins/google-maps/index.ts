@@ -439,6 +439,249 @@ export interface ElevationResult {
   resolution: number;
 }
 
+
+export type TrafficModel =
+  'BEST_GUESS' |
+  'OPTIMISTIC' |
+  'PESSIMISTIC';
+
+export type TransitMode =
+  'BUS' |
+  'RAIL' |
+  'SUBWAY' |
+  'TRAIN' |
+  'TRAM';
+
+export type TransitRoutePreference =
+  'FEWER_TRANSFERS' |
+  'LESS_WALKING';
+
+export type UnitSystem =
+  'IMPERIAL' |
+  'METRIC';
+
+
+export type TravelMode =
+  'BICYCLING' |
+  'DRIVING' |
+  'TRANSIT' |
+  'WALKING';
+
+export type VehicleType =
+  'BUS' |
+  'CABLE_CAR' |
+  'COMMUTER_TRAIN' |
+  'FERRY' |
+  'FUNICULAR' |
+  'GONDOLA_LIFT' |
+  'HEAVY_RAIL' |
+  'HIGH_SPEED_TRAIN' |
+  'INTERCITY_BUS' |
+  'METRO_RAIL' |
+  'MONORAIL' |
+  'OTHER' |
+  'RAIL' |
+  'SHARE_TAXI' |
+  'SUBWAY' |
+  'TRAM' |
+  'TROLLEYBUS';
+
+
+export const TrafficModelId = {
+  BEST_GUESS: 'BEST_GUESS',
+  OPTIMISTIC: 'OPTIMISTIC',
+  PESSIMISTIC: 'PESSIMISTIC'
+};
+
+export const TransitModeId = {
+  BUS: 'BUS',
+  RAIL: 'RAIL',
+  SUBWAY: 'SUBWAY',
+  TRAIN: 'TRAIN',
+  TRAM: 'TRAM'
+};
+
+export const TransitRoutePreferenceId = {
+  FEWER_TRANSFERS: 'FEWER_TRANSFERS',
+  LESS_WALKING: 'LESS_WALKING'
+};
+
+export const UnitSystemId = {
+  IMPERIAL: 'IMPERIAL',
+  METRIC: 'METRIC'
+};
+
+
+export const TravelModeId = {
+  BICYCLING: 'BICYCLING',
+  DRIVING: 'DRIVING',
+  TRANSIT: 'TRANSIT',
+  WALKING: 'WALKING'
+};
+
+export const VehicleTypeId = {
+  BUS: 'BUS',
+  CABLE_CAR: 'CABLE_CAR',
+  COMMUTER_TRAIN: 'COMMUTER_TRAIN',
+  FERRY: 'FERRY',
+  FUNICULAR: 'FUNICULAR',
+  GONDOLA_LIFT: 'GONDOLA_LIFT',
+  HEAVY_RAIL: 'HEAVY_RAIL',
+  HIGH_SPEED_TRAIN: 'HIGH_SPEED_TRAIN',
+  INTERCITY_BUS: 'INTERCITY_BUS',
+  METRO_RAIL: 'METRO_RAIL',
+  MONORAIL: 'MONORAIL',
+  OTHER: 'OTHER',
+  RAIL: 'RAIL',
+  SHARE_TAXI: 'SHARE_TAXI',
+  SUBWAY: 'SUBWAY',
+  TRAM: 'TRAM',
+  TROLLEYBUS: 'TROLLEYBUS'
+};
+
+export interface Place {
+  location?: ILatLng | LatLng;
+  placeId?: string;
+  query?: string;
+}
+
+export interface DirectionsWaypoint {
+  location?: string | ILatLng | LatLng | Place;
+  stopover?: boolean;
+}
+export interface DirectionsRequest {
+  avoidFerries?: boolean;
+  avoidHighways?: boolean;
+  avoidTolls?: boolean;
+  destination: string | ILatLng | LatLng | Place;
+  drivingOptions?: DrivingOptions;
+  optimizeWaypoints?: boolean;
+  origin: string | ILatLng | LatLng | Place;
+  provideRouteAlternatives?: boolean;
+  region?: string;
+  transitOptions?: TransitOptions;
+  travelMode: TravelMode | string;
+  unitSystem?: UnitSystem | string;
+  waypoints?: DirectionsWaypoint[];
+}
+
+export interface DrivingOptions {
+  departureTime: Date;
+  trafficModel?: TrafficModel;
+}
+
+export interface TransitOptions {
+  arrivalTime?: Date;
+  departureTime?: Date;
+  modes?: TransitMode[];
+  routingPreference?: TransitRoutePreference;
+}
+export interface TransitFare {
+  currency: string;
+  value: number;
+}
+
+export interface DirectionsResult {
+  geocoded_waypoints: DirectionsGeocodedWaypoint[];
+  routes: DirectionsRoute[];
+}
+
+export interface DirectionsGeocodedWaypoint {
+  partial_match: boolean;
+  place_id: string;
+  types: string[];
+}
+
+export interface DirectionsRoute {
+  bounds: ILatLngBounds;
+  copyrights: string;
+  fare: TransitFare;
+  legs: DirectionsLeg[];
+  overview_path: ILatLng[];
+  overview_polyline: string;
+  warnings: string[];
+  waypoint_order: number[];
+}
+
+export interface DirectionsLeg {
+  arrival_time: Time;
+  departure_time: Time;
+  distance: Distance;
+  duration: Duration;
+  duration_in_traffic: Duration;
+  end_address: string;
+  end_location: ILatLng[];
+  start_address: string;
+  start_location: ILatLng[];
+  steps: DirectionsStep[];
+  via_waypoints: ILatLng[];
+}
+
+export interface Time {
+  text: string;
+  time_zone: string;
+  value: Date;
+}
+export interface Distance {
+  text: string;
+  value: number;
+}
+export interface Duration {
+  text: string;
+  value: number;
+}
+export interface DirectionsStep {
+  distance: Distance;
+  duration: Duration;
+  end_location: ILatLng;
+  instructions: string;
+  path: ILatLng[];
+  start_location: ILatLng;
+  steps: DirectionsStep[];
+  transit: TransitDetails;
+  travel_mode: TravelMode;
+}
+
+export interface TransitDetails {
+  arrival_stop: TransitStop;
+  arrival_time: Time;
+  departure_stop: TransitStop;
+  departure_time: Time;
+  headsign: string;
+  headway: number;
+  line: TransitLine;
+  num_stops: number;
+  trip_short_name: string;
+}
+
+export interface TransitStop {
+  location: ILatLng;
+  name: string;
+}
+
+export interface TransitLine {
+  agencies: TransitAgency[];
+  color: string;
+  icon: string;
+  name: string;
+  short_name: string;
+  text_color: string;
+  url: string;
+  vehicle: TransitVehicle;
+}
+
+export interface TransitAgency {
+  name: string;
+  phone: string;
+  url: string;
+}
+
+export interface TransitVehicle {
+  icon: string;
+  local_icon: string;
+  name: string;
+  type: VehicleType;
+}
 export interface GroundOverlayOptions {
   /**
    * URL of overlay
@@ -1109,6 +1352,10 @@ export const GoogleMapsAnimation = {
   DROP: 'DROP'
 };
 
+export const AnimationId = {
+ BOUNCE: 'BOUNCE',
+ DROP: 'DROP'
+};
 /**
  * @hidden
  */
@@ -1121,6 +1368,14 @@ export const GoogleMapsMapTypeId = {
   NONE: 'MAP_TYPE_NONE'
 };
 
+export const MapTypeId = {
+ NORMAL: 'MAP_TYPE_NORMAL',
+ ROADMAP: 'MAP_TYPE_NORMAL',
+ SATELLITE: 'MAP_TYPE_SATELLITE',
+ HYBRID: 'MAP_TYPE_HYBRID',
+ TERRAIN: 'MAP_TYPE_TERRAIN',
+ NONE: 'MAP_TYPE_NONE'
+};
 /**
  * @name Google Maps
  * @description
@@ -2147,6 +2402,35 @@ export class Geocoder {
  */
 @Plugin({
   pluginName: 'GoogleMaps',
+  pluginRef: 'plugin.google.maps.DirectionsService',
+  plugin: 'cordova-plugin-googlemaps',
+  repo: ''
+})
+export class DirectionsService {
+
+  /**
+   * A service for computing directions between two or more places.
+   * @param {DirectionsRequest} request
+   * @return {Promise<DirectionsResult[]>}
+   */
+  static route(request: DirectionsRequest): Promise<DirectionsResult[]> {
+
+    if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
+      throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
+    }
+    return getPromise<DirectionsResult[]>((resolve, reject) => {
+      GoogleMaps.getPlugin().DirectionsService.route(request, resolve, reject);
+    });
+  }
+
+
+}
+
+/**
+ * @hidden
+ */
+@Plugin({
+  pluginName: 'GoogleMaps',
   pluginRef: 'plugin.google.maps.ElevationService',
   plugin: 'cordova-plugin-googlemaps',
   repo: ''
@@ -2164,9 +2448,7 @@ export class ElevationService {
       throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
     return getPromise<ElevationResult[]>((resolve, reject) => {
-      GoogleMaps.getPlugin().ElevationService.getElevationAlongPath(request, (result: any[]) => {
-        console.log('result', Date.now(), result);
-      }, reject);
+      GoogleMaps.getPlugin().ElevationService.getElevationAlongPath(request, resolve, reject);
     });
   }
 

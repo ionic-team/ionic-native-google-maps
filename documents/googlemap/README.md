@@ -399,7 +399,7 @@ Before using this plugin, please understand how this plugin work.
     </tr>
     <tr>
       <td>options</td>
-      <td><a href="../polylineoptions/README.md">PollineOptions</a></td>
+      <td><a href="../polylineoptions/README.md">PolylineOptions</a></td>
       <td>options</td>
     </tr>
     </table>

@@ -994,7 +994,7 @@ export interface PolylineOptions {
    * Pass ILatLng[] to specify the vertixes.
    * You need to contain two points at least.
    */
-  points: ILatLng[];
+  points: ILatLng[] | string;
 
   /**
    * Set false if you want to create invisible polyline
@@ -2411,14 +2411,14 @@ export class DirectionsService {
   /**
    * A service for computing directions between two or more places.
    * @param {DirectionsRequest} request
-   * @return {Promise<DirectionsResult[]>}
+   * @return {Promise<DirectionsResult>}
    */
-  static route(request: DirectionsRequest): Promise<DirectionsResult[]> {
+  static route(request: DirectionsRequest): Promise<DirectionsResult> {
 
     if (checkAvailability(GoogleMaps.getPluginRef(), null, GoogleMaps.getPluginName()) === false) {
       throw new Error('cordova-plugin-googlemaps is not ready. Please use platform.ready() before accessing this method.');
     }
-    return getPromise<DirectionsResult[]>((resolve, reject) => {
+    return getPromise<DirectionsResult>((resolve, reject) => {
       GoogleMaps.getPlugin().DirectionsService.route(request, resolve, reject);
     });
   }
@@ -3796,6 +3796,34 @@ export class GoogleMap extends BaseClass {
     });
   }
 
+
+  /**
+   * Adds a directions renderer
+   * @param options {DirectionsRendererOptions} options
+   * @return {Promise<DirectionsRenderer>}
+   */
+  @InstanceCheck()
+  addDirectionsRenderer(options: any): Promise<DirectionsRenderer> {
+    return getPromise<DirectionsRenderer>((resolve, reject) => {
+      this._objectInstance.addDirectionsRenderer(options, (directionsRenderer: any) => {
+        if (directionsRenderer) {
+          const overlayId: string = directionsRenderer.getId();
+          const overlay = new DirectionsRenderer(this, directionsRenderer);
+          this.get('_overlays')[overlayId] = overlay;
+          overlay.one(overlayId + '_remove', () => {
+            if (this.get('_overlays')) {
+              this.get('_overlays')[overlayId] = null;
+              overlay.destroy();
+            }
+          });
+          resolve(overlay);
+        } else {
+          reject();
+        }
+      });
+    });
+  }
+
   /**
    * Returns the base64 encoded screen capture of the map.
    * @param options {ToDataUrlOptions} [options] options
@@ -4775,6 +4803,7 @@ export class TileOverlay extends BaseClass {
   }
 }
 
+
 /**
  * @hidden
  */
@@ -4842,6 +4871,56 @@ export class KmlOverlay extends BaseClass {
    */
   @CordovaInstance({ sync: true })
   getClickable(): boolean { return; }
+
+  /**
+   * Remove the KmlOverlay
+   */
+  @CordovaInstance()
+  remove(): void {
+    delete this._objectInstance.getMap().get('_overlays')[this.getId()];
+    this._objectInstance.remove();
+    this.destroy();
+  }
+}
+
+/**
+ * @hidden
+ */
+export class DirectionsRenderer extends BaseClass {
+
+  private _map: GoogleMap;
+
+  constructor(_map: GoogleMap, _objectInstance: any) {
+    super(_objectInstance);
+    this._map = _map;
+  }
+
+  /**
+   * Returns the ID of instance.
+   * @return {string}
+   */
+  @CordovaInstance({ sync: true })
+  getId(): string { return; }
+
+  /**
+   * Returns the map instance.
+   * @return {GoogleMap}
+   */
+  getMap(): GoogleMap { return this._map; }
+
+  /**
+   * Changes visibility of the kml overlay
+   * @param visible {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  setVisible(visible: boolean): void {}
+
+  /**
+   * Returns true if the kml overlay is visible
+   * @return {boolean}
+   */
+  @CordovaInstance({ sync: true })
+  getVisible(): boolean { return; }
 
   /**
    * Remove the KmlOverlay

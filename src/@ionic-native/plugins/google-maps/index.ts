@@ -439,6 +439,74 @@ export interface ElevationResult {
   resolution: number;
 }
 
+export interface DirectionsRendererOptions {
+
+  /**
+   * directions [DirectionsResult]
+   */
+  directions?: DirectionsResult;
+
+  /**
+   * draggable [options]
+   */
+  draggable?: boolean;
+
+  /**
+   * hideRouteList [options]
+   */
+  hideRouteList?: boolean;
+
+  /**
+   * The InfoWindow in which to render text information when a marker is clicked. Existing info window content will be overwritten and its position moved. If no info window is specified, the DirectionsRenderer will create and use its own info window. This property will be ignored if suppressInfoWindows is set to true.
+   */
+  infoWindow?: HtmlInfoWindow;
+
+  /**
+   * Options for the markers. All markers rendered by the DirectionsRenderer will use these options.
+   */
+  markerOptions?: MarkerOptions;
+
+  /**
+   * panel [HTMLElement | string]
+   */
+  panel?: HTMLElement | string;
+
+  /**
+   * polylineOptions [PolylineOptions]
+   * Options for the polylines. All polylines rendered by the DirectionsRenderer will use these options.
+   */
+  polylineOptions?: PolylineOptions;
+
+  /**
+   * By default, the input map is centered and zoomed to the bounding box of this set of directions. If this option is set to true, the viewport is left unchanged, unless the map's center and zoom were never set.
+   */
+  preserveViewport?: boolean;
+
+  /**
+   * The index of the route within the DirectionsResult object. The default value is 0.
+   */
+  routeIndex?: number;
+
+  /**
+   * Suppress the rendering of info windows.
+   */
+  suppressInfoWindows?: boolean;
+
+  /**
+   * Suppress the rendering of markers.
+   */
+  suppressMarkers?: boolean;
+
+  /**
+   * Suppress the rendering of polylines.
+   */
+  suppressPolylines?: boolean;
+
+  /**
+   * Accept extra properties for future updates
+   */
+  [key: string]: any;
+}
 
 export type TrafficModel =
   'BEST_GUESS' |
@@ -582,6 +650,7 @@ export interface TransitFare {
 }
 
 export interface DirectionsResult {
+  request?: DirectionsRequest;
   geocoded_waypoints: DirectionsGeocodedWaypoint[];
   routes: DirectionsRoute[];
 }
@@ -1341,7 +1410,8 @@ export const GoogleMapsEvent = {
   PANORAMA_READY: 'panorama_ready',
   PANORAMA_CAMERA_CHANGE: 'panorama_camera_change',
   PANORAMA_LOCATION_CHANGE: 'panorama_location_change',
-  PANORAMA_CLICK: 'panorama_click'
+  PANORAMA_CLICK: 'panorama_click',
+  DIRECTIONS_CHANGED: 'directions_changed'
 };
 
 /**
@@ -3085,15 +3155,15 @@ export class GoogleMap extends BaseClass {
   /**
    * Changes the map div
    * @param domNode {HTMLElement | string} [options] If you want to display the map in an html element, you need to specify an element or id. If omit this argument, the map is detached from webview.
+   * @returns Promise<void>
    */
   @InstanceCheck()
-  setDiv(domNode?: HTMLElement | string): void {
+  setDiv(domNode?: HTMLElement | string): Promise<void> {
     if (!domNode) {
-      this._objectInstance.setDiv();
-      return;
+      return this._objectInstance.setDiv();
     }
     if (typeof domNode === 'string') {
-      (getPromise<any>((resolve, reject) => {
+      return (getPromise<any>((resolve, reject) => {
         let i, targets: any[];
         for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
           targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + domNode));
@@ -3111,13 +3181,13 @@ export class GoogleMap extends BaseClass {
         reject('Can not find [#' + domNode + '] element');
       }))
       .then((element: HTMLElement) => {
-        this._objectInstance.setDiv(element);
+        return this._objectInstance.setDiv(element);
       });
     } else {
       if (domNode instanceof HTMLElement &&
           !domNode.offsetParent &&
           domNode.offsetWidth >= 100 && domNode.offsetHeight >= 100) {
-        this._objectInstance.setDiv(domNode);
+        return this._objectInstance.setDiv(domNode);
       } else {
         throw new Error(domNode.tagName + ' is too small. Must be bigger than 100x100.');
       }
@@ -3436,7 +3506,7 @@ export class GoogleMap extends BaseClass {
    * @param options
    */
   @CordovaInstance({ sync: true })
-  setOptions(options: GoogleMapOptions): void {
+  setOptions(options: GoogleMapOptions): Promise<void> {
   }
 
   /**
@@ -3796,32 +3866,24 @@ export class GoogleMap extends BaseClass {
     });
   }
 
-
   /**
    * Adds a directions renderer
    * @param options {DirectionsRendererOptions} options
-   * @return {Promise<DirectionsRenderer>}
+   * @return {DirectionsRenderer}
    */
   @InstanceCheck()
-  addDirectionsRenderer(options: any): Promise<DirectionsRenderer> {
-    return getPromise<DirectionsRenderer>((resolve, reject) => {
-      this._objectInstance.addDirectionsRenderer(options, (directionsRenderer: any) => {
-        if (directionsRenderer) {
-          const overlayId: string = directionsRenderer.getId();
-          const overlay = new DirectionsRenderer(this, directionsRenderer);
-          this.get('_overlays')[overlayId] = overlay;
-          overlay.one(overlayId + '_remove', () => {
-            if (this.get('_overlays')) {
-              this.get('_overlays')[overlayId] = null;
-              overlay.destroy();
-            }
-          });
-          resolve(overlay);
-        } else {
-          reject();
-        }
-      });
+  addDirectionsRendererSync(options: any): DirectionsRenderer {
+    const directionsRenderer: any = this._objectInstance.addDirectionsRenderer(options);
+    const overlayId: string = directionsRenderer.getId();
+    const overlay = new DirectionsRenderer(this, directionsRenderer);
+    this.get('_overlays')[overlayId] = overlay;
+    directionsRenderer.one(overlayId + '_remove', () => {
+      if (this.get('_overlays')) {
+        this.get('_overlays')[overlayId] = null;
+        overlay.destroy();
+      }
     });
+    return overlay;
   }
 
   /**
@@ -4909,21 +4971,37 @@ export class DirectionsRenderer extends BaseClass {
   getMap(): GoogleMap { return this._map; }
 
   /**
-   * Changes visibility of the kml overlay
-   * @param visible {boolean}
+   * Set options
+   * @param options
    */
   @CordovaInstance({ sync: true })
-  setVisible(visible: boolean): void {}
+  setOptions(options: DirectionsRendererOptions): Promise<void> {}
 
   /**
-   * Returns true if the kml overlay is visible
-   * @return {boolean}
+   * Set directions
+   * @param options
    */
   @CordovaInstance({ sync: true })
-  getVisible(): boolean { return; }
+  setDirections(result: DirectionsResult): Promise<void> {}
+
+
 
   /**
-   * Remove the KmlOverlay
+   * Returns the current (zero-based) route index in use by this DirectionsRenderer object.
+   * @return {number}
+   */
+  @CordovaInstance({ sync: true })
+  getRouteIndex(): number { return; }
+
+  /**
+   * Returns the renderer's current set of directions.
+   * @return {DirectionsResult}
+   */
+  @CordovaInstance({ sync: true })
+  getDirections(): DirectionsResult { return; }
+
+  /**
+   * Remove the directions renderer
    */
   @CordovaInstance()
   remove(): void {

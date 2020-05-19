@@ -100,7 +100,7 @@ describe('GoogleMap', () => {
     it('should error when the target element does not appear in time with custom timeout', async () => {
       const mapId = 'testId';
       const intervalMs = 10;
-      const maxTries = 20;
+      const maxTries = 40;
       // The code tries 20 times, we add extra ms for a buffer for timing inconsistencies
       const expectedTimeout = intervalMs * maxTries + 100;
       const _ = new GoogleMap(mapId, null, intervalMs);

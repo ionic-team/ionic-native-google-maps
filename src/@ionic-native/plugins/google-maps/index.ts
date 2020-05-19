@@ -222,7 +222,7 @@ export interface GoogleMapPreferenceOptions {
   /**
    * Sets the bounds limit for user panning gesture.
    */
-  gestureBounds?: ILatLng[];
+  restriction?: ILatLngBounds | ILatLng[];
 
   /**
    * Accept extra properties for future updates
@@ -679,9 +679,9 @@ export interface DirectionsLeg {
   duration: Duration;
   duration_in_traffic: Duration;
   end_address: string;
-  end_location: ILatLng[];
+  end_location: ILatLng;
   start_address: string;
-  start_location: ILatLng[];
+  start_location: ILatLng;
   steps: DirectionsStep[];
   via_waypoints: ILatLng[];
 }
@@ -2899,7 +2899,7 @@ export class StreetViewPanorama extends BaseClass {
               }
 
             }
-            if (count++ < 20) {
+            if (count++ < 40) {
               return;
             }
             clearInterval(timer);
@@ -3102,7 +3102,7 @@ export class GoogleMap extends BaseClass {
               }
 
             }
-            if (count++ < 20) {
+            if (count++ < 40) {
               return;
             }
             clearInterval(timer);

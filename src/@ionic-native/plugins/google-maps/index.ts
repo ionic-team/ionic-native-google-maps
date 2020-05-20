@@ -220,6 +220,11 @@ export interface GoogleMapPreferenceOptions {
   building?: boolean;
 
   /**
+   * When false, map icons are not clickable. A map icon represents a point of interest, also known as a POI. By default map icons are clickable.
+   */
+  clickableIcons?: boolean;
+
+  /**
    * Sets the bounds limit for user panning gesture.
    */
   restriction?: ILatLngBounds | ILatLng[];

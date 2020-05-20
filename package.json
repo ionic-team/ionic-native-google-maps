@@ -78,7 +78,7 @@
     }
   },
   "dependencies": {
-    "@ionic-native/core": "^5.24.0",
+    "@ionic-native/core": "^5.26.0",
     "cordova-plugin-googlemaps": "^2.7.1"
   }
 }

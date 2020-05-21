@@ -1608,7 +1608,7 @@ export class GoogleMaps extends IonicNativePlugin {
         let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         if (targets.length > 0) {
           targets = targets.filter((target) => {
-            return !target.hasAttribute('__pluginmapid');
+            return !target.hasAttribute('__pluginMapId') && target.__pluginMapId === undefined;
           });
         }
         if (targets.length === 1 && targets[0]) {
@@ -1663,7 +1663,7 @@ export class GoogleMaps extends IonicNativePlugin {
         let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         if (targets.length > 0) {
           targets = targets.filter((target) => {
-            return !target.hasAttribute('__pluginmapid');
+            return !target.hasAttribute('__pluginMapId') && target.__pluginMapId === undefined;
           });
         }
         if (targets.length === 1 && targets[0]) {
@@ -2894,7 +2894,7 @@ export class StreetViewPanorama extends BaseClass {
               targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element));
               if (targets.length > 0) {
                 targets = targets.filter((target) => {
-                  return !target.hasAttribute('__pluginmapid');
+                  return !target.hasAttribute('__pluginMapId') && target.__pluginMapId === undefined;
                 });
               }
               if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
@@ -2940,7 +2940,7 @@ export class StreetViewPanorama extends BaseClass {
         let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         if (targets.length > 0) {
           targets = targets.filter((target) => {
-            return !target.hasAttribute('__pluginmapid');
+            return !target.hasAttribute('__pluginMapId') && target.__pluginMapId === undefined;
           });
         }
         if (targets.length === 1 && targets[0]) {
@@ -3097,7 +3097,7 @@ export class GoogleMap extends BaseClass {
               targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + element));
               if (targets.length > 0) {
                 targets = targets.filter((target) => {
-                  return !target.hasAttribute('__pluginmapid');
+                  return !target.hasAttribute('__pluginMapId') && target.__pluginMapId === undefined;
                 });
               }
               if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
@@ -3146,7 +3146,7 @@ export class GoogleMap extends BaseClass {
         let targets: any[] = Array.from(document.querySelectorAll('#' + element));
         if (targets.length > 0) {
           targets = targets.filter((target) => {
-            return !target.hasAttribute('__pluginmapid');
+            return !target.hasAttribute('__pluginMapId') && target.__pluginMapId === undefined;
           });
         }
         if (targets.length === 1 && targets[0]) {
@@ -3169,12 +3169,39 @@ export class GoogleMap extends BaseClass {
     }
     if (typeof domNode === 'string') {
       return (getPromise<any>((resolve, reject) => {
+        let count: number;
+        let i: number;
+        count = 0;
+        const timer: any = setInterval(() => {
+          let targets: any[];
+          for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
+            targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + domNode));
+            if (targets.length > 0) {
+              targets = targets.filter((target) => {
+                return !target.hasAttribute('__pluginMapId') && target.__pluginMapId === undefined;
+              });
+            }
+            if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
+              clearInterval(timer);
+              resolve(targets[0]);
+              return;
+            }
+
+          }
+          if (count++ < 40) {
+            return;
+          }
+          clearInterval(timer);
+          reject('Can not find [#' + domNode + '] element');
+        }, 100);
+
+        /*
         let i, targets: any[];
         for (i = 0; i < TARGET_ELEMENT_FINDING_QUERYS.length; i++) {
           targets = Array.from(document.querySelectorAll(TARGET_ELEMENT_FINDING_QUERYS[i] + domNode));
           if (targets.length > 0) {
             targets = targets.filter((target) => {
-              return !target.hasAttribute('__pluginmapid');
+              return !target.hasAttribute('__pluginMapId') && target.__pluginMapId === undefined;
             });
           }
           if (targets.length === 1 && targets[0] && targets[0].offsetWidth >= 100 && targets[0].offsetHeight >= 100) {
@@ -3184,6 +3211,7 @@ export class GoogleMap extends BaseClass {
 
         }
         reject('Can not find [#' + domNode + '] element');
+        */
       }))
       .then((element: HTMLElement) => {
         return this._objectInstance.setDiv(element);

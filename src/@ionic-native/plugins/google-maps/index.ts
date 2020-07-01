@@ -1206,6 +1206,11 @@ export interface EnvOptions {
    */
   API_KEY_FOR_BROWSER_DEBUG?: string;
 
+  /*
+   * A proxy server URL for Google Web Services
+   */
+  REST_API_PROXY_SERVER?: string;
+
   /**
    * Accept own properties for future update
    */

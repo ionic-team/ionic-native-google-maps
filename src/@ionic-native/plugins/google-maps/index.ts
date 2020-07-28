@@ -3223,7 +3223,7 @@ export class GoogleMap extends BaseClass {
       });
     } else {
       if (domNode instanceof HTMLElement &&
-          !domNode.offsetParent &&
+          domNode.offsetParent &&
           domNode.offsetWidth >= 100 && domNode.offsetHeight >= 100) {
         return this._objectInstance.setDiv(domNode);
       } else {

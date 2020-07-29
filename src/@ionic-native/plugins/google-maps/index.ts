@@ -806,6 +806,10 @@ export interface MarkerIcon {
     width?: number;
     height?: number;
   };
+  anchor?: {
+    x?: number;
+    y?: number;
+  };
 }
 
 export interface MarkerOptions {
@@ -4277,7 +4281,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Changes the info window anchor. This defaults to 50% from the left of the image and at the bottom of the image.
+   * Changes the icon anchor. This defaults to 50% from the left of the image and at the bottom of the image.
    * @param x {number} Distance from left of the icon image in pixels.
    * @param y {number} Distance from top of the icon image in pixels.
    */
@@ -4286,7 +4290,7 @@ export class Marker extends BaseClass {
   }
 
   /**
-   * Changes the info window anchor. This defaults to 50% from the left of the image and at the top of the image.
+   * Changes the infoWindow anchor. This defaults to 50% from the left of the image and at the top of the image.
    * @param x {number} Distance from left of the icon image in pixels.
    * @param y {number} Distance from top of the icon image in pixels.
    */
